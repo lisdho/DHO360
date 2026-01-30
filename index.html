@@ -381,6 +381,223 @@
   }
 }
 
+/* BLOCO 0: amostra e método */
+.metaGrid{
+  margin-top: 14px;
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  position:relative;
+  z-index:1;
+}
+
+.metaCard{
+  background: rgba(255,255,255,.02);
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 14px;
+  padding: 12px;
+  overflow:hidden;
+}
+
+.metaLabel{
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: .10em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.metaBig{
+  font-size: 34px;
+  font-weight: 780;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+.metaSmall{
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.metaList{
+  display:grid;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--body);
+  line-height: 1.3;
+}
+
+.metaPct{
+  color: var(--muted);
+  font-size: 13px;
+  margin-left: 6px;
+}
+
+.dot{
+  width:10px;
+  height:10px;
+  border-radius:999px;
+  display:inline-block;
+  margin-right:8px;
+  transform: translateY(1px);
+  border: 1px solid rgba(255,255,255,.14);
+  box-shadow: 0 8px 18px rgba(0,0,0,.35);
+}
+
+/* paleta discreta */
+.dot.pro{ background: rgba(233,213,255,.28); }
+.dot.lid{ background: rgba(168,85,247,.26); }
+.dot.neg{ background: rgba(124,58,237,.26); }
+.dot.rh{  background: rgba(192,132,252,.20); }
+
+.dot.clt{ background: rgba(233,213,255,.24); }
+.dot.pj{  background: rgba(168,85,247,.20); }
+.dot.mov{ background: rgba(124,58,237,.18); }
+
+/* botão curiosidade (mais chamativo que o normal, mas elegante) */
+.curiosityBtn{
+  position:relative;
+  overflow:hidden;
+}
+
+.curiosityBtn::before{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  background: radial-gradient(240px 80px at 20% 50%, rgba(233,213,255,.22), transparent 60%);
+  opacity:.9;
+  pointer-events:none;
+}
+
+.curiosityBtn::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(90deg, transparent, rgba(233,213,255,.14), transparent);
+  transform: translateX(-120%);
+  animation: shimmer 3.2s ease-in-out infinite;
+  pointer-events:none;
+  opacity:.55;
+}
+
+@keyframes shimmer{
+  0%{ transform: translateX(-120%); }
+  45%{ transform: translateX(120%); }
+  100%{ transform: translateX(120%); }
+}
+
+/* reveal do RH */
+.rhReveal{
+  margin-top: 14px;
+  border-top: 1px solid var(--line);
+  padding-top: 14px;
+
+  max-height:0;
+  opacity:0;
+  overflow:hidden;
+  transition: max-height .35s ease, opacity .25s ease;
+  position:relative;
+  z-index:1;
+}
+
+.rhReveal.open{
+  max-height: 980px;
+  opacity:1;
+}
+
+.rhHeader{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-bottom: 10px;
+}
+
+.rhTitle{
+  margin:0;
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 650;
+  letter-spacing:.02em;
+}
+
+.rhHint{
+  margin:0;
+  font-size: 12px;
+  color: var(--muted);
+  opacity:.9;
+}
+
+.rhNumbers{
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.rhNumberCard{
+  background: rgba(0,0,0,.16);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius: 14px;
+  padding: 12px;
+}
+
+.rhNum{
+  font-size: 26px;
+  font-weight: 780;
+  letter-spacing: -0.02em;
+}
+
+.rhNumLabel{
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--body);
+}
+
+.rhNumSub{
+  margin-top: 3px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.rhBullets{
+  display:grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.rhBullet{
+  background: rgba(255,255,255,.02);
+  border: 1px solid rgba(255,255,255,.09);
+  border-radius: 14px;
+  padding: 12px;
+}
+
+.rhBulletTitle{
+  font-size: 13px;
+  font-weight: 720;
+  color: var(--fg);
+  margin-bottom: 6px;
+}
+
+.rhBulletText{
+  font-size: 14px;
+  color: var(--body);
+  line-height: 1.55;
+}
+
+/* responsivo */
+@media (max-width: 900px){
+  .metaGrid{ grid-template-columns: 1fr; }
+  .rhNumbers{ grid-template-columns: 1fr; }
+}
+
+@media (max-width: 700px){
+  .rhBulletText{ text-align:left; }
+}
 
     /* BLOCO 1 */
     .block{
@@ -571,6 +788,7 @@
       <div class="navBottom">
         <nav class="linksBottom">
           <a href="#intro">Introdução</a>
+           <a href="#amostra">Amostra</a>
           <a href="#b1">Bloco 1</a>
         </nav>
       </div>
@@ -659,6 +877,104 @@
         </div>
       </div>
     </section>
+<article class="block" id="amostra">
+  <div class="kicker">BASE DO PILOTO</div>
+  <h2>Quem respondeu e como a pesquisa foi feita</h2>
+
+  <p>
+    Este piloto combina dois formatos: survey (n=29) e entrevistas rápidas (n=3). A intenção aqui não é fechar verdade,
+    e sim revelar sinais: tensões recorrentes e padrões que merecem aprofundamento na Onda 2.
+  </p>
+
+  <div class="metaGrid">
+    <div class="metaCard">
+      <div class="metaLabel">Respondentes</div>
+      <div class="metaBig">32</div>
+      <div class="metaSmall">Survey: 29 | Entrevistas: 3</div>
+    </div>
+
+    <div class="metaCard">
+      <div class="metaLabel">Público</div>
+      <div class="metaList">
+        <div><span class="dot pro"></span>PRO <span class="metaPct">56%</span></div>
+        <div><span class="dot lid"></span>LID <span class="metaPct">19%</span></div>
+        <div><span class="dot neg"></span>NEG <span class="metaPct">19%</span></div>
+        <div><span class="dot rh"></span>RH <span class="metaPct">6%</span></div>
+      </div>
+    </div>
+
+    <div class="metaCard">
+      <div class="metaLabel">Situação de trabalho</div>
+      <div class="metaList">
+        <div><span class="dot clt"></span>CLT <span class="metaPct">41%</span></div>
+        <div><span class="dot pj"></span>PJ <span class="metaPct">19%</span></div>
+        <div><span class="dot mov"></span>Transição <span class="metaPct">40%</span></div>
+      </div>
+      <div class="metaSmall">Negócio próprio, autônomo, recolocação, desemprego</div>
+    </div>
+  </div>
+
+  <div class="row" style="margin-top:16px">
+    <button id="toggleRhBtn" class="curiosityBtn" type="button" aria-controls="rhDetails" aria-expanded="false">
+      Por que o RH apareceu pouco?
+    </button>
+    <span class="pill">Clique para ver o contexto</span>
+  </div>
+
+  <section class="rhReveal" id="rhDetails" aria-hidden="true">
+    <div class="rhHeader">
+      <p class="rhTitle">Contexto do engajamento de RH</p>
+      <p class="rhHint">Um achado do piloto, não um detalhe</p>
+    </div>
+
+    <div class="rhNumbers">
+      <div class="rhNumberCard">
+        <div class="rhNum">100</div>
+        <div class="rhNumLabel">Abordagens no LinkedIn</div>
+        <div class="rhNumSub">(analistas a C-level)</div>
+      </div>
+      <div class="rhNumberCard">
+        <div class="rhNum">9</div>
+        <div class="rhNumLabel">Devolutivas</div>
+        <div class="rhNumSub">retornos efetivos</div>
+      </div>
+      <div class="rhNumberCard">
+        <div class="rhNum">6%</div>
+        <div class="rhNumLabel">Participação RH</div>
+        <div class="rhNumSub">na amostra do piloto</div>
+      </div>
+    </div>
+
+    <div class="rhBullets">
+      <div class="rhBullet">
+        <div class="rhBulletTitle">Blindagem por ruído comercial</div>
+        <div class="rhBulletText">
+          RH está sendo muito abordado por vendedores. Convites reais de cooperação podem parecer, à primeira vista, mais uma venda.
+        </div>
+      </div>
+
+      <div class="rhBullet">
+        <div class="rhBulletTitle">Rotina em modo urgência</div>
+        <div class="rhBulletText">
+          Muitos profissionais relataram sobrecarga apagando incêndio, com pouco tempo para iniciativas de comunidade e boas práticas.
+        </div>
+      </div>
+
+      <div class="rhBullet">
+        <div class="rhBulletTitle">Grupos seniores seletivos</div>
+        <div class="rhBulletText">
+          Profissionais mais seniores tendem a participar de grupos pequenos, com entrada ultra seletiva, para preservar confiança e qualidade.
+        </div>
+      </div>
+    </div>
+
+    <div class="note">
+      Leitura sugerida: a baixa presença de RH é parte da história. Ela aponta filtros, capacidade e curadoria no campo de gestão de pessoas.
+    </div>
+  </section>
+</article>
+
+<div style="height:16px"></div>
 
     <article class="block" id="b1">
       <div class="kicker">BLOCO 1</div>
@@ -803,6 +1119,30 @@
       if(isOpen) closeReveal();
       else openReveal();
     });
+// Toggle do bloco RH (curiosidade)
+const rhBtn = document.getElementById("toggleRhBtn");
+const rhDetails = document.getElementById("rhDetails");
+
+if (rhBtn && rhDetails){
+  rhBtn.addEventListener("click", () => {
+    const isOpen = rhDetails.classList.contains("open");
+
+    if (isOpen){
+      rhDetails.classList.remove("open");
+      rhDetails.setAttribute("aria-hidden", "true");
+      rhBtn.setAttribute("aria-expanded", "false");
+      rhBtn.textContent = "Por que o RH apareceu pouco?";
+    } else {
+      rhDetails.classList.add("open");
+      rhDetails.setAttribute("aria-hidden", "false");
+      rhBtn.setAttribute("aria-expanded", "true");
+      rhBtn.textContent = "Ocultar contexto do RH";
+      rhDetails.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  });
+}
+
+    
   </script>
 </body>
 </html>
