@@ -45,10 +45,59 @@
     }
     @media (max-width: 900px){
       .wrap{grid-template-columns:1fr}
-      .sticky{position:relative;top:auto}
+      .sticky{position:relative;top:auto;height:auto;min-height:auto;max-height:none}
+    }
+
+    /* INTRO - ocupa as duas colunas, sem borda */
+    .intro{
+      grid-column: 1 / -1;
+      padding: 10px 6px 4px;
+    }
+    .intro-kicker{
+      margin: 0 0 10px;
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .intro h1{
+      margin: 0 0 10px;
+      font-size: 36px;
+      line-height: 1.05;
+    }
+    .intro-lead{
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.6;
+      max-width: 85ch;
+    }
+    .intro-grid{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px 18px;
+    }
+    @media (max-width: 900px){
+      .intro h1{ font-size: 30px; }
+      .intro-grid{ grid-template-columns: 1fr; }
+    }
+    .intro-label{
+      margin: 0 0 6px;
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+    .intro-text{
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.55;
+      max-width: 75ch;
     }
 
     .steps{display:flex;flex-direction:column;gap:18px}
+
     .step{
       background:rgba(255,255,255,.03);
       border:1px solid var(--line);
@@ -60,74 +109,44 @@
     .kicker{font-size:12px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
     .step h2{margin:10px 0 8px;font-size:28px;line-height:1.1}
     .step p{margin:0;color:var(--muted);font-size:15px;line-height:1.55;max-width:70ch}
+    .hint{margin-top:10px;font-size:12px;color:var(--muted)}
     .active{outline:2px solid rgba(242,242,242,.22)}
 
+    /* STICKY - altura fixa responsiva */
     .sticky{
-      position:sticky; top:86px; align-self:start;
+      position:sticky;
+      top:86px;
+      align-self:start;
+
       background:var(--card);
       border:1px solid var(--line);
       border-radius:16px;
       padding:16px;
+
+      height: calc(100vh - 110px);
+      max-height: 720px;
+      min-height: 460px;
+
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
     }
+
     .sticky .title{margin:0 0 6px;font-size:14px;color:var(--muted);font-weight:600;letter-spacing:.02em}
-    .sticky .n{margin:0 0 14px;font-size:12px;color:var(--muted)}
+    .sticky .n{margin:0 0 10px;font-size:12px;color:var(--muted)}
+
+    /* Canvas ocupa o espaço certo */
+    .chartWrap{
+      flex: 1;
+      min-height: 260px;
+      position: relative;
+    }
+    .chartWrap canvas{
+      width: 100% !important;
+      height: 100% !important;
+    }
+
     .note{margin-top:10px;font-size:12px;color:var(--muted)}
-    .hint{margin-top:8px;font-size:12px;color:var(--muted)}
-
-    .intro{
-  grid-column: 1 / -1;
-  padding: 10px 6px 4px;
-}
-
-.intro-kicker{
-  margin: 0 0 10px;
-  font-size: 12px;
-  color: var(--muted);
-  letter-spacing: .08em;
-  text-transform: uppercase;
-}
-
-.intro h1{
-  margin: 0 0 10px;
-  font-size: 36px;
-  line-height: 1.05;
-}
-
-.intro-lead{
-  margin: 0 0 18px;
-  color: var(--muted);
-  font-size: 16px;
-  line-height: 1.6;
-  max-width: 85ch;
-}
-
-.intro-grid{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px 18px;
-}
-
-@media (max-width: 900px){
-  .intro h1{ font-size: 30px; }
-  .intro-grid{ grid-template-columns: 1fr; }
-}
-
-.intro-label{
-  margin: 0 0 6px;
-  font-size: 12px;
-  color: var(--muted);
-  letter-spacing: .06em;
-  text-transform: uppercase;
-}
-
-.intro-text{
-  margin: 0;
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.55;
-  max-width: 75ch;
-}
-
   </style>
 </head>
 
@@ -150,9 +169,11 @@
   </header>
 
   <main class="wrap">
-        <section class="intro" id="intro">
+    <!-- INTRO (sem borda, duas colunas) -->
+    <section class="intro" id="intro">
       <p class="intro-kicker">DHO360 | Pesquisa piloto</p>
       <h1>Trabalhador x Negócio: onde o acordo quebra</h1>
+
       <p class="intro-lead">
         Esta pesquisa nasceu de conversas reais com trabalhadores e decisores, onde o mesmo tema se repetia:
         expectativas desalinhadas, fricção no dia a dia e a sensação de que a promessa não vira prática.
@@ -162,10 +183,11 @@
         <div>
           <p class="intro-label">Por que existe</p>
           <p class="intro-text">
-            Para mapear dores e entraves do alinhamento entre pessoas e negócios, e medir o peso da coerência
+            Mapear dores e entraves do alinhamento entre pessoas e negócios, e observar o peso da coerência
             (liderança e RH) na sustentação desse acordo.
           </p>
         </div>
+
         <div>
           <p class="intro-label">Como ler</p>
           <p class="intro-text">
@@ -173,12 +195,14 @@
             Use como diagnóstico inicial, não como verdade definitiva.
           </p>
         </div>
+
         <div>
           <p class="intro-label">Quem conduziu</p>
           <p class="intro-text">
-            [Nome da consultoria ou autora]. Se quiser, inclua aqui uma linha sobre o contexto: consultoria de negócios via desenvolvimento humano.
+            Edite este trecho com o nome da consultoria/autoria e uma linha curta sobre o contexto do estudo.
           </p>
         </div>
+
         <div>
           <p class="intro-label">Objetivo público</p>
           <p class="intro-text">
@@ -187,7 +211,8 @@
         </div>
       </div>
     </section>
-    
+
+    <!-- BLOCOS -->
     <section class="steps" id="steps">
       <article class="step" id="b1" data-step="1">
         <div class="kicker">BLOCO 1</div>
@@ -209,20 +234,21 @@
       </article>
     </section>
 
+    <!-- CARD DO GRAFICO -->
     <aside class="sticky">
       <p class="title" id="chartTitle">Bloco 1</p>
       <p class="n" id="chartN">Piloto | n =</p>
-      <canvas id="chart" height="340"></canvas>
+
+      <div class="chartWrap">
+        <canvas id="chart"></canvas>
+      </div>
+
       <div class="note">Leitura inicial de um piloto. Indica sinais, não verdades finais.</div>
     </aside>
   </main>
 
   <script>
-    // Dados agregados reais do Excel v4 (somente para testar o mecanismo)
-    // Bloco 1: MQ0063 (n=29) top 6 por score (ranking invertido)
-    // Bloco 2: MQ0024 NEG (n=3) top 6 por % de seleção
-    // Bloco 3: MQ0084 PRO (n=12) top 6 por score (ranking invertido)
-
+    // Dados de teste (substitua depois pelos seus resultados agregados por bloco/MQ)
     const stepData = {
       1: {
         title: "MQ0063 | Consenso do piloto (top 6)",
@@ -339,7 +365,7 @@
       }
     }
 
-    // Observa os blocos e atualiza o gráfico
+    // Observa os blocos e atualiza o grafico
     const steps = [...document.querySelectorAll(".step")];
     const io = new IntersectionObserver((entries) => {
       entries.forEach((e) => {
