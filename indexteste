@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DHO360 - Scrollytelling (teste)</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <style>
+    :root{
+      --bg:#0b0c0f;
+      --fg:#f2f2f2;
+      --muted:#b8b8b8;
+      --card:#12141a;
+      --line:#232632;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--fg)}
+    a{color:var(--fg);text-decoration:none;opacity:.9}
+    a:hover{opacity:1}
+
+    .topbar{position:fixed;top:0;left:0;right:0;height:4px;z-index:99}
+    .progress{height:4px;width:0%;background:var(--fg);opacity:.85}
+
+    header{
+      position:sticky; top:0; z-index:98;
+      background:rgba(11,12,15,.75);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid var(--line);
+    }
+    .nav{
+      max-width:1200px;margin:0 auto;padding:12px 20px;
+      display:flex;gap:14px;align-items:center;justify-content:space-between;
+    }
+    .nav .left{display:flex;gap:14px;align-items:center}
+    .tag{font-size:12px;color:var(--muted);border:1px solid var(--line);padding:6px 10px;border-radius:999px}
+    .links{display:flex;gap:12px;flex-wrap:wrap}
+    .links a{font-size:13px;color:var(--muted)}
+    .links a:hover{color:var(--fg)}
+
+    .wrap{
+      display:grid;grid-template-columns: 1.05fr .95fr;gap:22px;
+      max-width:1200px;margin:0 auto;padding:22px 20px 60px;
+    }
+    @media (max-width: 900px){
+      .wrap{grid-template-columns:1fr}
+      .sticky{position:relative;top:auto;height:auto;min-height:auto;max-height:none}
+    }
+
+    /* INTRO - ocupa as duas colunas, sem borda */
+    .intro{
+      grid-column: 1 / -1;
+      padding: 10px 6px 4px;
+    }
+    .intro-kicker{
+      margin: 0 0 10px;
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .intro h1{
+      margin: 0 0 10px;
+      font-size: 36px;
+      line-height: 1.05;
+    }
+    .intro-lead{
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.6;
+      max-width: 85ch;
+    }
+    .intro-grid{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px 18px;
+    }
+    @media (max-width: 900px){
+      .intro h1{ font-size: 30px; }
+      .intro-grid{ grid-template-columns: 1fr; }
+    }
+    .intro-label{
+      margin: 0 0 6px;
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+    .intro-text{
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.55;
+      max-width: 75ch;
+    }
+
+    .steps{display:flex;flex-direction:column;gap:18px}
+
+    .step{
+      background:rgba(255,255,255,.03);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:18px;
+      min-height:55vh;
+      transition: outline .2s ease;
+    }
+    .kicker{font-size:12px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+    .step h2{margin:10px 0 8px;font-size:28px;line-height:1.1}
+    .step p{margin:0;color:var(--muted);font-size:15px;line-height:1.55;max-width:70ch}
+    .hint{margin-top:10px;font-size:12px;color:var(--muted)}
+    .active{outline:2px solid rgba(242,242,242,.22)}
+
+    /* STICKY - altura fixa responsiva */
+    .sticky{
+      position:sticky;
+      top:86px;
+      align-self:start;
+
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:16px;
+
+      height: calc(100vh - 110px);
+      max-height: 720px;
+      min-height: 460px;
+
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+    }
+
+    .sticky .title{margin:0 0 6px;font-size:14px;color:var(--muted);font-weight:600;letter-spacing:.02em}
+    .sticky .n{margin:0 0 10px;font-size:12px;color:var(--muted)}
+
+    /* Canvas ocupa o espaço certo */
+    .chartWrap{
+      flex: 1;
+      min-height: 260px;
+      position: relative;
+    }
+    .chartWrap canvas{
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    .note{margin-top:10px;font-size:12px;color:var(--muted)}
+  </style>
+</head>
+
+<body>
+  <div class="topbar"><div class="progress" id="progress"></div></div>
+
+  <header>
+    <div class="nav">
+      <div class="left">
+        <strong>DHO360</strong>
+        <span class="tag">Scrollytelling - teste</span>
+      </div>
+      <nav class="links">
+        <a href="#intro">Introdução</a>
+        <a href="#b1">Bloco 1</a>
+        <a href="#b2">Bloco 2</a>
+        <a href="#b3">Bloco 3</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- INTRO (sem borda, duas colunas) -->
+    <section class="intro" id="intro">
+      <p class="intro-kicker">DHO360 | Pesquisa piloto</p>
+      <h1>Trabalhador x Negócio: onde o acordo quebra</h1>
+
+      <p class="intro-lead">
+        Esta pesquisa nasceu de conversas reais com trabalhadores e decisores, onde o mesmo tema se repetia:
+        expectativas desalinhadas, fricção no dia a dia e a sensação de que a promessa não vira prática.
+      </p>
+
+      <div class="intro-grid">
+        <div>
+          <p class="intro-label">Por que existe</p>
+          <p class="intro-text">
+            Mapear dores e entraves do alinhamento entre pessoas e negócios, e observar o peso da coerência
+            (liderança e RH) na sustentação desse acordo.
+          </p>
+        </div>
+
+        <div>
+          <p class="intro-label">Como ler</p>
+          <p class="intro-text">
+            Os gráficos mostram sinais de um piloto. O tamanho da amostra (n) aparece em cada bloco e pode variar por pergunta.
+            Use como diagnóstico inicial, não como verdade definitiva.
+          </p>
+        </div>
+
+        <div>
+          <p class="intro-label">Quem conduziu</p>
+          <p class="intro-text">
+            Edite este trecho com o nome da consultoria/autoria e uma linha curta sobre o contexto do estudo.
+          </p>
+        </div>
+
+        <div>
+          <p class="intro-label">Objetivo público</p>
+          <p class="intro-text">
+            Provocar reflexão e abrir conversa com trabalhadores e decisores sobre como construir acordos mais justos e viáveis para ambos.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOCOS -->
+    <section class="steps" id="steps">
+      <article class="step" id="b1" data-step="1">
+        <div class="kicker">BLOCO 1</div>
+        <h2>O problema não é falta de esforço. É falta de coerência.</h2>
+        <p>Quando todo mundo sabe o que importa, o caos vira escolha. E escolha tem dono.</p>
+        <p class="hint">Role a página e veja o gráfico mudar a cada bloco.</p>
+      </article>
+
+      <article class="step" id="b2" data-step="2">
+        <div class="kicker">BLOCO 2</div>
+        <h2>Negócio quer crescimento. Mas entrega depende de confiança.</h2>
+        <p>Crescer não é errado. O erro é crescer sem pacto. Aqui, um recorte do que o público NEG marcou como prioridade.</p>
+      </article>
+
+      <article class="step" id="b3" data-step="3">
+        <div class="kicker">BLOCO 3</div>
+        <h2>A pessoa não pede demissão do trabalho. Pede demissão do combinado.</h2>
+        <p>Quando o que foi dito não vira prática, o contrato invisível quebra. Recorte do público PRO sobre fatores de saída (ranking).</p>
+      </article>
+    </section>
+
+    <!-- CARD DO GRAFICO -->
+    <aside class="sticky">
+      <p class="title" id="chartTitle">Bloco 1</p>
+      <p class="n" id="chartN">Piloto | n =</p>
+
+      <div class="chartWrap">
+        <canvas id="chart"></canvas>
+      </div>
+
+      <div class="note">Leitura inicial de um piloto. Indica sinais, não verdades finais.</div>
+    </aside>
+  </main>
+
+  <script>
+    // Dados de teste (substitua depois pelos seus resultados agregados por bloco/MQ)
+    const stepData = {
+      1: {
+        title: "MQ0063 | Consenso do piloto (top 6)",
+        n: 29,
+        xMax: 7,
+        datasetLabel: "Score (ranking invertido)",
+        labels: [
+          "Corpo/Ambiente: verificar se tenho as condições e recursos adequados (saúde, local, tempo, ferramentas, rede de apoio), para agir.",
+          "Habilidades: adquirir mais conhecimento sobre mim, sobre o mundo e sobre como fazer coisas no geral, e aprender a aplicá-los na vida real.",
+          "Comportamento: descobrir como meus comportamentos me ajudam a realizar tarefas e ações melhores, com mais produtividade ou até mesmo realizar coisas novas.",
+          "Crenças e Valores: clarear minhas crenças e valores para agir de acordo com o que acredito e valorizo.",
+          "Visão/Missão: descobrir meu propósito, definir um futuro desejado, e viver tudo isso.",
+          "Legado: gerar impacto positivo e duradouro nos meios que faço parte, para as pessoas e sociedade."
+        ],
+        values: [5.28, 5.17, 4.69, 3.72, 3.17, 3.00]
+      },
+      2: {
+        title: "MQ0024 | Prioridades do NEG (top 6)",
+        n: 3,
+        xMax: 100,
+        datasetLabel: "% de respondentes (multiselect)",
+        labels: [
+          "Aquisição de clientes e novos canais",
+          "Crescimento de receita orgânica",
+          "Caixa e capital de giro",
+          "Lucratividade e eficiência operacional",
+          "Digitalização e automação de processos",
+          "Expansão geográfica ou novos mercados"
+        ],
+        values: [100.0, 100.0, 66.7, 66.7, 33.3, 33.3]
+      },
+      3: {
+        title: "MQ0084 | Fatores de saída (PRO, top 6)",
+        n: 12,
+        xMax: 7,
+        datasetLabel: "Score (ranking invertido)",
+        labels: [
+          "Pacote de Compensação (Salário, Bônus, PLR)",
+          "Segurança Psicológica (Burnout, Assédio Moral, Falta de Autonomia, Conflito de Valores, Insegurança de Estabilidade)",
+          "Home Office (Trabalhar em casa)",
+          "Relevância do Trabalho (o que eu faço precisa respeitar valores e propósito e contribuir para meu crescimento pessoal)",
+          "Benefícios (Vale-Refeição, Vale-Alimentação, Seguro Médico, Seguro Dental, Seguro de Vida)",
+          "Flexibilidade de Horário (Entrada e saída ajustáveis, Semana Compacta, Autogestão de horários)"
+        ],
+        values: [5.58, 4.75, 3.92, 3.83, 3.58, 3.50]
+      }
+    };
+
+    const ctx = document.getElementById("chart");
+    let chart;
+
+    function truncateLabel(s, max=48){
+      if(!s) return s;
+      return s.length > max ? (s.slice(0, max-3) + "...") : s;
+    }
+
+    function makeConfig(step){
+      const d = stepData[step];
+      return {
+        type: "bar",
+        data: {
+          labels: d.labels.map(x => truncateLabel(x)),
+          datasets: [{
+            label: d.datasetLabel,
+            data: d.values,
+            borderWidth: 1
+          }]
+        },
+        options: {
+          indexAxis: "y",
+          responsive: true,
+          maintainAspectRatio: false,
+          animation: { duration: 450 },
+          plugins: {
+            legend: { display: true },
+            tooltip: {
+              callbacks: {
+                title: (items) => {
+                  const idx = items[0].dataIndex;
+                  return d.labels[idx];
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              suggestedMax: d.xMax,
+              ticks: { color: "#b8b8b8" },
+              grid: { color: "#232632" }
+            },
+            y: {
+              ticks: { color: "#b8b8b8" },
+              grid: { color: "#232632" }
+            }
+          }
+        }
+      };
+    }
+
+    function setStep(step){
+      const d = stepData[step];
+      document.getElementById("chartTitle").textContent = d.title;
+      document.getElementById("chartN").textContent = `Piloto | n = ${d.n}`;
+
+      const cfg = makeConfig(step);
+      if(!chart){
+        chart = new Chart(ctx, cfg);
+      }else{
+        chart.data.labels = cfg.data.labels;
+        chart.data.datasets[0].label = cfg.data.datasets[0].label;
+        chart.data.datasets[0].data = cfg.data.datasets[0].data;
+        chart.options.scales.x.suggestedMax = cfg.options.scales.x.suggestedMax;
+        chart.update();
+      }
+    }
+
+    // Observa os blocos e atualiza o grafico
+    const steps = [...document.querySelectorAll(".step")];
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if(e.isIntersecting){
+          steps.forEach(s => s.classList.remove("active"));
+          e.target.classList.add("active");
+          setStep(Number(e.target.dataset.step));
+        }
+      });
+    }, { threshold: 0.6 });
+
+    steps.forEach(s => io.observe(s));
+    setStep(1);
+
+    // Barra de progresso
+    window.addEventListener("scroll", () => {
+      const h = document.documentElement;
+      const sc = (h.scrollTop) / (h.scrollHeight - h.clientHeight);
+      document.getElementById("progress").style.width = `${Math.max(0, Math.min(1, sc))*100}%`;
+    });
+  </script>
+</body>
+</html>
