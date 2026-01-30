@@ -77,14 +77,25 @@
       backdrop-filter: blur(10px);
       border-bottom:1px solid var(--line);
     }
-    .nav{
-      max-width:1100px;
-      margin:0 auto;
-      padding:12px 20px;
-      display:flex;
-      gap:14px;
-      align-items:center;
-      justify-content:space-between;
+    .navWrap{
+  max-width:1100px;
+  margin:0 auto;
+  padding:0 20px;
+}
+
+/* Linha 1 */
+.navTop{
+  padding:12px 0;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+
+  /* Linha 2 (faixa do menu) */
+.navBottom{
+  padding:10px 0 12px;
+  border-top:1px solid rgba(255,255,255,.06);
+  background: rgba(0,0,0,.08);
     }
 
     .left{
@@ -124,22 +135,27 @@
       opacity:.95;
     }
 
-    .links{
-      display:flex; gap:10px; flex-wrap:wrap;
-      justify-content:flex-end;
-      align-items:center;
-    }
-    .links a{
-      font-size:13px;
-      color: var(--muted);
-      padding:6px 10px;
-      border-radius:999px;
-      transition: background .15s ease, color .15s ease;
-    }
-    .links a:hover{
-      color: var(--fg);
-      background: rgba(255,255,255,.05);
-    }
+/* Menu na linha de baixo */
+.linksBottom{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:flex-end; /* se quiser centralizar, troque por center */
+}
+
+.linksBottom a{
+  font-size:13px;
+  color: var(--muted);
+  padding:6px 10px;
+  border-radius:999px;
+  transition: background .15s ease, color .15s ease;
+}
+.linksBottom a:hover{
+  color: var(--fg);
+  background: rgba(255,255,255,.05);
+
+}
 
     .ctaTop{
       margin-left: 4px;
@@ -388,10 +404,11 @@
   <div class="topbar"><div class="progress" id="progress"></div></div>
 
   <header>
-    <div class="nav">
+  <div class="navWrap">
+    <!-- Linha 1 -->
+    <div class="navTop">
       <div class="left">
         <div class="brand">
-          <!-- Ícone (rosca + gradiente + seta ouroboros) -->
           <svg class="logoIcon" viewBox="0 0 64 64" aria-hidden="true">
             <defs>
               <linearGradient id="lg" x1="0" y1="0" x2="1" y2="1">
@@ -401,7 +418,6 @@
               </linearGradient>
             </defs>
             <circle cx="32" cy="32" r="22" fill="none" stroke="url(#lg)" stroke-width="10" stroke-linecap="round"/>
-            <!-- seta (estilo ouroboros) -->
             <path d="M46 17 l7 0 l0 7" fill="none" stroke="url(#lg)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M53 17 C49 12 42 8 34 8" fill="none" stroke="url(#lg)" stroke-width="6" stroke-linecap="round"/>
           </svg>
@@ -413,13 +429,18 @@
         </div>
       </div>
 
-      <nav class="links">
+      <a class="ctaTop" href="#onda2">Participar da Onda 2</a>
+    </div>
+
+    <!-- Linha 2 (menu desce para a faixa vermelha) -->
+    <div class="navBottom">
+      <nav class="linksBottom">
         <a href="#intro">Introdução</a>
         <a href="#b1">Bloco 1</a>
-        <a class="ctaTop" href="#onda2">Participar da Onda 2</a>
       </nav>
     </div>
-  </header>
+  </div>
+</header>
 
   <main>
     <!-- INTRO -->
