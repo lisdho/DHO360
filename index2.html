@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DHO360 - Teste (Intro + Bloco 1)</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <style>
+    :root{
+      --bg:#0b0c0f;
+      --fg:#f2f2f2;
+      --muted:#b8b8b8;
+      --card:#12141a;
+      --line:#232632;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--fg)}
+    a{color:var(--fg);text-decoration:none;opacity:.9}
+    a:hover{opacity:1}
+
+    header{
+      position:sticky; top:0; z-index:98;
+      background:rgba(11,12,15,.75);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid var(--line);
+    }
+    .nav{
+      max-width:1000px;margin:0 auto;padding:12px 20px;
+      display:flex;gap:14px;align-items:center;justify-content:space-between;
+    }
+    .tag{font-size:12px;color:var(--muted);border:1px solid var(--line);padding:6px 10px;border-radius:999px}
+
+    main{max-width:1000px;margin:0 auto;padding:22px 20px 60px}
+
+    /* INTRO */
+    .intro{
+      padding: 10px 6px 14px;
+      margin-bottom: 14px;
+    }
+    .intro-kicker{
+      margin: 0 0 10px;
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .intro h1{
+      margin: 0 0 10px;
+      font-size: 36px;
+      line-height: 1.05;
+    }
+    .intro-lead{
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.6;
+      max-width: 85ch;
+    }
+
+    /* BLOCO */
+    .step{
+      background:rgba(255,255,255,.03);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:18px;
+    }
+    .kicker{font-size:12px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+    .step h2{margin:10px 0 8px;font-size:28px;line-height:1.1}
+    .step p{margin:0;color:var(--muted);font-size:15px;line-height:1.55;max-width:75ch}
+
+    /* BOTÃO */
+    .btnRow{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    button{
+      appearance:none;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      color:var(--fg);
+      padding:10px 12px;
+      border-radius:12px;
+      cursor:pointer;
+      font-size:14px;
+    }
+    button:hover{background:rgba(255,255,255,.07)}
+    .meta{font-size:12px;color:var(--muted)}
+
+    /* CONTEÚDO REVELADO */
+    .reveal{
+      margin-top:14px;
+      border-top:1px solid var(--line);
+      padding-top:14px;
+
+      max-height:0;
+      opacity:0;
+      overflow:hidden;
+      transition: max-height .35s ease, opacity .25s ease;
+    }
+    .reveal.open{
+      max-height: 520px; /* suficiente p/ 6 barras */
+      opacity:1;
+    }
+
+    .chartTitle{margin:0 0 6px;font-size:13px;color:var(--muted);font-weight:600}
+    .chartWrap{
+      height: 360px;
+      background:rgba(0,0,0,.12);
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:10px;
+    }
+    .chartWrap canvas{
+      width:100% !important;
+      height:100% !important;
+    }
+
+    @media (max-width: 600px){
+      .intro h1{font-size:28px}
+      .chartWrap{height:320px}
+      .reveal.open{max-height:560px}
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="nav">
+      <div style="display:flex;gap:12px;align-items:center">
+        <strong>DHO360</strong>
+        <span class="tag">Teste: botão revela gráfico</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- INTRO -->
+    <section class="intro" id="intro">
+      <p class="intro-kicker">DHO360 | Pesquisa piloto</p>
+      <h1>Trabalhador x Negócio: onde o acordo quebra</h1>
+      <p class="intro-lead">
+        Este relatório organiza sinais iniciais (piloto) sobre desalinhamentos entre expectativas de negócios e trabalhadores,
+        e o papel de liderança e RH na sustentação desse acordo.
+      </p>
+    </section>
+
+    <!-- BLOCO 1 -->
+    <article class="step" id="b1">
+      <div class="kicker">BLOCO 1</div>
+      <h2>O problema não é falta de esforço. É falta de coerência.</h2>
+      <p>Quando todo mundo sabe o que importa, o caos vira escolha. E escolha tem dono.</p>
+
+      <div class="btnRow">
+        <button id="toggleChartBtn" type="button">Ver gráfico</button>
+        <span class="meta" id="chartMeta">Piloto | n = 29 | MQ0063</span>
+      </div>
+
+      <!-- Conteúdo revelado -->
+      <section class="reveal" id="revealArea" aria-hidden="true">
+        <p class="chartTitle" id="chartTitle">MQ0063 | Consenso do piloto (top 6)</p>
+        <div class="chartWrap">
+          <canvas id="chart"></canvas>
+        </div>
+      </section>
+    </article>
+  </main>
+
+  <script>
+    // Dados do Bloco 1 (mesmo exemplo do seu teste)
+    const bloco1 = {
+      title: "MQ0063 | Consenso do piloto (top 6)",
+      n: 29,
+      xMax: 7,
+      datasetLabel: "Score (ranking invertido)",
+      labels: [
+        "Corpo/Ambiente: verificar se tenho as condições e recursos adequados (saúde, local, tempo, ferramentas, rede de apoio), para agir.",
+        "Habilidades: adquirir mais conhecimento sobre mim, sobre o mundo e sobre como fazer coisas no geral, e aprender a aplicá-los na vida real.",
+        "Comportamento: descobrir como meus comportamentos me ajudam a realizar tarefas e ações melhores, com mais produtividade ou até mesmo realizar coisas novas.",
+        "Crenças e Valores: clarear minhas crenças e valores para agir de acordo com o que acredito e valorizo.",
+        "Visão/Missão: descobrir meu propósito, definir um futuro desejado, e viver tudo isso.",
+        "Legado: gerar impacto positivo e duradouro nos meios que faço parte, para as pessoas e sociedade."
+      ],
+      values: [5.28, 5.17, 4.69, 3.72, 3.17, 3.00]
+    };
+
+    function truncateLabel(s, max=58){
+      if(!s) return s;
+      return s.length > max ? (s.slice(0, max-3) + "...") : s;
+    }
+
+    const btn = document.getElementById("toggleChartBtn");
+    const reveal = document.getElementById("revealArea");
+    const title = document.getElementById("chartTitle");
+
+    let chartInstance = null;
+
+    function buildChart(){
+      const ctx = document.getElementById("chart");
+      chartInstance = new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: bloco1.labels.map(x => truncateLabel(x)),
+          datasets: [{
+            label: bloco1.datasetLabel,
+            data: bloco1.values,
+            borderWidth: 1
+          }]
+        },
+        options: {
+          indexAxis: "y",
+          responsive: true,
+          maintainAspectRatio: false,
+          animation: { duration: 450 },
+          plugins: {
+            legend: { display: true },
+            tooltip: {
+              callbacks: {
+                title: (items) => {
+                  const idx = items[0].dataIndex;
+                  return bloco1.labels[idx];
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              suggestedMax: bloco1.xMax,
+              ticks: { color: "#b8b8b8" },
+              grid: { color: "#232632" }
+            },
+            y: {
+              ticks: { color: "#b8b8b8" },
+              grid: { color: "#232632" }
+            }
+          }
+        }
+      });
+    }
+
+    function openReveal(){
+      title.textContent = bloco1.title;
+      reveal.classList.add("open");
+      reveal.setAttribute("aria-hidden", "false");
+      btn.textContent = "Ocultar gráfico";
+
+      // cria o gráfico só na primeira abertura
+      if(!chartInstance){
+        buildChart();
+      }else{
+        chartInstance.resize();
+      }
+    }
+
+    function closeReveal(){
+      reveal.classList.remove("open");
+      reveal.setAttribute("aria-hidden", "true");
+      btn.textContent = "Ver gráfico";
+    }
+
+    btn.addEventListener("click", () => {
+      const isOpen = reveal.classList.contains("open");
+      if(isOpen) closeReveal();
+      else openReveal();
+    });
+  </script>
+</body>
+</html>
