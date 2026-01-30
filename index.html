@@ -3,7 +3,11 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DHO360 | Piloto</title>
+  <title>DHO 360º | Piloto</title>
+
+  <!-- FAVICON (SVG em data-uri) -->
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Cdefs%3E%3ClinearGradient%20id='g'%20x1='0'%20y1='0'%20x2='1'%20y2='1'%3E%3Cstop%20offset='0'%20stop-color='%237c3aed'/%3E%3Cstop%20offset='0.55'%20stop-color='%23a855f7'/%3E%3Cstop%20offset='1'%20stop-color='%23e9d5ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle%20cx='32'%20cy='32'%20r='22'%20fill='none'%20stroke='url(%23g)'%20stroke-width='10'%20stroke-linecap='round'/%3E%3Cpath%20d='M46%2017%20l7%200%20l0%207'%20fill='none'%20stroke='url(%23g)'%20stroke-width='6'%20stroke-linecap='round'%20stroke-linejoin='round'/%3E%3Cpath%20d='M53%2017%20C49%2012%2042%208%2034%208'%20fill='none'%20stroke='url(%23g)'%20stroke-width='6'%20stroke-linecap='round'/%3E%3C/svg%3E" />
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 
@@ -17,10 +21,9 @@
       --card2: rgba(255,255,255,.025);
       --line: rgba(255,255,255,.09);
 
-      --violet1:#7c3aed;  /* violeta */
-      --violet2:#a855f7;  /* lilás */
-      --violet3:#c084fc;  /* lilás claro */
-      --ink:#0b0c12;
+      --violet1:#7c3aed;
+      --violet2:#a855f7;
+      --violet3:#e9d5ff;
 
       --radius: 18px;
       --shadow: 0 18px 60px rgba(0,0,0,.55);
@@ -38,7 +41,7 @@
     a{color:var(--fg);text-decoration:none;opacity:.9}
     a:hover{opacity:1}
 
-    /* Fundo com "glow" roxo */
+    /* Fundo com glow roxo/lilás */
     .bgfx{
       position:fixed; inset:0;
       pointer-events:none;
@@ -46,9 +49,8 @@
       background:
         radial-gradient(900px 520px at 12% 10%, rgba(168,85,247,.22), transparent 60%),
         radial-gradient(840px 520px at 88% 20%, rgba(124,58,237,.18), transparent 62%),
-        radial-gradient(760px 520px at 50% 92%, rgba(192,132,252,.12), transparent 65%),
+        radial-gradient(760px 520px at 50% 92%, rgba(233,213,255,.10), transparent 65%),
         radial-gradient(900px 700px at 40% 55%, rgba(124,58,237,.08), transparent 60%);
-      filter: blur(0px);
     }
     .bgfx::after{
       content:"";
@@ -60,7 +62,7 @@
       opacity:.9;
     }
 
-    /* Top progress */
+    /* Progresso topo */
     .topbar{position:fixed;top:0;left:0;right:0;height:3px;z-index:99}
     .progress{
       height:3px;width:0%;
@@ -68,6 +70,7 @@
       opacity:.9;
     }
 
+    /* HEADER */
     header{
       position:sticky; top:0; z-index:98;
       background: rgba(7,7,11,.62);
@@ -83,26 +86,48 @@
       align-items:center;
       justify-content:space-between;
     }
+
     .left{
-      display:flex; gap:12px; align-items:center;
-      min-width: 220px;
+      display:flex;
+      gap:12px;
+      align-items:center;
+      min-width: 260px;
     }
+
     .brand{
-      display:flex; gap:10px; align-items:center;
-      font-weight:700;
+      display:flex;
+      gap:10px;
+      align-items:center;
+      font-weight:800;
       letter-spacing:.02em;
+      line-height:1;
     }
-    .tag{
+
+    .logoIcon{
+      width:22px;height:22px; flex:0 0 22px;
+      filter: drop-shadow(0 10px 18px rgba(124,58,237,.22));
+    }
+
+    .brandText{
+      display:flex;
+      gap:10px;
+      align-items:baseline;
+      flex-wrap:wrap;
+    }
+    .brandName{
+      font-size:16px;
+    }
+    .pilot{
       font-size:12px;
       color: var(--muted);
-      border:1px solid var(--line);
-      padding:6px 10px;
-      border-radius:999px;
-      background: rgba(255,255,255,.02);
+      letter-spacing:.03em;
+      opacity:.95;
     }
+
     .links{
-      display:flex; gap:12px; flex-wrap:wrap;
+      display:flex; gap:10px; flex-wrap:wrap;
       justify-content:flex-end;
+      align-items:center;
     }
     .links a{
       font-size:13px;
@@ -116,13 +141,33 @@
       background: rgba(255,255,255,.05);
     }
 
+    .ctaTop{
+      margin-left: 4px;
+      border: 1px solid rgba(192,132,252,.35);
+      background: linear-gradient(180deg, rgba(124,58,237,.26), rgba(168,85,247,.14));
+      color: var(--fg);
+      padding: 8px 12px;
+      border-radius: 12px;
+      font-size: 13px;
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(124,58,237,.16);
+      transition: transform .12s ease, background .15s ease, border-color .15s ease;
+      white-space:nowrap;
+    }
+    .ctaTop:hover{
+      transform: translateY(-1px);
+      border-color: rgba(233,213,255,.55);
+      background: linear-gradient(180deg, rgba(124,58,237,.34), rgba(168,85,247,.18));
+    }
+    .ctaTop:active{transform: translateY(0px)}
+
     main{
       max-width:1100px;
       margin:0 auto;
       padding:22px 20px 64px;
     }
 
-    /* INTRO (mantida do primeiro teste) */
+    /* INTRO */
     .intro{
       padding: 10px 6px 10px;
       margin-bottom: 18px;
@@ -148,7 +193,6 @@
       line-height: 1.65;
       max-width: 90ch;
     }
-
     .intro-grid{
       display:grid;
       grid-template-columns: 1fr 1fr;
@@ -157,6 +201,7 @@
     @media (max-width: 900px){
       .intro h1{ font-size: 32px; }
       .intro-grid{ grid-template-columns: 1fr; }
+      .pilot{display:none}
     }
 
     .infoCard{
@@ -189,7 +234,7 @@
       max-width: 78ch;
     }
 
-    /* BLOCO 1 (card) */
+    /* BLOCO 1 */
     .block{
       background: var(--card);
       border:1px solid var(--line);
@@ -216,7 +261,6 @@
       position:relative;
       z-index:1;
     }
-
     .block h2{
       margin: 10px 0 10px;
       font-size: 30px;
@@ -225,7 +269,6 @@
       position:relative;
       z-index:1;
     }
-
     .block p{
       margin:0;
       color: var(--muted);
@@ -255,12 +298,10 @@
       background: rgba(255,255,255,.02);
     }
 
-    /* BOTÃO roxo */
     button{
       appearance:none;
       border: 1px solid rgba(192,132,252,.35);
-      background:
-        linear-gradient(180deg, rgba(124,58,237,.32), rgba(168,85,247,.18));
+      background: linear-gradient(180deg, rgba(124,58,237,.32), rgba(168,85,247,.18));
       color: var(--fg);
       padding:10px 12px;
       border-radius: 12px;
@@ -271,13 +312,11 @@
     }
     button:hover{
       transform: translateY(-1px);
-      border-color: rgba(192,132,252,.55);
-      background:
-        linear-gradient(180deg, rgba(124,58,237,.40), rgba(168,85,247,.22));
+      border-color: rgba(233,213,255,.55);
+      background: linear-gradient(180deg, rgba(124,58,237,.40), rgba(168,85,247,.22));
     }
     button:active{transform: translateY(0px)}
 
-    /* REVEAL */
     .reveal{
       margin-top: 14px;
       border-top: 1px solid var(--line);
@@ -351,18 +390,39 @@
   <header>
     <div class="nav">
       <div class="left">
-        <div class="brand">DHO360</div>
-        <span class="tag">Piloto | versão 0.1</span>
+        <div class="brand">
+          <!-- Ícone (rosca + gradiente + seta ouroboros) -->
+          <svg class="logoIcon" viewBox="0 0 64 64" aria-hidden="true">
+            <defs>
+              <linearGradient id="lg" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="var(--violet1)"/>
+                <stop offset="0.55" stop-color="var(--violet2)"/>
+                <stop offset="1" stop-color="var(--violet3)"/>
+              </linearGradient>
+            </defs>
+            <circle cx="32" cy="32" r="22" fill="none" stroke="url(#lg)" stroke-width="10" stroke-linecap="round"/>
+            <!-- seta (estilo ouroboros) -->
+            <path d="M46 17 l7 0 l0 7" fill="none" stroke="url(#lg)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M53 17 C49 12 42 8 34 8" fill="none" stroke="url(#lg)" stroke-width="6" stroke-linecap="round"/>
+          </svg>
+
+          <div class="brandText">
+            <span class="brandName">DHO 360º</span>
+            <span class="pilot">Piloto | versão 0.1</span>
+          </div>
+        </div>
       </div>
+
       <nav class="links">
         <a href="#intro">Introdução</a>
         <a href="#b1">Bloco 1</a>
+        <a class="ctaTop" href="#onda2">Participar da Onda 2</a>
       </nav>
     </div>
   </header>
 
   <main>
-    <!-- INTRO (mantida do primeiro teste) -->
+    <!-- INTRO -->
     <section class="intro" id="intro">
       <p class="intro-kicker">DHO360 | Pesquisa piloto</p>
       <h1>Trabalhador x Negócio: onde o acordo quebra</h1>
@@ -429,6 +489,17 @@
         <div class="note">Leitura inicial de um piloto. Indica sinais, não verdades finais.</div>
       </section>
     </article>
+
+    <!-- placeholder temporário só para o botão do topo não “quebrar” -->
+    <div style="height:22px"></div>
+    <section id="onda2" style="margin-top:26px;border-top:1px solid rgba(255,255,255,.09);padding-top:18px;color:#b7b7c6">
+      <div style="max-width:80ch">
+        <div style="letter-spacing:.10em;text-transform:uppercase;font-size:12px;margin-bottom:8px">Onda 2</div>
+        <div style="font-size:14px;line-height:1.6">
+          CTA será finalizada no fechamento do site. Este bloco é apenas um marcador para o botão do topo.
+        </div>
+      </div>
+    </section>
   </main>
 
   <script>
@@ -440,7 +511,7 @@
         `${Math.max(0, Math.min(1, sc))*100}%`;
     });
 
-    // Dados do Bloco 1 (substituível depois pelos seus agregados reais)
+    // Dados do Bloco 1
     const bloco1 = {
       title: "MQ0063 | Consenso do piloto (top 6)",
       n: 29,
