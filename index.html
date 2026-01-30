@@ -73,6 +73,61 @@
     .sticky .n{margin:0 0 14px;font-size:12px;color:var(--muted)}
     .note{margin-top:10px;font-size:12px;color:var(--muted)}
     .hint{margin-top:8px;font-size:12px;color:var(--muted)}
+
+    .intro{
+  grid-column: 1 / -1;
+  padding: 10px 6px 4px;
+}
+
+.intro-kicker{
+  margin: 0 0 10px;
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.intro h1{
+  margin: 0 0 10px;
+  font-size: 36px;
+  line-height: 1.05;
+}
+
+.intro-lead{
+  margin: 0 0 18px;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.6;
+  max-width: 85ch;
+}
+
+.intro-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 18px;
+}
+
+@media (max-width: 900px){
+  .intro h1{ font-size: 30px; }
+  .intro-grid{ grid-template-columns: 1fr; }
+}
+
+.intro-label{
+  margin: 0 0 6px;
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.intro-text{
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.55;
+  max-width: 75ch;
+}
+
   </style>
 </head>
 
@@ -86,6 +141,7 @@
         <span class="tag">Scrollytelling - teste</span>
       </div>
       <nav class="links">
+        <a href="#intro">Introdução</a>
         <a href="#b1">Bloco 1</a>
         <a href="#b2">Bloco 2</a>
         <a href="#b3">Bloco 3</a>
@@ -94,6 +150,44 @@
   </header>
 
   <main class="wrap">
+        <section class="intro" id="intro">
+      <p class="intro-kicker">DHO360 | Pesquisa piloto</p>
+      <h1>Trabalhador x Negócio: onde o acordo quebra</h1>
+      <p class="intro-lead">
+        Esta pesquisa nasceu de conversas reais com trabalhadores e decisores, onde o mesmo tema se repetia:
+        expectativas desalinhadas, fricção no dia a dia e a sensação de que a promessa não vira prática.
+      </p>
+
+      <div class="intro-grid">
+        <div>
+          <p class="intro-label">Por que existe</p>
+          <p class="intro-text">
+            Para mapear dores e entraves do alinhamento entre pessoas e negócios, e medir o peso da coerência
+            (liderança e RH) na sustentação desse acordo.
+          </p>
+        </div>
+        <div>
+          <p class="intro-label">Como ler</p>
+          <p class="intro-text">
+            Os gráficos mostram sinais de um piloto. O tamanho da amostra (n) aparece em cada bloco e pode variar por pergunta.
+            Use como diagnóstico inicial, não como verdade definitiva.
+          </p>
+        </div>
+        <div>
+          <p class="intro-label">Quem conduziu</p>
+          <p class="intro-text">
+            [Nome da consultoria ou autora]. Se quiser, inclua aqui uma linha sobre o contexto: consultoria de negócios via desenvolvimento humano.
+          </p>
+        </div>
+        <div>
+          <p class="intro-label">Objetivo público</p>
+          <p class="intro-text">
+            Provocar reflexão e abrir conversa com trabalhadores e decisores sobre como construir acordos mais justos e viáveis para ambos.
+          </p>
+        </div>
+      </div>
+    </section>
+    
     <section class="steps" id="steps">
       <article class="step" id="b1" data-step="1">
         <div class="kicker">BLOCO 1</div>
