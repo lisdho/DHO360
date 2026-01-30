@@ -133,6 +133,7 @@
       color: var(--muted);
       letter-spacing:.03em;
       opacity:.95;
+      font-weight: 400; /* ou 500 se quiser um pouco mais firme */
     }
 
     .linksBottom{
@@ -189,12 +190,118 @@
       padding: 10px 6px 10px;
       margin-bottom: 18px;
     }
-    .intro-kicker{
-      margin: 0 0 10px;
-      font-size: 12px;
-      color: var(--muted);
-      letter-spacing: .10em;
-      text-transform: uppercase;
+.intro-kicker{
+  margin: 0 0 10px;
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: .10em;
+  text-transform: uppercase;
+}
+
+.byline{
+  margin: 14px 0 18px;
+  padding: 14px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255,255,255,.02);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+}
+
+.byline-left{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  min-width: 0;
+}
+
+.avatarWrap{
+  width: 54px;
+  height: 54px;
+  border-radius: 999px;
+  border: 2px solid rgba(233,213,255,.35);
+  background: radial-gradient(70px 70px at 30% 30%, rgba(168,85,247,.18), rgba(0,0,0,.20));
+  overflow:hidden;
+  flex: 0 0 54px;
+}
+
+.avatar{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.avatarFallback{
+  width:100%;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight: 750;
+  letter-spacing:.03em;
+  color: var(--fg);
+}
+
+.byline-text{
+  min-width: 0;
+}
+
+.byline-name{
+  font-weight: 750;
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.byline-desc{
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.3;
+}
+
+.byline-link{
+  margin-top: 4px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.byline-link a{
+  color: var(--violet3);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  opacity: .95;
+}
+
+.byline-right{
+  flex: 0 0 auto;
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing:.04em;
+  white-space: nowrap;
+}
+
+.intro-body{
+  margin: 0 0 18px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+  max-width: 92ch;
+}
+.intro-body p{ margin: 0 0 12px; }
+.intro-body p:last-child{ margin-bottom: 0; }
+
+@media (max-width: 700px){
+  .byline{
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .byline-right{
+    white-space: normal;
+  }
+}
+
     }
     .intro h1{
       margin: 0 0 10px;
@@ -445,46 +552,92 @@
   <main>
     <!-- INTRO -->
     <section class="intro" id="intro">
-      <p class="intro-kicker">DHO360 | Pesquisa piloto</p>
-      <h1>Trabalhador x Negócio: onde o acordo quebra</h1>
+  <p class="intro-kicker">DHO 360º - Futuro do Trabalho em Foco | PESQUISA PILOTO</p>
 
-      <p class="intro-lead">
-        Esta pesquisa nasceu de conversas reais com trabalhadores e decisores, onde o mesmo tema se repetia:
-        expectativas desalinhadas, fricção no dia a dia e a sensação de que a promessa não vira prática.
-      </p>
+  <h1>Pessoas e Negócios: a coerência como ativo na relação de trabalho.</h1>
 
-      <div class="intro-grid">
-        <div class="infoCard">
-          <p class="intro-label">Por que existe</p>
-          <p class="intro-text">
-            Mapear dores e entraves do alinhamento entre pessoas e negócios, e observar o peso da coerência
-            (liderança e RH) na sustentação desse acordo.
-          </p>
-        </div>
+  <!-- Byline (estilo do print) -->
+  <div class="byline">
+    <div class="byline-left">
+      <div class="avatarWrap">
+        <!-- 1) Coloque sua foto em /assets/lisandra.jpg no repositório -->
+        <img class="avatar" src="assets/lisandra.jpg" alt="Lisandra Lencina">
+        <!-- 2) Se ainda não tiver foto, comente a linha acima e descomente abaixo:
+        <div class="avatarFallback">LL</div>
+        -->
+      </div>
 
-        <div class="infoCard">
-          <p class="intro-label">Como ler</p>
-          <p class="intro-text">
-            Os gráficos mostram sinais de um piloto. O tamanho da amostra (n) aparece em cada bloco e pode variar por pergunta.
-            Use como diagnóstico inicial, não como verdade definitiva.
-          </p>
-        </div>
-
-        <div class="infoCard">
-          <p class="intro-label">Quem conduziu</p>
-          <p class="intro-text">
-            Edite este trecho com o nome da consultoria/autoria e uma linha curta sobre o contexto do estudo.
-          </p>
-        </div>
-
-        <div class="infoCard">
-          <p class="intro-label">Objetivo público</p>
-          <p class="intro-text">
-            Provocar reflexão e abrir conversa com trabalhadores e decisores sobre como construir acordos mais justos e viáveis para ambos.
-          </p>
+      <div class="byline-text">
+        <div class="byline-name">Por Lisandra Lencina</div>
+        <div class="byline-desc">Administradora de Negócios com ênfase em Desenvolvimento Humano</div>
+        <div class="byline-link">
+          LinkedIn:
+          <a href="https://www.linkedin.com/in/lisandralencina/" target="_blank" rel="noopener">/in/lisandralencina</a>
         </div>
       </div>
-    </section>
+    </div>
+
+    <div class="byline-right">
+      <div class="byline-date">02/02/2026 | 06h00</div>
+    </div>
+  </div>
+
+  <!-- Lead (em parágrafos) -->
+  <div class="intro-body">
+    <p>
+      A pesquisa piloto DHO 360º - Futuro do Trabalho em Foco nasceu da observação das dores dos negócios e das pessoas
+      nas relações de trabalho: quando o acordo entre negócio e trabalhador falha, os dois lados relatam sintomas parecidos.
+    </p>
+
+    <p>
+      De um lado os donos e decisores do negócio sentem a sobrecarga das falhas na força de trabalho.
+      Do outro, trabalhadores sentem sobrecarga por pressão por resultado e esgotamento.
+      As causas parecem diferentes, mas elas surgem a partir de um mesmo ponto: Desenvolvimento Humano.
+    </p>
+
+    <p>
+      A pesquisa tem como objetivo entender quais aspectos desse pilar são mais demandados e como integrá-los para sustentar
+      resultados e qualidade vida e estabelecer uma coerência entre trabalho e negócios.
+    </p>
+  </div>
+
+  <!-- Cards -->
+  <div class="intro-grid">
+    <div class="infoCard">
+      <p class="intro-label">O que você encontrará nesta página</p>
+      <p class="intro-text">
+        Serão apresentados os resultados da pesquisa a partir de recortes objetivos das tensões mais citadas pelos respondentes.
+        O foco será despertar reflexões a respeito dos pontos que unem trabalhadores e negócios, e o que os levam para lados extremos
+        das situações, e ainda dar pistas de qual é o papel da liderança e do RH para construir essa coerência no dia a dia.
+      </p>
+    </div>
+
+    <div class="infoCard">
+      <p class="intro-label">Como ler</p>
+      <p class="intro-text">
+        Ao rolar a página você encontrará as 10 tensões mais citadas pelos respondentes com um enunciado curto, um gráfico e uma
+        pergunta reflexiva. Em alguns, você poderá abrir detalhes, filtrar ou interagir para explorar conforme a sua necessidade.
+      </p>
+    </div>
+
+    <div class="infoCard">
+      <p class="intro-label">Quem conduziu</p>
+      <p class="intro-text">
+        Lisandra Lencina, Administradora de Negócios com ênfase em Desenvolvimento Humano, que de forma independente construiu um piloto
+        para transformar percepções recorrentes em dados organizados e abrir conversa com quem decide e com quem faz a o negócio girar.
+      </p>
+    </div>
+
+    <div class="infoCard">
+      <p class="intro-label">Limites do piloto</p>
+      <p class="intro-text">
+        O “n” (Número de Respondentes) varia por pergunta. Por isso os resultados devem ser aproveitados de forma mais qualitativa e
+        utilizados como bússola para identificar tensões e hipóteses e não como conclusão definitiva. A Onda 2 abre em julho de 2026 e
+        vai ampliar a base.
+      </p>
+    </div>
+  </div>
+</section>
 
     <!-- BLOCO 1 -->
     <article class="block" id="b1">
