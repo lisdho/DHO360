@@ -244,7 +244,7 @@
       z-index:1;
     }
 
-    /* AJUSTE: texto ocupa toda a largura (remove max-width) */
+    /* texto ocupa toda a largura */
     .intro-text{
       margin: 0;
       color: var(--body);
@@ -253,8 +253,8 @@
       text-align: justify;
       text-justify: inter-word;
       hyphens: none;
-      max-width: none;       /* <<< */
-      width: 100%;           /* <<< */
+      max-width: none;
+      width: 100%;
       position:relative;
       z-index:1;
     }
@@ -331,14 +331,14 @@
       white-space: nowrap;
     }
 
-    /* AJUSTE: texto ocupa toda a largura (remove max-width) */
+    /* texto ocupa toda a largura */
     .intro-body{
       margin: 0 auto 18px;
       color: var(--body);
       font-size: 15px;
       line-height: 1.7;
-      max-width: none;       /* <<< */
-      width: 100%;           /* <<< */
+      max-width: none;
+      width: 100%;
       text-align: justify;
       text-justify: inter-word;
       hyphens: none;
@@ -347,17 +347,9 @@
     .intro-body p:last-child{ margin-bottom: 0; }
 
     @media (max-width: 700px){
-      .byline{
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .byline-right{
-        white-space: normal;
-      }
+      .byline{ flex-direction: column; align-items: flex-start; }
+      .byline-right{ white-space: normal; }
     }
-
-    /* >>> REMOVIDO o trecho que forçava texto à esquerda no mobile.
-       Agora no mobile permanece JUSTIFICADO e sem hifenização (pedido). */
 
     /* BLOCO 0: amostra e método */
     .metaGrid{
@@ -482,13 +474,13 @@
       opacity:1;
     }
 
-    /* AJUSTE: remove espaço feio à direita (empilha) */
+    /* RH header empilhado (sem bug de layout) */
     .rhHeader{
       display:flex;
-      flex-direction: column;     /* <<< */
-      align-items:flex-start;     /* <<< */
-      justify-content:flex-start; /* <<< */
-      gap:6px;                    /* <<< */
+      flex-direction: column;
+      align-items:flex-start;
+      justify-content:flex-start;
+      gap:6px;
       margin-bottom: 10px;
     }
 
@@ -507,14 +499,13 @@
       opacity:.9;
     }
 
-    /* AJUSTE: texto ocupa toda a largura (remove max-width) */
     .rhLead{
       margin: 0 0 12px;
       font-size: 14px;
       color: var(--body);
       line-height: 1.6;
-      max-width: none;   /* <<< */
-      width: 100%;       /* <<< */
+      max-width: none;
+      width: 100%;
       text-align: justify;
       text-justify: inter-word;
       hyphens: none;
@@ -574,7 +565,6 @@
       margin-bottom: 6px;
     }
 
-    /* AJUSTE: garante largura total + justificado (sem hifenização) */
     .rhBulletText{
       font-size: 14px;
       color: var(--body);
@@ -584,7 +574,7 @@
       hyphens: none;
     }
 
-    /* BLOCO 1 */
+    /* BLOCO GERAL */
     .block{
       background: var(--card);
       border:1px solid var(--line);
@@ -620,14 +610,13 @@
       z-index:1;
     }
 
-    /* AJUSTE: corpo do bloco ocupa toda a largura (remove max-width) */
     .block p{
       margin:0;
       color: var(--body);
       font-size:15px;
       line-height:1.6;
-      max-width: none;    /* <<< */
-      width: 100%;        /* <<< */
+      max-width: none;
+      width: 100%;
       text-align: justify;
       text-justify: inter-word;
       hyphens: none;
@@ -686,7 +675,7 @@
       z-index:1;
     }
     .reveal.open{
-      max-height: 680px;
+      max-height: 2200px; /* bloco 1 ficou maior */
       opacity:1;
     }
 
@@ -734,26 +723,196 @@
     @media (max-width: 600px){
       .block h2{font-size:26px}
       .chartWrap{height: 340px}
-      .reveal.open{max-height: 760px}
+      .reveal.open{max-height: 2600px}
     }
 
-    /* Responsivo do bloco amostra + RH */
     @media (max-width: 900px){
       .metaGrid{ grid-template-columns: 1fr; }
       .rhNumbers{ grid-template-columns: 1fr; }
     }
 
-    /* MOBILE: manter justificado e sem hifenização (pedido explícito) */
+    /* MOBILE: manter justificado e sem hifenização */
     @media (max-width: 700px){
       .intro-body,
       .intro-text,
       .block p,
       .rhLead,
-      .rhBulletText{
+      .rhBulletText,
+      .subQ,
+      .closingLine{
         text-align: justify;
         text-justify: inter-word;
         hyphens: none;
       }
+    }
+
+    /* =========================================================
+       ✅ PASSO 2 — CSS DO BLOCO 1 (adaptado p/ manter largura total e mobile justificado)
+       ========================================================= */
+
+    /* BLOCO 1 — subseções (A/B) */
+    .subsection{
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255,255,255,.06);
+      position: relative;
+      z-index: 1;
+    }
+    .subsection:first-child{
+      margin-top: 0;
+      padding-top: 0;
+      border-top: none;
+    }
+
+    .subQ{
+      margin: 8px 0 10px;
+      color: var(--body);
+      font-size: 15px;
+      line-height: 1.55;
+      max-width: none; /* mantém full width */
+      width: 100%;
+      text-align: justify;
+      text-justify: inter-word;
+      hyphens: none;
+    }
+    .subQHint{
+      color: var(--muted);
+      font-size: 13px;
+      margin-left: 6px;
+    }
+
+    /* pizza menor e elegante */
+    .pieWrap{ height: 300px; }
+    @media (max-width:600px){
+      .pieWrap{ height: 260px; }
+    }
+
+    /* Legenda HTML (nome bold + descrição menor) */
+    .legendList{
+      list-style:none;
+      padding:0;
+      margin: 12px 0 0;
+      display:grid;
+      gap: 10px;
+      max-width: none; /* full width */
+      width: 100%;
+    }
+    .legendList li{
+      display:flex;
+      gap: 10px;
+      align-items:flex-start;
+      background: rgba(255,255,255,.02);
+      border: 1px solid rgba(255,255,255,.09);
+      border-radius: 14px;
+      padding: 10px 10px;
+    }
+
+    .swatch{
+      width:12px;height:12px;border-radius:999px;
+      flex: 0 0 12px;
+      margin-top: 4px;
+      border: 1px solid rgba(255,255,255,.14);
+      box-shadow: 0 8px 18px rgba(0,0,0,.35);
+    }
+
+    /* cores (em linha com sua paleta) */
+    .swatch.s1{ background: rgba(233,213,255,.34); }
+    .swatch.s2{ background: rgba(168,85,247,.28); }
+    .swatch.s3{ background: rgba(124,58,237,.26); }
+    .swatch.s4{ background: rgba(192,132,252,.22); }
+
+    .legendMain{
+      display:flex;
+      gap: 8px;
+      align-items:baseline;
+      color: var(--fg);
+      font-size: 14px;
+    }
+    .legendPct{
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .legendSub{
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 12.5px;
+      line-height: 1.35;
+    }
+
+    /* Ranking list */
+    .rankList{
+      margin: 12px 0 0;
+      padding: 0;
+      list-style: none;
+      display:grid;
+      gap: 10px;
+      max-width: none; /* full width */
+      width: 100%;
+    }
+    .rankItem{
+      display:flex;
+      gap: 10px;
+      align-items:flex-start;
+      background: rgba(255,255,255,.02);
+      border: 1px solid rgba(255,255,255,.09);
+      border-radius: 14px;
+      padding: 10px 10px;
+    }
+
+    .rankBadge{
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size: 12px;
+      font-weight: 780;
+      color: var(--fg);
+      background: linear-gradient(180deg, rgba(124,58,237,.28), rgba(168,85,247,.14));
+      border: 1px solid rgba(233,213,255,.22);
+      box-shadow: 0 10px 25px rgba(124,58,237,.12);
+      flex: 0 0 26px;
+      margin-top: 2px;
+    }
+    .rankMain{
+      font-size: 14px;
+      color: var(--fg);
+    }
+    .rankSub{
+      margin-top: 3px;
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.35;
+    }
+
+    /* Fechamento */
+    .closingBox{
+      margin-top: 16px;
+      border-top: 1px solid rgba(255,255,255,.06);
+      padding-top: 14px;
+      background: rgba(0,0,0,.16);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 14px;
+      padding: 12px;
+      position: relative;
+      z-index: 1;
+    }
+    .closingTitle{
+      font-size: 12px;
+      letter-spacing: .10em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .closingLine{
+      color: var(--body);
+      font-size: 14px;
+      line-height: 1.55;
+      margin-top: 8px;
+      text-align: justify;
+      text-justify: inter-word;
+      hyphens: none;
     }
   </style>
 </head>
@@ -993,27 +1152,167 @@
 
     <div style="height:16px"></div>
 
+    <!-- =========================================================
+         ✅ PASSO 1 — BLOCO 1 substituído (MQ0062 + MQ0063)
+         ========================================================= -->
     <article class="block" id="b1">
-      <div class="kicker">BLOCO 1</div>
-      <h2>O problema não é falta de esforço. É falta de coerência.</h2>
-      <p>Quando todo mundo sabe o que importa, o caos vira escolha. E escolha tem dono.</p>
+      <div class="kicker">BLOCO 1 | OBJETIVOS E PRIORIDADES DE DESENVOLVIMENTO</div>
+
+      <h2>Quando se sabe qual é o objetivo, o próximo passo no desenvolvimento é priorizar por onde começar.</h2>
+
+      <p>
+        <strong>100% dos respondentes</strong> descreveram seus objetivos a serem alcançados, ou seja, todos têm um norte e há uma vontade de chegar lá.
+      </p>
+      <p style="margin-top:10px">
+        Então o que se perguntou foi: onde a energia está concentrada, e o que as pessoas acreditam que precisam desenvolver para chegar lá.
+      </p>
 
       <div class="row">
-        <button id="toggleChartBtn" type="button">Ver gráfico</button>
-        <span class="pill" id="metaPill">Piloto | n = 29 | MQ0063</span>
+        <button id="toggleB1Btn" type="button">Ver resultados</button>
+        <span class="pill" id="metaPill">Piloto | n = 29 | MQ0062 + MQ0063</span>
       </div>
 
-      <section class="reveal" id="revealArea" aria-hidden="true">
-        <div class="chartHeader">
-          <p class="chartTitle" id="chartTitle">MQ0063 | Consenso do piloto (top 6)</p>
-          <p class="chartHint">Passe o mouse para ver o texto completo</p>
+      <section class="reveal" id="b1Reveal" aria-hidden="true">
+        <!-- SEÇÃO A -->
+        <div class="subsection">
+          <div class="chartHeader">
+            <p class="chartTitle">MQ0062 | Onde os objetivos estão?</p>
+            <p class="chartHint">Passe o mouse para ver detalhes</p>
+          </div>
+
+          <p class="subQ">
+            Em quais aspectos da vida seus objetivos estão mais concentrados?
+          </p>
+
+          <div class="chartWrap pieWrap">
+            <canvas id="chartMq0062"></canvas>
+          </div>
+
+          <ul class="legendList" id="legendMq0062">
+            <li>
+              <span class="swatch s1"></span>
+              <div class="legendText">
+                <div class="legendMain"><strong>Profissional</strong> <span class="legendPct">45%</span></div>
+                <div class="legendSub">Carreira, propósito, recursos financeiros.</div>
+              </div>
+            </li>
+            <li>
+              <span class="swatch s2"></span>
+              <div class="legendText">
+                <div class="legendMain"><strong>Pessoal</strong> <span class="legendPct">28%</span></div>
+                <div class="legendSub">Saúde, desenvolvimento intelectual, equilíbrio emocional.</div>
+              </div>
+            </li>
+            <li>
+              <span class="swatch s3"></span>
+              <div class="legendText">
+                <div class="legendMain"><strong>Qualidade de Vida</strong> <span class="legendPct">17%</span></div>
+                <div class="legendSub">Diversão, hobbies, felicidade, espiritualidade.</div>
+              </div>
+            </li>
+            <li>
+              <span class="swatch s4"></span>
+              <div class="legendText">
+                <div class="legendMain"><strong>Relacionamentos</strong> <span class="legendPct">10%</span></div>
+                <div class="legendSub">Família, vida social, relacionamento conjugal.</div>
+              </div>
+            </li>
+          </ul>
+
+          <div class="note">
+            Leitura: a maior parte dos objetivos se concentra no campo profissional, mas há uma concentração relevante ligada a saúde, mente e equilíbrio:
+            um fio condutor que começa a revelar o tema da coerência entre desempenho e qualidade de vida.
+          </div>
         </div>
 
-        <div class="chartWrap">
-          <canvas id="chart"></canvas>
+        <!-- SEÇÃO B -->
+        <div class="subsection">
+          <div class="chartHeader">
+            <p class="chartTitle">MQ0063 | O que as pessoas priorizam desenvolver?</p>
+            <p class="chartHint">Barras maiores = mais prioritário (ranking invertido)</p>
+          </div>
+
+          <p class="subQ">
+            Quais fatores você considera mais importantes desenvolver para realizar esses objetivos?
+            <span class="subQHint">(Ranking: 1 = mais prioritário)</span>
+          </p>
+
+          <div class="chartWrap">
+            <canvas id="chartMq0063"></canvas>
+          </div>
+
+          <ol class="rankList" id="rankMq0063">
+            <li class="rankItem">
+              <span class="rankBadge">1</span>
+              <div>
+                <div class="rankMain"><strong>Corpo/Ambiente</strong></div>
+                <div class="rankSub">Verificar se tenho condições e recursos adequados para agir: saúde, local, tempo, ferramentas e rede de apoio.</div>
+              </div>
+            </li>
+
+            <li class="rankItem">
+              <span class="rankBadge">2</span>
+              <div>
+                <div class="rankMain"><strong>Habilidades</strong></div>
+                <div class="rankSub">Adquirir mais conhecimento sobre mim, sobre o mundo e sobre como fazer coisas, e aprender a aplicar isso na vida real.</div>
+              </div>
+            </li>
+
+            <li class="rankItem">
+              <span class="rankBadge">3</span>
+              <div>
+                <div class="rankMain"><strong>Comportamento</strong></div>
+                <div class="rankSub">Entender como meus comportamentos ajudam ou atrapalham desempenho, produtividade e novas ações.</div>
+              </div>
+            </li>
+
+            <li class="rankItem">
+              <span class="rankBadge">4</span>
+              <div>
+                <div class="rankMain"><strong>Crenças e Valores</strong></div>
+                <div class="rankSub">Clarear crenças e valores para agir de acordo com o que acredito e valorizo.</div>
+              </div>
+            </li>
+
+            <li class="rankItem">
+              <span class="rankBadge">5</span>
+              <div>
+                <div class="rankMain"><strong>Visão/Missão</strong></div>
+                <div class="rankSub">Descobrir propósito, definir um futuro desejado e viver isso.</div>
+              </div>
+            </li>
+
+            <li class="rankItem">
+              <span class="rankBadge">6</span>
+              <div>
+                <div class="rankMain"><strong>Legado</strong></div>
+                <div class="rankSub">Gerar impacto positivo e duradouro nos meios em que faço parte: pessoas e sociedade.</div>
+              </div>
+            </li>
+
+            <li class="rankItem">
+              <span class="rankBadge">7</span>
+              <div>
+                <div class="rankMain"><strong>Identidade</strong></div>
+                <div class="rankSub">Entender meus papéis para expressar quem eu verdadeiramente sou.</div>
+              </div>
+            </li>
+          </ol>
+
+          <div class="note">
+            Leitura: no contexto atual, os respondentes escolhem priorizar o desenvolvimento das condições adequadas para agir + habilidades + comportamento.
+          </div>
         </div>
 
-        <div class="note">Leitura inicial de um piloto. Indica sinais, não verdades finais.</div>
+        <div class="closingBox">
+          <div class="closingTitle">Fechamento</div>
+          <div class="closingLine">
+            <strong>Insight:</strong> É possível verificar que há objetivos claros para os respondentes, e uma demanda por entender como diminuir a distância entre o que se quer e o que torna possível chegar lá.
+          </div>
+          <div class="closingLine">
+            <strong>Pergunta:</strong> Se os objetivos se concentram nos aspectos profissional e pessoal, como desenvolver corpo/ambiente, habilidades e comportamento poderia beneficiar o alcance da coerência na relação de trabalho?
+          </div>
+        </div>
       </section>
     </article>
 
@@ -1037,106 +1336,6 @@
         `${Math.max(0, Math.min(1, sc))*100}%`;
     });
 
-    const bloco1 = {
-      title: "MQ0063 | Consenso do piloto (top 6)",
-      n: 29,
-      xMax: 7,
-      datasetLabel: "Score (ranking invertido)",
-      labels: [
-        "Corpo/Ambiente: verificar se tenho as condições e recursos adequados (saúde, local, tempo, ferramentas, rede de apoio), para agir.",
-        "Habilidades: adquirir mais conhecimento sobre mim, sobre o mundo e sobre como fazer coisas no geral, e aprender a aplicá-los na vida real.",
-        "Comportamento: descobrir como meus comportamentos me ajudam a realizar tarefas e ações melhores, com mais produtividade ou até mesmo realizar coisas novas.",
-        "Crenças e Valores: clarear minhas crenças e valores para agir de acordo com o que acredito e valorizo.",
-        "Visão/Missão: descobrir meu propósito, definir um futuro desejado, e viver tudo isso.",
-        "Legado: gerar impacto positivo e duradouro nos meios que faço parte, para as pessoas e sociedade."
-      ],
-      values: [5.28, 5.17, 4.69, 3.72, 3.17, 3.00]
-    };
-
-    const btn = document.getElementById("toggleChartBtn");
-    const reveal = document.getElementById("revealArea");
-    const title = document.getElementById("chartTitle");
-
-    let chartInstance = null;
-
-    function truncateLabel(s, max=58){
-      if(!s) return s;
-      return s.length > max ? (s.slice(0, max-3) + "...") : s;
-    }
-
-    function buildChart(){
-      const ctx = document.getElementById("chart");
-
-      chartInstance = new Chart(ctx, {
-        type: "bar",
-        data: {
-          labels: bloco1.labels.map(x => truncateLabel(x)),
-          datasets: [{
-            label: bloco1.datasetLabel,
-            data: bloco1.values,
-            borderWidth: 1
-          }]
-        },
-        options: {
-          indexAxis: "y",
-          responsive: true,
-          maintainAspectRatio: false,
-          animation: { duration: 450 },
-          plugins: {
-            legend: {
-              display: true,
-              labels: { color: "#c7c7d6" }
-            },
-            tooltip: {
-              callbacks: {
-                title: (items) => {
-                  const idx = items[0].dataIndex;
-                  return bloco1.labels[idx];
-                }
-              }
-            }
-          },
-          scales: {
-            x: {
-              suggestedMax: bloco1.xMax,
-              ticks: { color: "#c7c7d6" },
-              grid: { color: "rgba(255,255,255,.08)" }
-            },
-            y: {
-              ticks: { color: "#c7c7d6" },
-              grid: { color: "rgba(255,255,255,.08)" }
-            }
-          }
-        }
-      });
-    }
-
-    function openReveal(){
-      title.textContent = bloco1.title;
-
-      reveal.classList.add("open");
-      reveal.setAttribute("aria-hidden", "false");
-      btn.textContent = "Ocultar gráfico";
-
-      if(!chartInstance){
-        buildChart();
-      }else{
-        chartInstance.resize();
-      }
-    }
-
-    function closeReveal(){
-      reveal.classList.remove("open");
-      reveal.setAttribute("aria-hidden", "true");
-      btn.textContent = "Ver gráfico";
-    }
-
-    btn.addEventListener("click", () => {
-      const isOpen = reveal.classList.contains("open");
-      if(isOpen) closeReveal();
-      else openReveal();
-    });
-
     // Toggle do bloco RH (curiosidade)
     const rhBtn = document.getElementById("toggleRhBtn");
     const rhDetails = document.getElementById("rhDetails");
@@ -1157,6 +1356,169 @@
           rhBtn.textContent = "Ocultar contexto do RH";
           rhDetails.scrollIntoView({ behavior: "smooth", block: "start" });
         }
+      });
+    }
+
+    /* =========================================================
+       ✅ PASSO 3 — JS DO BLOCO 1 (MQ0062 + MQ0063) substituído
+       ========================================================= */
+
+    // ===== BLOCO 1 (MQ0062 + MQ0063) =====
+    const b1Btn = document.getElementById("toggleB1Btn");
+    const b1Reveal = document.getElementById("b1Reveal");
+
+    let chart0062 = null;
+    let chart0063 = null;
+
+    const mq0062 = {
+      id: "MQ0062",
+      n: 29,
+      items: [
+        { name: "Profissional", pct: 45, desc: "Carreira, propósito, recursos financeiros." },
+        { name: "Pessoal", pct: 28, desc: "Saúde, desenvolvimento intelectual, equilíbrio emocional." },
+        { name: "Qualidade de Vida", pct: 17, desc: "Diversão, hobbies, felicidade, espiritualidade." },
+        { name: "Relacionamentos", pct: 10, desc: "Família, vida social, relacionamento conjugal." }
+      ],
+      colors: [
+        "rgba(233,213,255,.34)",
+        "rgba(168,85,247,.28)",
+        "rgba(124,58,237,.26)",
+        "rgba(192,132,252,.22)"
+      ]
+    };
+
+    const mq0063 = {
+      id: "MQ0063",
+      n: 29,
+      // ranking 1..7
+      rank: [
+        { name: "Corpo/Ambiente", r: 1, desc: "Verificar se tenho condições e recursos adequados para agir: saúde, local, tempo, ferramentas e rede de apoio." },
+        { name: "Habilidades", r: 2, desc: "Adquirir mais conhecimento sobre mim, sobre o mundo e sobre como fazer coisas, e aprender a aplicar isso na vida real." },
+        { name: "Comportamento", r: 3, desc: "Entender como meus comportamentos ajudam ou atrapalham desempenho, produtividade e novas ações." },
+        { name: "Crenças e Valores", r: 4, desc: "Clarear crenças e valores para agir de acordo com o que acredito e valorizo." },
+        { name: "Visão/Missão", r: 5, desc: "Descobrir propósito, definir um futuro desejado e viver isso." },
+        { name: "Legado", r: 6, desc: "Gerar impacto positivo e duradouro nos meios em que faço parte: pessoas e sociedade." },
+        { name: "Identidade", r: 7, desc: "Entender meus papéis para expressar quem eu verdadeiramente sou." }
+      ]
+    };
+
+    // helper: prioridade (ranking invertido) p/ barras maiores = mais prioritário
+    function invRank(r){ return 8 - r; } // 1->7, 7->1
+
+    function buildChart0062(){
+      const ctx = document.getElementById("chartMq0062");
+      if (!ctx) return;
+
+      chart0062 = new Chart(ctx, {
+        type: "doughnut",
+        data: {
+          labels: mq0062.items.map(i => i.name),
+          datasets: [{
+            data: mq0062.items.map(i => i.pct),
+            borderWidth: 1,
+            borderColor: "rgba(255,255,255,.08)",
+            backgroundColor: mq0062.colors,
+            hoverOffset: 6
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          cutout: "55%",
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                title: (items) => mq0062.items[items[0].dataIndex].name,
+                label: (item) => `${mq0062.items[item.dataIndex].pct}%`,
+                afterLabel: (item) => mq0062.items[item.dataIndex].desc
+              }
+            }
+          }
+        }
+      });
+    }
+
+    function buildChart0063(){
+      const ctx = document.getElementById("chartMq0063");
+      if (!ctx) return;
+
+      chart0063 = new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: mq0063.rank.map(i => i.name),
+          datasets: [{
+            label: "Prioridade (ranking invertido)",
+            data: mq0063.rank.map(i => invRank(i.r)),
+            borderWidth: 1
+          }]
+        },
+        options: {
+          indexAxis: "y",
+          responsive: true,
+          maintainAspectRatio: false,
+          animation: { duration: 450 },
+          plugins: {
+            legend: {
+              display: true,
+              labels: { color: "#c7c7d6" }
+            },
+            tooltip: {
+              callbacks: {
+                title: (items) => mq0063.rank[items[0].dataIndex].name,
+                label: (item) => {
+                  const r = mq0063.rank[item.dataIndex].r;
+                  return `Ranking: ${r} (1 = mais prioritário)`;
+                },
+                afterLabel: (item) => mq0063.rank[item.dataIndex].desc
+              }
+            }
+          },
+          scales: {
+            x: {
+              suggestedMax: 7,
+              ticks: { color: "#c7c7d6" },
+              grid: { color: "rgba(255,255,255,.08)" }
+            },
+            y: {
+              ticks: { color: "#c7c7d6" },
+              grid: { color: "rgba(255,255,255,.08)" }
+            }
+          }
+        }
+      });
+    }
+
+    function openB1(){
+      if (!b1Reveal) return;
+
+      b1Reveal.classList.add("open");
+      b1Reveal.setAttribute("aria-hidden", "false");
+      if (b1Btn) b1Btn.textContent = "Ocultar resultados";
+
+      if(!chart0062) buildChart0062();
+      if(!chart0063) buildChart0063();
+
+      // garante resize correto
+      setTimeout(() => {
+        chart0062 && chart0062.resize();
+        chart0063 && chart0063.resize();
+      }, 50);
+    }
+
+    function closeB1(){
+      if (!b1Reveal) return;
+
+      b1Reveal.classList.remove("open");
+      b1Reveal.setAttribute("aria-hidden", "true");
+      if (b1Btn) b1Btn.textContent = "Ver resultados";
+    }
+
+    if (b1Btn && b1Reveal){
+      b1Btn.addEventListener("click", () => {
+        const isOpen = b1Reveal.classList.contains("open");
+        if(isOpen) closeB1();
+        else openB1();
       });
     }
   </script>
