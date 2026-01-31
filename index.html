@@ -41,6 +41,27 @@
     }
     a{color:var(--fg);text-decoration:none;opacity:.9}
     a:hover{opacity:1}
+    a:focus-visible, button:focus-visible{
+      outline: 2px solid rgba(233,213,255,.8);
+      outline-offset: 2px;
+    }
+
+    .skip-link{
+      position:absolute;
+      top:10px;
+      left:10px;
+      padding:8px 12px;
+      border-radius:10px;
+      background: rgba(15,15,20,.92);
+      color: var(--fg);
+      border:1px solid rgba(255,255,255,.2);
+      transform: translateY(-200%);
+      transition: transform .2s ease;
+      z-index: 100;
+    }
+    .skip-link:focus{
+      transform: translateY(0);
+    }
 
     /* Fundo com glow roxo/lilás */
     .bgfx{
@@ -787,6 +808,31 @@
       .pieWrap{ height: 260px; }
     }
 
+    .pieLayout{
+      display:flex;
+      gap: 16px;
+      align-items: stretch;
+    }
+    .pieLayout .chartWrap{
+      flex: 1 1 0;
+      min-width: 0;
+    }
+    .pieLayout .legendList{
+      flex: 0 0 280px;
+      margin: 0;
+      align-content: start;
+    }
+    @media (max-width: 900px){
+      .pieLayout{
+        flex-direction: column;
+      }
+      .pieLayout .legendList{
+        flex: 1 1 auto;
+        width: 100%;
+        margin-top: 12px;
+      }
+    }
+
     /* Legenda HTML (nome bold + descrição menor) */
     .legendList{
       list-style:none;
@@ -918,6 +964,7 @@
 </head>
 
 <body>
+  <a class="skip-link" href="#conteudo-principal">Pular para o conteúdo</a>
   <div class="bgfx"></div>
   <div class="topbar"><div class="progress" id="progress"></div></div>
 
@@ -950,7 +997,7 @@
       </div>
 
       <div class="navBottom">
-        <nav class="linksBottom">
+        <nav class="linksBottom" aria-label="Navegação principal">
           <a href="#intro">Introdução</a>
           <a href="#amostra">Amostra</a>
           <a href="#b1">Bloco 1</a>
@@ -959,7 +1006,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="conteudo-principal">
     <section class="intro" id="intro">
       <p class="intro-kicker">DHO 360º - Futuro do Trabalho em Foco</p>
 
@@ -1184,40 +1231,42 @@
             Em quais aspectos da vida seus objetivos estão mais concentrados?
           </p>
 
-          <div class="chartWrap pieWrap">
-            <canvas id="chartMq0062"></canvas>
-          </div>
+          <div class="pieLayout">
+            <div class="chartWrap pieWrap">
+              <canvas id="chartMq0062"></canvas>
+            </div>
 
-          <ul class="legendList" id="legendMq0062">
-            <li>
-              <span class="swatch s1"></span>
-              <div class="legendText">
-                <div class="legendMain"><strong>Profissional</strong> <span class="legendPct">45%</span></div>
-                <div class="legendSub">Carreira, propósito, recursos financeiros.</div>
-              </div>
-            </li>
-            <li>
-              <span class="swatch s2"></span>
-              <div class="legendText">
-                <div class="legendMain"><strong>Pessoal</strong> <span class="legendPct">28%</span></div>
-                <div class="legendSub">Saúde, desenvolvimento intelectual, equilíbrio emocional.</div>
-              </div>
-            </li>
-            <li>
-              <span class="swatch s3"></span>
-              <div class="legendText">
-                <div class="legendMain"><strong>Qualidade de Vida</strong> <span class="legendPct">17%</span></div>
-                <div class="legendSub">Diversão, hobbies, felicidade, espiritualidade.</div>
-              </div>
-            </li>
-            <li>
-              <span class="swatch s4"></span>
-              <div class="legendText">
-                <div class="legendMain"><strong>Relacionamentos</strong> <span class="legendPct">10%</span></div>
-                <div class="legendSub">Família, vida social, relacionamento conjugal.</div>
-              </div>
-            </li>
-          </ul>
+            <ul class="legendList" id="legendMq0062">
+              <li>
+                <span class="swatch s1"></span>
+                <div class="legendText">
+                  <div class="legendMain"><strong>Profissional</strong> <span class="legendPct">45%</span></div>
+                  <div class="legendSub">Carreira, propósito, recursos financeiros.</div>
+                </div>
+              </li>
+              <li>
+                <span class="swatch s2"></span>
+                <div class="legendText">
+                  <div class="legendMain"><strong>Pessoal</strong> <span class="legendPct">28%</span></div>
+                  <div class="legendSub">Saúde, desenvolvimento intelectual, equilíbrio emocional.</div>
+                </div>
+              </li>
+              <li>
+                <span class="swatch s3"></span>
+                <div class="legendText">
+                  <div class="legendMain"><strong>Qualidade de Vida</strong> <span class="legendPct">17%</span></div>
+                  <div class="legendSub">Diversão, hobbies, felicidade, espiritualidade.</div>
+                </div>
+              </li>
+              <li>
+                <span class="swatch s4"></span>
+                <div class="legendText">
+                  <div class="legendMain"><strong>Relacionamentos</strong> <span class="legendPct">10%</span></div>
+                  <div class="legendSub">Família, vida social, relacionamento conjugal.</div>
+                </div>
+              </li>
+            </ul>
+          </div>
 
           <div class="note">
             Leitura: a maior parte dos objetivos se concentra no campo profissional, mas há uma concentração relevante ligada a saúde, mente e equilíbrio:
