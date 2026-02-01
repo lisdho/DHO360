@@ -1,9 +1,10 @@
 <!-- =========================
      INTRODUCAO (HTML + CSS) - Por Lisandra, foto, objetivo, como ler, etc.
      Inclui: imagem a esquerda + texto a direita + destaque central do objetivo
-     AJUSTES (versao atual):
-     1) "O que voce encontrara" e "Como ler" viram quadros (cards) lilas/rosa com translucidez
-     2) "Quem conduziu" e "Limites do piloto" seguem como botoes (details), logo abaixo, com degrade mais escuro e menos altura
+     Ajustes:
+     1) Alinha largura dos quadros e botoes com a largura do objetivo
+     2) "O que voce..." e "Como ler" viram quadros com cor unica (sem degrade) e mais transparencia
+     3) Botoes "Quem conduziu" e "Limites do piloto" com tons mais escuros (proximo ao preto) e menor altura
 ========================= -->
 
 <style>
@@ -24,10 +25,12 @@
     --radius: 18px;
     --shadow: 0 18px 60px rgba(0,0,0,.55);
 
-    /* NOVO: preenchimento dos quadros (lilas/rosa) com translucidez "70%" */
-    /* Se quiser mais transparente: reduza o ultimo numero (ex: .22). Se quiser mais "cheio": aumente (ex: .38). */
-    --panelFill: rgba(168,85,247,.30);
-    --panelStroke: rgba(233,213,255,.22);
+    /* largura mae para alinhar objetivo + quadros + botoes */
+    --introNarrow: 92ch;
+
+    /* quadros: cor unica, mais transparencia, sem degrade */
+    --panelFill: rgba(168,85,247,.18);      /* translucido ~70% */
+    --panelStroke: rgba(233,213,255,.18);
   }
 
   body{
@@ -172,11 +175,10 @@
 
   /* =========================
      SPLIT: imagem (esq) + texto (dir)
-     AJUSTE: imagem +10% a +15% (mais largura) e texto menor
   ========================= */
   .intro-split{
     display: grid;
-    grid-template-columns: 1fr 1fr; /* era 0.85fr 1.15fr */
+    grid-template-columns: 1fr 1fr;
     gap: 18px;
     align-items: start;
     margin: 0 0 14px;
@@ -239,7 +241,7 @@
   ========================= */
   .intro-goal{
     margin: 12px auto 16px;
-    max-width: 92ch;
+    max-width: var(--introNarrow);
     border-radius: 18px;
     border: 1px solid rgba(233,213,255,.22);
     background:
@@ -283,12 +285,12 @@
   }
 
   /* =========================
-     NOVO: QUADROS (cards) para:
-     - O que voce encontrara nesta pagina
-     - Como ler
+     QUADROS (O que voce... / Como ler)
+     Alinhados com a largura do objetivo
   ========================= */
   .intro-panels{
-    margin-top: 12px;
+    max-width: var(--introNarrow);
+    margin: 12px auto 0;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 12px 16px;
@@ -301,38 +303,28 @@
   .panel{
     border-radius: 16px;
     border: 1px solid var(--panelStroke);
-    background: var(--panelFill);
+    background: var(--panelFill); /* cor unica, sem degrade */
     box-shadow: 0 10px 30px rgba(0,0,0,.25);
-    padding: 16px 16px 16px;
+    padding: 16px;
     position: relative;
     overflow: hidden;
   }
 
-  .panel::before{
-    content:"";
-    position:absolute;
-    inset:-2px;
-    background: radial-gradient(520px 180px at 18% 0%, rgba(233,213,255,.18), transparent 60%);
-    pointer-events:none;
-    opacity: .9;
-  }
+  /* remove qualquer glow/degrade */
+  .panel::before{ content:none; }
 
   .panel-title{
     margin: 0 0 10px;
-    position: relative;
-    z-index: 1;
-    color: rgba(244,244,248,.96);
-    font-weight: 820;
-    letter-spacing: .02em;
+    font-size: 12px;
+    color: rgba(255,255,255,.92);
+    letter-spacing: .08em;
     text-transform: uppercase;
-    font-size: 14px;
+    font-weight: 820;
   }
 
   .panel-text{
     margin: 0;
-    position: relative;
-    z-index: 1;
-    color: rgba(244,244,248,.88);
+    color: rgba(244,244,248,.90);
     font-size: 14px;
     line-height: 1.65;
     text-align: justify;
@@ -341,13 +333,12 @@
   }
 
   /* =========================
-     ACORDEOES (apenas 2):
-     - Quem conduziu
-     - Limites do piloto
-     (posicionados logo abaixo dos quadros)
+     ACORDEOES (Quem conduziu / Limites do piloto)
+     Alinhados com a largura do objetivo
   ========================= */
   .intro-acc{
-    margin-top: 10px;
+    max-width: var(--introNarrow);
+    margin: 10px auto 0;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 12px 16px;
@@ -368,10 +359,7 @@
   summary.acc-btn{
     list-style: none;
     cursor: pointer;
-
-    /* AJUSTE: diminuir levemente a altura do botao */
-    padding: 11px 12px;
-
+    padding: 10px 12px; /* menor altura */
     display:flex;
     align-items:center;
     justify-content:space-between;
@@ -383,9 +371,9 @@
     font-size: 13px;
     text-transform: uppercase;
 
-    /* AJUSTE: degrade mais escuro (roxo forte) */
-    background: linear-gradient(90deg, rgba(76,29,149,.96), rgba(88,28,135,.96));
-    border-bottom: 1px solid rgba(0,0,0,.28);
+    /* mais escuro, proximo ao preto */
+    background: linear-gradient(90deg, rgba(8,8,14,.96), rgba(18,18,28,.96));
+    border-bottom: 1px solid rgba(255,255,255,.06);
   }
 
   summary.acc-btn::-webkit-details-marker{ display:none; }
@@ -398,8 +386,8 @@
     align-items:center;
     justify-content:center;
     flex: 0 0 auto;
-    background: rgba(0,0,0,.25);
-    border: 1px solid rgba(255,255,255,.16);
+    background: rgba(0,0,0,.35);
+    border: 1px solid rgba(255,255,255,.14);
     color: rgba(255,255,255,.92);
     font-size: 16px;
     line-height: 1;
@@ -409,7 +397,7 @@
 
   details.acc[open] .acc-arrow{
     transform: rotate(90deg);
-    background: rgba(0,0,0,.32);
+    background: rgba(0,0,0,.48);
   }
 
   .acc-body{
@@ -427,7 +415,7 @@
     content:"";
     position:absolute;
     inset: -2px;
-    background: radial-gradient(420px 160px at 12% 0%, rgba(168,85,247,.12), transparent 58%);
+    background: radial-gradient(420px 160px at 12% 0%, rgba(168,85,247,.10), transparent 58%);
     pointer-events:none;
   }
 
@@ -512,10 +500,10 @@
       </p>
     </div>
 
-    <!-- QUADROS (web: lado a lado / mobile: empilha) -->
+    <!-- QUADROS: O que voce encontrara / Como ler (sem degrade, mais translucidos) -->
     <div class="intro-panels">
       <div class="panel">
-        <h3 class="panel-title">O que você encontrará nesta página</h3>
+        <p class="panel-title">O que você encontrará nesta página</p>
         <p class="panel-text">
           Serão apresentados os resultados da pesquisa a partir de recortes objetivos das tensões mais citadas pelos respondentes. O foco será despertar
           reflexões a respeito dos pontos que unem trabalhadores e negócios, e o que os levam para lados extremos das situações, e ainda dar pistas de qual é
@@ -524,7 +512,7 @@
       </div>
 
       <div class="panel">
-        <h3 class="panel-title">Como ler</h3>
+        <p class="panel-title">Como ler</p>
         <p class="panel-text">
           Ao rolar a página você encontrará as 10 tensões mais citadas pelos respondentes com um enunciado curto, um gráfico e uma pergunta reflexiva.
           Em alguns, você poderá abrir detalhes, filtrar ou interagir para explorar conforme a sua necessidade.
@@ -532,7 +520,7 @@
       </div>
     </div>
 
-    <!-- BOTOES (details) abaixo dos quadros -->
+    <!-- ACORDEOES: Quem conduziu / Limites do piloto (botoes escuros) -->
     <div class="intro-acc">
       <details class="acc">
         <summary class="acc-btn">
