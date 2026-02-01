@@ -198,7 +198,7 @@
     (async function carregarIntro(){
       const alvo = document.getElementById("intro");
       try{
-        const resp = await fetch("01-intro.html", { cache: "no-store" });
+        const resp = await fetch("blocks/01-intro.html", { cache: "no-store" });
         if(!resp.ok) throw new Error("Falha ao carregar 01-intro.html: " + resp.status);
         const html = await resp.text();
         alvo.innerHTML = html;
