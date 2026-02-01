@@ -1,7 +1,6 @@
 <!-- =========================
-     INTRODUÇÃO (HTML + CSS) — Por Lisandra, foto, objetivo, como ler, etc.
+     INTRODUCAO (HTML + CSS) - Por Lisandra, foto, objetivo, como ler, etc.
      Cole este BLOCO TODO no seu arquivo.
-     (Mantém fontes, cores, cards e layout conforme o que você já tinha.)
 ========================= -->
 
 <style>
@@ -42,6 +41,12 @@
     margin-bottom: 18px;
   }
 
+  /* NOVO: container interno para alinhar tudo no mesmo eixo (linhas vermelhas) */
+  .intro-inner{
+    max-width: 980px;           /* ajuste fino aqui se quiser mais largo/estreito */
+    margin: 0 auto;
+  }
+
   .intro-kicker{
     margin: 0 0 10px;
     font-size: 12px;
@@ -66,6 +71,7 @@
 
   @media (max-width: 900px){
     .intro h1{ font-size: 32px; }
+    .intro-inner{ max-width: 100%; }
     .intro-grid{ grid-template-columns: 1fr; }
   }
 
@@ -192,13 +198,13 @@
     white-space: nowrap;
   }
 
-  /* Texto introdutório */
+  /* Texto introdutorio */
   .intro-body{
-    margin: 0 auto 18px;
+    margin: 0 0 18px;          /* antes era 0 auto 18px, isso quebrava o alinhamento */
     color: var(--body);
     font-size: 15px;
     line-height: 1.7;
-    max-width: 92ch;
+    max-width: none;           /* antes era 92ch, isso deixava mais estreito que os outros blocos */
     text-align: justify;
     text-justify: inter-word;
     hyphens: none;
@@ -216,7 +222,7 @@
     }
   }
 
-  /* Mobile: mantém sem hifenização e justificado (como você pediu) */
+  /* Mobile: mantém sem hifenizacao e justificado */
   @media (max-width: 700px){
     .intro-body,
     .intro-text{
@@ -231,83 +237,85 @@
      INTRO (HTML)
 ========================= -->
 <section class="intro" id="intro">
-  <p class="intro-kicker">DHO 360º - Futuro do Trabalho em Foco</p>
+  <div class="intro-inner">
+    <p class="intro-kicker">DHO 360º - Futuro do Trabalho em Foco</p>
 
-  <h1>Pessoas e Negócios: a coerência como ativo na relação de trabalho.</h1>
+    <h1>Pessoas e Negócios: a coerência como ativo na relação de trabalho.</h1>
 
-  <div class="byline">
-    <div class="byline-left">
-      <div class="avatarWrap">
-        <img class="avatar" src="assets/lisandra.jpg" alt="Lisandra Lencina">
-        <!-- Fallback (se não tiver imagem):
-        <div class="avatarFallback">LL</div>
-        -->
-      </div>
+    <div class="byline">
+      <div class="byline-left">
+        <div class="avatarWrap">
+          <img class="avatar" src="assets/lisandra.jpg" alt="Lisandra Lencina">
+          <!-- Fallback (se nao tiver imagem):
+          <div class="avatarFallback">LL</div>
+          -->
+        </div>
 
-      <div class="byline-text">
-        <div class="byline-name">Por Lisandra Lencina</div>
-        <div class="byline-desc">Administradora de Negócios com ênfase em Desenvolvimento Humano</div>
-        <div class="byline-link">
-          LinkedIn:
-          <a href="https://www.linkedin.com/in/lisandralencina/" target="_blank" rel="noopener">/in/lisandralencina</a>
+        <div class="byline-text">
+          <div class="byline-name">Por Lisandra Lencina</div>
+          <div class="byline-desc">Administradora de Negócios com ênfase em Desenvolvimento Humano</div>
+          <div class="byline-link">
+            LinkedIn:
+            <a href="https://www.linkedin.com/in/lisandralencina/" target="_blank" rel="noopener">/in/lisandralencina</a>
+          </div>
         </div>
       </div>
+
+      <div class="byline-right">
+        <div class="byline-date">02/02/2026 | 06h00</div>
+      </div>
     </div>
 
-    <div class="byline-right">
-      <div class="byline-date">02/02/2026 | 06h00</div>
-    </div>
-  </div>
+    <div class="intro-body">
+      <p>
+        A pesquisa piloto DHO 360º - Futuro do Trabalho em Foco nasceu da observação das dores dos negócios e das pessoas nas relações de trabalho:
+        quando o acordo entre negócio e trabalhador falha, os dois lados relatam sintomas parecidos.
+      </p>
 
-  <div class="intro-body">
-    <p>
-      A pesquisa piloto DHO 360º - Futuro do Trabalho em Foco nasceu da observação das dores dos negócios e das pessoas nas relações de trabalho:
-      quando o acordo entre negócio e trabalhador falha, os dois lados relatam sintomas parecidos.
-    </p>
+      <p>
+        De um lado os donos e decisores do negócio sentem a sobrecarga das falhas na força de trabalho. Do outro, trabalhadores sentem sobrecarga por
+        pressão por resultado e esgotamento. As causas parecem diferentes, mas elas surgem a partir de um mesmo ponto: Desenvolvimento Humano.
+      </p>
 
-    <p>
-      De um lado os donos e decisores do negócio sentem a sobrecarga das falhas na força de trabalho. Do outro, trabalhadores sentem sobrecarga por
-      pressão por resultado e esgotamento. As causas parecem diferentes, mas elas surgem a partir de um mesmo ponto: Desenvolvimento Humano.
-    </p>
-
-    <p>
-      A pesquisa tem como objetivo entender quais aspectos desse pilar são mais demandados e como integrá-los para sustentar resultados e qualidade vida
-      e estabelecer uma coerência entre trabalho e negócios.
-    </p>
-  </div>
-
-  <div class="intro-grid">
-    <div class="infoCard">
-      <p class="intro-label">O que você encontrará nesta página</p>
-      <p class="intro-text">
-        Serão apresentados os resultados da pesquisa a partir de recortes objetivos das tensões mais citadas pelos respondentes. O foco será despertar
-        reflexões a respeito dos pontos que unem trabalhadores e negócios, e o que os levam para lados extremos das situações, e ainda dar pistas de qual é
-        o papel da liderança e do RH para construir essa coerência no dia a dia.
+      <p>
+        A pesquisa tem como objetivo entender quais aspectos desse pilar são mais demandados e como integrá-los para sustentar resultados e qualidade vida
+        e estabelecer uma coerência entre trabalho e negócios.
       </p>
     </div>
 
-    <div class="infoCard">
-      <p class="intro-label">Como ler</p>
-      <p class="intro-text">
-        Ao rolar a página você encontrará as 10 tensões mais citadas pelos respondentes com um enunciado curto, um gráfico e uma pergunta reflexiva.
-        Em alguns, você poderá abrir detalhes, filtrar ou interagir para explorar conforme a sua necessidade.
-      </p>
-    </div>
+    <div class="intro-grid">
+      <div class="infoCard">
+        <p class="intro-label">O que você encontrará nesta página</p>
+        <p class="intro-text">
+          Serão apresentados os resultados da pesquisa a partir de recortes objetivos das tensões mais citadas pelos respondentes. O foco será despertar
+          reflexões a respeito dos pontos que unem trabalhadores e negócios, e o que os levam para lados extremos das situações, e ainda dar pistas de qual é
+          o papel da liderança e do RH para construir essa coerência no dia a dia.
+        </p>
+      </div>
 
-    <div class="infoCard">
-      <p class="intro-label">Quem conduziu</p>
-      <p class="intro-text">
-        Lisandra Lencina, Administradora de Negócios com ênfase em Desenvolvimento Humano, que de forma independente construiu um piloto para transformar
-        percepções recorrentes em dados organizados e abrir conversa com quem decide e com quem faz a o negócio girar.
-      </p>
-    </div>
+      <div class="infoCard">
+        <p class="intro-label">Como ler</p>
+        <p class="intro-text">
+          Ao rolar a página você encontrará as 10 tensões mais citadas pelos respondentes com um enunciado curto, um gráfico e uma pergunta reflexiva.
+          Em alguns, você poderá abrir detalhes, filtrar ou interagir para explorar conforme a sua necessidade.
+        </p>
+      </div>
 
-    <div class="infoCard">
-      <p class="intro-label">Limites do piloto</p>
-      <p class="intro-text">
-        O “n” (Número de Respondentes) varia por pergunta. Por isso os resultados devem ser aproveitados de forma mais qualitativa e utilizados como bússola
-        para identificar tensões e hipóteses e não como conclusão definitiva. A Onda 2 abre em julho de 2026 e vai ampliar a base.
-      </p>
+      <div class="infoCard">
+        <p class="intro-label">Quem conduziu</p>
+        <p class="intro-text">
+          Lisandra Lencina, Administradora de Negócios com ênfase em Desenvolvimento Humano, que de forma independente construiu um piloto para transformar
+          percepções recorrentes em dados organizados e abrir conversa com quem decide e com quem faz a o negócio girar.
+        </p>
+      </div>
+
+      <div class="infoCard">
+        <p class="intro-label">Limites do piloto</p>
+        <p class="intro-text">
+          O “n” (Número de Respondentes) varia por pergunta. Por isso os resultados devem ser aproveitados de forma mais qualitativa e utilizados como bússola
+          para identificar tensões e hipóteses e não como conclusão definitiva. A Onda 2 abre em julho de 2026 e vai ampliar a base.
+        </p>
+      </div>
     </div>
   </div>
 </section>
