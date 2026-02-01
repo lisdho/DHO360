@@ -1,6 +1,6 @@
 <!-- =========================
-     INTRODUCAO (HTML + CSS) - Acordeoes clicaveis (abre e fecha)
-     Substitui o carrossel por botoes expansivos.
+     INTRODUCAO (HTML + CSS) - Por Lisandra, foto, objetivo, como ler, etc.
+     Inclui: texto a esquerda + imagem a direita (altura controlada)
 ========================= -->
 
 <style>
@@ -68,7 +68,7 @@
     .intro-inner{ max-width: 100%; }
   }
 
-  /* Byline */
+  /* Byline (Por Lisandra) */
   .byline{
     margin: 14px 0 18px;
     padding: 14px 14px;
@@ -162,9 +162,26 @@
     }
   }
 
-  /* Texto introdutorio */
-  .intro-body{
+  /* =========================
+     SPLIT: texto (esq) + imagem (dir)
+  ========================= */
+  .intro-split{
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 18px;
+    align-items: start;
     margin: 0 0 18px;
+  }
+
+  @media (max-width: 900px){
+    .intro-split{
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Texto introdutorio (dentro do split) */
+  .intro-body{
+    margin: 0;
     color: var(--body);
     font-size: 15px;
     line-height: 1.7;
@@ -176,10 +193,41 @@
   .intro-body p{ margin: 0 0 12px; }
   .intro-body p:last-child{ margin-bottom: 0; }
 
+  /* Card da imagem (dir) */
+  .intro-media{
+    background: var(--card2);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,.25);
+    position: relative;
+  }
+  .intro-media::before{
+    content:"";
+    position:absolute; inset:-2px;
+    background: radial-gradient(520px 220px at 15% 0%, rgba(168,85,247,.10), transparent 60%);
+    pointer-events:none;
+  }
+
+  .intro-media img{
+    width: 100%;
+    height: 320px;             /* altura controlada (desktop) */
+    object-fit: cover;         /* corta sem distorcer */
+    display: block;
+    position: relative;
+    z-index: 1;
+    filter: saturate(1.02) contrast(1.02);
+  }
+
+  @media (max-width: 900px){
+    .intro-media img{
+      height: 260px;           /* altura controlada (mobile/tablet) */
+    }
+  }
+
   /* =========================
      ACORDEOES (botoes + conteudo)
   ========================= */
-
   .intro-acc{
     margin-top: 10px;
     display: grid;
@@ -199,7 +247,6 @@
     box-shadow: 0 10px 30px rgba(0,0,0,.25);
   }
 
-  /* Botao (summary) com degrade roxo */
   summary.acc-btn{
     list-style: none;
     cursor: pointer;
@@ -219,10 +266,8 @@
     border-bottom: 1px solid rgba(0,0,0,.25);
   }
 
-  /* remove triangulo padrao */
   summary.acc-btn::-webkit-details-marker{ display:none; }
 
-  /* seta */
   .acc-arrow{
     width: 28px;
     height: 28px;
@@ -270,7 +315,6 @@
     z-index: 1;
   }
 
-  /* Mobile: mantém sem hifenizacao e justificado */
   @media (max-width: 700px){
     .intro-body,
     .acc-body{
@@ -314,26 +358,35 @@
       </div>
     </div>
 
-    <div class="intro-body">
-      <p>
-        A pesquisa piloto DHO 360º - Futuro do Trabalho em Foco nasceu da observação das dores dos negócios e das pessoas nas relações de trabalho:
-        quando o acordo entre negócio e trabalhador falha, os dois lados relatam sintomas parecidos.
-      </p>
+    <!-- Texto a esquerda + imagem a direita -->
+    <div class="intro-split">
+      <div class="intro-body">
+        <p>
+          A pesquisa piloto DHO 360º - Futuro do Trabalho em Foco nasceu da observação das dores dos negócios e das pessoas nas relações de trabalho:
+          quando o acordo entre negócio e trabalhador falha, os dois lados relatam sintomas parecidos.
+        </p>
 
-      <p>
-        De um lado os donos e decisores do negócio sentem a sobrecarga das falhas na força de trabalho. Do outro, trabalhadores sentem sobrecarga por
-        pressão por resultado e esgotamento. As causas parecem diferentes, mas elas surgem a partir de um mesmo ponto: Desenvolvimento Humano.
-      </p>
+        <p>
+          De um lado os donos e decisores do negócio sentem a sobrecarga das falhas na força de trabalho. Do outro, trabalhadores sentem sobrecarga por
+          pressão por resultado e esgotamento. As causas parecem diferentes, mas elas surgem a partir de um mesmo ponto: Desenvolvimento Humano.
+        </p>
 
-      <p>
-        A pesquisa tem como objetivo entender quais aspectos desse pilar são mais demandados e como integrá-los para sustentar resultados e qualidade vida
-        e estabelecer uma coerência entre trabalho e negócios.
-      </p>
+        <p>
+          A pesquisa tem como objetivo entender quais aspectos desse pilar são mais demandados e como integrá-los para sustentar resultados e qualidade vida
+          e estabelecer uma coerência entre trabalho e negócios.
+        </p>
+      </div>
+
+      <div class="intro-media">
+        <img
+          src="assets/dhobalance.png"
+          alt="Ilustracao sobre equilibrio entre desenvolvimento humano e resultados no trabalho, conectando pessoas, carreira profissional e performance organizacional por meio de analise e gestao"
+          loading="lazy"
+        >
+      </div>
     </div>
 
-    <!-- =========================
-         ACORDEOES (4 topicos)
-    ========================= -->
+    <!-- Acordeoes (4 topicos) -->
     <div class="intro-acc">
       <details class="acc">
         <summary class="acc-btn">
