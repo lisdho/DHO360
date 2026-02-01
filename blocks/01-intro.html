@@ -1,6 +1,5 @@
 <!-- =========================
-     INTRODUCAO (HTML + CSS) - Por Lisandra, foto, objetivo, como ler, etc.
-     Cole este BLOCO TODO no seu arquivo.
+     INTRODUCAO (HTML + CSS + JS) - Carrossel dos cards (arrastavel)
 ========================= -->
 
 <style>
@@ -41,9 +40,9 @@
     margin-bottom: 18px;
   }
 
-  /* NOVO: container interno para alinhar tudo no mesmo eixo (linhas vermelhas) */
+  /* container interno para alinhar tudo */
   .intro-inner{
-    max-width: 980px;           /* ajuste fino aqui se quiser mais largo/estreito */
+    max-width: 980px;
     margin: 0 auto;
   }
 
@@ -63,58 +62,12 @@
     letter-spacing: -0.02em;
   }
 
-  .intro-grid{
-    display:grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px 18px;
-  }
-
   @media (max-width: 900px){
     .intro h1{ font-size: 32px; }
     .intro-inner{ max-width: 100%; }
-    .intro-grid{ grid-template-columns: 1fr; }
   }
 
-  .infoCard{
-    background: var(--card2);
-    border:1px solid var(--line);
-    border-radius: var(--radius);
-    padding: 14px 14px;
-    box-shadow: 0 10px 30px rgba(0,0,0,.25);
-    position:relative;
-    overflow:hidden;
-  }
-  .infoCard::before{
-    content:"";
-    position:absolute; inset:-2px;
-    background: radial-gradient(420px 120px at 15% 0%, rgba(168,85,247,.12), transparent 55%);
-    pointer-events:none;
-  }
-
-  .intro-label{
-    margin: 0 0 6px;
-    font-size: 12px;
-    color: var(--muted);
-    letter-spacing: .08em;
-    text-transform: uppercase;
-    position:relative;
-    z-index:1;
-  }
-
-  .intro-text{
-    margin: 0;
-    color: var(--body);
-    font-size: 14px;
-    line-height: 1.55;
-    text-align: justify;
-    text-justify: inter-word;
-    hyphens: none;
-    max-width: 78ch;
-    position:relative;
-    z-index:1;
-  }
-
-  /* Byline (Por Lisandra) */
+  /* Byline */
   .byline{
     margin: 14px 0 18px;
     padding: 14px 14px;
@@ -198,20 +151,6 @@
     white-space: nowrap;
   }
 
-  /* Texto introdutorio */
-  .intro-body{
-    margin: 0 0 18px;          /* antes era 0 auto 18px, isso quebrava o alinhamento */
-    color: var(--body);
-    font-size: 15px;
-    line-height: 1.7;
-    max-width: none;           /* antes era 92ch, isso deixava mais estreito que os outros blocos */
-    text-align: justify;
-    text-justify: inter-word;
-    hyphens: none;
-  }
-  .intro-body p{ margin: 0 0 12px; }
-  .intro-body p:last-child{ margin-bottom: 0; }
-
   @media (max-width: 700px){
     .byline{
       flex-direction: column;
@@ -222,10 +161,169 @@
     }
   }
 
+  /* Texto introdutorio */
+  .intro-body{
+    margin: 0 0 18px;
+    color: var(--body);
+    font-size: 15px;
+    line-height: 1.7;
+    max-width: none;
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: none;
+  }
+  .intro-body p{ margin: 0 0 12px; }
+  .intro-body p:last-child{ margin-bottom: 0; }
+
+  /* =========================
+     CARROSSEL (substitui intro-grid)
+  ========================= */
+
+  .carouselWrap{
+    position: relative;
+    margin-top: 10px;
+    padding: 0;
+  }
+
+  /* seta fora do container, como no print */
+  .carArrow{
+    position:absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 0;
+    background: transparent;
+    color: var(--fg);
+    font-size: 42px;
+    line-height: 1;
+    padding: 10px 14px;
+    cursor: pointer;
+    opacity: .75;
+    user-select:none;
+  }
+  .carArrow:hover{ opacity: 1; }
+  .carArrow:active{ transform: translateY(-50%) scale(.98); }
+
+  .carArrow.left{ left: -62px; }
+  .carArrow.right{ right: -62px; }
+
+  @media (max-width: 980px){
+    .carArrow.left{ left: -10px; }
+    .carArrow.right{ right: -10px; }
+  }
+  @media (max-width: 700px){
+    .carArrow{ display:none; } /* no mobile, swipe resolve */
+  }
+
+  /* container arredondado grande */
+  .carouselShell{
+    border-radius: 28px;
+    border: 1px solid rgba(233,213,255,.22);
+    box-shadow: 0 20px 70px rgba(0,0,0,.55);
+    background: radial-gradient(900px 500px at 15% 10%, rgba(168,85,247,.10), transparent 55%),
+                rgba(255,255,255,.02);
+    overflow: hidden;
+  }
+
+  /* topo com titulo */
+  .carTop{
+    padding: 16px 18px 10px;
+    text-align: center;
+    font-weight: 720;
+    font-size: 22px;
+    letter-spacing: -0.01em;
+  }
+
+  .carTop small{
+    display:block;
+    margin-top: 6px;
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 600;
+    letter-spacing: .06em;
+  }
+
+  /* viewport */
+  .carViewport{
+    position: relative;
+    overflow: hidden;
+    touch-action: pan-y; /* permite scroll vertical e swipe horizontal */
+    user-select: none;
+  }
+
+  .carTrack{
+    display: flex;
+    gap: 0;
+    will-change: transform;
+    transform: translate3d(0,0,0);
+  }
+
+  .carSlide{
+    flex: 0 0 100%;
+    padding: 10px 22px 22px;
+    box-sizing: border-box;
+  }
+
+  .carText{
+    margin: 0 auto;
+    max-width: 86ch;
+    color: var(--body);
+    font-size: 15px;
+    line-height: 1.7;
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: none;
+  }
+
+  /* rodape estilo faixa roxa com proximo titulo */
+  .carBottom{
+    padding: 14px 18px;
+    background: linear-gradient(90deg, rgba(124,58,237,.82), rgba(168,85,247,.82));
+    color: #fff;
+    text-align: center;
+    font-weight: 740;
+    font-size: 20px;
+    letter-spacing: -0.01em;
+  }
+
+  .carBottom span{
+    opacity: .95;
+  }
+
+  .carBottom .hint{
+    font-weight: 650;
+    opacity: .9;
+  }
+
+  /* pontinhos opcionais */
+  .carDots{
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    padding: 10px 0 0;
+    opacity: .8;
+  }
+  .carDot{
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,.35);
+    background: transparent;
+  }
+  .carDot.active{
+    background: rgba(233,213,255,.85);
+    border-color: rgba(233,213,255,.85);
+  }
+
+  @media (max-width: 700px){
+    .carTop{ font-size: 18px; }
+    .carBottom{ font-size: 18px; }
+    .carSlide{ padding: 6px 16px 18px; }
+  }
+
   /* Mobile: mantém sem hifenizacao e justificado */
   @media (max-width: 700px){
     .intro-body,
-    .intro-text{
+    .carText{
       text-align: justify;
       text-justify: inter-word;
       hyphens: none;
@@ -233,9 +331,6 @@
   }
 </style>
 
-<!-- =========================
-     INTRO (HTML)
-========================= -->
 <section class="intro" id="intro">
   <div class="intro-inner">
     <p class="intro-kicker">DHO 360º - Futuro do Trabalho em Foco</p>
@@ -283,39 +378,167 @@
       </p>
     </div>
 
-    <div class="intro-grid">
-      <div class="infoCard">
-        <p class="intro-label">O que você encontrará nesta página</p>
-        <p class="intro-text">
-          Serão apresentados os resultados da pesquisa a partir de recortes objetivos das tensões mais citadas pelos respondentes. O foco será despertar
-          reflexões a respeito dos pontos que unem trabalhadores e negócios, e o que os levam para lados extremos das situações, e ainda dar pistas de qual é
-          o papel da liderança e do RH para construir essa coerência no dia a dia.
-        </p>
+    <!-- =========================
+         CARROSSEL - substitui o intro-grid
+    ========================= -->
+    <div class="carouselWrap" id="introCarousel">
+      <button class="carArrow left" type="button" aria-label="Voltar">&#60;</button>
+
+      <div class="carouselShell">
+        <div class="carTop">
+          <div id="carTitle">O que você encontrará nesta página?</div>
+          <small id="carCounter">1 de 4</small>
+        </div>
+
+        <div class="carViewport">
+          <div class="carTrack" id="carTrack">
+            <article class="carSlide" data-title="O que você encontrará nesta página?" data-next="Como ler?">
+              <p class="carText">
+                Serão apresentados os resultados da pesquisa a partir de recortes objetivos das tensões mais citadas pelos respondentes. O foco será despertar
+                reflexões a respeito dos pontos que unem trabalhadores e negócios, e o que os levam para lados extremos das situações, e ainda dar pistas de qual é
+                o papel da liderança e do RH para construir essa coerência no dia a dia.
+              </p>
+            </article>
+
+            <article class="carSlide" data-title="Como ler?" data-next="Quem conduziu?">
+              <p class="carText">
+                Ao rolar a página você encontrará as 10 tensões mais citadas pelos respondentes com um enunciado curto, um gráfico e uma pergunta reflexiva.
+                Em alguns, você poderá abrir detalhes, filtrar ou interagir para explorar conforme a sua necessidade.
+              </p>
+            </article>
+
+            <article class="carSlide" data-title="Quem conduziu?" data-next="Limites do piloto">
+              <p class="carText">
+                Lisandra Lencina, Administradora de Negócios com ênfase em Desenvolvimento Humano, que de forma independente construiu um piloto para transformar
+                percepções recorrentes em dados organizados e abrir conversa com quem decide e com quem faz a o negócio girar.
+              </p>
+            </article>
+
+            <article class="carSlide" data-title="Limites do piloto" data-next="O que você encontrará nesta página?">
+              <p class="carText">
+                O “n” (Número de Respondentes) varia por pergunta. Por isso os resultados devem ser aproveitados de forma mais qualitativa e utilizados como bússola
+                para identificar tensões e hipóteses e não como conclusão definitiva. A Onda 2 abre em julho de 2026 e vai ampliar a base.
+              </p>
+            </article>
+          </div>
+        </div>
+
+        <div class="carBottom">
+          <span id="carNext">Como ler?</span>
+          <span class="hint"> &nbsp;&gt;&gt;&gt; arraste para o lado</span>
+        </div>
       </div>
 
-      <div class="infoCard">
-        <p class="intro-label">Como ler</p>
-        <p class="intro-text">
-          Ao rolar a página você encontrará as 10 tensões mais citadas pelos respondentes com um enunciado curto, um gráfico e uma pergunta reflexiva.
-          Em alguns, você poderá abrir detalhes, filtrar ou interagir para explorar conforme a sua necessidade.
-        </p>
-      </div>
+      <div class="carDots" id="carDots" aria-hidden="true"></div>
 
-      <div class="infoCard">
-        <p class="intro-label">Quem conduziu</p>
-        <p class="intro-text">
-          Lisandra Lencina, Administradora de Negócios com ênfase em Desenvolvimento Humano, que de forma independente construiu um piloto para transformar
-          percepções recorrentes em dados organizados e abrir conversa com quem decide e com quem faz a o negócio girar.
-        </p>
-      </div>
-
-      <div class="infoCard">
-        <p class="intro-label">Limites do piloto</p>
-        <p class="intro-text">
-          O “n” (Número de Respondentes) varia por pergunta. Por isso os resultados devem ser aproveitados de forma mais qualitativa e utilizados como bússola
-          para identificar tensões e hipóteses e não como conclusão definitiva. A Onda 2 abre em julho de 2026 e vai ampliar a base.
-        </p>
-      </div>
+      <button class="carArrow right" type="button" aria-label="Avançar">&#62;</button>
     </div>
   </div>
 </section>
+
+<script>
+  (function(){
+    const root = document.getElementById("introCarousel");
+    if(!root) return;
+
+    const track = root.querySelector("#carTrack");
+    const slides = Array.from(track.querySelectorAll(".carSlide"));
+
+    const titleEl = root.querySelector("#carTitle");
+    const nextEl = root.querySelector("#carNext");
+    const counterEl = root.querySelector("#carCounter");
+
+    const btnPrev = root.querySelector(".carArrow.left");
+    const btnNext = root.querySelector(".carArrow.right");
+
+    const dotsWrap = root.querySelector("#carDots");
+
+    let index = 0;
+    let startX = 0;
+    let currentX = 0;
+    let isDragging = false;
+    let baseTranslate = 0;
+
+    function slideWidth(){
+      return root.querySelector(".carViewport").clientWidth;
+    }
+
+    function clamp(n, min, max){
+      return Math.max(min, Math.min(max, n));
+    }
+
+    function setUI(i){
+      const cur = slides[i];
+      const nextIdx = (i + 1) % slides.length;
+
+      titleEl.textContent = cur.getAttribute("data-title") || "";
+      nextEl.textContent = slides[nextIdx].getAttribute("data-title") || (cur.getAttribute("data-next") || "");
+      counterEl.textContent = (i + 1) + " de " + slides.length;
+
+      const dots = Array.from(dotsWrap.querySelectorAll(".carDot"));
+      dots.forEach((d, di) => d.classList.toggle("active", di === i));
+    }
+
+    function goTo(i, animate=true){
+      index = clamp(i, 0, slides.length - 1);
+      const x = -index * slideWidth();
+      baseTranslate = x;
+
+      track.style.transition = animate ? "transform 280ms ease" : "none";
+      track.style.transform = "translate3d(" + x + "px,0,0)";
+
+      setUI(index);
+    }
+
+    function buildDots(){
+      dotsWrap.innerHTML = "";
+      for(let i=0;i<slides.length;i++){
+        const d = document.createElement("div");
+        d.className = "carDot" + (i===0 ? " active" : "");
+        dotsWrap.appendChild(d);
+      }
+    }
+
+    function onPointerDown(e){
+      isDragging = true;
+      track.style.transition = "none";
+      startX = e.clientX;
+      currentX = startX;
+      track.setPointerCapture(e.pointerId);
+    }
+
+    function onPointerMove(e){
+      if(!isDragging) return;
+      currentX = e.clientX;
+      const dx = currentX - startX;
+      const x = baseTranslate + dx;
+      track.style.transform = "translate3d(" + x + "px,0,0)";
+    }
+
+    function onPointerUp(e){
+      if(!isDragging) return;
+      isDragging = false;
+
+      const dx = currentX - startX;
+      const threshold = Math.min(120, slideWidth() * 0.18);
+
+      if(dx < -threshold) goTo(index + 1, true);
+      else if(dx > threshold) goTo(index - 1, true);
+      else goTo(index, true);
+    }
+
+    btnPrev.addEventListener("click", () => goTo(index - 1, true));
+    btnNext.addEventListener("click", () => goTo(index + 1, true));
+
+    track.addEventListener("pointerdown", onPointerDown);
+    track.addEventListener("pointermove", onPointerMove);
+    track.addEventListener("pointerup", onPointerUp);
+    track.addEventListener("pointercancel", onPointerUp);
+    track.addEventListener("pointerleave", (e) => { if(isDragging) onPointerUp(e); });
+
+    window.addEventListener("resize", () => goTo(index, false));
+
+    buildDots();
+    goTo(0, false);
+  })();
+</script>
