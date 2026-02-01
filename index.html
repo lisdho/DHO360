@@ -198,25 +198,68 @@
   <!-- Bloco 02 - Metodologia -->
   <div id="metodologia"></div>
 
-  <script>
-    async function carregarBloco(id, arquivo){
-      const alvo = document.getElementById(id);
-      try{
-        const resp = await fetch(arquivo, { cache: "no-store" });
-        if(!resp.ok) throw new Error("Falha ao carregar " + arquivo + ": " + resp.status);
-        alvo.innerHTML = await resp.text();
-      }catch(err){
-        console.error(err);
-        alvo.innerHTML =
-          '<section style="max-width:1100px;margin:24px auto;padding:0 20px;color:var(--muted)">' +
-          'Não foi possível carregar o arquivo ' + arquivo +
-          '</section>';
+<script>
+  async function carregarBloco(id, arquivo){
+    const alvo = document.getElementById(id);
+
+    function executarScriptsDentro(container){
+      const scripts = Array.from(container.querySelectorAll("script"));
+      const promessas = [];
+
+      for(const oldScript of scripts){
+        const newScript = document.createElement("script");
+
+        // Copia atributos
+        for(const attr of oldScript.attributes){
+          newScript.setAttribute(attr.name, attr.value);
+        }
+
+        // Se tiver src, aguarda carregar
+        if(oldScript.src){
+          promessas.push(new Promise((resolve, reject) => {
+            newScript.onload = resolve;
+            newScript.onerror = reject;
+          }));
+          newScript.src = oldScript.src;
+        }else{
+          newScript.text = oldScript.textContent;
+        }
+
+        // Substitui para forçar execução
+        oldScript.parentNode.replaceChild(newScript, oldScript);
       }
+
+      return Promise.all(promessas);
     }
 
-    carregarBloco("intro", "blocks/01-intro.html");
-    carregarBloco("metodologia", "blocks/02-metodologia.html");
-  </script>
+    try{
+      const resp = await fetch(arquivo, { cache: "no-store" });
+      if(!resp.ok) throw new Error("Falha ao carregar " + arquivo + ": " + resp.status);
+
+      alvo.innerHTML = await resp.text();
+
+      // Executa scripts que vierem dentro do bloco carregado
+      await executarScriptsDentro(alvo);
+
+      // Se o bloco expuser um init, chama por convenção
+      const initName = "initBloco_" + id;
+      if(typeof window[initName] === "function"){
+        window[initName]();
+      }
+
+    }catch(err){
+      console.error(err);
+      alvo.innerHTML =
+        '<section style="max-width:1100px;margin:24px auto;padding:0 20px;color:var(--muted)">' +
+        'Não foi possível carregar o arquivo ' + arquivo +
+        '</section>';
+    }
+  }
+
+  carregarBloco("intro", "blocks/01-intro.html");
+  carregarBloco("metodologia", "blocks/02-metodologia.html");
+</script>
+
 
 </body>
 </html>
