@@ -1,1 +1,450 @@
+<!-- =========================
+     BLOCO 1 (HTML)
+     Substitua seu <article id="b1"> pelo bloco abaixo
+========================= -->
+<article class="block" id="b1">
+  <div class="kicker">BLOCO 1 | OBJETIVOS E PRIORIDADES DE DESENVOLVIMENTO</div>
+
+  <h2>Quando se sabe qual é o objetivo, o próximo passo no desenvolvimento é priorizar por onde começar.</h2>
+
+  <p>
+    <strong>100% dos respondentes</strong> descreveram seus objetivos a serem alcançados, ou seja, todos têm um norte e há uma vontade de chegar lá.
+  </p>
+  <p style="margin-top:10px">
+    Então o que se perguntou foi: onde a energia está concentrada, e o que as pessoas acreditam que precisam desenvolver para chegar lá.
+  </p>
+
+  <div class="row">
+    <button id="toggleB1Btn" type="button">Ver resultados</button>
+    <span class="pill" id="metaPill">Piloto | n = 29 | MQ0062 + MQ0063</span>
+  </div>
+
+  <section class="reveal" id="b1Reveal" aria-hidden="true">
+    <!-- SEÇÃO A -->
+    <div class="subsection">
+      <div class="chartHeader">
+        <p class="chartTitle">MQ0062 | Onde os objetivos estão?</p>
+        <p class="chartHint">Passe o mouse para ver detalhes</p>
+      </div>
+
+      <p class="subQ">
+        Em quais aspectos da vida seus objetivos estão mais concentrados?
+      </p>
+
+      <!-- ✅ Gráfico + legenda na mesma forma (lado a lado no desktop) -->
+      <div class="pieGrid">
+        <div class="chartWrap pieWrap">
+          <canvas id="chartMq0062"></canvas>
+        </div>
+
+        <div class="legendBox" aria-label="Legenda MQ0062">
+          <ul class="legendList" id="legendMq0062">
+            <li>
+              <span class="swatch s1"></span>
+              <div class="legendText">
+                <div class="legendMain"><strong>Profissional</strong> <span class="legendPct">45%</span></div>
+                <div class="legendSub">Carreira, propósito, recursos financeiros.</div>
+              </div>
+            </li>
+
+            <li>
+              <span class="swatch s2"></span>
+              <div class="legendText">
+                <div class="legendMain"><strong>Pessoal</strong> <span class="legendPct">28%</span></div>
+                <div class="legendSub">Saúde, desenvolvimento intelectual, equilíbrio emocional.</div>
+              </div>
+            </li>
+
+            <li>
+              <span class="swatch s3"></span>
+              <div class="legendText">
+                <div class="legendMain"><strong>Qualidade de Vida</strong> <span class="legendPct">17%</span></div>
+                <div class="legendSub">Diversão, hobbies, felicidade, espiritualidade.</div>
+              </div>
+            </li>
+
+            <li>
+              <span class="swatch s4"></span>
+              <div class="legendText">
+                <div class="legendMain"><strong>Relacionamentos</strong> <span class="legendPct">10%</span></div>
+                <div class="legendSub">Família, vida social, relacionamento conjugal.</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="note">
+        Leitura: a maior parte dos objetivos se concentra no campo profissional, mas há uma concentração relevante ligada a saúde, mente e equilíbrio:
+        um fio condutor que começa a revelar o tema da coerência entre desempenho e qualidade de vida.
+      </div>
+    </div>
+
+    <!-- SEÇÃO B -->
+    <div class="subsection">
+      <div class="chartHeader">
+        <p class="chartTitle">MQ0063 | O que as pessoas priorizam desenvolver?</p>
+        <p class="chartHint">Lista ranqueada (1 = mais prioritário)</p>
+      </div>
+
+      <p class="subQ">
+        Quais fatores você considera mais importantes desenvolver para realizar esses objetivos?
+        <span class="subQHint">(Ranking: 1 = mais prioritário)</span>
+      </p>
+
+      <!-- ✅ Sem gráfico: apenas ranking -->
+      <ol class="rankList" id="rankMq0063">
+        <li class="rankItem">
+          <span class="rankBadge">1</span>
+          <div>
+            <div class="rankMain"><strong>Corpo/Ambiente</strong></div>
+            <div class="rankSub">Verificar se tenho condições e recursos adequados para agir: saúde, local, tempo, ferramentas e rede de apoio.</div>
+          </div>
+        </li>
+
+        <li class="rankItem">
+          <span class="rankBadge">2</span>
+          <div>
+            <div class="rankMain"><strong>Habilidades</strong></div>
+            <div class="rankSub">Adquirir mais conhecimento sobre mim, sobre o mundo e sobre como fazer coisas, e aprender a aplicar isso na vida real.</div>
+          </div>
+        </li>
+
+        <li class="rankItem">
+          <span class="rankBadge">3</span>
+          <div>
+            <div class="rankMain"><strong>Comportamento</strong></div>
+            <div class="rankSub">Entender como meus comportamentos ajudam ou atrapalham desempenho, produtividade e novas ações.</div>
+          </div>
+        </li>
+
+        <li class="rankItem">
+          <span class="rankBadge">4</span>
+          <div>
+            <div class="rankMain"><strong>Crenças e Valores</strong></div>
+            <div class="rankSub">Clarear crenças e valores para agir de acordo com o que acredito e valorizo.</div>
+          </div>
+        </li>
+
+        <li class="rankItem">
+          <span class="rankBadge">5</span>
+          <div>
+            <div class="rankMain"><strong>Visão/Missão</strong></div>
+            <div class="rankSub">Descobrir propósito, definir um futuro desejado e viver isso.</div>
+          </div>
+        </li>
+
+        <li class="rankItem">
+          <span class="rankBadge">6</span>
+          <div>
+            <div class="rankMain"><strong>Legado</strong></div>
+            <div class="rankSub">Gerar impacto positivo e duradouro nos meios em que faço parte: pessoas e sociedade.</div>
+          </div>
+        </li>
+
+        <li class="rankItem">
+          <span class="rankBadge">7</span>
+          <div>
+            <div class="rankMain"><strong>Identidade</strong></div>
+            <div class="rankSub">Entender meus papéis para expressar quem eu verdadeiramente sou.</div>
+          </div>
+        </li>
+      </ol>
+
+      <div class="note">
+        Leitura: no contexto atual, os respondentes escolhem priorizar o desenvolvimento das condições adequadas para agir + habilidades + comportamento.
+      </div>
+    </div>
+
+    <!-- Fechamento do bloco -->
+    <div class="closingBox">
+      <div class="closingTitle">Fechamento</div>
+      <div class="closingLine">
+        <strong>Insight:</strong> É possível verificar que há objetivos claros para os respondentes, e uma demanda por entender como diminuir a distância entre o que se quer e o que torna possível chegar lá.
+      </div>
+      <div class="closingLine">
+        <strong>Pergunta:</strong> Se os objetivos se concentram nos aspectos profissional e pessoal, como desenvolver corpo/ambiente, habilidades e comportamento poderia beneficiar o alcance da coerência na relação de trabalho?
+      </div>
+    </div>
+  </section>
+</article>
+
+<!-- =========================
+     BLOCO 1 (CSS)
+     Cole no final do seu <style>
+========================= -->
+<style>
+  /* BLOCO 1 — subseções (A/B) */
+  .subsection{
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255,255,255,.06);
+    position: relative;
+    z-index: 1;
+  }
+  .subsection:first-child{
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+  }
+
+  .subQ{
+    margin: 8px 0 10px;
+    color: var(--body);
+    font-size: 15px;
+    line-height: 1.55;
+    max-width: none;
+    width: 100%;
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: none;
+  }
+  .subQHint{
+    color: var(--muted);
+    font-size: 13px;
+    margin-left: 6px;
+  }
+
+  /* ✅ MQ0062 — gráfico + legenda na mesma “forma” */
+  .pieGrid{
+    display:grid;
+    grid-template-columns: minmax(280px, 360px) 1fr;
+    gap: 12px;
+    align-items: stretch;
+    margin-top: 10px;
+  }
+
+  .pieWrap{ height: 320px; }
+
+  .legendBox{
+    background: rgba(0,0,0,.10);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 14px;
+    padding: 10px;
+    overflow: auto;
+  }
+
+  @media (max-width: 860px){
+    .pieGrid{ grid-template-columns: 1fr; }
+    .pieWrap{ height: 280px; }
+    .legendBox{ overflow: visible; }
+  }
+
+  /* Legenda HTML (nome bold + descrição menor) */
+  .legendList{
+    list-style:none;
+    padding:0;
+    margin: 0;
+    display:grid;
+    gap: 10px;
+    max-width: none;
+    width: 100%;
+  }
+  .legendList li{
+    display:flex;
+    gap: 10px;
+    align-items:flex-start;
+    background: rgba(255,255,255,.02);
+    border: 1px solid rgba(255,255,255,.09);
+    border-radius: 14px;
+    padding: 10px 10px;
+  }
+
+  .swatch{
+    width:12px;height:12px;border-radius:999px;
+    flex: 0 0 12px;
+    margin-top: 4px;
+    border: 1px solid rgba(255,255,255,.14);
+    box-shadow: 0 8px 18px rgba(0,0,0,.35);
+  }
+  .swatch.s1{ background: rgba(233,213,255,.34); }
+  .swatch.s2{ background: rgba(168,85,247,.28); }
+  .swatch.s3{ background: rgba(124,58,237,.26); }
+  .swatch.s4{ background: rgba(192,132,252,.22); }
+
+  .legendMain{
+    display:flex;
+    gap: 8px;
+    align-items:baseline;
+    color: var(--fg);
+    font-size: 14px;
+  }
+  .legendPct{
+    color: var(--muted);
+    font-size: 13px;
+  }
+  .legendSub{
+    margin-top: 3px;
+    color: var(--muted);
+    font-size: 12.5px;
+    line-height: 1.35;
+  }
+
+  /* ✅ MQ0063 — somente ranking */
+  .rankList{
+    margin: 12px 0 0;
+    padding: 0;
+    list-style: none;
+    display:grid;
+    gap: 10px;
+    max-width: none;
+    width: 100%;
+  }
+  .rankItem{
+    display:flex;
+    gap: 10px;
+    align-items:flex-start;
+    background: rgba(255,255,255,.02);
+    border: 1px solid rgba(255,255,255,.09);
+    border-radius: 14px;
+    padding: 10px 10px;
+  }
+
+  .rankBadge{
+    width: 26px;
+    height: 26px;
+    border-radius: 999px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size: 12px;
+    font-weight: 780;
+    color: var(--fg);
+    background: linear-gradient(180deg, rgba(124,58,237,.28), rgba(168,85,247,.14));
+    border: 1px solid rgba(233,213,255,.22);
+    box-shadow: 0 10px 25px rgba(124,58,237,.12);
+    flex: 0 0 26px;
+    margin-top: 2px;
+  }
+  .rankMain{
+    font-size: 14px;
+    color: var(--fg);
+  }
+  .rankSub{
+    margin-top: 3px;
+    font-size: 12.5px;
+    color: var(--muted);
+    line-height: 1.35;
+  }
+
+  /* Fechamento */
+  .closingBox{
+    margin-top: 16px;
+    border-top: 1px solid rgba(255,255,255,.06);
+    padding-top: 14px;
+    background: rgba(0,0,0,.16);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 14px;
+    padding: 12px;
+  }
+  .closingTitle{
+    font-size: 12px;
+    letter-spacing: .10em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .closingLine{
+    color: var(--body);
+    font-size: 14px;
+    line-height: 1.55;
+    margin-top: 8px;
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: none;
+  }
+</style>
+
+<!-- =========================
+     BLOCO 1 (JS)
+     Cole dentro do seu <script>
+========================= -->
+<script>
+  // ===== BLOCO 1 (apenas MQ0062 com gráfico; MQ0063 só lista) =====
+  const b1Btn = document.getElementById("toggleB1Btn");
+  const b1Reveal = document.getElementById("b1Reveal");
+
+  let chart0062 = null;
+
+  const mq0062 = {
+    id: "MQ0062",
+    n: 29,
+    items: [
+      { name: "Profissional", pct: 45, desc: "Carreira, propósito, recursos financeiros." },
+      { name: "Pessoal", pct: 28, desc: "Saúde, desenvolvimento intelectual, equilíbrio emocional." },
+      { name: "Qualidade de Vida", pct: 17, desc: "Diversão, hobbies, felicidade, espiritualidade." },
+      { name: "Relacionamentos", pct: 10, desc: "Família, vida social, relacionamento conjugal." }
+    ],
+    colors: [
+      "rgba(233,213,255,.34)",
+      "rgba(168,85,247,.28)",
+      "rgba(124,58,237,.26)",
+      "rgba(192,132,252,.22)"
+    ]
+  };
+
+  function buildChart0062(){
+    const ctx = document.getElementById("chartMq0062");
+    if (!ctx) return;
+
+    chart0062 = new Chart(ctx, {
+      type: "doughnut",
+      data: {
+        labels: mq0062.items.map(i => i.name),
+        datasets: [{
+          data: mq0062.items.map(i => i.pct),
+          borderWidth: 1,
+          borderColor: "rgba(255,255,255,.08)",
+          backgroundColor: mq0062.colors,
+          hoverOffset: 6
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        cutout: "55%",
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              title: (items) => mq0062.items[items[0].dataIndex].name,
+              label: (item) => `${mq0062.items[item.dataIndex].pct}%`,
+              afterLabel: (item) => mq0062.items[item.dataIndex].desc
+            }
+          }
+        }
+      }
+    });
+  }
+
+  function openB1(){
+    if (!b1Reveal) return;
+
+    b1Reveal.classList.add("open");
+    b1Reveal.setAttribute("aria-hidden", "false");
+    if (b1Btn) b1Btn.textContent = "Ocultar resultados";
+
+    if(!chart0062) buildChart0062();
+
+    setTimeout(() => {
+      chart0062 && chart0062.resize();
+    }, 50);
+  }
+
+  function closeB1(){
+    if (!b1Reveal) return;
+
+    b1Reveal.classList.remove("open");
+    b1Reveal.setAttribute("aria-hidden", "true");
+    if (b1Btn) b1Btn.textContent = "Ver resultados";
+  }
+
+  if (b1Btn && b1Reveal){
+    b1Btn.addEventListener("click", () => {
+      const isOpen = b1Reveal.classList.contains("open");
+      if(isOpen) closeB1();
+      else openB1();
+    });
+  }
+</script>
 
