@@ -1,4 +1,4 @@
-<section class="dho-objetivos" aria-labelledby="dho-objetivos-title">
+<section class="dho-objetivos" aria-labelledby="dho-objetivos-title"> 
   <div class="dho-objetivos-wrap">
 
     <header class="dho-objetivos-header">
@@ -37,7 +37,7 @@
         </p>
       </article>
 
-      <!-- Card b: Ranking (movido para baixo do card da pizza) -->
+      <!-- Card B: Ranking (garantido abaixo do card da pizza) -->
       <article class="dho-rank-card" aria-label="Fatores mais importantes para desenvolver">
         <div class="dho-card-head">
           <h3 class="dho-card-title">Ranking de iniciativas de desenvolvimento</h3>
@@ -128,8 +128,7 @@
         </div>
       </article>
 
-      
-      <!-- Card c: Reflexões (agora na coluna da direita, acima do ranking) -->
+      <!-- Card C: Reflexões (garantido abaixo do ranking, centralizado) -->
       <aside class="dho-insight-box" aria-label="Reflexões orientadas pelos dados">
         <h3 class="dho-insight-title">Reflexões</h3>
         <ul class="dho-insight-list">
@@ -181,7 +180,7 @@
     color: rgba(255,255,255,0.85);
   }
 
-  /* Layout: pizza na esquerda; reflexões e ranking na direita */
+  /* Layout: 2 colunas apenas para o card da pizza */
   .dho-objetivos-grid {
     margin-top: 18px;
     display: grid;
@@ -263,9 +262,7 @@
     display: block;
   }
 
-  .dho-legend {
-    padding: 0;
-  }
+  .dho-legend { padding: 0; }
 
   .dho-legend-item {
     display: grid;
@@ -319,7 +316,7 @@
     color: rgba(255,255,255,0.80);
   }
 
-  /* Ranking: totalmente transparente (sem borda e bg) */
+  /* Ranking: mantém transparente, mas agora ocupa a largura toda (fica abaixo da pizza) */
   .dho-rank-card {
     border: 0;
     background: transparent;
@@ -330,6 +327,7 @@
     -webkit-backdrop-filter: none;
     position: relative;
     overflow: visible;
+    grid-column: 1 / -1;
   }
 
   .dho-rank-wrap { margin-top: 10px; }
@@ -461,7 +459,6 @@
     color: rgba(255,255,255,0.70);
   }
 
-  /* Pergunta final com destaque lilás/rosa (sem distorcer) */
   .dho-rank-final {
     display: none;
     border-radius: 14px;
@@ -481,7 +478,6 @@
     font-weight: 700;
   }
 
-  /* Mini insight substituído e simplificado */
   .dho-mini-insight {
     margin-top: 10px;
     border-radius: 16px;
@@ -497,10 +493,10 @@
     color: rgba(255,255,255,0.85);
   }
 
-  /* Reflexões: mais estreito (-40%) e bg rosado transparente */
+  /* Reflexões: abaixo do ranking e centralizado */
   .dho-insight-box {
     width: 60%;
-    justify-self: end;
+    justify-self: center;
     border-radius: 18px;
     padding: 14px;
     border: 1px solid rgba(255,255,255,0.10);
@@ -511,6 +507,7 @@
     -webkit-backdrop-filter: blur(10px);
     position: relative;
     overflow: hidden;
+    margin-top: 6px;
   }
 
   .dho-insight-box::before {
@@ -561,8 +558,6 @@
       width: 100%;
       justify-self: stretch;
     }
-
-    /* no mobile, ranking fica naturalmente abaixo */
   }
 
   @media (max-width: 520px) {
@@ -650,7 +645,6 @@
 
       if (finalBox) finalBox.classList.remove("is-visible");
 
-      // Evita duplicar listener se o init rodar novamente
       if (wrap.dataset.bound !== "1") {
         wrap.dataset.bound = "1";
 
@@ -675,7 +669,6 @@
         });
       }
 
-      // Ajusta botão conforme primeiro hidden
       const firstHidden = list.querySelector(".dho-rank-item.is-hidden");
       if (firstHidden) {
         const r = firstHidden.getAttribute("data-rank");
