@@ -15,15 +15,48 @@
       --violet1:#7c3aed;
       --violet2:#a855f7;
       --violet3:#e9d5ff;
+
+      /* extras para o fundo neon escuro */
+      --bg0:#05050a;
+      --bg1:#070712;
+      --bg2:#0a0a1a;
+      --neonV1: rgba(168,85,247,.18);
+      --neonV2: rgba(124,58,237,.16);
+      --neonP1: rgba(236,72,153,.10);
+      --ink: rgba(0,0,0,.78);
     }
 
     /* ====== BASE mínima para o header “parecer o mesmo site” ====== */
     body{
       margin:0;
       font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-      background: var(--bg);
       color: var(--fg);
+
+      /* Fundo roxo/lilás bem escuro, predominância de preto, leve neon */
+      background:
+        radial-gradient(900px 520px at 22% 12%, var(--neonP1), transparent 60%),
+        radial-gradient(980px 560px at 72% 18%, var(--neonV1), transparent 62%),
+        radial-gradient(860px 520px at 42% 82%, var(--neonV2), transparent 64%),
+        linear-gradient(180deg, var(--bg0) 0%, var(--bg1) 40%, var(--bg2) 100%);
+      background-attachment: fixed;
+      overflow-x:hidden;
     }
+
+    /* camada extra para dar “profundidade” e vinheta suave */
+    body::before{
+      content:"";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+
+      background:
+        radial-gradient(1200px 700px at 50% 0%, rgba(168,85,247,.10), transparent 65%),
+        radial-gradient(900px 700px at 50% 100%, rgba(124,58,237,.08), transparent 68%),
+        radial-gradient(1200px 900px at 50% 50%, rgba(0,0,0,.72), rgba(0,0,0,.90));
+      mix-blend-mode: normal;
+    }
+
     a{
       color: var(--fg);
       text-decoration:none;
