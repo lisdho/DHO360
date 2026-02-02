@@ -2,7 +2,7 @@
   <div class="dho-objetivos-wrap">
 
     <header class="dho-objetivos-header">
-      <p class="dho-kicker">BLOCO 1 | OBJETIVOS E PRIORIDADES DE DESENVOLVIMENTO</p>
+      <p class="dho-kicker">DIMENSÃO 1 | OBJETIVOS E PRIORIDADES DE DESENVOLVIMENTO</p>
 
       <h2 id="dho-objetivos-title" class="dho-title">
         Quando se sabe qual é o objetivo, o próximo passo é priorizar por onde começar.
@@ -123,25 +123,66 @@
       </article>
 
       <!-- Card C: Reflexões (garantido abaixo do ranking, centralizado) -->
-      <aside class="dho-insight-box" aria-label="Reflexões orientadas pelos dados">
-        <h3 class="dho-insight-title">Reflexões</h3>
-        <ul class="dho-insight-list">
-          <li>
-            Se 45% do foco está em <strong>trabalho e carreira</strong>, o que ainda precisa ficar mais seguro
-            (saúde, relações, bem-estar) para sustentar esse objetivo sem custo invisível?
-          </li>
-          <li>
-            O ranking começa em <strong>corpo e ambiente</strong> e termina em <strong>identidade</strong>.
-            Isso é maturidade estratégica ou um sinal de sobrecarga pedindo reorganização do contexto?
-          </li>
-        </ul>
-        <p class="dho-insight-close">
-          Sequência sugerida pelo dado:
-          <span class="dho-seq">condição → habilidade → comportamento → alinhamento interno → visão</span>.
-        </p>
+    <!-- Card C: Reflexões (novo layout em fluxo) -->
+<aside class="dho-insight-box dho-insight-box--flow" aria-label="Reflexão orientada pelos dados">
+  <h3 class="dho-flow-title">Reflexão</h3>
 
-        <img class="dho-reflexoes-img" src="assets/fluxodedesenvolvimento.png" alt="Fluxo de desenvolvimento">
-      </aside>
+  <p class="dho-flow-top">
+    A pesquisa revela que os profissionais no geral priorizam desenvolver condições, habilidades e comportamento
+    antes de refinar sua visão. Eles preferem aplicar esforços para agir efetivamente.
+  </p>
+
+  <div class="dho-flow-track" role="list" aria-label="Sequência sugerida pelo dado">
+    <div class="dho-flow-step" role="listitem">
+      <div class="dho-flow-ring">
+        <span class="dho-flow-icon" aria-hidden="true">🌿</span>
+      </div>
+      <p class="dho-flow-label">Corpo e Ambiente</p>
+    </div>
+
+    <div class="dho-flow-connector" aria-hidden="true"></div>
+
+    <div class="dho-flow-step" role="listitem">
+      <div class="dho-flow-ring">
+        <span class="dho-flow-icon" aria-hidden="true">🧠</span>
+      </div>
+      <p class="dho-flow-label">Habilidades</p>
+    </div>
+
+    <div class="dho-flow-connector" aria-hidden="true"></div>
+
+    <div class="dho-flow-step" role="listitem">
+      <div class="dho-flow-ring">
+        <span class="dho-flow-icon" aria-hidden="true">💬</span>
+      </div>
+      <p class="dho-flow-label">Comportamento</p>
+    </div>
+
+    <div class="dho-flow-connector" aria-hidden="true"></div>
+
+    <div class="dho-flow-step" role="listitem">
+      <div class="dho-flow-ring">
+        <span class="dho-flow-icon" aria-hidden="true">🧭</span>
+      </div>
+      <p class="dho-flow-label">Alinhamento Interno</p>
+    </div>
+
+    <div class="dho-flow-connector" aria-hidden="true"></div>
+
+    <div class="dho-flow-step" role="listitem">
+      <div class="dho-flow-ring">
+        <span class="dho-flow-icon" aria-hidden="true">👁️</span>
+      </div>
+      <p class="dho-flow-label">Visão</p>
+    </div>
+  </div>
+
+  <p class="dho-flow-bottom">
+    Ou seja, esta sequência sugere que para chegar lá, os primeiros passos devem ser desenvolver corpo/ambiente,
+    habilidades e comportamento para tornar possível o alcance da coerência na relação de trabalho.
+  </p>
+</aside>
+
       
     </div>
 
@@ -560,6 +601,106 @@
     margin-top: 12px;
     border-radius: 14px;
   }
+
+
+/* ===== Reflexões em formato de fluxo (substitui lista + imagem) ===== */
+.dho-insight-box--flow{
+  text-align: center;
+}
+
+.dho-flow-title{
+  margin: 0 0 10px 0;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  color: rgba(232, 202, 255, 0.95);
+}
+
+.dho-flow-top,
+.dho-flow-bottom{
+  margin: 0 auto;
+  max-width: 860px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.90);
+}
+
+.dho-flow-top{ margin-bottom: 16px; }
+.dho-flow-bottom{ margin-top: 18px; }
+
+.dho-flow-track{
+  margin: 0 auto;
+  max-width: 980px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: nowrap;
+  padding: 6px 4px;
+}
+
+.dho-flow-step{
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  min-width: 120px;
+}
+
+.dho-flow-ring{
+  width: 122px;
+  height: 122px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  border: 8px solid rgba(210,160,255,0.55);
+  background: rgba(0,0,0,0.12);
+  box-shadow:
+    0 18px 45px rgba(0,0,0,0.28),
+    0 0 0 1px rgba(255,255,255,0.06) inset;
+}
+
+.dho-flow-icon{
+  font-size: 34px;
+  filter: drop-shadow(0 8px 18px rgba(0,0,0,0.25));
+}
+
+.dho-flow-label{
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.2;
+  font-weight: 700;
+  color: rgba(255,255,255,0.92);
+}
+
+.dho-flow-connector{
+  width: 54px;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(210,160,255,0.35);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.20);
+}
+
+/* Responsivo: no mobile quebra em 2 linhas com conectores menores */
+@media (max-width: 900px){
+  .dho-flow-track{
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+  .dho-flow-connector{
+    width: 26px;
+    height: 8px;
+  }
+  .dho-flow-ring{
+    width: 108px;
+    height: 108px;
+    border-width: 7px;
+  }
+  .dho-flow-step{ min-width: 140px; }
+}
+
+
+
+  
 </style>
 
 <script>
