@@ -9,10 +9,10 @@
       </h2>
 
       <p class="dho-subtitle">
-        É unânime: 100% dos respondentes têm objetivos. O que muda não é “ter um norte”, e sim
-        transformar esse norte em prioridade praticável. Os relatos caminham de estabilidade
-        (profissional, emocional e financeira) até alta realização (liderança, legado e impacto).
+        É unânime: 100% dos respondentes descreveram seus objetivos a serem alcançados, ou seja, todos têm um ponto de chegada claro.
+        Os relatos traçam um caminho para a conquista de estabilidade (profissional, emocional e financeira) até alta realização (liderança, legado e impacto).
         Primeiro segurança, depois expansão.
+        Então o que se perguntou foi: onde a energia está concentrada, e qual é o top aspecto da vida para desenvolver-se e chegar lá!
       </p>
     </header>
 
@@ -20,33 +20,48 @@
       <!-- Card A: Pizza -->
       <article class="dho-card dho-card--chart" aria-label="Distribuição dos objetivos por área da vida">
         <div class="dho-card-head">
-          <h3 class="dho-card-title">Em que área da vida esses objetivos moram?</h3>
-          <p class="dho-card-note">
-            Quando a energia se concentra no eixo de “trabalho e carreira”, pode ser sinal de
-            busca por base, previsibilidade e sustentação do restante da vida.
-          </p>
+          <h3 class="dho-card-title">Em que área da vida os objetivos dos respondentes se enquadram?</h3>
         </div>
 
         <div class="dho-chart-row">
-          <div class="dho-chart-canvas">
+          <div class="dho-chart-canvas dho-plain-surface">
             <canvas id="dhoObjetivosPizza" aria-label="Gráfico de pizza"></canvas>
           </div>
 
-          <div class="dho-legend" id="dhoObjetivosLegenda" aria-label="Legenda do gráfico"></div>
+          <div class="dho-legend dho-plain-surface" id="dhoObjetivosLegenda" aria-label="Legenda do gráfico"></div>
         </div>
 
         <p class="dho-footnote">
-          Leitura rápida: foco profissional alto pode ser ambição, mas também pode ser “primeiro eu organizo a base, depois eu amplio”.
+          A maior parte dos objetivos se concentra no campo profissional, mas há uma concentração relevante ligada a saúde, mente e equilíbrio:
+          um fio condutor que começa a revelar o tema da coerência entre desempenho e qualidade de vida.
         </p>
       </article>
 
-      <!-- Card B: Ranking com revelação progressiva -->
-      <article class="dho-card dho-card--rank" aria-label="Fatores mais importantes para desenvolver">
+      <!-- Card B: Reflexões (agora na coluna da direita, acima do ranking) -->
+      <aside class="dho-insight-box" aria-label="Reflexões orientadas pelos dados">
+        <h3 class="dho-insight-title">Reflexões</h3>
+        <ul class="dho-insight-list">
+          <li>
+            Se 45% do foco está em <strong>trabalho e carreira</strong>, o que ainda precisa ficar mais seguro
+            (saúde, relações, bem-estar) para sustentar esse objetivo sem custo invisível?
+          </li>
+          <li>
+            O ranking começa em <strong>corpo e ambiente</strong> e termina em <strong>identidade</strong>.
+            Isso é maturidade estratégica ou um sinal de sobrecarga pedindo reorganização do contexto?
+          </li>
+        </ul>
+        <p class="dho-insight-close">
+          Sequência sugerida pelo dado:
+          <span class="dho-seq">condição → habilidade → comportamento → alinhamento interno → visão</span>.
+        </p>
+      </aside>
+
+      <!-- Card C: Ranking (movido para baixo do card da pizza) -->
+      <article class="dho-rank-card" aria-label="Fatores mais importantes para desenvolver">
         <div class="dho-card-head">
-          <h3 class="dho-card-title">O que as pessoas acreditam que precisam desenvolver?</h3>
+          <h3 class="dho-card-title">Ranking de iniciativas de desenvolvimento</h3>
           <p class="dho-card-note">
-            O ranking começa por condições e recursos antes de chegar em identidade e legado.
-            Isso costuma indicar pragmatismo: o objetivo existe, mas o corpo e o contexto precisam acompanhar.
+            A leitura do ranking é simples: antes de sofisticar a visão, as pessoas querem conseguir agir.
           </p>
         </div>
 
@@ -126,32 +141,12 @@
         </div>
 
         <div class="dho-mini-insight">
-          <p class="dho-mini-insight-title">Uma leitura prática</p>
           <p class="dho-mini-insight-text">
-            Se a base (condição) não existe, habilidade vira teoria. Se a habilidade não vira prática,
-            comportamento não muda. E sem consistência, propósito vira só intenção.
+            No contexto atual, os respondentes escolhem priorizar o desenvolvimento das condições, habilidades e comportamento para agir.
           </p>
         </div>
       </article>
     </div>
-
-    <aside class="dho-insight-box" aria-label="Reflexões orientadas pelos dados">
-      <h3 class="dho-insight-title">Reflexões para leitura (sem pressa)</h3>
-      <ul class="dho-insight-list">
-        <li>
-          Se 45% do foco está em <strong>trabalho e carreira</strong>, o que ainda precisa ficar mais seguro
-          (saúde, relações, bem-estar) para sustentar esse objetivo sem custo invisível?
-        </li>
-        <li>
-          O ranking começa em <strong>corpo e ambiente</strong> e termina em <strong>identidade</strong>.
-          Isso é maturidade estratégica ou um sinal de sobrecarga pedindo reorganização do contexto?
-        </li>
-      </ul>
-      <p class="dho-insight-close">
-        Sequência sugerida pelo dado:
-        <span class="dho-seq">condição → habilidade → comportamento → alinhamento interno → visão</span>.
-      </p>
-    </aside>
 
   </div>
 </section>
@@ -184,13 +179,16 @@
     color: rgba(255,255,255,0.85);
   }
 
+  /* Layout: pizza na esquerda; reflexões e ranking na direita */
   .dho-objetivos-grid {
     margin-top: 18px;
     display: grid;
     grid-template-columns: 1.05fr 0.95fr;
     gap: 14px;
+    align-items: start;
   }
 
+  /* Card padrão (pizza mantém glass) */
   .dho-card {
     border: 1px solid rgba(255,255,255,0.10);
     background: rgba(255,255,255,0.07);
@@ -241,11 +239,17 @@
     padding-top: 6px;
   }
 
+  /* Tornar superfícies do gráfico/legenda "invisíveis" (sem borda e bg) */
+  .dho-plain-surface {
+    border: 0 !important;
+    background: transparent !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    height: auto;
+    box-shadow: none !important;
+  }
+
   .dho-chart-canvas {
-    border: 1px solid rgba(255,255,255,0.10);
-    background: rgba(0,0,0,0.18);
-    border-radius: 16px;
-    padding: 10px;
     height: 320px;
     display: grid;
     place-items: center;
@@ -258,10 +262,7 @@
   }
 
   .dho-legend {
-    border: 1px solid rgba(255,255,255,0.10);
-    background: rgba(0,0,0,0.12);
-    border-radius: 16px;
-    padding: 12px;
+    padding: 0;
   }
 
   .dho-legend-item {
@@ -269,11 +270,15 @@
     grid-template-columns: 10px 1fr auto;
     gap: 10px;
     align-items: start;
-    padding: 8px 6px;
-    border-radius: 12px;
+    padding: 8px 0;
+    border-radius: 0;
   }
 
-  .dho-legend-item + .dho-legend-item { margin-top: 6px; }
+  .dho-legend-item + .dho-legend-item {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    margin-top: 6px;
+    padding-top: 10px;
+  }
 
   .dho-legend-dot {
     width: 10px;
@@ -307,9 +312,22 @@
 
   .dho-footnote {
     margin: 10px 0 0 0;
-    font-size: 12.5px;
-    line-height: 1.5;
-    color: rgba(255,255,255,0.70);
+    font-size: 12.8px;
+    line-height: 1.55;
+    color: rgba(255,255,255,0.80);
+  }
+
+  /* Ranking: totalmente transparente (sem borda e bg) */
+  .dho-rank-card {
+    border: 0;
+    background: transparent;
+    border-radius: 0;
+    padding: 0;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    position: relative;
+    overflow: visible;
   }
 
   .dho-rank-wrap { margin-top: 10px; }
@@ -372,7 +390,7 @@
     gap: 6px;
   }
 
-  /* Botão lilás claro com "shimmer" suave */
+  /* Botão lilás claro com shimmer suave */
   .dho-btn {
     width: 100%;
     border: 1px solid rgba(206, 182, 255, 0.26);
@@ -441,7 +459,7 @@
     color: rgba(255,255,255,0.70);
   }
 
-  /* Pergunta final, aparece só ao concluir */
+  /* Pergunta final com destaque lilás/rosa (sem distorcer) */
   .dho-rank-final {
     display: none;
     border-radius: 14px;
@@ -457,23 +475,17 @@
     margin: 0;
     font-size: 13px;
     line-height: 1.55;
-    color: rgba(255,255,255,0.85);
+    color: rgba(232, 202, 255, 0.95);
+    font-weight: 700;
   }
 
+  /* Mini insight substituído e simplificado */
   .dho-mini-insight {
     margin-top: 10px;
     border-radius: 16px;
     padding: 12px;
     border: 1px solid rgba(255,255,255,0.10);
     background: rgba(255,255,255,0.05);
-  }
-
-  .dho-mini-insight-title {
-    margin: 0 0 6px 0;
-    font-size: 12px;
-    letter-spacing: 0.10em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.70);
   }
 
   .dho-mini-insight-text {
@@ -483,13 +495,15 @@
     color: rgba(255,255,255,0.85);
   }
 
+  /* Reflexões: mais estreito (-40%) e bg rosado transparente */
   .dho-insight-box {
-    margin-top: 14px;
+    width: 60%;
+    justify-self: end;
     border-radius: 18px;
     padding: 14px;
     border: 1px solid rgba(255,255,255,0.10);
-    background: rgba(255,255,255,0.06);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.22);
+    background: rgba(255, 130, 180, 0.10);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.18);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     position: relative;
@@ -501,8 +515,8 @@
     position: absolute;
     inset: -1px;
     background:
-      radial-gradient(820px 260px at 10% 0%, rgba(160,120,255,0.14), transparent 60%),
-      radial-gradient(700px 240px at 90% 20%, rgba(120,170,255,0.10), transparent 55%);
+      radial-gradient(700px 240px at 20% 0%, rgba(255, 180, 215, 0.14), transparent 58%),
+      radial-gradient(720px 260px at 90% 20%, rgba(180,130,255,0.10), transparent 56%);
     pointer-events: none;
     opacity: 0.85;
   }
@@ -522,7 +536,7 @@
     display: grid;
     gap: 8px;
     color: rgba(255,255,255,0.85);
-    font-size: 13.5px;
+    font-size: 13.2px;
     line-height: 1.55;
   }
 
@@ -539,6 +553,13 @@
     .dho-objetivos-grid { grid-template-columns: 1fr; }
     .dho-chart-row { grid-template-columns: 1fr; }
     .dho-chart-canvas { height: 280px; }
+
+    .dho-insight-box {
+      width: 100%;
+      justify-self: stretch;
+    }
+
+    /* no mobile, ranking fica naturalmente abaixo */
   }
 
   @media (max-width: 520px) {
@@ -624,7 +645,6 @@
 
       if (!wrap || !btn || !list) return;
 
-      // Estado inicial: garante que a pergunta final esteja oculta
       if (finalBox) finalBox.classList.remove("is-visible");
 
       // Evita duplicar listener se o init rodar novamente
