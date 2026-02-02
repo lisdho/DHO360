@@ -121,6 +121,11 @@
           </div>
         </div>
 
+        <div class="dho-mini-insight">
+          <p class="dho-mini-insight-text">
+            No contexto atual, os respondentes escolhem priorizar o desenvolvimento das condições, habilidades e comportamento para agir.
+          </p>
+        </div>
       </article>
 
       <!-- Card C: Reflexões (garantido abaixo do ranking, centralizado) -->
@@ -458,22 +463,22 @@
     color: rgba(255,255,255,0.70);
   }
 
-.dho-rank-final{
-  width: 40%;                 /* diminui ~60% */
-  margin: 12px auto 0 auto;   /* centraliza */
-  border-radius: 4px;         /* bordas quase quadradas */
-  background: rgba(210,160,255,0.5); /* rosa/lilás 50% */
-  border: none;
-}
-
+  .dho-rank-final {
+    display: none;
+    border-radius: 14px;
+    padding: 10px 12px;
+    border: 1px solid rgba(255,255,255,0.10);
+    background: rgba(255,255,255,0.05);
+    margin-top: 6px;
+  }
 
   .dho-rank-final.is-visible { display: block; }
 
   .dho-rank-final-q {
     margin: 0;
-    font-size: 14.5px;
+    font-size: 13px;
     line-height: 1.55;
-    color: #ffffff;
+    color: rgba(232, 202, 255, 0.95);
     font-weight: 700;
   }
 
@@ -485,6 +490,12 @@
     background: rgba(255,255,255,0.05);
   }
 
+  .dho-mini-insight-text {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.55;
+    color: rgba(255,255,255,0.85);
+  }
 
   /* Reflexões: abaixo do ranking e centralizado */
   .dho-insight-box {
