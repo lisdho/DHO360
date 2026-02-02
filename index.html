@@ -37,7 +37,7 @@
       overflow-x:hidden;
     }
 
-    /* ====== FUNDO NEON (garantia total) ====== */
+    /* ====== FUNDO NEON (tentativa atual — você decidiu revisar depois) ====== */
     html::before{
       content:"";
       position: fixed;
@@ -50,8 +50,6 @@
         radial-gradient(860px 520px at 42% 82%, var(--neonV2), transparent 64%),
         linear-gradient(180deg, var(--bg0) 0%, var(--bg1) 40%, var(--bg2) 100%);
     }
-
-    /* vinheta/profundidade */
     html::after{
       content:"";
       position: fixed;
@@ -62,9 +60,7 @@
         radial-gradient(1200px 900px at 50% 50%, rgba(0,0,0,.72), rgba(0,0,0,.92));
     }
 
-    /* ====== CHAVE: se seus blocos desenham “tela preta”, isso mata o neon.
-       Então forçamos APENAS os wrappers externos comuns a serem transparentes.
-       (cards internos continuam podendo ter fundo próprio) ====== */
+    /* wrappers comuns (mantidos como estavam na sua última versão) */
     .block,
     section.block,
     article.block{
@@ -73,7 +69,7 @@
     }
 
     /* containers onde você injeta os blocos */
-    #intro, #metodologia, #r_objetivos, #r_objetivosNeg{
+    #intro, #metodologia, #r_objetivos, #r_objetivosNeg, #r_motivacoes{
       background: transparent !important;
       background-color: transparent !important;
     }
@@ -261,6 +257,9 @@
   <!-- Bloco 04 - Resultados: Objetivos (Negócios) -->
   <div id="r_objetivosNeg"></div>
 
+  <!-- Bloco 05 - Resultados: Motivações -->
+  <div id="r_motivacoes"></div>
+
 <script>
   async function carregarBloco({ url, targetId, initFnName }) {
     const host = document.getElementById(targetId);
@@ -356,6 +355,9 @@
   carregarBloco({ url: "blocks/02-metodologia.html", targetId: "metodologia", initFnName: "initBloco_metodologia" });
   carregarBloco({ url: "blocks/03-R-objetivos.html", targetId: "r_objetivos", initFnName: "initBloco_objetivos" });
   carregarBloco({ url: "blocks/04-R-objetivosNeg.html", targetId: "r_objetivosNeg", initFnName: "initBloco_objetivosNeg" });
+
+  // NOVO: Bloco 05
+  carregarBloco({ url: "blocks/05-R-Motivacoes.html", targetId: "r_motivacoes", initFnName: "initBloco_motivacoes" });
 </script>
 
 </body>
