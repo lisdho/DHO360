@@ -120,12 +120,6 @@
             </div>
           </div>
         </div>
-
-        <div class="dho-mini-insight">
-          <p class="dho-mini-insight-text">
-            No contexto atual, os respondentes escolhem priorizar o desenvolvimento das condições, habilidades e comportamento para agir.
-          </p>
-        </div>
       </article>
 
       <!-- Card C: Reflexões (garantido abaixo do ranking, centralizado) -->
@@ -146,9 +140,7 @@
           <span class="dho-seq">condição → habilidade → comportamento → alinhamento interno → visão</span>.
         </p>
 
-           <img class="dho-reflexoes-img" src="assets/fluxodedesenvolvimento.png" alt="Fluxo de desenvolvimento">
-
-        
+        <img class="dho-reflexoes-img" src="assets/fluxodedesenvolvimento.png" alt="Fluxo de desenvolvimento">
       </aside>
       
     </div>
@@ -463,38 +455,26 @@
     color: rgba(255,255,255,0.70);
   }
 
+  /* Pergunta final: menor, centralizada, bg branco translúcido e sem borda */
   .dho-rank-final {
     display: none;
-    border-radius: 14px;
+    width: 40%;
+    margin: 12px auto 0 auto;
+    border: 0;
+    border-radius: 6px;
     padding: 10px 12px;
-    border: 1px solid rgba(255,255,255,0.10);
-    background: rgba(255,255,255,0.05);
-    margin-top: 6px;
+    background: rgba(255,255,255,0.16);
+    text-align: center;
   }
 
   .dho-rank-final.is-visible { display: block; }
 
   .dho-rank-final-q {
     margin: 0;
-    font-size: 13px;
-    line-height: 1.55;
-    color: rgba(232, 202, 255, 0.95);
-    font-weight: 700;
-  }
-
-  .dho-mini-insight {
-    margin-top: 10px;
-    border-radius: 16px;
-    padding: 12px;
-    border: 1px solid rgba(255,255,255,0.10);
-    background: rgba(255,255,255,0.05);
-  }
-
-  .dho-mini-insight-text {
-    margin: 0;
-    font-size: 13px;
-    line-height: 1.55;
-    color: rgba(255,255,255,0.85);
+    font-size: 14px;
+    line-height: 1.45;
+    color: rgba(10,10,14,0.92);
+    font-weight: 800;
   }
 
   /* Reflexões: abaixo do ranking e centralizado */
@@ -558,37 +538,28 @@
     .dho-chart-row { grid-template-columns: 1fr; }
     .dho-chart-canvas { height: 280px; }
 
-    .dho-insight-box {
-      width: 100%;
-      justify-self: stretch;
-    }
+    .dho-insight-box { width: 100%; justify-self: stretch; }
+    .dho-rank-final { width: 100%; }
   }
 
   @media (max-width: 520px) {
     .dho-subtitle { text-align: justify; }
   }
 
-
-
   .dho-objetivos-header{ position: static !important; }
+  .dho-subtitle{ text-align: justify; }
 
-.dho-subtitle{ text-align: justify; }
-  
   .dho-card--chart{ grid-column: 1 / -1; justify-self: center; width: min(860px, 100%); }
   .dho-rank-card{ grid-column: 1 / -1; justify-self: center; width: min(750px, 100%); }
   .dho-rank-card .dho-card-head{ text-align:center; }
 
   .dho-reflexoes-img{
-  width: 80%;
-  height: auto;
-  display: block;
-  margin-top: 12px;
-  border-radius: 14px;
-}
-
-
-
-
+    width: 80%;
+    height: auto;
+    display: block;
+    margin-top: 12px;
+    border-radius: 14px;
+  }
 </style>
 
 <script>
