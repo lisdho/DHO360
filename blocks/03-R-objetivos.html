@@ -37,7 +37,7 @@
         </p>
       </article>
 
-      <!-- Card b: Ranking -->
+      <!-- Card B: Ranking (garantido abaixo do card da pizza) -->
       <article class="dho-rank-card" aria-label="Fatores mais importantes para desenvolver">
         <div class="dho-card-head">
           <h3 class="dho-card-title">Ranking de iniciativas de desenvolvimento</h3>
@@ -121,14 +121,9 @@
           </div>
         </div>
 
-        <div class="dho-mini-insight">
-          <p class="dho-mini-insight-text">
-            No contexto atual, os respondentes escolhem priorizar o desenvolvimento das condições, habilidades e comportamento para agir.
-          </p>
-        </div>
       </article>
 
-      <!-- Card c: Reflexões -->
+      <!-- Card C: Reflexões (garantido abaixo do ranking, centralizado) -->
       <aside class="dho-insight-box" aria-label="Reflexões orientadas pelos dados">
         <h3 class="dho-insight-title">Reflexões</h3>
         <ul class="dho-insight-list">
@@ -145,7 +140,12 @@
           Sequência sugerida pelo dado:
           <span class="dho-seq">condição → habilidade → comportamento → alinhamento interno → visão</span>.
         </p>
+
+           <img class="dho-reflexoes-img" src="assets/fluxodedesenvolvimento.png" alt="Fluxo de desenvolvimento">
+
+        
       </aside>
+      
     </div>
 
   </div>
@@ -154,9 +154,6 @@
 <style>
   .dho-objetivos { padding: 28px 16px; }
   .dho-objetivos-wrap { max-width: 980px; margin: 0 auto; }
-
-  /* Blindagem contra sticky global do index */
-  .dho-objetivos-header{ position: static !important; }
 
   .dho-kicker {
     margin: 0 0 10px 0;
@@ -182,6 +179,7 @@
     color: rgba(255,255,255,0.85);
   }
 
+  /* Layout: 2 colunas apenas para o card da pizza */
   .dho-objetivos-grid {
     margin-top: 18px;
     display: grid;
@@ -190,6 +188,7 @@
     align-items: start;
   }
 
+  /* Card padrão (pizza mantém glass) */
   .dho-card {
     border: 1px solid rgba(255,255,255,0.10);
     background: rgba(255,255,255,0.07);
@@ -240,6 +239,7 @@
     padding-top: 6px;
   }
 
+  /* Tornar superfícies do gráfico/legenda "invisíveis" (sem borda e bg) */
   .dho-plain-surface {
     border: 0 !important;
     background: transparent !important;
@@ -315,6 +315,7 @@
     color: rgba(255,255,255,0.80);
   }
 
+  /* Ranking: mantém transparente, mas agora ocupa a largura toda (fica abaixo da pizza) */
   .dho-rank-card {
     border: 0;
     background: transparent;
@@ -325,6 +326,7 @@
     -webkit-backdrop-filter: none;
     position: relative;
     overflow: visible;
+    grid-column: 1 / -1;
   }
 
   .dho-rank-wrap { margin-top: 10px; }
@@ -387,6 +389,7 @@
     gap: 6px;
   }
 
+  /* Botão lilás claro com shimmer suave */
   .dho-btn {
     width: 100%;
     border: 1px solid rgba(206, 182, 255, 0.26);
@@ -455,44 +458,23 @@
     color: rgba(255,255,255,0.70);
   }
 
-  /* Pergunta final: glow sutil + animação (fade + rise) */
-  .dho-rank-final{
-    display: none;
-    width: 40%;
-    margin: 12px auto 0 auto;
-    border-radius: 6px;
-    padding: 11px 12px;
+.dho-rank-final{
+  width: 40%;                 /* diminui ~60% */
+  margin: 12px auto 0 auto;   /* centraliza */
+  border-radius: 4px;         /* bordas quase quadradas */
+  background: rgba(210,160,255,0.5); /* rosa/lilás 50% */
+  border: none;
+}
 
-    background: rgba(210,160,255,0.50);
-    border: 1px solid rgba(255,255,255,0.10);
 
-    box-shadow:
-      0 10px 26px rgba(0,0,0,0.24),
-      0 0 0 1px rgba(210,160,255,0.22),
-      0 0 22px rgba(255,170,215,0.18);
-
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-  }
-
-  .dho-rank-final.is-visible{
-    display: block;
-    animation: dhoFadeRise 520ms cubic-bezier(.2,.8,.2,1) both;
-  }
-
-  @keyframes dhoFadeRise{
-    from { opacity: 0; transform: translateY(10px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
+  .dho-rank-final.is-visible { display: block; }
 
   .dho-rank-final-q {
     margin: 0;
-    font-size: 15px;
+    font-size: 14.5px;
     line-height: 1.55;
-    color: rgba(255,255,255,0.96);
-    font-weight: 800;
-    letter-spacing: 0.01em;
-    text-align: center;
+    color: #ffffff;
+    font-weight: 700;
   }
 
   .dho-mini-insight {
@@ -503,16 +485,11 @@
     background: rgba(255,255,255,0.05);
   }
 
-  .dho-mini-insight-text {
-    margin: 0;
-    font-size: 13px;
-    line-height: 1.55;
-    color: rgba(255,255,255,0.85);
-  }
 
+  /* Reflexões: abaixo do ranking e centralizado */
   .dho-insight-box {
     width: 60%;
-    justify-self: end;
+    justify-self: center;
     border-radius: 18px;
     padding: 14px;
     border: 1px solid rgba(255,255,255,0.10);
@@ -523,6 +500,7 @@
     -webkit-backdrop-filter: blur(10px);
     position: relative;
     overflow: hidden;
+    margin-top: 6px;
   }
 
   .dho-insight-box::before {
@@ -573,15 +551,33 @@
       width: 100%;
       justify-self: stretch;
     }
-
-    .dho-rank-final{
-      width: 100%;
-    }
   }
 
   @media (max-width: 520px) {
     .dho-subtitle { text-align: justify; }
   }
+
+
+
+  .dho-objetivos-header{ position: static !important; }
+
+.dho-subtitle{ text-align: justify; }
+  
+  .dho-card--chart{ grid-column: 1 / -1; justify-self: center; width: min(860px, 100%); }
+  .dho-rank-card{ grid-column: 1 / -1; justify-self: center; width: min(750px, 100%); }
+  .dho-rank-card .dho-card-head{ text-align:center; }
+
+  .dho-reflexoes-img{
+  width: 80%;
+  height: auto;
+  display: block;
+  margin-top: 12px;
+  border-radius: 14px;
+}
+
+
+
+
 </style>
 
 <script>
@@ -664,7 +660,6 @@
 
       if (finalBox) finalBox.classList.remove("is-visible");
 
-      // Evita duplicar listener se o init rodar novamente
       if (wrap.dataset.bound !== "1") {
         wrap.dataset.bound = "1";
 
@@ -689,7 +684,6 @@
         });
       }
 
-      // Ajusta botão conforme primeiro hidden
       const firstHidden = list.querySelector(".dho-rank-item.is-hidden");
       if (firstHidden) {
         const r = firstHidden.getAttribute("data-rank");
