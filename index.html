@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>DHO 360º </title>
+  <title>DHO 360º</title>
 
   <style>
     /* ====== TOKENS (fallback)  — se o :root do site não estiver carregado ====== */
@@ -37,7 +37,7 @@
       overflow-x:hidden;
     }
 
-    /* ====== FUNDO NEON (tentativa atual — você decidiu revisar depois) ====== */
+    /* ====== FUNDO NEON ====== */
     html::before{
       content:"";
       position: fixed;
@@ -60,7 +60,7 @@
         radial-gradient(1200px 900px at 50% 50%, rgba(0,0,0,.72), rgba(0,0,0,.92));
     }
 
-    /* wrappers comuns (mantidos como estavam na sua última versão) */
+    /* wrappers comuns */
     .block,
     section.block,
     article.block{
@@ -81,7 +81,7 @@
     }
     a:hover{ opacity:1; }
 
-    /* ====== HEADER (igual ao seu original) ====== */
+    /* ====== HEADER ====== */
     header{
       position: sticky;
       top: 0;
@@ -200,7 +200,7 @@
     }
   </style>
 
-  <!-- Chart.js uma vez no index (padrão do projeto) -->
+  <!-- Chart.js uma vez no index -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
@@ -260,53 +260,138 @@
   <!-- Bloco 05 - Resultados: Motivações -->
   <div id="r_motivacoes"></div>
 
-<script type="module">
-  const blocoCache = new Map();
+  <script>
+    // =====================================================================
+    // Loader compatível com GitHub Pages (repo em subpasta) + Chart.js seguro
+    // =====================================================================
 
-  async function carregarBloco({ url, targetId, moduleUrl }) {
-    const host = document.getElementById(targetId);
-    if (!host) {
-      console.warn(`[loader] targetId não encontrado: ${targetId}`);
-      return;
+    const blocoCache = new Map();
+
+    function getBasePath(){
+      // Ex.: /dho360/index.html -> /dho360
+      const p = location.pathname;
+      return p.endsWith("/") ? p.slice(0, -1) : p.replace(/\/[^\/]*$/, "");
     }
 
-    try{
-      if (blocoCache.has(url)) {
-        host.innerHTML = blocoCache.get(url);
+    function nextFrame(){
+      return new Promise(resolve => requestAnimationFrame(resolve));
+    }
+
+    async function carregarBloco({ url, targetId, initFnName }) {
+      const host = document.getElementById(targetId);
+      if (!host) {
+        console.warn(`[loader] targetId não encontrado: ${targetId}`);
         return;
       }
 
-      const res = await fetch(url, { cache: "force-cache" });
-      if(!res.ok) throw new Error("Falha ao carregar " + url + ": " + res.status);
+      const marker = `data-bloco="${targetId}"`;
 
-      const html = await res.text();
-      const doc = new DOMParser().parseFromString(html, "text/html");
+      // remove styles/scripts previamente injetados desse bloco
+      document.querySelectorAll(`style[${marker}]`).forEach(el => el.remove());
+      document.querySelectorAll(`script[${marker}]`).forEach(el => el.remove());
 
-      host.innerHTML = doc.body.innerHTML;
-      blocoCache.set(url, doc.body.innerHTML);
-
-      if (moduleUrl) {
-        const mod = await import(moduleUrl);
-        if (mod?.init) mod.init();
+      // destrói charts existentes dentro do host (evita conflitos Chart.js)
+      try{
+        if (window.Chart && typeof Chart.getChart === "function") {
+          host.querySelectorAll("canvas").forEach((c) => {
+            const ch = Chart.getChart(c);
+            if (ch && typeof ch.destroy === "function") ch.destroy();
+          });
+        }
+      }catch(e){
+        console.warn("[loader] falha ao destruir charts antigos:", e);
       }
 
-    }catch(err){
-      console.error(err);
-      host.innerHTML =
-        '<section style="max-width:1100px;margin:24px auto;padding:0 20px;color:var(--muted)">' +
-        'Não foi possível carregar o arquivo ' + url +
-        '</section>';
+      function appendScriptAndWait(scriptEl){
+        return new Promise((resolve, reject) => {
+          const s = document.createElement("script");
+          s.setAttribute("data-bloco", targetId);
+
+          // copia atributos (mantendo ordem), exceto data-bloco
+          for (const attr of scriptEl.attributes) {
+            if (attr.name === "data-bloco") continue;
+            s.setAttribute(attr.name, attr.value);
+          }
+
+          if (scriptEl.src) {
+            s.async = false;
+            s.onload = () => resolve();
+            s.onerror = (err) => reject(err);
+            s.src = scriptEl.src;
+            document.body.appendChild(s);
+          } else {
+            s.textContent = scriptEl.textContent || "";
+            document.body.appendChild(s);
+            requestAnimationFrame(() => resolve());
+          }
+        });
+      }
+
+      try{
+        if (blocoCache.has(url)) {
+          host.innerHTML = blocoCache.get(url);
+          // tenta init mesmo em cache (se existir)
+          if (initFnName && typeof window[initFnName] === "function") {
+            try { window[initFnName](); } catch(e) { console.error(e); }
+          }
+          return;
+        }
+
+        const res = await fetch(url, { cache: "no-store" });
+        if(!res.ok) throw new Error(`Falha ao carregar ${url}: ${res.status}`);
+
+        const html = await res.text();
+        const doc = new DOMParser().parseFromString(html, "text/html");
+
+        host.innerHTML = doc.body.innerHTML;
+        blocoCache.set(url, doc.body.innerHTML);
+
+        // injeta styles do bloco
+        doc.querySelectorAll("style").forEach(styleEl => {
+          const st = document.createElement("style");
+          st.setAttribute("data-bloco", targetId);
+          st.textContent = styleEl.textContent || "";
+          document.head.appendChild(st);
+        });
+
+        // injeta scripts do bloco (na ordem)
+        const scripts = Array.from(doc.querySelectorAll("script"));
+        for (const old of scripts) {
+          await appendScriptAndWait(old);
+        }
+
+        await nextFrame();
+        await nextFrame();
+
+        // init opcional (não trava se não existir)
+        if (initFnName) {
+          const fn = window[initFnName];
+          if (typeof fn === "function") {
+            try { fn(); }
+            catch (e) { console.error(`[loader] erro ao executar ${initFnName}:`, e); }
+          } else {
+            console.warn(`[loader] initFn não encontrada: ${initFnName}`);
+          }
+        }
+
+      }catch(err){
+        console.error(err);
+        host.innerHTML =
+          '<section style="max-width:1100px;margin:24px auto;padding:0 20px;color:var(--muted)">' +
+          'Não foi possível carregar o arquivo ' + url +
+          '</section>';
+      }
     }
-  }
 
-  carregarBloco({ url: "blocks/01-intro.html", targetId: "intro", moduleUrl: "blocks/01-intro.js" });
-  carregarBloco({ url: "blocks/02-metodologia.html", targetId: "metodologia", moduleUrl: "blocks/02-metodologia.js" });
-  carregarBloco({ url: "blocks/03-R-objetivos.html", targetId: "r_objetivos", moduleUrl: "blocks/03-R-objetivos.js" });
-  carregarBloco({ url: "blocks/04-R-objetivosNeg.html", targetId: "r_objetivosNeg", moduleUrl: "blocks/04-R-objetivosNeg.js" });
+    const BASE = getBasePath();
 
-  // NOVO: Bloco 05
-  carregarBloco({ url: "blocks/05-R-motivacoes.html", targetId: "r_motivacoes", moduleUrl: "blocks/05-R-motivacoes.js" });
-</script>
+    // ⚠️ URLs exatamente como seu repo
+    carregarBloco({ url: `${BASE}/blocks/01-intro.html`,          targetId: "intro",          initFnName: "initBloco_intro" });
+    carregarBloco({ url: `${BASE}/blocks/02-metodologia.html`,    targetId: "metodologia",    initFnName: "initBloco_metodologia" });
+    carregarBloco({ url: `${BASE}/blocks/03-R-objetivos.html`,    targetId: "r_objetivos",    initFnName: "initBloco_objetivos" });
+    carregarBloco({ url: `${BASE}/blocks/04-R-objetivosNeg.html`, targetId: "r_objetivosNeg", initFnName: "initBloco_objetivosNeg" });
+    carregarBloco({ url: `${BASE}/blocks/05-R-motivacoes.html`,   targetId: "r_motivacoes",   initFnName: "initBloco_motivacoes" });
+  </script>
 
 </body>
 </html>
