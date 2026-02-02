@@ -122,24 +122,65 @@
       </summary>
 
       <div class="dho-met-details-body">
-        <p class="dho-met-p">
-          Em resposta à baixa adesão de RH no piloto, profissionais foram abordados no LinkedIn para entender limites de engajamento e coletar devolutivas qualitativas (de analistas a c-level).
-        </p>
+        <div class="dho-met-details-layout" aria-label="Evidências e leituras qualitativas">
+          <!-- ESQUERDA: dados (sem borda, sem bg) -->
+          <div class="dho-met-details-left" aria-label="Dados de campo">
+            <p class="dho-met-p dho-met-details-lead">
+              Em resposta à baixa adesão de RH no piloto, realizamos uma checagem complementar no LinkedIn.
+            </p>
 
-        <div class="dho-met-details-kpis" role="list" aria-label="Amostragem complementar de RH no LinkedIn">
-          <div class="dho-met-details-kpi" role="listitem">
-            <span class="dho-met-details-kpi-label">Abordagens no LinkedIn</span>
-            <span class="dho-met-details-kpi-val">100</span>
+            <div class="dho-met-details-kpis dho-met-details-kpis-plain" role="list" aria-label="Indicadores de abordagem no LinkedIn">
+              <div class="dho-met-details-kpi dho-met-details-kpi-plain" role="listitem">
+                <span class="dho-met-details-kpi-label">Abordagens no LinkedIn</span>
+                <span class="dho-met-details-kpi-val">100</span>
+              </div>
+              <div class="dho-met-details-kpi dho-met-details-kpi-plain" role="listitem">
+                <span class="dho-met-details-kpi-label">Devolutivas recebidas</span>
+                <span class="dho-met-details-kpi-val">9</span>
+              </div>
+            </div>
+
+            <p class="dho-met-small dho-met-muted dho-met-details-obj">
+              Objetivo: entender barreiras de engajamento e ajustar a estratégia de amostragem na próxima fase.
+            </p>
           </div>
-          <div class="dho-met-details-kpi" role="listitem">
-            <span class="dho-met-details-kpi-label">Devolutivas recebidas</span>
-            <span class="dho-met-details-kpi-val">9</span>
+
+          <!-- DIREITA: feedbacks qualitativos -->
+          <div class="dho-met-details-right" aria-label="Feedbacks qualitativos">
+            <div class="dho-met-details-qual-head">
+              <div class="dho-met-details-qual-title">Leituras qualitativas</div>
+              <div class="dho-met-details-qual-sub">Síntese do que apareceu com mais consistência nos retornos.</div>
+            </div>
+
+            <div class="dho-met-qual-list" role="list">
+              <div class="dho-met-qual-item" role="listitem">
+                <div class="dho-met-qual-kicker">Perfil de quem respondeu</div>
+                <div class="dho-met-qual-text">A maior parte dos retornos veio de Chefes de RH.</div>
+              </div>
+
+              <div class="dho-met-qual-item" role="listitem">
+                <div class="dho-met-qual-kicker">Ruído de abordagem</div>
+                <div class="dho-met-qual-text">
+                  Muitos relatam volume alto de contatos comerciais, o que faz cooperações legítimas parecerem “mais uma venda”.
+                </div>
+              </div>
+
+              <div class="dho-met-qual-item" role="listitem">
+                <div class="dho-met-qual-kicker">Rotina operacional</div>
+                <div class="dho-met-qual-text">
+                  A agenda tende a ser consumida por urgências, reduzindo espaço para comunidade e boas práticas.
+                </div>
+              </div>
+
+              <div class="dho-met-qual-item" role="listitem">
+                <div class="dho-met-qual-kicker">Acesso a redes seniores</div>
+                <div class="dho-met-qual-text">
+                  Profissionais mais seniores preferem grupos pequenos e seletivos, protegendo a qualidade e evitando interesses puramente comerciais.
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-
-        <p class="dho-met-small dho-met-muted">
-          Objetivo: entender barreiras de engajamento e ajustar a estratégia de amostragem na próxima fase.
-        </p>
       </div>
     </details>
 
@@ -186,14 +227,13 @@
     backdrop-filter: blur(6px);
   }
 
-  /* Header sem caixa: igual ao fundo do container */
   .dho-met .dho-met-header{
-    margin-bottom: 14px;
-    background: transparent;
-    border: none;
-    border-radius: 0;
+    background: var(--card) !important;
+    border: 1px solid var(--stroke) !important;
+    border-radius: var(--radius);
     box-shadow: none;
-    padding: 0;
+    padding: 16px 14px;
+    margin-bottom: 14px;
   }
 
   .dho-met .dho-met-title{
@@ -453,26 +493,95 @@
     padding: 14px 14px 14px;
   }
 
-  .dho-met .dho-met-details-kpis{
+  /* NOVO: layout esquerda/direita */
+  .dho-met .dho-met-details-layout{
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 10px;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 14px;
+    align-items: start;
+  }
+
+  .dho-met .dho-met-details-left{
+    padding: 0;
+  }
+
+  .dho-met .dho-met-details-lead{
+    margin-top: 0;
+  }
+
+  /* KPIs sem contorno e sem preenchimento */
+  .dho-met .dho-met-details-kpis-plain{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
     margin-top: 10px;
   }
 
-  .dho-met .dho-met-details-kpi{
-    border: 1px solid rgba(255,255,255,0.10);
-    border-radius: 14px;
-    background: rgba(0,0,0,0.10);
-    padding: 10px 10px;
+  .dho-met .dho-met-details-kpi-plain{
+    border: none !important;
+    background: transparent !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
     display: flex;
     align-items: baseline;
     justify-content: space-between;
     gap: 10px;
   }
 
-  .dho-met .dho-met-details-kpi-label{ font-size: 12px; color: var(--muted); }
-  .dho-met .dho-met-details-kpi-val{ font-size: 18px; font-weight: 850; letter-spacing: -0.02em; }
+  .dho-met .dho-met-details-obj{
+    margin-top: 10px;
+  }
+
+  /* Direita: elegante, sem virar “caixa” */
+  .dho-met .dho-met-details-right{
+    border-left: 1px solid rgba(255,255,255,0.10);
+    padding-left: 14px;
+  }
+
+  .dho-met .dho-met-details-qual-head{
+    margin-bottom: 10px;
+  }
+
+  .dho-met .dho-met-details-qual-title{
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: var(--muted2);
+  }
+
+  .dho-met .dho-met-details-qual-sub{
+    margin-top: 6px;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .dho-met .dho-met-qual-list{
+    display: grid;
+    gap: 10px;
+  }
+
+  .dho-met .dho-met-qual-item{
+    padding: 10px 10px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.10);
+    background: rgba(0,0,0,0.08);
+  }
+
+  .dho-met .dho-met-qual-kicker{
+    font-size: 12px;
+    color: var(--muted2);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .dho-met .dho-met-qual-text{
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
 
   @media (max-width: 680px){
     .dho-met .dho-met-subtitle{
@@ -481,6 +590,16 @@
     }
     .dho-met .dho-met-keylist{
       grid-template-columns: 1fr;
+    }
+    .dho-met .dho-met-details-layout{
+      grid-template-columns: 1fr;
+    }
+    .dho-met .dho-met-details-right{
+      border-left: none;
+      padding-left: 0;
+      border-top: 1px solid rgba(255,255,255,0.10);
+      padding-top: 12px;
+      margin-top: 6px;
     }
   }
 
