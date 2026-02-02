@@ -25,26 +25,28 @@
       --neonP1: rgba(236,72,153,.10);
     }
 
-    html, body{
-      height:100%;
-    }
+    html, body{ height:100%; }
 
-    /* ====== BASE mínima ====== */
+    /* IMPORTANT: não deixa nenhum background “matar” o fundo neon */
+    html{
+      background: transparent !important;
+    }
     body{
       margin:0;
       font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
       color: var(--fg);
-
-      /* IMPORTANT: deixa transparente para o backdrop aparecer sempre */
       background: transparent !important;
       overflow-x:hidden;
+      position: relative;
+      z-index: 0;
     }
 
-    /* Camada fixa de fundo (não pode ser sobrescrita por CSS dos blocos) */
-    .siteBackdrop{
+    /* ====== FUNDO NEON: aplicado no html (garantia total) ====== */
+    html::before{
+      content:"";
       position: fixed;
       inset: 0;
-      z-index: -999;
+      z-index: -2;
       pointer-events: none;
 
       background:
@@ -52,16 +54,19 @@
         radial-gradient(980px 560px at 72% 18%, var(--neonV1), transparent 62%),
         radial-gradient(860px 520px at 42% 82%, var(--neonV2), transparent 64%),
         linear-gradient(180deg, var(--bg0) 0%, var(--bg1) 40%, var(--bg2) 100%);
+      background-attachment: fixed;
     }
 
-    /* Vinheta/profundidade extra */
-    .siteBackdrop::after{
+    /* vinheta/profundidade */
+    html::after{
       content:"";
-      position:absolute;
-      inset:0;
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+
       background:
         radial-gradient(1200px 900px at 50% 50%, rgba(0,0,0,.72), rgba(0,0,0,.92));
-      mix-blend-mode: normal;
     }
 
     a{
@@ -71,7 +76,7 @@
     }
     a:hover{ opacity:1; }
 
-    /* ====== HEADER ====== */
+    /* ====== HEADER (igual ao seu original) ====== */
     header{
       position: sticky;
       top: 0;
@@ -196,9 +201,6 @@
 
 <body>
 
-  <!-- Fundo neon fixo do site -->
-  <div class="siteBackdrop" aria-hidden="true"></div>
-
   <header>
     <div class="navWrap">
       <div class="navTop">
@@ -263,6 +265,7 @@
     document.querySelectorAll(`style[${marker}]`).forEach(el => el.remove());
     document.querySelectorAll(`script[${marker}]`).forEach(el => el.remove());
 
+    // destrói charts existentes dentro do host (evita conflitos Chart.js)
     try{
       if (window.Chart && typeof Chart.getChart === "function") {
         host.querySelectorAll("canvas").forEach((c) => {
@@ -308,6 +311,7 @@
 
       host.innerHTML = doc.body.innerHTML;
 
+      // styles do bloco vão pro head (mas html/body continuam transparentes por !important)
       doc.querySelectorAll("style").forEach(styleEl => {
         const s = document.createElement("style");
         s.setAttribute("data-bloco", targetId);
