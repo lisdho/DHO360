@@ -6,7 +6,7 @@
   <title>DHO 360º | Piloto</title>
 
   <style>
-    /* ====== TOKENS (fallback) - se o :root do site não estiver carregado ====== */
+    /* ====== TOKENS (fallback) — se o :root do site não estiver carregado ====== */
     :root{
       --bg:#07070b;
       --fg:#f4f4f8;
@@ -150,7 +150,7 @@
     }
   </style>
 
-  <!-- Chart.js garantido uma vez no index -->
+  <!-- Chart.js uma vez no index (padrão do projeto) -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
@@ -204,71 +204,112 @@
   <!-- Bloco 03 - Resultados: Objetivos -->
   <div id="r_objetivos"></div>
 
+  <!-- Bloco 04 - Resultados: Objetivos (Negócios) -->
+  <div id="r_objetivosNeg"></div>
+
 <script>
-  async function carregarBloco(id, arquivo, initFnName){
-    const alvo = document.getElementById(id);
-
-    function executarScriptsDentro(container){
-      const scripts = Array.from(container.querySelectorAll("script"));
-      const promessas = [];
-
-      for(const oldScript of scripts){
-        const newScript = document.createElement("script");
-
-        // Copia atributos
-        for(const attr of oldScript.attributes){
-          newScript.setAttribute(attr.name, attr.value);
-        }
-
-        // Se tiver src, aguarda carregar
-        if(oldScript.src){
-          promessas.push(new Promise((resolve, reject) => {
-            newScript.onload = resolve;
-            newScript.onerror = reject;
-          }));
-          newScript.src = oldScript.src;
-        }else{
-          newScript.text = oldScript.textContent;
-        }
-
-        // Substitui para forçar execução
-        oldScript.parentNode.replaceChild(newScript, oldScript);
-      }
-
-      return Promise.all(promessas);
+  // Loader robusto por bloco:
+  // 1) injeta HTML
+  // 2) clona <style> para <head>
+  // 3) executa <script> (recriado no DOM)
+  // 4) chama init explicitamente
+  async function carregarBloco({ url, targetId, initFnName }) {
+    const host = document.getElementById(targetId);
+    if (!host) {
+      console.warn(`[loader] targetId não encontrado: ${targetId}`);
+      return;
     }
 
+    // evita duplicar styles/scripts do mesmo bloco em recargas
+    const marker = `data-bloco="${targetId}"`;
+
+    // remove versões antigas do bloco (styles e scripts marcados)
+    document.querySelectorAll(`style[${marker}]`).forEach(el => el.remove());
+    document.querySelectorAll(`script[${marker}]`).forEach(el => el.remove());
+
     try{
-      const resp = await fetch(arquivo, { cache: "no-store" });
-      if(!resp.ok) throw new Error("Falha ao carregar " + arquivo + ": " + resp.status);
+      const res = await fetch(url, { cache: "no-store" });
+      if(!res.ok) throw new Error("Falha ao carregar " + url + ": " + res.status);
 
-      alvo.innerHTML = await resp.text();
+      const html = await res.text();
 
-      // Executa scripts que vierem dentro do bloco carregado
-      await executarScriptsDentro(alvo);
+      // parse do HTML
+      const doc = new DOMParser().parseFromString(html, "text/html");
 
-      // Chama init do bloco:
-      // 1) se initFnName foi passado, usa ele
-      // 2) senão, usa a convenção initBloco_<id>
-      const initName = initFnName || ("initBloco_" + id);
-      if(typeof window[initName] === "function"){
-        window[initName]();
+      // 1) Injeta somente o body (conteúdo do bloco)
+      host.innerHTML = doc.body.innerHTML;
+
+      // 2) Clona <style> para o <head> para garantir aplicação
+      doc.querySelectorAll("style").forEach(styleEl => {
+        const s = document.createElement("style");
+        s.setAttribute("data-bloco", targetId);
+        s.textContent = styleEl.textContent || "";
+        document.head.appendChild(s);
+      });
+
+      // 3) Recria e executa <script>
+      const scripts = Array.from(doc.querySelectorAll("script"));
+      for (const old of scripts) {
+        const s = document.createElement("script");
+        s.setAttribute("data-bloco", targetId);
+
+        // mantém atributos se existirem
+        for (const attr of old.attributes) s.setAttribute(attr.name, attr.value);
+
+        if (old.src) {
+          s.src = old.src;
+          s.async = false;
+        } else {
+          s.textContent = old.textContent || "";
+        }
+
+        document.body.appendChild(s);
       }
+
+      // 4) Chama init explicitamente (se existir)
+      setTimeout(() => {
+        const fn = window[initFnName];
+        if (typeof fn === "function") {
+          try { fn(); }
+          catch (e) { console.error(`[loader] erro ao executar ${initFnName}:`, e); }
+        } else {
+          console.warn(`[loader] initFn não encontrada: ${initFnName}`);
+        }
+      }, 0);
 
     }catch(err){
       console.error(err);
-      alvo.innerHTML =
+      host.innerHTML =
         '<section style="max-width:1100px;margin:24px auto;padding:0 20px;color:var(--muted)">' +
-        'Não foi possível carregar o arquivo ' + arquivo +
+        'Não foi possível carregar o arquivo ' + url +
         '</section>';
     }
   }
 
-  carregarBloco("intro", "blocks/01-intro.html");
-  carregarBloco("metodologia", "blocks/02-metodologia.html");
+  // Chamadas dos blocos
+  carregarBloco({
+    url: "blocks/01-intro.html",
+    targetId: "intro",
+    initFnName: "initBloco_intro"
+  });
 
-  // Bloco 03: usa init explícito (ajuste aqui se o nome for outro)
-  carregarBloco("r_objetivos", "blocks/03-R-objetivos.html", "initBloco_objetivos");
+  carregarBloco({
+    url: "blocks/02-metodologia.html",
+    targetId: "metodologia",
+    initFnName: "initBloco_metodologia"
+  });
+
+  carregarBloco({
+    url: "blocks/03-R-objetivos.html",
+    targetId: "r_objetivos",
+    initFnName: "initBloco_objetivos"
+  });
+
+  carregarBloco({
+    url: "blocks/04-R-objetivosNeg.html",
+    targetId: "r_objetivosNeg",
+    initFnName: "initBloco_objetivosNeg"
+  });
 </script>
 
 </body>
