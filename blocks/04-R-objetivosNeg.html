@@ -172,7 +172,7 @@
       </div>
     </section>
 
-    <!-- ATO 4 | BARREIRAS -->
+    <!-- ATO 4 | BARREIRAS (AJUSTE PARA 850px) -->
     <section class="dho-ato" aria-label="Barreiras da força de trabalho que podem comprometer a entrega">
       <div class="dho-ato-head">
         <h3 class="dho-ato-title">O que pode comprometer a entrega</h3>
@@ -181,38 +181,37 @@
         </p>
       </div>
 
-      <div class="dho-chart-block">
-        <div class="dho-chart-head">
-          <div class="dho-chart-title">Fatores mais citados</div>
-          <div class="dho-legend" id="dho-objetivosneg-legend"></div>
+      <div class="dho-barreiras-wrap" aria-label="Container de barreiras com largura controlada">
+        <div class="dho-chart-block">
+          <div class="dho-chart-head">
+            <div class="dho-chart-title">Fatores mais citados</div>
+            <div class="dho-legend" id="dho-objetivosneg-legend"></div>
+          </div>
+
+          <div class="dho-chart-area">
+            <canvas id="dho-objetivosneg-barreiras" aria-label="Gráfico de barras horizontais com fatores mais citados" role="img"></canvas>
+          </div>
+
+          <div class="dho-footnote">
+            <p class="dho-note">
+              Observação: os valores representam menções totais por fator. A leitura é indicativa, dado o volume reduzido de respostas.
+            </p>
+          </div>
         </div>
 
-        <div class="dho-chart-area">
-          <canvas id="dho-objetivosneg-barreiras" aria-label="Gráfico de barras horizontais com fatores mais citados" role="img"></canvas>
-        </div>
-
-        <div class="dho-footnote">
-          <p class="dho-note">
-            Observação: os valores representam menções totais por fator. A leitura é indicativa, dado o volume reduzido de respostas.
+        <div class="dho-card" role="note" aria-label="Insight editorial sobre barreiras">
+          <h4 class="dho-card-title">Insight</h4>
+          <p class="dho-card-text">
+            O movimento é claro: o risco maior não parece ser a falta de intenção, e sim o atrito cotidiano. Alinhamento, liderança e priorização tendem a decidir se a estratégia vira entrega.
           </p>
         </div>
-      </div>
-
-      <div class="dho-card" role="note" aria-label="Insight editorial sobre barreiras">
-        <h4 class="dho-card-title">Insight</h4>
-        <p class="dho-card-text">
-          O movimento é claro: o risco maior não parece ser a falta de intenção, e sim o atrito cotidiano. Alinhamento, liderança e priorização tendem a decidir se a estratégia vira entrega.
-          </p>
       </div>
     </section>
   </div>
 
   <style>
     .dho-objetivosneg { padding: 34px 18px 26px; }
-
-    /* largura do bloco para 980px */
     .dho-objetivosneg-wrap { max-width: 980px; margin: 0 auto; }
-
     .dho-objetivosneg-header { margin-bottom: 18px; }
 
     .dho-kicker {
@@ -247,7 +246,6 @@
     }
 
     .dho-ato-head { display: grid; gap: 8px; margin-bottom: 12px; }
-
     .dho-ato-title { margin: 0; font-size: 18px; color: rgba(255,255,255,0.96); }
 
     .dho-ato-lead {
@@ -260,7 +258,6 @@
       max-width: 980px;
     }
 
-    /* 3 eixos em 3 colunas, uma linha */
     .dho-eixos {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -288,7 +285,6 @@
 
     .dho-eixo strong { color: rgba(255,255,255,0.96); font-weight: 600; }
 
-    /* Chart blocks */
     .dho-chart-block {
       margin-top: 10px;
       border: 1px solid rgba(255,255,255,0.10);
@@ -329,7 +325,6 @@
     }
 
     .dho-chart-area { position: relative; height: 320px; }
-
     .dho-chart-area-top { height: 280px; }
 
     .dho-footnote .dho-note { margin: 10px 0 0 0; }
@@ -343,7 +338,6 @@
       font-size: 13px;
     }
 
-    /* Nota complementar */
     .dho-nota-compl {
       margin-top: 10px;
       border: 1px solid rgba(255,255,255,0.10);
@@ -373,9 +367,7 @@
 
     /* Preparação com largura 850px */
     .dho-prep-wrap { max-width: 850px; margin: 0 auto; }
-
     .dho-prep-legend { margin-top: 6px; margin-bottom: 10px; }
-
     .dho-prep { display: grid; gap: 10px; margin-top: 10px; }
 
     .dho-prep-row {
@@ -421,7 +413,6 @@
 
     .dho-prep-score { color: rgba(255,255,255,0.70); font-size: 13px; font-weight: 700; text-align: right; }
 
-    /* Cards de insight */
     .dho-card {
       margin-top: 12px;
       border: 1px solid rgba(255,255,255,0.10);
@@ -458,7 +449,12 @@
       font-size: 14px;
     }
 
-    /* Responsivo */
+    /* (NOVO) Barreiras com largura 850px */
+    .dho-barreiras-wrap {
+      max-width: 850px;
+      margin: 0 auto;
+    }
+
     @media (max-width: 980px) {
       .dho-objetivosneg h2 { font-size: 24px; }
     }
@@ -470,11 +466,7 @@
     }
 
     @media (max-width: 620px) {
-      .dho-prep-row {
-        grid-template-columns: 1fr;
-        gap: 10px;
-        align-items: start;
-      }
+      .dho-prep-row { grid-template-columns: 1fr; gap: 10px; align-items: start; }
       .dho-scale { justify-content: flex-start; }
       .dho-prep-score { text-align: left; }
     }
@@ -498,13 +490,10 @@
 
       // Legendas customizadas (sem legenda padrão do Chart.js)
       const legendTop = document.getElementById("dho-objetivosneg-legend-top");
-      if (legendTop) {
-        legendTop.innerHTML = '<span class="swatch" aria-hidden="true"></span><span>Contagem de menções</span>';
-      }
+      if (legendTop) legendTop.innerHTML = '<span class="swatch" aria-hidden="true"></span><span>Contagem de menções</span>';
+
       const legendBar = document.getElementById("dho-objetivosneg-legend");
-      if (legendBar) {
-        legendBar.innerHTML = '<span class="swatch" aria-hidden="true"></span><span>Total de menções</span>';
-      }
+      if (legendBar) legendBar.innerHTML = '<span class="swatch" aria-hidden="true"></span><span>Total de menções</span>';
 
       // Carregar Chart.js se necessário
       async function ensureChartJs() {
@@ -566,11 +555,7 @@
             maintainAspectRatio: false,
             plugins: {
               legend: { display: false },
-              tooltip: {
-                callbacks: {
-                  label: (ctx) => ` ${ctx.parsed.y} menções`
-                }
-              }
+              tooltip: { callbacks: { label: (ctx) => ` ${ctx.parsed.y} menções` } }
             },
             scales: {
               x: {
@@ -580,7 +565,6 @@
                   minRotation: 0,
                   callback: function(value) {
                     const label = this.getLabelForValue(value) || "";
-                    // quebra suave para evitar poluição visual
                     const parts = label.split(" ");
                     const cut = parts.length > 4 ? 4 : Math.max(2, Math.floor(parts.length / 2));
                     return parts.slice(0, cut).join(" ") + (parts.length > cut ? "..." : "");
@@ -591,11 +575,7 @@
               },
               y: {
                 beginAtZero: true,
-                ticks: {
-                  color: "rgba(255,255,255,0.70)",
-                  precision: 0,
-                  stepSize: 1
-                },
+                ticks: { color: "rgba(255,255,255,0.70)", precision: 0, stepSize: 1 },
                 grid: { color: "rgba(255,255,255,0.08)" },
                 border: { color: "rgba(255,255,255,0.10)" }
               }
@@ -650,28 +630,17 @@
           indexAxis: "y",
           plugins: {
             legend: { display: false },
-            tooltip: {
-              callbacks: {
-                label: (ctx) => ` ${ctx.parsed.x} menções`
-              }
-            }
+            tooltip: { callbacks: { label: (ctx) => ` ${ctx.parsed.x} menções` } }
           },
           scales: {
             x: {
               beginAtZero: true,
-              ticks: {
-                color: "rgba(255,255,255,0.70)",
-                precision: 0,
-                stepSize: 1
-              },
+              ticks: { color: "rgba(255,255,255,0.70)", precision: 0, stepSize: 1 },
               grid: { color: "rgba(255,255,255,0.08)" },
               border: { color: "rgba(255,255,255,0.10)" }
             },
             y: {
-              ticks: {
-                color: "rgba(255,255,255,0.85)",
-                font: { size: 12 }
-              },
+              ticks: { color: "rgba(255,255,255,0.85)", font: { size: 12 } },
               grid: { display: false },
               border: { color: "rgba(255,255,255,0.10)" }
             }
