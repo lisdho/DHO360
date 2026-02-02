@@ -3,9 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>DHO 360º</title>
+  <title>DHO 360º </title>
 
   <style>
+    /* ====== TOKENS (fallback)  — se o :root do site não estiver carregado ====== */
     :root{
       --bg:#07070b;
       --fg:#f4f4f8;
@@ -15,6 +16,7 @@
       --violet2:#a855f7;
       --violet3:#e9d5ff;
 
+      /* fundo neon escuro */
       --bg0:#05050a;
       --bg1:#070712;
       --bg2:#0a0a1a;
@@ -24,8 +26,9 @@
     }
 
     html, body{ height:100%; }
-    html{ background: transparent !important; }
 
+    /* IMPORTANT: deixa transparente para o fundo do html aparecer */
+    html{ background: transparent !important; }
     body{
       margin:0;
       font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
@@ -34,6 +37,7 @@
       overflow-x:hidden;
     }
 
+    /* ====== FUNDO NEON (tentativa atual — você decidiu revisar depois) ====== */
     html::before{
       content:"";
       position: fixed;
@@ -56,6 +60,7 @@
         radial-gradient(1200px 900px at 50% 50%, rgba(0,0,0,.72), rgba(0,0,0,.92));
     }
 
+    /* wrappers comuns (mantidos como estavam na sua última versão) */
     .block,
     section.block,
     article.block{
@@ -63,6 +68,7 @@
       background-color: transparent !important;
     }
 
+    /* containers onde você injeta os blocos */
     #intro, #metodologia, #r_objetivos, #r_objetivosNeg, #r_motivacoes{
       background: transparent !important;
       background-color: transparent !important;
@@ -75,6 +81,7 @@
     }
     a:hover{ opacity:1; }
 
+    /* ====== HEADER (igual ao seu original) ====== */
     header{
       position: sticky;
       top: 0;
@@ -193,14 +200,12 @@
     }
   </style>
 
-  <!-- Chart.js uma vez no index -->
+  <!-- Chart.js uma vez no index (padrão do projeto) -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-  <!-- Loader externo (sem JS inline crítico) -->
-  <script src="js/loader.js" defer></script>
 </head>
 
 <body>
+
   <header>
     <div class="navWrap">
       <div class="navTop">
@@ -254,5 +259,54 @@
 
   <!-- Bloco 05 - Resultados: Motivações -->
   <div id="r_motivacoes"></div>
+
+<script type="module">
+  const blocoCache = new Map();
+
+  async function carregarBloco({ url, targetId, moduleUrl }) {
+    const host = document.getElementById(targetId);
+    if (!host) {
+      console.warn(`[loader] targetId não encontrado: ${targetId}`);
+      return;
+    }
+
+    try{
+      if (blocoCache.has(url)) {
+        host.innerHTML = blocoCache.get(url);
+        return;
+      }
+
+      const res = await fetch(url, { cache: "force-cache" });
+      if(!res.ok) throw new Error("Falha ao carregar " + url + ": " + res.status);
+
+      const html = await res.text();
+      const doc = new DOMParser().parseFromString(html, "text/html");
+
+      host.innerHTML = doc.body.innerHTML;
+      blocoCache.set(url, doc.body.innerHTML);
+
+      if (moduleUrl) {
+        const mod = await import(moduleUrl);
+        if (mod?.init) mod.init();
+      }
+
+    }catch(err){
+      console.error(err);
+      host.innerHTML =
+        '<section style="max-width:1100px;margin:24px auto;padding:0 20px;color:var(--muted)">' +
+        'Não foi possível carregar o arquivo ' + url +
+        '</section>';
+    }
+  }
+
+  carregarBloco({ url: "blocks/01-intro.html", targetId: "intro", moduleUrl: "blocks/01-intro.js" });
+  carregarBloco({ url: "blocks/02-metodologia.html", targetId: "metodologia", moduleUrl: "blocks/02-metodologia.js" });
+  carregarBloco({ url: "blocks/03-R-objetivos.html", targetId: "r_objetivos", moduleUrl: "blocks/03-R-objetivos.js" });
+  carregarBloco({ url: "blocks/04-R-objetivosNeg.html", targetId: "r_objetivosNeg", moduleUrl: "blocks/04-R-objetivosNeg.js" });
+
+  // NOVO: Bloco 05
+  carregarBloco({ url: "blocks/05-R-Motivacoes.html", targetId: "r_motivacoes", moduleUrl: "blocks/05-R-Motivacoes.js" });
+</script>
+
 </body>
 </html>
