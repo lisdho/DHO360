@@ -224,14 +224,6 @@
     text-align: justify;
   }
 
-  .dho-chart-row{
-    display: grid;
-    grid-template-columns: 1fr 0.9fr;
-    gap: 12px;
-    align-items: center;
-    padding-top: 6px;
-  }
-
   .dho-plain-surface{
     border: 0 !important;
     background: transparent !important;
@@ -241,27 +233,34 @@
     box-shadow: none !important;
   }
 
-  /* ✅ sizing real e previsível */
+  /* ====== CHART: dimensões estáveis (sem “faixa amarela”) ====== */
   .dho-objetivos{
-    --pizzaSize: 320px; /* desktop */
+    --pizzaSize: 260px;   /* desktop */
+    --chartGap: 22px;
+    --legendMax: 420px;
+  }
+
+  .dho-chart-row{
+    display: grid;
+    grid-template-columns: var(--pizzaSize) 1fr;
+    gap: var(--chartGap);
+    align-items: center;        /* corta o vazio */
+    padding-top: 4px;
   }
 
   .dho-chart-canvas{
-    width: 100%;
     display: grid;
-    place-items: center;
+    justify-items: start;       /* aproxima da esquerda (linha azul) */
+    align-items: center;
   }
 
-  /* ✅ nunca colapsa (min-height) + mantém quadrado (aspect-ratio) */
   .dho-chart-box{
-    width: min(var(--pizzaSize), 100%);
-    aspect-ratio: 1 / 1;
-    min-height: min(var(--pizzaSize), 100vw);
+    width: var(--pizzaSize);
+    height: var(--pizzaSize);   /* chave: remove min-height + trava altura real */
     position: relative;
-    margin: 0 auto;
+    margin: 0;                  /* sem centralizar */
   }
 
-  /* ✅ canvas ocupa o box e o Chart.js calcula certo */
   #dhoObjetivosPizza{
     position: absolute;
     inset: 0;
@@ -270,20 +269,28 @@
     display: block;
   }
 
-  .dho-legend{ padding: 0; }
+  /* Legenda em LISTA vertical alinhada (linha vermelha) */
+  #dhoObjetivosLegenda{
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 12px;
+    align-content: start;
+    justify-self: start;
+    max-width: var(--legendMax);
+  }
 
   .dho-legend-item{
     display: grid;
     grid-template-columns: 10px 1fr auto;
     gap: 10px;
     align-items: start;
-    padding: 8px 0;
+    padding: 0;                /* sem “altura extra” */
   }
 
   .dho-legend-item + .dho-legend-item{
-    border-top: 1px solid rgba(255,255,255,0.08);
-    margin-top: 6px;
-    padding-top: 10px;
+    border-top: 0 !important;  /* sem divisórias, como lista limpa */
+    margin-top: 0 !important;
+    padding-top: 0 !important;
   }
 
   .dho-legend-dot{
@@ -318,13 +325,14 @@
   }
 
   .dho-footnote{
-    margin: 10px 0 0 0;
+    margin: 8px 0 0 0;   /* reduz altura “amarela” */
     font-size: 12.8px;
     line-height: 1.55;
     color: rgba(255,255,255,0.80);
     text-align: justify;
   }
 
+  /* ===== Ranking e resto: mantidos ===== */
   .dho-rank-card{
     border: 0;
     background: transparent;
@@ -518,79 +526,29 @@
     text-align: justify;
   }
 
-  /* Breakpoints do donut */
-  @media (max-width: 920px){
-    .dho-objetivos{ --pizzaSize: 280px; }
-    .dho-objetivos-grid{ grid-template-columns: 1fr; }
-    .dho-chart-row{ grid-template-columns: 200px 150px; }
-    .dho-rank-final{ width: 100%; }
-  }
-
-  @media (max-width: 520px){
-    .dho-objetivos{ --pizzaSize: 240px; }
-  }
-
+  /* Layout geral */
   .dho-objetivos-header{ position: static !important; }
 
   .dho-card--chart{ grid-column: 1 / -1; justify-self: center; width: min(860px, 100%); }
   .dho-rank-card{ grid-column: 1 / -1; justify-self: center; width: min(750px, 100%); }
   .dho-rank-card .dho-card-head{ text-align:center; }
 
-
-
-/* === DESKTOP: legenda em lista + donut menor e mais à esquerda === */
-@media (min-width: 921px){
-  /* traz o conteúdo pra esquerda e reduz o respiro interno */
-  .dho-card--chart{
-    padding-left: 10px;
-    padding-right: 12px;
+  /* ===== Mobile / tablet ===== */
+  @media (max-width: 920px){
+    .dho-objetivos{ --pizzaSize: 240px; --legendMax: 100%; --chartGap: 12px; }
+    .dho-objetivos-grid{ grid-template-columns: 1fr; }
+    .dho-chart-row{
+      grid-template-columns: 1fr;
+      align-items: start;
+    }
+    .dho-chart-canvas{ justify-items: center; }
+    .dho-chart-box{ margin: 0 auto; }
+    .dho-rank-final{ width: 100%; }
   }
 
-  /* define uma coluna fixa pro donut e o resto pra legenda */
-  .dho-chart-row{
-    grid-template-columns: 500px 1fr; /* donut menor */
-    gap: 50px;                        /* distância entre donut e legenda */
-    align-items: start;
+  @media (max-width: 520px){
+    .dho-objetivos{ --pizzaSize: 220px; }
   }
-
-  /* “encosta” o donut na esquerda do card */
-  .dho-chart-canvas{
-    justify-items: center;  /* antes estava centralizando */
-  }
-
-  .dho-chart-box{
-    width: 200px;
-    max-width: 280px;
-    margin-left: 0;        /* garante que não centralize */
-    margin-right: 0;
-  }
-
-  /* legenda em LISTA (uma coluna), alinhada */
-  #dhoObjetivosLegenda{
-    display: grid;
-    grid-template-columns: 1fr; /* lista vertical */
-    row-gap: 12px;
-    align-content: start;
-    margin-top: 4px;
-  }
-
-  /* remove a linha divisória antiga entre itens */
-  .dho-legend-item + .dho-legend-item{
-    border-top: 0 !important;
-    margin-top: 0 !important;
-    padding-top: 0 !important;
-  }
-}
-
-/* mantém o mobile do jeito correto */
-@media (max-width: 920px){
-  .dho-chart-canvas{ justify-items: center; }
-  #dhoObjetivosLegenda{ grid-template-columns: 1fr; }
-}
-
-
-
-  
 </style>
 
 <script>
@@ -603,7 +561,6 @@
       const ensureChart = () => new Promise((resolve) => {
         if (window.Chart) return resolve(true);
 
-        // evita múltiplos injects
         if (window.__dhoChartLoading === true) {
           const t = setInterval(() => {
             if (window.Chart) { clearInterval(t); resolve(true); }
@@ -615,7 +572,6 @@
         window.__dhoChartLoading = true;
 
         const s = document.createElement("script");
-        // fallback mais “estável” em ambientes com tracking prevention
         s.src = "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js";
         s.async = true;
         s.onload = () => resolve(true);
@@ -649,7 +605,6 @@
         const canvas = root.querySelector("#dhoObjetivosPizza");
         if (!canvas) return;
 
-        // limpa dimensões “travadas” do canvas (muito comum quando já renderizou antes)
         canvas.removeAttribute("width");
         canvas.removeAttribute("height");
 
@@ -690,14 +645,13 @@
 
         canvas._chartInstance = chart;
 
-        // “assenta” sizing pós-layout (especialmente quando bloco entra via fetch)
         const force = () => { try { chart.resize(); } catch(e){} };
         requestAnimationFrame(force);
         setTimeout(force, 80);
         setTimeout(force, 260);
       };
 
-      // ========= 2) Ranking progressivo (o seu que funcionou) =========
+      // ========= 2) Ranking progressivo =========
       const wrap = root.querySelector("#dhoRankWrap");
       const btn  = root.querySelector("#dhoRankNextBtn");
       const hint = root.querySelector("#dhoRankHint");
@@ -746,7 +700,6 @@
         syncButtonLabel();
       }
 
-      // ========= init chart (com fallback robusto) =========
       ensureChart().then((ok) => {
         if (!ok) {
           console.warn("[Bloco objetivos] Não foi possível carregar Chart.js (CDN bloqueado).");
