@@ -6,7 +6,6 @@
   <title>DHO 360º | Piloto</title>
 
   <style>
-    /* ====== TOKENS (fallback) — se o :root do site não estiver carregado ====== */
     :root{
       --bg:#07070b;
       --fg:#f4f4f8;
@@ -16,7 +15,6 @@
       --violet2:#a855f7;
       --violet3:#e9d5ff;
 
-      /* fundo neon escuro */
       --bg0:#05050a;
       --bg1:#070712;
       --bg2:#0a0a1a;
@@ -26,8 +24,6 @@
     }
 
     html, body{ height:100%; }
-
-    /* IMPORTANT: deixa transparente para o fundo do html aparecer */
     html{ background: transparent !important; }
     body{
       margin:0;
@@ -37,7 +33,6 @@
       overflow-x:hidden;
     }
 
-    /* ====== FUNDO NEON (tentativa atual — você decidiu revisar depois) ====== */
     html::before{
       content:"";
       position: fixed;
@@ -60,7 +55,6 @@
         radial-gradient(1200px 900px at 50% 50%, rgba(0,0,0,.72), rgba(0,0,0,.92));
     }
 
-    /* wrappers comuns (mantidos como estavam na sua última versão) */
     .block,
     section.block,
     article.block{
@@ -68,7 +62,6 @@
       background-color: transparent !important;
     }
 
-    /* containers onde você injeta os blocos */
     #intro, #metodologia, #r_objetivos, #r_objetivosNeg, #r_motivacoes{
       background: transparent !important;
       background-color: transparent !important;
@@ -81,7 +74,6 @@
     }
     a:hover{ opacity:1; }
 
-    /* ====== HEADER (igual ao seu original) ====== */
     header{
       position: sticky;
       top: 0;
@@ -200,7 +192,6 @@
     }
   </style>
 
-  <!-- Chart.js uma vez no index (padrão do projeto) -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
@@ -245,19 +236,10 @@
     </div>
   </header>
 
-  <!-- Bloco 01 - Introdução -->
   <div id="intro"></div>
-
-  <!-- Bloco 02 - Metodologia -->
   <div id="metodologia"></div>
-
-  <!-- Bloco 03 - Resultados: Objetivos -->
   <div id="r_objetivos"></div>
-
-  <!-- Bloco 04 - Resultados: Objetivos (Negócios) -->
   <div id="r_objetivosNeg"></div>
-
-  <!-- Bloco 05 - Resultados: Motivações -->
   <div id="r_motivacoes"></div>
 
 <script>
@@ -268,12 +250,15 @@
       return;
     }
 
-    const marker = `data-bloco="${targetId}"`;
+    // seletor robusto
+    const styleSel = `style[data-bloco="${targetId}"]`;
+    const scriptSel = `script[data-bloco="${targetId}"]`;
 
-    document.querySelectorAll(`style[${marker}]`).forEach(el => el.remove());
-    document.querySelectorAll(`script[${marker}]`).forEach(el => el.remove());
+    // limpa css/js do bloco anterior
+    document.querySelectorAll(styleSel).forEach(el => el.remove());
+    document.querySelectorAll(scriptSel).forEach(el => el.remove());
 
-    // destrói charts existentes dentro do host (evita conflitos Chart.js)
+    // destrói charts existentes dentro do host
     try{
       if (window.Chart && typeof Chart.getChart === "function") {
         host.querySelectorAll("canvas").forEach((c) => {
@@ -285,28 +270,31 @@
       console.warn("[loader] falha ao destruir charts antigos:", e);
     }
 
-    function nextFrame(){
-      return new Promise(resolve => requestAnimationFrame(resolve));
-    }
+    const nextFrame = () => new Promise(r => requestAnimationFrame(r));
 
     function appendScriptAndWait(scriptEl){
       return new Promise((resolve, reject) => {
         const s = document.createElement("script");
-        s.setAttribute("data-bloco", targetId);
 
-        for (const attr of scriptEl.attributes) s.setAttribute(attr.name, attr.value);
+        // copia atributos, mas garante que data-bloco seja o nosso
+        for (const attr of scriptEl.attributes) {
+          if (attr.name.toLowerCase() === "data-bloco") continue;
+          s.setAttribute(attr.name, attr.value);
+        }
+        s.setAttribute("data-bloco", targetId);
 
         if (scriptEl.src) {
           s.src = scriptEl.src;
-          s.async = false;
+          s.async = false; // preserva ordem
           s.onload = () => resolve();
           s.onerror = (err) => reject(err);
+          document.body.appendChild(s);
         } else {
+          // inline: executa ao inserir
           s.textContent = scriptEl.textContent || "";
+          document.body.appendChild(s);
           resolve();
         }
-
-        document.body.appendChild(s);
       });
     }
 
@@ -317,8 +305,11 @@
       const html = await res.text();
       const doc = new DOMParser().parseFromString(html, "text/html");
 
-      host.innerHTML = doc.body.innerHTML;
+      // injeta conteúdo do body (fallback se vier vazio)
+      const bodyHTML = doc.body && doc.body.innerHTML ? doc.body.innerHTML : (doc.documentElement?.innerHTML || "");
+      host.innerHTML = bodyHTML;
 
+      // injeta styles do bloco
       doc.querySelectorAll("style").forEach(styleEl => {
         const s = document.createElement("style");
         s.setAttribute("data-bloco", targetId);
@@ -326,14 +317,17 @@
         document.head.appendChild(s);
       });
 
+      // injeta scripts em ordem
       const scripts = Array.from(doc.querySelectorAll("script"));
       for (const old of scripts) {
         await appendScriptAndWait(old);
       }
 
+      // aguarda layout
       await nextFrame();
       await nextFrame();
 
+      // chama init do bloco
       const fn = window[initFnName];
       if (typeof fn === "function") {
         try { fn(); }
@@ -355,9 +349,7 @@
   carregarBloco({ url: "blocks/02-metodologia.html", targetId: "metodologia", initFnName: "initBloco_metodologia" });
   carregarBloco({ url: "blocks/03-R-objetivos.html", targetId: "r_objetivos", initFnName: "initBloco_objetivos" });
   carregarBloco({ url: "blocks/04-R-objetivosNeg.html", targetId: "r_objetivosNeg", initFnName: "initBloco_objetivosNeg" });
-
-  // NOVO: Bloco 05
-  carregarBloco({ url: "blocks/05-R-motivacoes.html", targetId: "r_motivacoes", initFnName: "initBloco_motivacoes" });
+  carregarBloco({ url: "blocks/05-R-Motivacoes.html", targetId: "r_motivacoes", initFnName: "initBloco_motivacoes" });
 </script>
 
 </body>
