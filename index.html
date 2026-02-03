@@ -74,8 +74,9 @@
     }
     a:hover{ opacity:1; }
 
-    /* ====== HEADER ====== */
-    header{
+    /* ====== HEADER (SOMENTE O HEADER DO SITE) ======
+       ✅ ajuste: não aplicar estilos em <header> dentro dos blocos */
+    header.siteHeader{
       position: sticky;
       top: 0;
       z-index: 98;
@@ -103,8 +104,6 @@
       padding:10px 0 12px;
       border-top:1px solid rgba(255,255,255,.06);
       background: rgba(0,0,0,.08);
-
-      /* ✅ ajuste: centralizar o conjunto de links no desktop também */
       display:flex;
       justify-content:center;
     }
@@ -156,8 +155,6 @@
       gap:10px;
       flex-wrap:wrap;
       align-items:center;
-
-      /* ✅ ajuste: centralizar no desktop (antes era flex-end) */
       justify-content:center;
       width:100%;
     }
@@ -214,7 +211,6 @@
         width: auto;
       }
 
-      /* (permanece centralizado no mobile) */
       .linksBottom{ justify-content: center; }
 
       #intro, #metodologia, #r_objetivos, #r_objetivosNeg, #r_motivacoes, #onda2{
@@ -231,13 +227,13 @@
     }
   </style>
 
-  <!-- Chart.js uma vez no index -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
 
-  <header>
+  <!-- ✅ ajuste: class aplicada para isolar o CSS do header do site -->
+  <header class="siteHeader">
     <div class="navWrap">
       <div class="navTop">
         <div class="left">
@@ -279,7 +275,6 @@
   <div id="r_objetivos"></div>
   <div id="r_objetivosNeg"></div>
   <div id="r_motivacoes"></div>
-
   <div id="onda2"></div>
 
 <script>
