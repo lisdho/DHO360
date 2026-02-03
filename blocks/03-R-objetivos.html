@@ -538,57 +538,56 @@
 
 
 
-/* === FIX DESKTOP: legenda limpa e alinhada === */
-.dho-chart-row{
-  grid-template-columns: 360px 1fr; /* gráfico com largura fixa, legenda ocupa o resto */
-  align-items: start;
+/* === DESKTOP: legenda em lista + donut menor e mais à esquerda === */
+@media (min-width: 921px){
+  /* traz o conteúdo pra esquerda e reduz o respiro interno */
+  .dho-card--chart{
+    padding-left: 10px;
+    padding-right: 12px;
+  }
+
+  /* define uma coluna fixa pro donut e o resto pra legenda */
+  .dho-chart-row{
+    grid-template-columns: 320px 1fr; /* donut menor */
+    gap: 22px;                        /* distância entre donut e legenda */
+    align-items: start;
+  }
+
+  /* “encosta” o donut na esquerda do card */
+  .dho-chart-canvas{
+    justify-items: start;  /* antes estava centralizando */
+  }
+
+  .dho-chart-box{
+    width: 320px;
+    max-width: 320px;
+    margin-left: 0;        /* garante que não centralize */
+    margin-right: 0;
+  }
+
+  /* legenda em LISTA (uma coluna), alinhada */
+  #dhoObjetivosLegenda{
+    display: grid;
+    grid-template-columns: 1fr; /* lista vertical */
+    row-gap: 12px;
+    align-content: start;
+    margin-top: 4px;
+  }
+
+  /* remove a linha divisória antiga entre itens */
+  .dho-legend-item + .dho-legend-item{
+    border-top: 0 !important;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
 }
 
-.dho-chart-box{
-  width: 360px;       /* garante “tamanho editorial” no desktop */
-  max-width: 360px;
-}
-
-/* Legenda vira 2 colunas (fica elegante e não “estoura”) */
-#dhoObjetivosLegenda{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 14px;
-  row-gap: 10px;
-  align-content: start;
-}
-
-/* Cada item sem “borda atravessando a linha toda” */
-.dho-legend-item{
-  padding: 0;
-  border: 0 !important;
-  margin: 0 !important;
-}
-
-.dho-legend-item + .dho-legend-item{
-  border: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-/* Alinha dot, textos e % sem quebrar */
-.dho-legend-item{
-  grid-template-columns: 10px 1fr auto;
-  align-items: start;
-}
-
-.dho-legend-label,
-.dho-legend-sub{
-  max-width: 100%;
-  word-break: break-word;
-}
-
-/* Responsivo: volta para 1 coluna quando apertar */
+/* mantém o mobile do jeito correto */
 @media (max-width: 920px){
-  .dho-chart-row{ grid-template-columns: 1fr; }
+  .dho-chart-canvas{ justify-items: center; }
   #dhoObjetivosLegenda{ grid-template-columns: 1fr; }
-  .dho-chart-box{ width: min(var(--pizzaSize), 100%); max-width: 100%; }
 }
+
 
 
   
