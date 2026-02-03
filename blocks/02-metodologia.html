@@ -212,12 +212,13 @@
     backdrop-filter: blur(6px);
   }
 
+  /* ✅ AJUSTE PRINCIPAL: header sem “caixa” própria (fica igual ao fundo do wrap) */
   .dho-met .dho-met-header{
     background: transparent !important;
     border: none !important;
-    border-radius: var(--radius);
-    box-shadow: none;
-    padding: 16px 14px;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
     margin-bottom: 14px;
   }
 
@@ -612,19 +613,9 @@
     .dho-met .dho-met-panel{ grid-column: span 12; }
     .dho-met .dho-met-chart-bar{ height: 280px; }
   }
-
-  /* FORÇA: header do título sem “caixa” */
-  #metodologia .dho-met .dho-met-header{
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    border-radius: 0 !important;
-    padding: 0 !important;
-  }
 </style>
 
 <script>
-  // Loader único (evita múltiplas injeções do Chart.js em navegação por blocos)
   function ensureChartJS(){
     if (window.Chart) return Promise.resolve();
     if (window.__dhoChartJsPromise) return window.__dhoChartJsPromise;
@@ -655,7 +646,6 @@
     };
   }
 
-  // Destrói charts antigos (se o bloco for reinicializado)
   function destroyIfAny(canvas){
     const prev = canvas && canvas.__chartInstance;
     if (prev && typeof prev.destroy === "function") {
@@ -665,19 +655,17 @@
   }
 
   window.initBloco_metodologia = async function(){
-    const root = document.querySelector("#metodologia .dho-met");
+    const root = document.querySelector(".dho-met");
     if(!root) return;
 
     const donutEl = root.querySelector("#dhoChartAmostraDonut");
     const barEl   = root.querySelector("#dhoChartTrabalhoBar");
     if(!donutEl || !barEl) return;
 
-    // Se já existem instâncias válidas, não refaz
     if (donutEl.__chartInstance && barEl.__chartInstance) return;
 
     await ensureChartJS();
 
-    // Se por algum motivo o init for chamado de novo, limpa antes
     destroyIfAny(donutEl);
     destroyIfAny(barEl);
 
@@ -701,9 +689,7 @@
         plugins: {
           legend: { display: false },
           tooltip: {
-            callbacks: {
-              label: (ctx) => `${ctx.label}: ${ctx.parsed}%`
-            }
+            callbacks: { label: (ctx) => `${ctx.label}: ${ctx.parsed}%` }
           }
         }
       }
