@@ -122,12 +122,10 @@
       </summary>
 
       <div class="dho-met-details-body">
-        <!-- ENUNCIADO (sem caixa) -->
         <div class="dho-met-rh-enunciado" aria-label="Enunciado da checagem complementar">
           Em resposta à baixa adesão de RH no piloto, realizamos uma checagem complementar no LinkedIn. Objetivo: entender barreiras de engajamento e ajustar a estratégia de amostragem na próxima fase.
         </div>
 
-        <!-- MÉTRICAS + NOTA (sem caixas; somente texto/números) -->
         <div class="dho-met-rh-toprow" aria-label="Métricas e nota">
           <div class="dho-met-rh-metricas" role="list" aria-label="Métricas da checagem no LinkedIn">
             <div class="dho-met-rh-metrica" role="listitem">
@@ -147,12 +145,10 @@
           </aside>
         </div>
 
-        <!-- SUBTÍTULO -->
         <h4 class="dho-met-rh-subtitle">
           O que os profissionais que retornaram relataram
         </h4>
 
-        <!-- FEEDBACKS (única área com forma destacada) -->
         <div class="dho-met-rh-feedbacks" aria-label="Feedbacks qualitativos">
           <div class="dho-met-rh-feedback">
             Há percepção recorrente de excesso de abordagens comerciais, o que faz com que propostas de cooperação legítimas sejam descartadas já na primeira impressão.
@@ -354,7 +350,6 @@
     height: 100% !important;
   }
 
-  /* Legenda em grid 2x2 + fonte menor */
   .dho-met .dho-met-keylist{
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -483,7 +478,6 @@
     padding: 14px 14px 14px;
   }
 
-  /* RH: enunciado sem caixa */
   .dho-met .dho-met-rh-enunciado{
     width: 100%;
     padding: 0;
@@ -496,7 +490,6 @@
     line-height: 1.55;
   }
 
-  /* RH: métricas + nota em layout limpo (sem caixas) */
   .dho-met .dho-met-rh-toprow{
     display: grid;
     grid-template-columns: 1fr 0.9fr;
@@ -561,7 +554,6 @@
     line-height: 1.5;
   }
 
-  /* Subtítulo antes dos feedbacks */
   .dho-met .dho-met-rh-subtitle{
     margin: 16px 0 10px;
     font-size: 14px;
@@ -570,7 +562,6 @@
     color: var(--text);
   }
 
-  /* Feedbacks 2x2 (única área com forma destacada) */
   .dho-met .dho-met-rh-feedbacks{
     margin-top: 0;
     display: grid;
@@ -633,37 +624,66 @@
 </style>
 
 <script>
+  // Loader único (evita múltiplas injeções do Chart.js em navegação por blocos)
+  function ensureChartJS(){
+    if (window.Chart) return Promise.resolve();
+    if (window.__dhoChartJsPromise) return window.__dhoChartJsPromise;
+
+    window.__dhoChartJsPromise = new Promise((resolve, reject) => {
+      const s = document.createElement("script");
+      s.src = "https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js";
+      s.async = true;
+      s.onload = () => resolve();
+      s.onerror = () => reject(new Error("Falha ao carregar Chart.js"));
+      document.head.appendChild(s);
+    });
+
+    return window.__dhoChartJsPromise;
+  }
+
+  function readMetColors(root){
+    const css = getComputedStyle(root);
+    const get = (v, fb) => (css.getPropertyValue(v).trim() || fb);
+
+    return {
+      pro: get("--pro", "#c08ad6"),
+      lid: get("--lid", "#8d5aa6"),
+      neg: get("--neg", "#5b2e73"),
+      rh:  get("--rh",  "#e2c6ec"),
+      muted: get("--muted2", "rgba(255,255,255,0.60)"),
+      grid: "rgba(255,255,255,0.10)"
+    };
+  }
+
+  // Destrói charts antigos (se o bloco for reinicializado)
+  function destroyIfAny(canvas){
+    const prev = canvas && canvas.__chartInstance;
+    if (prev && typeof prev.destroy === "function") {
+      prev.destroy();
+      canvas.__chartInstance = null;
+    }
+  }
+
   window.initBloco_metodologia = async function(){
     const root = document.querySelector("#metodologia .dho-met");
     if(!root) return;
 
     const donutEl = root.querySelector("#dhoChartAmostraDonut");
-    const barEl = root.querySelector("#dhoChartTrabalhoBar");
+    const barEl   = root.querySelector("#dhoChartTrabalhoBar");
     if(!donutEl || !barEl) return;
 
-    if(!window.Chart){
-      await new Promise((resolve, reject) => {
-        const s = document.createElement("script");
-        s.src = "https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js";
-        s.onload = resolve;
-        s.onerror = reject;
-        document.head.appendChild(s);
-      });
-    }
+    // Se já existem instâncias válidas, não refaz
+    if (donutEl.__chartInstance && barEl.__chartInstance) return;
 
-    if(donutEl.dataset.rendered === "1" || barEl.dataset.rendered === "1") return;
+    await ensureChartJS();
 
-    const css = getComputedStyle(root);
-    const colors = {
-      pro: css.getPropertyValue("--pro").trim() || "#c08ad6",
-      lid: css.getPropertyValue("--lid").trim() || "#8d5aa6",
-      neg: css.getPropertyValue("--neg").trim() || "#5b2e73",
-      rh:  css.getPropertyValue("--rh").trim()  || "#e2c6ec",
-      muted: css.getPropertyValue("--muted2").trim() || "rgba(255,255,255,0.60)",
-      grid: "rgba(255,255,255,0.10)"
-    };
+    // Se por algum motivo o init for chamado de novo, limpa antes
+    destroyIfAny(donutEl);
+    destroyIfAny(barEl);
 
-    new Chart(donutEl, {
+    const colors = readMetColors(root);
+
+    donutEl.__chartInstance = new Chart(donutEl, {
       type: "doughnut",
       data: {
         labels: ["PRO", "LID", "NEG", "RH"],
@@ -680,12 +700,16 @@
         maintainAspectRatio: false,
         plugins: {
           legend: { display: false },
-          tooltip: { callbacks: { label: (ctx) => ctx.label + ": " + ctx.parsed + "%" } }
+          tooltip: {
+            callbacks: {
+              label: (ctx) => `${ctx.label}: ${ctx.parsed}%`
+            }
+          }
         }
       }
     });
 
-    new Chart(barEl, {
+    barEl.__chartInstance = new Chart(barEl, {
       type: "bar",
       data: {
         labels: [
@@ -726,8 +750,5 @@
         }
       }
     });
-
-    donutEl.dataset.rendered = "1";
-    barEl.dataset.rendered = "1";
   };
 </script>
