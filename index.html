@@ -191,7 +191,7 @@
       .ctaTop{ margin-left: auto; width: auto; }
       .linksBottom{ justify-content: center; }
 
-      #intro, #metodologia, #r_objetivos, #r_objetivosNeg, #r_motivacoes, #onda2{
+      #intro, #metodologia, #r_objetivos, #r_objetivosNeg, #r_motivacoes, #r_praticas, #onda2{
         width: 100%;
         max-width: 1100px;
         margin: 0 auto;
@@ -252,6 +252,10 @@
   <div id="r_objetivos"></div>
   <div id="r_objetivosNeg"></div>
   <div id="r_motivacoes"></div>
+
+  <!-- NOVO: Bloco 06 - Práticas -->
+  <div id="r_praticas"></div>
+
   <div id="onda2"></div>
 
 <script>
@@ -339,7 +343,6 @@
       await nextFrame();
       await nextFrame();
 
-      /* ✅ ajuste: só tenta chamar init se você informou um nome válido */
       if (initFnName && typeof initFnName === "string" && initFnName.trim().length){
         const fn = window[initFnName];
         if (typeof fn === "function") {
@@ -367,7 +370,10 @@
   carregarBloco({ url: "blocks/04-R-objetivosNeg.html", targetId: "r_objetivosNeg", initFnName: "initBloco_objetivosNeg" });
   carregarBloco({ url: "blocks/05-R-motivacoes.html", targetId: "r_motivacoes", initFnName: "initBloco_motivacoes" });
 
-  /* ✅ Onda 2: nome correto conforme seu bloco */
+  /* NOVO: Bloco 06 - Práticas */
+  carregarBloco({ url: "blocks/06-R-praticas.html", targetId: "r_praticas", initFnName: "initBloco_praticas" });
+
+  /* Onda 2 */
   carregarBloco({
     url: "blocks/Participar_da_Onda2.html",
     targetId: "onda2",
