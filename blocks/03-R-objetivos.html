@@ -133,12 +133,15 @@
           antes de refinar sua visão. Eles preferem aplicar esforços para agir efetivamente.
         </p>
 
-        <img class="dho-flow-img" src="assets/fluxodedesenvolvimento.png" alt="Fluxo de desenvolvimento">
+        <!-- Ajuste: texto "dho-flow-bottom" agora fica dentro do espaço vazio do fluxo (sobre a imagem) -->
+        <div class="dho-flow-figure" aria-label="Fluxo de desenvolvimento com interpretação">
+          <img class="dho-flow-img" src="assets/fluxodedesenvolvimento.png" alt="Fluxo de desenvolvimento">
 
-        <p class="dho-flow-bottom">
-          Ou seja, esta sequência sugere que para chegar lá, os primeiros passos devem ser desenvolver corpo/ambiente,
-          habilidades e comportamento para tornar possível o alcance da coerência na relação de trabalho.
-        </p>
+          <p class="dho-flow-caption">
+            Ou seja, esta sequência sugere que para chegar lá, os primeiros passos devem ser desenvolver corpo/ambiente,
+            habilidades e comportamento para tornar possível o alcance da coerência na relação de trabalho.
+          </p>
+        </div>
       </aside>
     </div>
 
@@ -235,16 +238,15 @@
 
   /* ====== CHART: centralizado no quadro (pizza + legenda) ====== */
   .dho-objetivos{
-    --pizzaSize: 260px;   /* desktop */
+    --pizzaSize: 260px;
     --chartGap: 22px;
     --legendMax: 420px;
   }
 
-  /* antes era grid "colado" na esquerda; agora centraliza o conjunto inteiro */
   .dho-chart-row{
     display: flex;
-    justify-content: center;  /* centro do quadro */
-    align-items: center;      /* centro vertical do conjunto */
+    justify-content: center;
+    align-items: center;
     gap: var(--chartGap);
     padding-top: 4px;
   }
@@ -270,12 +272,11 @@
     display: block;
   }
 
-  /* legenda também centralizada, mas mantendo leitura alinhada */
   #dhoObjetivosLegenda{
     display: grid;
     grid-template-columns: 1fr;
     row-gap: 12px;
-    align-content: center;   /* centraliza verticalmente dentro do espaço */
+    align-content: center;
     max-width: var(--legendMax);
   }
 
@@ -506,8 +507,6 @@
     grid-column: 1 / -1;
   }
 
-  .dho-flow-img{ display:block; width:90%; height:auto; margin:16px auto 16px auto; }
-
   .dho-flow-title{
     text-align: center;
     margin: 0 0 10px 0;
@@ -517,10 +516,44 @@
     color: rgba(232, 202, 255, 0.95);
   }
 
-  .dho-flow-top,
-  .dho-flow-bottom{
+  .dho-flow-top{
     margin: 0 auto;
     max-width: 860px;
+    font-size: 15px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.90);
+    text-align: justify;
+  }
+
+  /* ===== Ajuste pedido: colocar o texto dentro do "vazio" da imagem ===== */
+  .dho-flow-figure{
+    position: relative;
+    width: min(920px, 100%);
+    margin: 16px auto 0 auto;
+  }
+
+  .dho-flow-img{
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .dho-flow-caption{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 18px;
+    width: min(860px, calc(100% - 44px));
+    margin: 0;
+
+    padding: 12px 14px;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.10);
+    background: rgba(0,0,0,0.20);
+    box-shadow: 0 10px 26px rgba(0,0,0,0.22);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
     font-size: 15px;
     line-height: 1.6;
     color: rgba(255,255,255,0.90);
@@ -556,6 +589,14 @@
     .dho-chart-canvas{ justify-items: center; }
     .dho-chart-box{ margin: 0 auto; }
     .dho-rank-final{ width: 100%; }
+
+    /* no mobile o texto vira bloco abaixo (sem sobreposição) */
+    .dho-flow-caption{
+      position: static;
+      transform: none;
+      width: 100%;
+      margin-top: 12px;
+    }
   }
 
   @media (max-width: 520px){
@@ -569,7 +610,6 @@
       const root = document.querySelector(".dho-objetivos");
       if (!root) return;
 
-      // ========= util: carregar Chart.js com fallback =========
       const ensureChart = () => new Promise((resolve) => {
         if (window.Chart) return resolve(true);
 
@@ -591,7 +631,6 @@
         document.head.appendChild(s);
       });
 
-      // ========= 1) Pizza =========
       const renderPizza = () => {
         const dataPizza = [
           { label: "Trabalho e carreira", sub: "carreira, propósito, renda", value: 45, color: "rgba(180,130,255,0.95)" },
@@ -663,7 +702,6 @@
         setTimeout(force, 260);
       };
 
-      // ========= 2) Ranking progressivo =========
       const wrap = root.querySelector("#dhoRankWrap");
       const btn  = root.querySelector("#dhoRankNextBtn");
       const hint = root.querySelector("#dhoRankHint");
