@@ -146,7 +146,39 @@
 
 <style>
   .dho-objetivos { padding: 28px 16px; }
-  .dho-objetivos-wrap { max-width: 980px; margin: 0 auto; }
+
+  /* ===== Fundo "vidro" do bloco inteiro (igual referência do print) ===== */
+  .dho-objetivos-wrap{
+    max-width: 980px;
+    margin: 0 auto;
+
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 22px;
+    background: rgba(255,255,255,0.06);
+    box-shadow: 0 18px 44px rgba(0,0,0,0.40);
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    position: relative;
+    overflow: hidden;
+
+    padding: 18px 18px;
+  }
+
+  .dho-objetivos-wrap::before{
+    content:"";
+    position:absolute;
+    inset:-1px;
+    background:
+      radial-gradient(900px 380px at 22% 12%, rgba(180,130,255,0.12), transparent 62%),
+      radial-gradient(760px 340px at 84% 26%, rgba(130,160,255,0.09), transparent 58%),
+      linear-gradient(180deg, rgba(255,255,255,0.05), rgba(0,0,0,0.00) 55%);
+    pointer-events:none;
+    opacity: 0.95;
+  }
+
+  .dho-objetivos-wrap > *{ position: relative; z-index: 1; }
 
   .dho-kicker{
     margin: 0 0 10px 0;
@@ -232,18 +264,16 @@
     box-shadow: none !important;
   }
 
-  /* ====== CHART: centralizado no quadro (pizza + legenda) ====== */
   .dho-objetivos{
-    --pizzaSize: 260px;   /* desktop */
+    --pizzaSize: 260px;
     --chartGap: 22px;
     --legendMax: 420px;
   }
 
-  /* antes era grid "colado" na esquerda; agora centraliza o conjunto inteiro */
   .dho-chart-row{
     display: flex;
-    justify-content: center;  /* centro do quadro */
-    align-items: center;      /* centro vertical do conjunto */
+    justify-content: center;
+    align-items: center;
     gap: var(--chartGap);
     padding-top: 4px;
   }
@@ -269,12 +299,11 @@
     display: block;
   }
 
-  /* legenda também centralizada, mas mantendo leitura alinhada */
   #dhoObjetivosLegenda{
     display: grid;
     grid-template-columns: 1fr;
     row-gap: 12px;
-    align-content: center;   /* centraliza verticalmente dentro do espaço */
+    align-content: center;
     max-width: var(--legendMax);
   }
 
@@ -331,7 +360,6 @@
     text-align: justify;
   }
 
-  /* ===== Ranking e resto: mantidos ===== */
   .dho-rank-card{
     border: 0;
     background: transparent;
@@ -526,14 +554,12 @@
     text-align: justify;
   }
 
-  /* Layout geral */
   .dho-objetivos-header{ position: static !important; }
 
   .dho-card--chart{ grid-column: 1 / -1; justify-self: center; width: min(860px, 100%); }
   .dho-rank-card{ grid-column: 1 / -1; justify-self: center; width: min(750px, 100%); }
   .dho-rank-card .dho-card-head{ text-align:center; }
 
-  /* ===== Mobile / tablet ===== */
   @media (max-width: 920px){
     .dho-objetivos{ --pizzaSize: 240px; --legendMax: 100%; --chartGap: 12px; }
     .dho-objetivos-grid{ grid-template-columns: 1fr; }
@@ -559,6 +585,7 @@
 
   @media (max-width: 520px){
     .dho-objetivos{ --pizzaSize: 220px; }
+    .dho-objetivos-wrap{ padding: 16px 14px; border-radius: 20px; }
   }
 </style>
 
@@ -568,7 +595,6 @@
       const root = document.querySelector(".dho-objetivos");
       if (!root) return;
 
-      // ========= util: carregar Chart.js com fallback =========
       const ensureChart = () => new Promise((resolve) => {
         if (window.Chart) return resolve(true);
 
@@ -590,7 +616,6 @@
         document.head.appendChild(s);
       });
 
-      // ========= 1) Pizza =========
       const renderPizza = () => {
         const dataPizza = [
           { label: "Trabalho e carreira", sub: "carreira, propósito, renda", value: 45, color: "rgba(180,130,255,0.95)" },
@@ -662,7 +687,6 @@
         setTimeout(force, 260);
       };
 
-      // ========= 2) Ranking progressivo =========
       const wrap = root.querySelector("#dhoRankWrap");
       const btn  = root.querySelector("#dhoRankNextBtn");
       const hint = root.querySelector("#dhoRankHint");
