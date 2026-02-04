@@ -1,5 +1,3 @@
-//versão original
-
 <section class="dho-objetivos" aria-labelledby="dho-objetivos-title">
   <div class="dho-objetivos-wrap">
 
@@ -235,32 +233,33 @@
     box-shadow: none !important;
   }
 
-  /* ====== CHART: dimensões estáveis (sem “faixa amarela”) ====== */
+  /* ====== CHART: centralizado no quadro (pizza + legenda) ====== */
   .dho-objetivos{
     --pizzaSize: 260px;   /* desktop */
     --chartGap: 22px;
     --legendMax: 420px;
   }
 
+  /* antes era grid "colado" na esquerda; agora centraliza o conjunto inteiro */
   .dho-chart-row{
-    display: grid;
-    grid-template-columns: var(--pizzaSize) 1fr;
+    display: flex;
+    justify-content: center;  /* centro do quadro */
+    align-items: center;      /* centro vertical do conjunto */
     gap: var(--chartGap);
-    align-items: center;        /* corta o vazio */
     padding-top: 4px;
   }
 
   .dho-chart-canvas{
     display: grid;
-    justify-items: center;       /* aproxima da esquerda (linha azul) */
+    justify-items: center;
     align-items: center;
   }
 
   .dho-chart-box{
     width: var(--pizzaSize);
-    height: var(--pizzaSize);   /* chave: remove min-height + trava altura real */
+    height: var(--pizzaSize);
     position: relative;
-    margin: 0;                  /* sem centralizar */
+    margin: 0;
   }
 
   #dhoObjetivosPizza{
@@ -271,13 +270,12 @@
     display: block;
   }
 
-  /* Legenda em LISTA vertical alinhada (linha vermelha) */
+  /* legenda também centralizada, mas mantendo leitura alinhada */
   #dhoObjetivosLegenda{
     display: grid;
     grid-template-columns: 1fr;
     row-gap: 12px;
-    align-content: start;
-    justify-self: start;
+    align-content: center;   /* centraliza verticalmente dentro do espaço */
     max-width: var(--legendMax);
   }
 
@@ -286,11 +284,11 @@
     grid-template-columns: 10px 1fr auto;
     gap: 10px;
     align-items: start;
-    padding: 0;                /* sem “altura extra” */
+    padding: 0;
   }
 
   .dho-legend-item + .dho-legend-item{
-    border-top: 0 !important;  /* sem divisórias, como lista limpa */
+    border-top: 0 !important;
     margin-top: 0 !important;
     padding-top: 0 !important;
   }
@@ -327,7 +325,7 @@
   }
 
   .dho-footnote{
-    margin: 8px 0 0 0;   /* reduz altura “amarela” */
+    margin: 8px 0 0 0;
     font-size: 12.8px;
     line-height: 1.55;
     color: rgba(255,255,255,0.80);
@@ -540,10 +538,21 @@
   @media (max-width: 920px){
     .dho-objetivos{ --pizzaSize: 240px; --legendMax: 100%; --chartGap: 12px; }
     .dho-objetivos-grid{ grid-template-columns: 1fr; }
+
     .dho-chart-row{
+      display: grid;
       grid-template-columns: 1fr;
       align-items: start;
+      justify-items: center;
+      gap: 12px;
     }
+
+    #dhoObjetivosLegenda{
+      width: 100%;
+      max-width: 560px;
+      justify-self: center;
+    }
+
     .dho-chart-canvas{ justify-items: center; }
     .dho-chart-box{ margin: 0 auto; }
     .dho-rank-final{ width: 100%; }
