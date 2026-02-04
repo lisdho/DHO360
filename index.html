@@ -1,6 +1,4 @@
-
-/Index original 
-<!doctype html> 
+<!doctype html>
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8" />
@@ -8,7 +6,7 @@
   <title>DHO 360º</title>
 
   <style>
-    :root{
+:root{
       --bg:#07070b;
       --fg:#f4f4f8;
       --muted:#c7c7d6;
@@ -38,6 +36,7 @@
       color: var(--fg);
       background: transparent;
       overflow-x:hidden;
+      padding-top: var(--headerH, 92px);
     }
 
     html::before{
@@ -71,13 +70,32 @@
     a:hover{ opacity:1; }
 
     header.siteHeader{
-      position: sticky;
+      position: fixed;
       top: 0;
-      z-index: 98;
+      left: 0;
+      right: 0;
+      width: 100%;
+      z-index: 999;
       background: rgba(7,7,11,.62);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--line);
     }
+
+    /* /Fix: impedir headers de seções de ficarem fixos */
+    .dho-met-header,
+    .dho-objetivos-header,
+    .dho-on-header,
+    .dho-r-praticas-header,
+    .dho-r-motivacoes-header{
+      position: static !important;
+      top: auto !important;
+      left: auto !important;
+      right: auto !important;
+      width: auto !important;
+      z-index: auto !important;
+    }
+
+
 
     .navWrap{
       max-width:1100px;
@@ -87,7 +105,7 @@
     }
 
     .navTop{
-      padding:12px 0;
+      padding: 8px 0;
       display:flex;
       align-items:center;
       justify-content:space-between;
@@ -95,7 +113,7 @@
     }
 
     .navBottom{
-      padding:10px 0 12px;
+      padding: 7px 0 9px;
       border-top:1px solid rgba(255,255,255,.06);
       background: rgba(0,0,0,.08);
       display:flex;
@@ -119,9 +137,9 @@
     }
 
     .logoIcon{
-      width:22px;
-      height:22px;
-      flex:0 0 22px;
+      width: 20px;
+      height: 20px;
+      flex:0 0 20px;
       display:block;
       filter: drop-shadow(0 10px 18px rgba(124,58,237,.22));
     }
@@ -132,7 +150,7 @@
       align-items:baseline;
       flex-wrap:wrap;
     }
-    .brandName{ font-size:16px; font-weight:800; }
+    .brandName{ font-size: 15px; font-weight:800; }
     .pilot{
       font-size:12px;
       color: var(--muted);
@@ -205,11 +223,2612 @@
     @media (max-width: 900px){
       .pilot{display:none}
     }
-  </style>
+
+/* /Estilos por sessao */
+
+/* /Introducao */
+/* Base */
+  /* Acessibilidade: foco visível em interativos */
+  :where(a, button, summary):focus-visible{
+    outline: 2px solid rgba(233,213,255,.65);
+    outline-offset: 3px;
+    border-radius: 12px;
+  }
+
+  /* INTRO */
+.dho-intro{
+  padding: 28px 0 22px;
+  margin-bottom: 18px;
+}
+.dho-intro-wrap{
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.intro-kicker{
+  margin: 0 0 10px;
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: .10em;
+  text-transform: uppercase;
+}
+
+.dho-intro h1{
+  margin: 0 0 10px;
+  font-size: clamp(28px, 3.6vw, 40px);
+  line-height: 1.05;
+  font-weight: 740;
+  letter-spacing: -0.02em;
+}
+
+@media (max-width: 900px){
+  .dho-intro-wrap{ max-width: 100%; padding: 0 16px; }
+}
+
+}
+
+  /* Texto base reutilizável */
+  .prose{
+    margin: 0;
+    color: var(--body);
+    font-size: 15px;
+    line-height: 1.7;
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: none;
+  }
+  .prose p{ margin: 0 0 12px; }
+  .prose p:last-child{ margin-bottom: 0; }
+  @media (max-width: 700px){
+    .prose{ font-size: 14px; }
+  }
+
+  /* Byline */
+  .byline{
+    margin: 14px 0 18px;
+    padding: 14px 14px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: rgba(255,255,255,.02);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:14px;
+  }
+  .byline-left{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    min-width: 0;
+  }
+  .avatarWrap{
+    width: 81px;
+    height: 81px;
+    border-radius: 999px;
+    border: 2px solid rgba(233,213,255,.35);
+    background: radial-gradient(90px 90px at 30% 30%, rgba(168,85,247,.18), rgba(0,0,0,.20));
+    overflow:hidden;
+    flex: 0 0 81px;
+  }
+  .avatar{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
+  .avatarFallback{
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight: 750;
+    letter-spacing:.03em;
+    color: var(--fg);
+  }
+
+  .byline-text{ min-width: 0; }
+  .byline-name{
+    font-weight: 750;
+    font-size: 14px;
+    line-height: 1.2;
+  }
+  .byline-desc{
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.3;
+  }
+  .byline-link{
+    margin-top: 4px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .byline-link a{
+    color: var(--violet3);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    opacity: .95;
+  }
+  .byline-right{
+    flex: 0 0 auto;
+    color: var(--muted);
+    font-size: 12px;
+    letter-spacing:.04em;
+    white-space: nowrap;
+  }
+  @media (max-width: 700px){
+    .byline{
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .byline-right{
+      white-space: normal;
+    }
+  }
+
+  /* Split */
+  .dho-intro-split{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    align-items: start;
+    margin: 0 0 14px;
+  }
+  @media (max-width: 900px){
+    .dho-intro-split{ grid-template-columns: 1fr; }
+  }
+
+  /* Imagem */
+  .dho-intro-media{
+    background: var(--card2);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,.25);
+    position: relative;
+  }
+  .dho-intro-media::before{
+    content:"";
+    position:absolute; inset:-2px;
+    background: radial-gradient(520px 220px at 15% 0%, rgba(168,85,247,.10), transparent 60%);
+    pointer-events:none;
+  }
+  .dho-intro-media img{
+    width: 100%;
+    height: 290px;
+    object-fit: cover;
+    display: block;
+    position: relative;
+    z-index: 1;
+    filter: saturate(1.02) contrast(1.02);
+  }
+  @media (max-width: 900px){
+    .dho-intro-media img{ height: 260px; }
+  }
+
+  /* Objetivo central */
+  .dho-intro-goal{
+    margin: 12px auto 16px;
+    max-width: var(--introNarrow);
+    border-radius: 18px;
+    border: 1px solid rgba(233,213,255,.22);
+    background:
+      radial-gradient(520px 160px at 12% 0%, rgba(168,85,247,.12), transparent 58%),
+      rgba(255,255,255,.02);
+    box-shadow: 0 14px 44px rgba(0,0,0,.38);
+    position: relative;
+    overflow: hidden;
+    padding: 14px 16px;
+    text-align: center;
+  }
+  .dho-intro-goal::before{
+    content:"";
+    position:absolute;
+    inset:-2px;
+    background: linear-gradient(90deg, rgba(124,58,237,.22), rgba(168,85,247,.18), rgba(233,213,255,.08));
+    opacity: .55;
+    pointer-events:none;
+  }
+  .dho-intro-goal p{
+    margin: 0;
+    position: relative;
+    z-index: 1;
+    color: rgba(244,244,248,.92);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  .dho-intro-goal strong{
+    color: var(--violet3);
+    font-weight: 780;
+  }
+  @media (max-width: 700px){
+    .dho-intro-goal{
+      text-align: left;
+      padding: 14px 14px;
+    }
+  }
+
+  /* Quadros */
+  .dho-intro-panels{
+    max-width: var(--introNarrow);
+    margin: 12px auto 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 16px;
+  }
+  @media (max-width: 900px){
+    .dho-intro-panels{ grid-template-columns: 1fr; }
+  }
+  .panel{
+    border-radius: 16px;
+    border: 1px solid var(--panelStroke);
+    background: var(--panelFill);
+    box-shadow: 0 10px 30px rgba(0,0,0,.25);
+    padding: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .panel-title{
+    margin: 0 0 10px;
+    font-size: 12px;
+    color: rgba(255,255,255,.92);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    font-weight: 820;
+  }
+  .panel-text{ color: rgba(244,244,248,.90); font-size: 14px; line-height: 1.65; }
+
+  /* Acordeões */
+  .dho-intro-acc{
+    max-width: var(--introNarrow);
+    margin: 10px auto 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 16px;
+  }
+  @media (max-width: 900px){
+    .dho-intro-acc{ grid-template-columns: 1fr; }
+  }
+  details.acc{
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,.10);
+    background: rgba(255,255,255,.02);
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,.25);
+  }
+  summary.acc-btn{
+    list-style: none;
+    cursor: pointer;
+    padding: 10px 12px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap: 12px;
+
+    color: #fff;
+    font-weight: 820;
+    letter-spacing: -0.01em;
+    font-size: 13px;
+    text-transform: uppercase;
+
+    background: linear-gradient(90deg, rgba(8,8,14,.96), rgba(18,18,28,.96));
+    border-bottom: 1px solid rgba(255,255,255,.06);
+  }
+  summary.acc-btn::-webkit-details-marker{ display:none; }
+
+  .acc-arrow{
+    width: 26px;
+    height: 26px;
+    border-radius: 999px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex: 0 0 auto;
+    background: rgba(0,0,0,.35);
+    border: 1px solid rgba(255,255,255,.14);
+    color: rgba(255,255,255,.92);
+    font-size: 16px;
+    line-height: 1;
+    transition: transform .18s ease, background .18s ease;
+    user-select:none;
+  }
+  details.acc[open] .acc-arrow{
+    transform: rotate(90deg);
+    background: rgba(0,0,0,.48);
+  }
+
+  .acc-.acc-body::before{
+    content:"";
+    position:absolute;
+    inset: -2px;
+    background: radial-gradient(420px 160px at 12% 0%, rgba(168,85,247,.10), transparent 58%);
+    pointer-events:none;
+  }
+  .acc-body > *{ position: relative; z-index: 1; }
+
+
+/* /Metodologia */
+.dho-met{
+    --bg0: #23142f;
+    --bg1: #2a1637;
+
+    /* uniformizado (sem faixa mais clara) */
+    --wrapTop: rgba(255,255,255,0.06);
+    --wrapBot: rgba(255,255,255,0.06);
+
+    --card: rgba(255,255,255,0.06);
+    --card2: rgba(255,255,255,0.08);
+    --stroke: rgba(255,255,255,0.10);
+    --text: rgba(255,255,255,0.92);
+    --muted: rgba(255,255,255,0.72);
+    --muted2: rgba(255,255,255,0.60);
+
+    --pro: #c08ad6;
+    --lid: #8d5aa6;
+    --neg: #5b2e73;
+    --rh:  #e2c6ec;
+
+    --radius: 18px;
+    --shadow: 0 14px 40px rgba(0,0,0,0.25);
+
+    padding: 24px 16px;
+  }
+
+  .dho-met *{ box-sizing: border-box; }
+
+  .dho-met .dho-met-wrap{
+    max-width: 980px;
+    margin: 0 auto;
+    background: linear-gradient(180deg, var(--wrapTop), var(--wrapBot));
+    border: 1px solid var(--stroke);
+    border-radius: 22px;
+    box-shadow: var(--shadow);
+    padding: 24px 20px 18px;
+    color: var(--text);
+    backdrop-filter: blur(6px);
+  }
+
+  /* ✅ FORÇA o header a respeitar o fluxo (evita sticky/fixed vindos do CSS global) */
+  .dho-met .dho-met-header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    z-index: auto !important;
+
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    margin-bottom: 14px;
+  }
+
+  .dho-met .dho-met-title{
+    margin: 0;
+    font-size: 34px;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    color: var(--text);
+  }
+
+  .dho-met .dho-met-subtitle{
+    margin: 10px 0 0;
+    max-width: none;
+    width: 100%;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.55;
+    text-align: justify;
+    text-justify: inter-word;
+  }
+
+  .dho-met .dho-met-kpis{
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 12px;
+    margin: 14px 0 12px;
+  }
+
+  .dho-met .dho-met-card{
+    border: 1px solid var(--stroke);
+    border-radius: var(--radius);
+    background: var(--card);
+    padding: 14px 14px 12px;
+    min-height: 118px;
+  }
+  .dho-met .dho-met-card:nth-child(1){ grid-column: span 4; }
+  .dho-met .dho-met-card:nth-child(2){ grid-column: span 4; }
+  .dho-met .dho-met-card:nth-child(3){ grid-column: span 4; }
+
+  .dho-met .dho-met-card-label{ margin: 0; font-size: 13px; color: var(--muted); }
+  .dho-met .dho-met-number{ margin-top: 10px; font-size: 44px; font-weight: 800; letter-spacing: -0.03em; }
+  .dho-met .dho-met-small{ margin: 8px 0 0; font-size: 13px; color: var(--muted); line-height: 1.45; text-align: justify; text-justify: inter-word; }
+  .dho-met .dho-met-dot{ margin: 0 6px; color: var(--muted2); }
+  .dho-met .dho-met-muted{ color: var(--muted2); }
+
+  .dho-met .dho-met-inflexao-hero{
+    margin-top: -6px;
+    padding: 12px 12px;
+    border-radius: 14px;
+    border: 0px solid rgba(255,255,255,0.10);
+    background: transparent;
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .dho-met .dho-met-inflexao-hero-num{
+    font-size: 44px;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+
+  .dho-met .dho-met-inflexao-hero-title{
+    font-size: 14px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: var(--muted2);
+    margin-bottom: 6px;
+  }
+
+  .dho-met .dho-met-inflexao-hero-desc{
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.45;
+    text-align: justify;
+    text-justify: inter-word;
+  }
+
+  .dho-met .dho-met-bullets{
+    margin: 10px 0 0;
+    padding-left: 18px;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.5;
+    text-align: justify;
+    text-justify: inter-word;
+  }
+  .dho-met .dho-met-bullets li{ margin: 6px 0; }
+
+  .dho-met .dho-met-grid{
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 12px;
+    margin-top: 10px;
+  }
+
+  .dho-met .dho-met-panel{
+    grid-column: span 6;
+    border: 1px solid var(--stroke);
+    border-radius: var(--radius);
+    background: var(--card2);
+    padding: 16px 14px 14px;
+  }
+
+  .dho-met .dho-met-panel-head{ margin-bottom: 10px; }
+  .dho-met .dho-met-h3{ margin: 0; font-size: 16px; letter-spacing: -0.01em; }
+  .dho-met .dho-met-p{ margin: 6px 0 0; font-size: 13px; color: var(--muted); line-height: 1.5; text-align: justify; text-justify: inter-word; }
+
+  .dho-met .dho-met-comp{ margin-top: 10px; }
+
+  .dho-met .dho-met-comp-chart{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 0 10px;
+  }
+
+  .dho-met .dho-met-chart{ width: 100%; position: relative; }
+  .dho-met .dho-met-chart-donut{ height: 240px; max-width: 360px; }
+  .dho-met .dho-met-chart-bar{ height: 300px; }
+
+  .dho-met canvas{
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .dho-met .dho-met-keylist{
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 8px;
+  }
+
+  .dho-met .dho-met-keyitem{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 9px 9px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.10);
+    background: rgba(0,0,0,0.10);
+  }
+
+  .dho-met .dho-met-keyleft{
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    min-width: 0;
+  }
+
+  .dho-met .dho-met-keysq{
+    width: 11px;
+    height: 11px;
+    border-radius: 4px;
+    flex: 0 0 11px;
+    margin-right: 2px;
+  }
+
+  .dho-met .dho-met-keyname{
+    font-size: 12px;
+    color: var(--text);
+    font-weight: 650;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .dho-met .dho-met-keytag{
+    font-size: 11px;
+    color: var(--muted2);
+    white-space: nowrap;
+  }
+
+  .dho-met .dho-met-keyval{
+    font-size: 13px;
+    font-weight: 850;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+  }
+
+  .dho-met .dho-met-pro{ border-left: 3px solid var(--pro); }
+  .dho-met .dho-met-lid{ border-left: 3px solid var(--lid); }
+  .dho-met .dho-met-neg{ border-left: 3px solid var(--neg); }
+  .dho-met .dho-met-rh{  border-left: 3px solid var(--rh);  }
+
+  .dho-met .dho-met-sw-pro{ background: var(--pro); }
+  .dho-met .dho-met-sw-lid{ background: var(--lid); }
+  .dho-met .dho-met-sw-neg{ background: var(--neg); }
+  .dho-met .dho-met-sw-rh{  background: var(--rh);  }
+
+  .dho-met .dho-met-note{
+    margin: 10px 0 0;
+    font-size: 12px;
+    color: var(--muted2);
+    line-height: 1.5;
+    text-align: justify;
+    text-justify: inter-word;
+  }
+
+  .dho-met .dho-met-details{
+    margin-top: 12px;
+    border: 1px solid var(--stroke);
+    border-radius: var(--radius);
+    background: rgba(255,255,255,0.06);
+    overflow: hidden;
+  }
+
+  .dho-met .dho-met-summary{
+    list-style: none;
+    cursor: pointer;
+    padding: 14px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    font-weight: 700;
+    font-size: 14px;
+    user-select: none;
+    position: static !important;
+    top: auto !important;
+  }
+
+  .dho-met .dho-met-summary::-webkit-details-marker{ display: none; }
+
+  .dho-met .dho-met-summary-icon{
+    width: 30px;
+    height: 30px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.14);
+    background: rgba(0,0,0,0.12);
+    position: relative;
+    flex: 0 0 30px;
+  }
+
+  .dho-met .dho-met-summary-icon::before,
+  .dho-met .dho-met-summary-icon::after{
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 12px;
+    height: 2px;
+    background: rgba(255,255,255,0.85);
+    transform: translate(-50%, -50%);
+  }
+
+  .dho-met .dho-met-summary-icon::after{
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+
+  .dho-met details[open] .dho-met-summary-icon::after{ opacity: 0; }
+
+  .dho-met .dho-met-details-.dho-met .dho-met-rh-enunciado{
+    width: 100%;
+    padding: 0;
+    border: none;
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.55;
+    text-align: justify;
+    text-justify: inter-word;
+  }
+
+  .dho-met .dho-met-rh-toprow{
+    display: grid;
+    grid-template-columns: 1fr 0.9fr;
+    gap: 12px;
+    align-items: center;
+    margin-top: 12px;
+  }
+
+  .dho-met .dho-met-rh-metricas{
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    align-items: center;
+  }
+
+  .dho-met .dho-met-rh-metrica{
+    border: none;
+    background: transparent;
+    border-radius: 0;
+    padding: 0;
+    text-align: center;
+  }
+
+  .dho-met .dho-met-rh-metrica-num{
+    font-size: 34px;
+    font-weight: 950;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    background: linear-gradient(90deg, var(--pro), var(--rh));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .dho-met .dho-met-rh-metrica-label{
+    margin-top: 6px;
+    font-size: 12px;
+    color: var(--muted2);
+    line-height: 1.35;
+    text-align: center;
+  }
+
+  .dho-met .dho-met-rh-nota{
+    border: none;
+    background: transparent;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .dho-met .dho-met-rh-nota-kicker{
+    font-size: 12px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: var(--muted2);
+    font-weight: 850;
+  }
+
+  .dho-met .dho-met-rh-nota-text{
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+    text-align: justify;
+    text-justify: inter-word;
+  }
+
+  .dho-met .dho-met-rh-subtitle{
+    margin: 16px 0 10px;
+    font-size: 14px;
+    font-weight: 750;
+    letter-spacing: -0.01em;
+    color: var(--text);
+  }
+
+  .dho-met .dho-met-rh-feedbacks{
+    margin-top: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .dho-met .dho-met-rh-feedback{
+    border: 1px solid rgba(192,138,214,0.35);
+    background: linear-gradient(135deg, rgba(192,138,214,0.10), rgba(226,198,236,0.06));
+    border-radius: 16px;
+    padding: 14px 14px;
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.6;
+    text-align: justify;
+    text-justify: inter-word;
+  }
+
+  @media (max-width: 680px){
+    .dho-met .dho-met-keylist{ grid-template-columns: 1fr; }
+    .dho-met .dho-met-rh-toprow{ grid-template-columns: 1fr; align-items: start; }
+    .dho-met .dho-met-rh-metricas{ grid-template-columns: repeat(2, minmax(0, 1fr)); justify-items: center; gap: 12px; }
+    .dho-met .dho-met-rh-feedbacks{ grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 980px){
+    .dho-met .dho-met-card:nth-child(1),
+    .dho-met .dho-met-card:nth-child(2),
+    .dho-met .dho-met-card:nth-child(3){ grid-column: span 12; }
+    .dho-met .dho-met-panel{ grid-column: span 12; }
+    .dho-met .dho-met-chart-bar{ height: 280px; }
+  }
+
+
+/* /Dimensao 1 Objetivos */
+.dho-objetivos { padding: 28px 16px; }
+  .dho-objetivos-wrap { max-width: 980px; margin: 0 auto; }
+
+  .dho-kicker{
+    margin: 0 0 10px 0;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-size: 12px;
+    color: rgba(255,255,255,0.70);
+  }
+
+  .dho-title{
+    margin: 0 0 10px 0;
+    font-size: clamp(22px, 2.3vw, 34px);
+    line-height: 1.15;
+    color: #F5F5F7;
+    font-weight: 700;
+  }
+
+  .dho-subtitle{
+    margin: 0;
+    max-width: 980px;
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: rgba(255,255,255,0.85);
+    text-align: justify;
+  }
+
+  .dho-objetivos-grid{
+    margin-top: 18px;
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 14px;
+    align-items: start;
+  }
+
+  .dho-card{
+    border: 1px solid rgba(255,255,255,0.10);
+    background: rgba(255,255,255,0.07);
+    border-radius: 18px;
+    padding: 14px 14px 12px 14px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .dho-card::before{
+    content: "";
+    position: absolute;
+    inset: -1px;
+    background:
+      radial-gradient(900px 280px at 20% 0%, rgba(180,130,255,0.14), transparent 60%),
+      radial-gradient(700px 260px at 80% 20%, rgba(130,160,255,0.10), transparent 55%);
+    pointer-events: none;
+    opacity: 0.9;
+  }
+
+  .dho-card > *{ position: relative; z-index: 1; }
+  .dho-card-head{ margin-bottom: 10px; }
+
+  .dho-card-title{
+    margin: 0 0 6px 0;
+    font-size: 16px;
+    font-weight: 700;
+    color: #F5F5F7;
+    letter-spacing: 0.01em;
+  }
+
+  .dho-card-note{
+    margin: 0;
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: rgba(255,255,255,0.70);
+    text-align: justify;
+  }
+
+  .dho-plain-surface{
+    border: 0 !important;
+    background: transparent !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    height: auto;
+    box-shadow: none !important;
+  }
+
+  /* ====== CHART: dimensões estáveis (sem “faixa amarela”) ====== */
+  .dho-objetivos{
+    --pizzaSize: 260px;   /* desktop */
+    --chartGap: 22px;
+    --legendMax: 420px;
+  }
+
+  .dho-chart-row{
+    display: grid;
+    grid-template-columns: var(--pizzaSize) 1fr;
+    gap: var(--chartGap);
+    align-items: center;        /* corta o vazio */
+    padding-top: 4px;
+  }
+
+  .dho-chart-canvas{
+    display: grid;
+    justify-items: center;       /* aproxima da esquerda (linha azul) */
+    align-items: center;
+  }
+
+  .dho-chart-box{
+    width: var(--pizzaSize);
+    height: var(--pizzaSize);   /* chave: remove min-height + trava altura real */
+    position: relative;
+    margin: 0;                  /* sem centralizar */
+  }
+
+  #dhoObjetivosPizza{
+    position: absolute;
+    inset: 0;
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+  }
+
+  /* Legenda em LISTA vertical alinhada (linha vermelha) */
+  #dhoObjetivosLegenda{
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 12px;
+    align-content: start;
+    justify-self: start;
+    max-width: var(--legendMax);
+  }
+
+  .dho-legend-item{
+    display: grid;
+    grid-template-columns: 10px 1fr auto;
+    gap: 10px;
+    align-items: start;
+    padding: 0;                /* sem “altura extra” */
+  }
+
+  .dho-legend-item + .dho-legend-item{
+    border-top: 0 !important;  /* sem divisórias, como lista limpa */
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+
+  .dho-legend-dot{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-top: 4px;
+    box-shadow: 0 0 0 2px rgba(255,255,255,0.08);
+  }
+
+  .dho-legend-label{
+    font-size: 13.5px;
+    line-height: 1.35;
+    color: rgba(255,255,255,0.85);
+    margin: 0;
+  }
+
+  .dho-legend-sub{
+    font-size: 12px;
+    line-height: 1.35;
+    color: rgba(255,255,255,0.70);
+    margin: 2px 0 0 0;
+    text-align: justify;
+  }
+
+  .dho-legend-pct{
+    font-variant-numeric: tabular-nums;
+    font-weight: 700;
+    color: #F5F5F7;
+    font-size: 13.5px;
+    opacity: 0.95;
+  }
+
+  .dho-footnote{
+    margin: 8px 0 0 0;   /* reduz altura “amarela” */
+    font-size: 12.8px;
+    line-height: 1.55;
+    color: rgba(255,255,255,0.80);
+    text-align: justify;
+  }
+
+  /* ===== Ranking e resto: mantidos ===== */
+  .dho-rank-card{
+    border: 0;
+    background: transparent;
+    border-radius: 0;
+    padding: 0;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    position: relative;
+    overflow: visible;
+    grid-column: 1 / -1;
+  }
+
+  .dho-rank-wrap{ margin-top: 10px; }
+
+  .dho-rank{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 8px;
+  }
+
+  .dho-rank-item{
+    display: grid;
+    grid-template-columns: 30px 1fr;
+    gap: 10px;
+    padding: 10px 10px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.10);
+    background: rgba(0,0,0,0.12);
+  }
+
+  .dho-rank-item--top{
+    border-color: rgba(255,255,255,0.14);
+    background: linear-gradient(180deg, rgba(180,130,255,0.10), rgba(0,0,0,0.12));
+  }
+
+  .dho-rank-n{
+    width: 28px;
+    height: 28px;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.06);
+    color: rgba(255,255,255,0.92);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .dho-rank-title{
+    margin: 0;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.92);
+  }
+
+  .dho-rank-desc{
+    margin: 3px 0 0 0;
+    font-size: 12.8px;
+    line-height: 1.45;
+    color: rgba(255,255,255,0.70);
+    text-align: justify;
+  }
+
+  .is-hidden{ display: none !important; }
+
+  .dho-rank-cta{
+    margin-top: 10px;
+    display: grid;
+    gap: 6px;
+  }
+
+  .dho-btn{
+    width: 100%;
+    border: 1px solid rgba(206, 182, 255, 0.26);
+    border-radius: 14px;
+    padding: 11px 12px;
+    font-weight: 800;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    color: rgba(255,255,255,0.94);
+    background: rgba(165, 125, 255, 0.16);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.22);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: transform 0.12s ease, background 0.12s ease, border-color 0.12s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .dho-btn:hover{
+    transform: translateY(-1px);
+    background: rgba(175, 140, 255, 0.20);
+    border-color: rgba(220, 200, 255, 0.34);
+  }
+
+  .dho-btn:active{ transform: translateY(0px); }
+
+  .dho-btn:disabled{
+    cursor: default;
+    opacity: 0.70;
+    transform: none;
+  }
+
+  .dho-btn--glow::after{
+    content: "";
+    position: absolute;
+    inset: -40%;
+    background: linear-gradient(
+      110deg,
+      transparent 0%,
+      rgba(245, 235, 255, 0.06) 35%,
+      rgba(245, 235, 255, 0.22) 50%,
+      rgba(245, 235, 255, 0.06) 65%,
+      transparent 100%
+    );
+    transform: translateX(-55%) rotate(8deg);
+    animation: dhoShimmer 3.6s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes dhoShimmer{
+    0%   { transform: translateX(-60%) rotate(8deg); opacity: 0.0; }
+    18%  { opacity: 0.55; }
+    50%  { transform: translateX(60%) rotate(8deg); opacity: 0.35; }
+    100% { transform: translateX(60%) rotate(8deg); opacity: 0.0; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .dho-btn--glow::after{ animation: none; }
+  }
+
+  .dho-rank-hint{
+    margin: 0;
+    font-size: 12.5px;
+    line-height: 1.45;
+    color: rgba(255,255,255,0.70);
+    text-align: justify;
+  }
+
+  .dho-rank-final{
+    display: none;
+    width: 40%;
+    margin: 12px auto 0 auto;
+    border: 0;
+    border-radius: 6px;
+    padding: 10px 12px;
+    background: rgba(232, 120, 190, 0.50);
+    text-align: center;
+  }
+
+  .dho-rank-final.is-visible{ display: block; }
+
+  .dho-rank-final-q{
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.45;
+    color: rgba(254, 255, 255,0.92);
+    font-weight: 800;
+    text-align: center;
+  }
+
+  .dho-insight-box--flow{
+    background: transparent !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    grid-column: 1 / -1;
+  }
+
+  .dho-flow-img{ display:block; width:90%; height:auto; margin:16px auto 16px auto; }
+
+  .dho-flow-title{
+    text-align: center;
+    margin: 0 0 10px 0;
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    color: rgba(232, 202, 255, 0.95);
+  }
+
+  .dho-flow-top,
+  .dho-flow-bottom{
+    margin: 0 auto;
+    max-width: 860px;
+    font-size: 15px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.90);
+    text-align: justify;
+  }
+
+  /* Layout geral */
+  .dho-objetivos-header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+ position: static !important; }
+
+  .dho-card--chart{ grid-column: 1 / -1; justify-self: center; width: min(860px, 100%); }
+  .dho-rank-card{ grid-column: 1 / -1; justify-self: center; width: min(750px, 100%); }
+  .dho-rank-card .dho-card-head{ text-align:center; }
+
+  /* ===== Mobile / tablet ===== */
+  @media (max-width: 920px){
+    .dho-objetivos{ --pizzaSize: 240px; --legendMax: 100%; --chartGap: 12px; }
+    .dho-objetivos-grid{ grid-template-columns: 1fr; }
+    .dho-chart-row{
+      grid-template-columns: 1fr;
+      align-items: start;
+    }
+    .dho-chart-canvas{ justify-items: center; }
+    .dho-chart-box{ margin: 0 auto; }
+    .dho-rank-final{ width: 100%; }
+  }
+
+  @media (max-width: 520px){
+    .dho-objetivos{ --pizzaSize: 220px; }
+  }
+
+
+/* /Dimensao 2 Objetivos do Negocio */
+.dho-objetivos-negocio{
+      --fg: rgba(255,255,255,0.96);
+      --muted: rgba(255,255,255,0.85);
+      --note: rgba(255,255,255,0.70);
+      --stroke: rgba(255,255,255,0.10);
+      --card: rgba(255,255,255,0.07);
+      --card2: rgba(255,255,255,0.06);
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --blur: blur(10px);
+      --violet: rgba(168,85,247,0.95);
+      --violet2: rgba(124,58,237,0.95);
+
+      padding: 26px 16px 34px;
+    }
+
+    .dho-objetivos-negocio-wrap{
+      max-width: 1060px;
+      margin: 0 auto;
+    }
+
+    /* Tipografia */
+    .dho-objetivos-negocio h2,
+    .dho-objetivos-negocio h3{
+      color: var(--fg);
+      margin: 0;
+      letter-spacing: .2px;
+      text-align: left;
+    }
+    .dho-objetivos-negocio h2{
+      font-size: 20px;
+      font-weight: 650;
+    }
+    .dho-objetivos-negocio h3{
+      font-size: 16px;
+      font-weight: 650;
+      margin-bottom: 6px;
+    }
+
+    .dho-objetivos-negocio p,
+    .dho-objetivos-negocio li{
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.55;
+      margin: 0;
+      text-align: justify;
+      text-justify: inter-word;
+    }
+
+    .dho-on-sub{
+      color: var(--note);
+      margin-top: 6px;
+    }
+
+    .dho-on-note{
+      color: var(--note);
+      font-size: 13px;
+      margin-top: 10px;
+    }
+
+    .dho-on-header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+
+      display: grid;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .dho-on-divider{
+      height: 1px;
+      background: var(--stroke);
+      width: 100%;
+    }
+
+    .dho-on-editorial{
+      display: grid;
+      gap: 10px;
+      margin: 10px 0 12px;
+    }
+    .dho-on-lead{
+      font-size: 15px;
+      color: var(--fg);
+      font-weight: 550;
+    }
+
+    /* Insight faixa */
+    .dho-on-insight{
+      display: grid;
+      grid-template-columns: 18px 1fr;
+      gap: 10px;
+      align-items: start;
+      padding: 12px 14px;
+      border: 1px solid var(--stroke);
+      background: var(--card);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
+      margin: 10px 0 18px;
+    }
+    .dho-on-insight p{
+      color: var(--fg);
+    }
+    .dho-on-insight-mark{
+      color: rgba(233,213,255,0.95);
+      font-weight: 700;
+      line-height: 1;
+      margin-top: 2px;
+    }
+    .dho-on-insight--soft{
+      background: var(--card2);
+      box-shadow: none;
+      margin-top: 14px;
+    }
+
+    .dho-on-section{
+      margin: 18px 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .dho-on-section-head{
+      display: grid;
+      gap: 8px;
+    }
+
+    /* Micro KPI */
+    .dho-on-micro{
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 12px;
+      align-items: stretch;
+      margin-top: 4px;
+    }
+    .dho-on-micro-kpi{
+      border: 1px solid var(--stroke);
+      background: rgba(255,255,255,0.04);
+      border-radius: 14px;
+      padding: 12px 14px;
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
+    }
+    .dho-on-kpi-num{
+      color: var(--fg);
+      font-size: 28px;
+      font-weight: 750;
+      line-height: 1.05;
+      text-align: left;
+    }
+    .dho-on-kpi-label{
+      color: var(--note);
+      font-size: 12.5px;
+      margin-top: 6px;
+      text-align: left;
+    }
+    .dho-on-micro-note{
+      display: grid;
+      align-content: center;
+    }
+
+    /* Card qualitativo */
+    .dho-on-card{
+      border: 1px solid var(--stroke);
+      background: var(--card);
+      border-radius: 14px;
+      padding: 12px 14px;
+      box-shadow: var(--shadow);
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
+    }
+
+    /* Lista */
+    .dho-on-list{
+      margin: 0;
+      padding-left: 18px;
+      display: grid;
+      gap: 8px;
+    }
+
+    /* Chart cards */
+    .dho-on-chartCard{
+      border: 1px solid var(--stroke);
+      background: rgba(255,255,255,0.05);
+      border-radius: 16px;
+      padding: 12px 12px 10px;
+      box-shadow: var(--shadow);
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
+    }
+    .dho-on-chartCard--dark{
+      background: rgba(255,255,255,0.035);
+    }
+
+    .dho-on-chartTop{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .dho-on-legend{
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .dho-on-legend-item{
+      color: var(--note);
+      font-size: 12.5px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-align: left;
+    }
+    .dho-on-legend-muted{
+      opacity: .85;
+    }
+    .dho-on-dot{
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      display: inline-block;
+      border: 1px solid var(--stroke);
+    }
+    .dho-on-dot-primary{
+      background: rgba(168,85,247,0.75);
+    }
+    .dho-on-dot-muted{
+      background: rgba(255,255,255,0.10);
+    }
+
+    .dho-on-canvasWrap{
+      position: relative;
+      width: 100%;
+    }
+
+    .dho-on-insightline{
+      color: var(--fg);
+      font-size: 14px;
+      margin-top: 6px;
+      text-align: justify;
+      text-justify: inter-word;
+    }
+
+    /* Details / accordion */
+    .dho-on-details{
+      border: 1px solid var(--stroke);
+      border-radius: 14px;
+      padding: 10px 12px;
+      background: rgba(255,255,255,0.03);
+    }
+    .dho-on-details summary{
+      color: var(--fg);
+      cursor: pointer;
+      font-size: 13.5px;
+      text-align: left;
+      list-style: none;
+      outline: none;
+    }
+    .dho-on-details summary::-webkit-details-marker{ display:none; }
+    .dho-on-details-/* Planos (escala 1-5) */
+    .dho-on-planos{
+      display: grid;
+      gap: 10px;
+      border: 1px solid var(--stroke);
+      background: rgba(255,255,255,0.03);
+      border-radius: 16px;
+      padding: 12px;
+    }
+    .dho-on-pl-row{
+      display: grid;
+      grid-template-columns: 1.2fr 160px 34px 110px;
+      gap: 10px;
+      align-items: center;
+      padding: 8px 10px;
+      border-radius: 12px;
+    }
+    .dho-on-pl-row.is-fragil{
+      background: rgba(168,85,247,0.08);
+      border: 1px solid rgba(168,85,247,0.18);
+    }
+    .dho-on-pl-label{
+      color: var(--muted);
+      font-size: 13.5px;
+      text-align: left;
+    }
+    .dho-on-pl-scale{
+      display: inline-grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+      align-items: center;
+      justify-items: center;
+    }
+    .dho-on-pl-dot{
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      border: 1px solid var(--stroke);
+      background: rgba(255,255,255,0.06);
+    }
+    .dho-on-pl-dot.is-on{
+      background: rgba(168,85,247,0.78);
+      border-color: rgba(168,85,247,0.35);
+    }
+    .dho-on-pl-val{
+      color: var(--fg);
+      font-weight: 700;
+      text-align: left;
+    }
+    .dho-on-pl-txt{
+      color: var(--note);
+      font-size: 12.5px;
+      text-align: left;
+    }
+
+    /* Fecho */
+    .dho-on-close{
+      margin-top: 22px;
+      display: grid;
+      gap: 12px;
+    }
+    .dho-on-cta{
+      border: 1px solid rgba(233,213,255,0.18);
+      background: rgba(233,213,255,0.06);
+      border-radius: 16px;
+      padding: 14px 16px;
+      box-shadow: var(--shadow);
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
+    }
+    .dho-on-cta p{
+      color: var(--fg);
+      font-size: 15px;
+      font-weight: 650;
+      text-align: center;
+    }
+
+    /* Responsivo */
+    @media (max-width: 820px){
+      .dho-on-micro{
+        grid-template-columns: 1fr;
+      }
+      .dho-on-pl-row{
+        grid-template-columns: 1fr;
+        gap: 8px;
+        padding: 10px 10px;
+      }
+      .dho-on-pl-scale{
+        justify-items: start;
+        width: fit-content;
+      }
+      .dho-on-cta p{
+        text-align: justify;
+      }
+    }
+
+
+/* /Dimensao 3 Motivacoes */
+/* =========================
+       DHO 360 | Bloco Motivações
+       ========================= */
+    .dho-motivacoes { width: 100%; }
+    .dho-motivacoes-wrap{
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 26px 18px 34px 18px;
+      color: rgba(255,255,255,0.92);
+    }
+
+    /* Tipografia base */
+    .dho-kicker{
+      margin: 0 0 10px 0;
+      font-size: 12px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.70);
+    }
+    .dho-motivacoes h2{
+      margin: 0 0 10px 0;
+      font-size: 26px;
+      line-height: 1.20;
+      color: rgba(255,255,255,0.96);
+    }
+    .dho-subtitle{
+      margin: 0;
+      font-size: 14.5px;
+      line-height: 1.55;
+      color: rgba(255,255,255,0.85);
+      text-align: justify;
+      text-justify: inter-word;
+    }
+
+    /* Seções */
+    .dho-quad{ margin-top: 18px; }
+    .dho-quad-titleRow{
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .dho-quad h3{
+      margin: 0 0 6px 0;
+      font-size: 18px;
+      color: rgba(255,255,255,0.96);
+    }
+    .dho-quad-sub{
+      margin: 0;
+      font-size: 13.5px;
+      line-height: 1.55;
+      color: rgba(255,255,255,0.80);
+      text-align: justify;
+      text-justify: inter-word;
+    }
+
+    .dho-quad-grid{
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    /* Cards (glass leve) */
+    .dho-col{
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.07);
+      box-shadow: 0 8px 26px rgba(0,0,0,0.28);
+      border-radius: 14px;
+      padding: 14px 14px 12px 14px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      overflow: hidden;
+    }
+    .dho-col-head h4{
+      margin: 0;
+      font-size: 14px;
+      color: rgba(255,255,255,0.96);
+    }
+    .dho-col-sub{
+      margin: 6px 0 10px 0;
+      font-size: 12.5px;
+      color: rgba(255,255,255,0.70);
+      text-align: justify;
+      text-justify: inter-word;
+    }
+
+    .dho-rank{
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 8px;
+    }
+    .dho-rank li{
+      display: grid;
+      grid-template-columns: 24px 1fr;
+      grid-template-rows: auto auto;
+      column-gap: 10px;
+      row-gap: 2px;
+      padding: 10px 10px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(0,0,0,0.16);
+    }
+    .dho-rank li.is-top{
+      border-color: rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+    }
+    .dho-rank-n{
+      grid-row: 1 / span 2;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.16);
+      color: rgba(255,255,255,0.92);
+      font-size: 12px;
+    }
+    .dho-rank-t{
+      font-size: 13px;
+      color: rgba(255,255,255,0.96);
+      line-height: 1.20;
+    }
+    .dho-rank-d{
+      font-size: 12px;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.35;
+      text-align: justify;
+      text-justify: inter-word;
+    }
+
+    .dho-others{
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255,255,255,0.10);
+    }
+    .dho-others-label{
+      margin: 0 0 8px 0;
+      font-size: 12px;
+      color: rgba(255,255,255,0.70);
+      text-align: justify;
+      text-justify: inter-word;
+    }
+    .dho-others ul{
+      margin: 0;
+      padding-left: 16px;
+      color: rgba(255,255,255,0.80);
+    }
+    .dho-others li{
+      margin: 4px 0;
+      font-size: 12.5px;
+      line-height: 1.30;
+      text-align: justify;
+      text-justify: inter-word;
+    }
+
+    .dho-col-note{
+      margin: 10px 0 0 0;
+      font-size: 12.5px;
+      line-height: 1.55;
+      color: rgba(255,255,255,0.78);
+      text-align: justify;
+      text-justify: inter-word;
+    }
+
+    .dho-footnote{
+      margin: 10px 0 0 0;
+      font-size: 12px;
+      line-height: 1.55;
+      color: rgba(255,255,255,0.70);
+      text-align: justify;
+      text-justify: inter-word;
+    }
+
+    .dho-bridge{
+      margin: 14px 0 0 0;
+      font-size: 14px;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.85);
+      text-align: justify;
+      text-justify: inter-word;
+    }
+
+    /* Retenção */
+    .dho-retencao{ margin-top: 18px; }
+    .dho-ret-head h3{
+      margin: 0 0 6px 0;
+      font-size: 18px;
+      color: rgba(255,255,255,0.96);
+    }
+    .dho-ret-sub{
+      margin: 0;
+      font-size: 13.5px;
+      line-height: 1.55;
+      color: rgba(255,255,255,0.80);
+      text-align: justify;
+      text-justify: inter-word;
+    }
+    .dho-ret-grid{
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: 1.4fr 0.9fr;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .dho-ret-chartCard{
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.07);
+      box-shadow: 0 8px 26px rgba(0,0,0,0.28);
+      border-radius: 14px;
+      padding: 14px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .dho-ret-chartHead{
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .dho-ret-chartHead h4{
+      margin: 0 0 6px 0;
+      font-size: 14px;
+      color: rgba(255,255,255,0.96);
+    }
+    .dho-ret-caption{
+      margin: 0;
+      font-size: 12px;
+      color: rgba(255,255,255,0.70);
+      text-align: justify;
+      text-justify: inter-word;
+    }
+    .dho-ret-legend{
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 999px;
+      background: rgba(0,0,0,0.18);
+      color: rgba(255,255,255,0.80);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    .dho-dot{
+      width: 10px; height: 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.30);
+      display: inline-block;
+    }
+
+    .dho-chartWrap{
+      height: 280px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(0,0,0,0.16);
+      padding: 10px;
+    }
+    .dho-chartWrap canvas{ width: 100% !important; height: 100% !important; }
+
+    .dho-ret-note{
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255,255,255,0.10);
+    }
+    .dho-ret-noteTitle{
+      margin: 0 0 6px 0;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.70);
+    }
+    .dho-ret-noteText{
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.60;
+      color: rgba(255,255,255,0.82);
+      text-align: justify;
+      text-justify: inter-word;
+    }
+
+    .dho-ret-list h4{
+      margin: 0 0 10px 0;
+      font-size: 14px;
+      color: rgba(255,255,255,0.96);
+    }
+    .dho-metrics{
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 8px;
+    }
+    .dho-metrics li{
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.06);
+    }
+    .dho-metrics span{
+      font-size: 13px;
+      color: rgba(255,255,255,0.85);
+      text-align: justify;
+      text-justify: inter-word;
+      flex: 1;
+      padding-right: 8px;
+    }
+    .dho-metrics strong{
+      font-size: 13px;
+      color: rgba(255,255,255,0.96);
+      white-space: nowrap;
+    }
+
+    .dho-callout{
+      margin-top: 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.06);
+      padding: 12px 14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+    }
+    .dho-callout p{
+      margin: 0;
+      font-size: 13.5px;
+      line-height: 1.60;
+      color: rgba(255,255,255,0.90);
+      text-align: justify;
+      text-justify: inter-word;
+    }
+
+    /* Negócio */
+    .dho-neg{ margin-top: 18px; }
+    .dho-neg-head h3{
+      margin: 0 0 6px 0;
+      font-size: 18px;
+      color: rgba(255,255,255,0.96);
+    }
+    .dho-neg-sub{
+      margin: 0 0 10px 0;
+      font-size: 13.5px;
+      line-height: 1.55;
+      color: rgba(255,255,255,0.80);
+      text-align: justify;
+      text-justify: inter-word;
+    }
+    .dho-neg-list{
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    .dho-neg-item{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(0,0,0,0.16);
+    }
+    .dho-neg-item span{
+      font-size: 13px;
+      color: rgba(255,255,255,0.85);
+      text-align: justify;
+      text-justify: inter-word;
+    }
+    .dho-neg-item strong{
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255,255,255,0.16);
+      color: rgba(255,255,255,0.92);
+      font-size: 12px;
+      flex: 0 0 auto;
+    }
+
+    .dho-close{
+      margin: 12px 0 0 0;
+      font-size: 14px;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.85);
+      text-align: justify;
+      text-justify: inter-word;
+    }
+    .dho-question{
+      margin: 10px 0 0 0;
+      font-size: 14px;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.92);
+      text-align: justify;
+      text-justify: inter-word;
+    }
+
+    /* Responsivo */
+    @media (max-width: 980px){
+      .dho-quad-grid{ grid-template-columns: repeat(2, 1fr); }
+      .dho-ret-grid{ grid-template-columns: 1fr; }
+      .dho-neg-list{ grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px){
+      .dho-motivacoes-wrap{ padding: 22px 14px 30px 14px; }
+      .dho-motivacoes h2{ font-size: 22px; }
+      .dho-quad-grid{ grid-template-columns: 1fr; }
+      .dho-chartWrap{ height: 260px; }
+    }
+
+
+/* /Dimensao 4 Praticas */
+/* =========================
+       DHO 360 | Bloco: Práticas
+       ========================= */
+    .dho-praticas{
+      position: relative;
+      padding: 22px 0 28px;
+    }
+    .dho-praticas-wrap{
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 0 18px;
+    }
+
+    /* Paleta e base */
+    .dho-praticas{
+      --fg: rgba(255,255,255,0.96);
+      --sub: rgba(255,255,255,0.85);
+      --muted: rgba(255,255,255,0.70);
+      --stroke: rgba(255,255,255,0.10);
+      --card: rgba(255,255,255,0.07);
+      --card2: rgba(255,255,255,0.06);
+      --shadow: 0 10px 26px rgba(0,0,0,.34);
+      --blur: blur(10px);
+
+      --v1: rgba(124,58,237,0.22);
+      --v2: rgba(168,85,247,0.22);
+      --v3: rgba(233,213,255,0.18);
+
+      --h1: 22px;
+      --h2: 16px;
+      --p: 14.5px;
+      --small: 12.5px;
+
+      color: var(--sub);
+    }
+
+    /* Tipografia */
+    .dho-praticas h2,
+    .dho-praticas .h3,
+    .dho-praticas .h4{
+      color: var(--fg);
+      margin: 0 0 8px 0;
+      letter-spacing: 0.2px;
+    }
+    .dho-praticas h2{
+      font-size: clamp(20px, 2vw, 26px);
+      line-height: 1.18;
+      font-weight: 760;
+    }
+    .dho-praticas .h3{
+      font-size: 16px;
+      font-weight: 720;
+      line-height: 1.25;
+    }
+    .dho-praticas .h4{
+      font-size: 14px;
+      font-weight: 720;
+      line-height: 1.25;
+    }
+    .dho-praticas p{
+      margin: 0 0 10px 0;
+      font-size: var(--p);
+      line-height: 1.6;
+      text-align: justify; /* Regra obrigatória */
+      text-justify: inter-word;
+    }
+
+    /* Cards */
+    .dho-praticas .card{
+      background: var(--card);
+      border: 1px solid var(--stroke);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
+      padding: 14px 16px;
+    }
+
+    /* Header */
+    .dho-praticas-head{
+      margin-bottom: 14px;
+    }
+    .dho-praticas-kicker{
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      margin-bottom: 10px;
+      border: 1px solid var(--stroke);
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(124,58,237,0.16), rgba(168,85,247,0.10));
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .dho-praticas-sub{
+      color: var(--sub);
+      margin-top: 8px;
+      max-width: 980px;
+    }
+    .dho-praticas-insight{
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 10px;
+      align-items: start;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid var(--stroke);
+      background: linear-gradient(135deg, rgba(124,58,237,0.12), rgba(233,213,255,0.06));
+    }
+    .insight-badge{
+      font-size: 12px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--stroke);
+      background: rgba(0,0,0,0.14);
+      white-space: nowrap;
+      margin-top: 1px;
+    }
+    .insight-text{
+      margin: 0;
+      color: var(--fg);
+    }
+
+    /* Guide */
+    .dho-praticas-guide{
+      margin: 14px 0;
+    }
+    .guide-list{
+      margin: 10px 0 8px 0;
+      padding-left: 18px;
+    }
+    .guide-list li{
+      margin: 8px 0;
+      font-size: var(--p);
+      line-height: 1.55;
+      color: var(--sub);
+      text-align: justify; /* regra */
+      text-justify: inter-word;
+    }
+    .tag{
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 8px;
+      border: 1px solid var(--stroke);
+      border-radius: 999px;
+      font-size: 12px;
+      color: var(--muted);
+      background: rgba(0,0,0,0.12);
+      margin-right: 6px;
+      white-space: nowrap;
+    }
+    .guide-note{
+      color: var(--muted);
+      margin-top: 8px;
+      font-size: var(--small);
+    }
+
+    /* Core */
+    .dho-praticas-core{
+      margin-top: 10px;
+    }
+    .core-top{
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      align-items: start;
+      margin: 8px 0 10px;
+    }
+    .core-desc{
+      color: var(--muted);
+      margin-top: 2px;
+      font-size: var(--small);
+    }
+    .view-toggle{
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .toggle-btn{
+      appearance: none;
+      border: 1px solid var(--stroke);
+      background: rgba(0,0,0,0.14);
+      color: var(--muted);
+      padding: 8px 10px;
+      border-radius: 999px;
+      font-size: 12.5px;
+      letter-spacing: .02em;
+      cursor: pointer;
+      transition: transform .08s ease, background .2s ease, color .2s ease;
+    }
+    .toggle-btn:hover{ transform: translateY(-1px); }
+    .toggle-btn.is-active{
+      color: var(--fg);
+      background: linear-gradient(135deg, rgba(124,58,237,0.18), rgba(168,85,247,0.10));
+    }
+
+    /* Heatmap container */
+    .heatwrap{
+      border: 1px solid var(--stroke);
+      border-radius: 16px;
+      background: rgba(255,255,255,0.03);
+      box-shadow: 0 12px 28px rgba(0,0,0,.28);
+      overflow: hidden;
+    }
+    .heat-head{
+      display: grid;
+      grid-template-columns: 1.6fr 0.7fr 0.9fr 0.8fr 0.55fr;
+      gap: 0;
+      border-bottom: 1px solid var(--stroke);
+      background: linear-gradient(135deg, rgba(124,58,237,0.10), rgba(0,0,0,0.12));
+    }
+    .heat-th{
+      padding: 10px 10px;
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      border-right: 1px solid rgba(255,255,255,0.06);
+      text-align: left;
+    }
+    .heat-th:last-child{ border-right: none; }
+
+    .heat-body .row{
+      display: grid;
+      grid-template-columns: 1.6fr 0.7fr 0.9fr 0.8fr 0.55fr;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      background: rgba(0,0,0,0.10);
+    }
+    .heat-body .row:last-child{ border-bottom: none; }
+
+    .cell{
+      padding: 10px 10px;
+      border-right: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 44px;
+    }
+    .cell:last-child{ border-right: none; }
+
+    .pratica{
+      color: var(--fg);
+      font-size: 13.5px;
+      line-height: 1.25;
+      text-align: left;
+      font-weight: 640;
+    }
+    .heatbox{
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      border-radius: 12px;
+      padding: 8px 10px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+    }
+    .heatbox .val{
+      font-size: 13px;
+      color: var(--fg);
+      font-weight: 720;
+    }
+    .heatbox .lab{
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: .02em;
+      text-align: left;
+    }
+    .gap-pill{
+      width: 100%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(0,0,0,0.10);
+      color: var(--fg);
+      font-size: 12.5px;
+      font-weight: 700;
+    }
+
+    /* Legend */
+    .legend{
+      padding: 12px 14px;
+      background: rgba(0,0,0,0.12);
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .legend-row{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 6px;
+    }
+    .legend-label{
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .swatch{
+      width: 22px;
+      height: 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.10);
+    }
+    .s1{ background: rgba(20,20,30,0.55); }
+    .s2{ background: rgba(124,58,237,0.18); }
+    .s3{ background: rgba(124,58,237,0.28); }
+    .s4{ background: rgba(168,85,247,0.30); }
+    .s5{ background: rgba(233,213,255,0.34); }
+    .legend-note{
+      font-size: 12.5px;
+      color: var(--muted);
+      margin: 0;
+      text-align: justify;
+      text-justify: inter-word;
+    }
+
+    /* Reading */
+    .dho-praticas-reading{
+      margin-top: 14px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 12px;
+      align-items: start;
+    }
+    .reading-callout{
+      display: grid;
+      grid-template-columns: 10px 1fr;
+      gap: 10px;
+      align-items: start;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: linear-gradient(135deg, rgba(124,58,237,0.10), rgba(0,0,0,0.10));
+      margin-top: 10px;
+    }
+    .callout-dot{
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(233,213,255,0.45);
+      margin-top: 6px;
+      box-shadow: 0 0 0 4px rgba(168,85,247,0.12);
+    }
+    .callout-text{
+      margin: 0;
+      color: var(--sub);
+    }
+
+    /* Gaps list */
+    .gaps-list{
+      display: grid;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .gap-item{
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 12px;
+      background: rgba(255,255,255,0.04);
+      padding: 10px 12px;
+    }
+    .gap-top{
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .gap-name{
+      color: var(--fg);
+      font-weight: 680;
+      font-size: 13px;
+      line-height: 1.25;
+      text-align: left;
+    }
+    .gap-val{
+      color: var(--fg);
+      font-weight: 760;
+      font-size: 12.5px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(0,0,0,0.10);
+      white-space: nowrap;
+    }
+    .gap-desc{
+      margin-top: 6px;
+      font-size: 12.5px;
+      color: var(--muted);
+      text-align: justify;
+      text-justify: inter-word;
+    }
+    .note{
+      margin-top: 10px;
+      font-size: 12.5px;
+      color: var(--muted);
+      text-align: justify;
+      text-justify: inter-word;
+    }
+
+    /* Perspectives */
+    .dho-praticas-perspectives{
+      margin-top: 14px;
+    }
+    .persp-grid{
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .mini{
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 12.5px;
+      text-align: justify;
+      text-justify: inter-word;
+    }
+
+    /* Synth */
+    .dho-praticas-synth{
+      margin-top: 14px;
+    }
+    .synth-strip{
+      display: grid;
+      grid-template-columns: auto auto auto auto auto 1fr;
+      gap: 10px;
+      align-items: center;
+      padding: 12px 14px;
+      border: 1px solid var(--stroke);
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(124,58,237,0.10), rgba(0,0,0,0.12));
+      box-shadow: 0 12px 28px rgba(0,0,0,.28);
+    }
+    .synth-step{
+      display: grid;
+      gap: 4px;
+      align-items: start;
+      padding: 8px 10px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(0,0,0,0.10);
+      min-width: 150px;
+    }
+    .synth-k{
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+    .synth-v{
+      font-size: 14px;
+      color: var(--fg);
+      font-weight: 760;
+      text-align: left;
+    }
+    .synth-arrow{
+      color: rgba(233,213,255,0.55);
+      font-size: 18px;
+      text-align: center;
+      padding: 0 2px;
+    }
+    .synth-note p{
+      margin: 0;
+      color: var(--sub);
+      font-size: 13px;
+      text-align: justify;
+      text-justify: inter-word;
+    }
+
+    /* Bridge + Reflection */
+    .dho-praticas-bridge,
+    .dho-praticas-reflection{
+      margin-top: 14px;
+      padding: 0;
+    }
+    .bridge-em{
+      margin-top: 10px;
+      display: grid;
+      grid-template-columns: 18px 1fr;
+      gap: 10px;
+      align-items: start;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.03);
+    }
+    .bridge-icon{
+      color: rgba(233,213,255,0.60);
+      font-size: 16px;
+      margin-top: 2px;
+    }
+    .bridge-em p{
+      margin: 0;
+      color: var(--fg);
+    }
+
+    /* CTA */
+    .dho-praticas-cta{
+      margin-top: 14px;
+    }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .core-top{
+        grid-template-columns: 1fr;
+      }
+      .view-toggle{
+        justify-content: flex-start;
+      }
+      .dho-praticas-reading{
+        grid-template-columns: 1fr;
+      }
+      .persp-grid{
+        grid-template-columns: 1fr;
+      }
+      .heat-head,
+      .heat-body .row{
+        grid-template-columns: 1.4fr 0.65fr 0.8fr 0.75fr 0.55fr;
+      }
+      .synth-strip{
+        grid-template-columns: 1fr;
+      }
+      .synth-arrow{ display: none; }
+      .synth-step{ min-width: 0; }
+    }
+
+    @media (max-width: 640px){
+      .dho-praticas-wrap{ padding: 0 14px; }
+      .heat-th{ font-size: 11px; }
+      .pratica{ font-size: 13px; }
+      .heatbox{ padding: 8px 9px; }
+      .heatbox .lab{ display: none; }
+    }
+
+
+/* /Onda 2 */
+/* ===== DHO 360 | Participar da Onda 2 ===== */
+
+  .dho-participar-da-onda2{
+    padding: 18px 14px 22px;
+  }
+
+  .dho-participar-da-onda2-wrap{
+    max-width: 980px;
+    margin: 0 auto;
+  }
+
+  .dho-participar-da-onda2-head{
+    margin-bottom: 12px;
+  }
+
+  .dho-participar-da-onda2 h2{
+    margin: 0 0 8px 0;
+    font-size: 1.35rem;
+    line-height: 1.2;
+    color: rgba(255,255,255,0.96);
+    letter-spacing: 0.2px;
+  }
+
+  .dho-participar-da-onda2-sub{
+    margin: 0 0 8px 0;
+    color: rgba(255,255,255,0.85);
+    font-size: 0.98rem;
+    line-height: 1.55;
+    text-align: justify;
+  }
+
+  .dho-participar-da-onda2-note{
+    margin: 0;
+    color: rgba(255,255,255,0.70);
+    font-size: 0.92rem;
+    line-height: 1.45;
+    text-align: justify;
+  }
+
+  /* Card (permitido: embed é conteúdo “qualitativo/experiencial” e merece moldura leve) */
+  .dho-participar-da-onda2-embed{
+    border: 1px solid rgba(255,255,255,0.10);
+    background: rgba(255,255,255,0.06);
+    border-radius: 16px;
+    box-shadow: 0 14px 40px rgba(0,0,0,0.30);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    overflow: hidden;
+    padding: 12px;
+  }
+
+  /* Responsividade do iframe: ocupa a largura e mantém altura confortável */
+  .dho-participar-da-onda2-embed iframe{
+    width: 100%;
+    height: min(80vh, 720px);
+    border: none;
+    display: block;
+    background: transparent;
+  }
+
+  @media (max-width: 720px){
+    .dho-participar-da-onda2{
+      padding: 16px 12px 20px;
+    }
+    .dho-participar-da-onda2 h2{
+      font-size: 1.22rem;
+    }
+    .dho-participar-da-onda2-sub{
+      font-size: 0.96rem;
+    }
+    .dho-participar-da-onda2-note{
+      font-size: 0.90rem;
+    }
+    .dho-participar-da-onda2-embed{
+      padding: 10px;
+      border-radius: 14px;
+    }
+    .dho-participar-da-onda2-embed iframe{
+      height: min(78vh, 680px);
+    }
+  }
+
+  
+/* =========================
+   /HEADER GLOBAL - FIXO
+   ========================= */
+header.dho-header{
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  backdrop-filter: blur(8px);
+}
+
+</style>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-
 <body>
 
   <header class="siteHeader">
@@ -249,139 +2868,2083 @@
     </div>
   </header>
 
-  <div id="intro"></div>
-  <div id="metodologia"></div>
-  <div id="r_objetivos"></div>
-  <div id="r_objetivosNeg"></div>
-  <div id="r_motivacoes"></div>
+  <section class="dho-intro" id="intro" aria-labelledby="intro-title">
+  <div class="dho-intro-wrap">
+    <p class="intro-kicker">DHO 360º - Futuro do Trabalho em Foco</p>
 
-  <!-- NOVO: Bloco 06 - Práticas -->
-  <div id="r_praticas"></div>
+    <h1 id="intro-title">Pessoas e Negócios: a coerência como ativo na relação de trabalho.</h1>
 
-  <div id="onda2"></div>
+    <div class="byline">
+      <div class="byline-left">
+        <div class="avatarWrap">
+          <img class="avatar" src="assets/lisandra.jpg" alt="Lisandra Lencina" width="162" height="162" loading="lazy">
+          <!-- Fallback (se nao tiver imagem):
+          <div class="avatarFallback">LL</div>
+          -->
+        </div>
 
-<script>
-  async function carregarBloco({ url, targetId, initFnName }) {
-    const host = document.getElementById(targetId);
-    if (!host) {
-      console.warn(`[loader] targetId não encontrado: ${targetId}`);
-      return;
-    }
+        <div class="byline-text">
+          <div class="byline-name">Por Lisandra Lencina</div>
+          <div class="byline-desc">Administradora de Negócios com ênfase em Desenvolvimento Humano</div>
+          <div class="byline-link">
+            LinkedIn:
+            <a href="https://www.linkedin.com/in/lisandralencina/" target="_blank" rel="noopener">/in/lisandralencina</a>
+          </div>
+        </div>
+      </div>
 
-    const styleSel = `style[data-bloco="${targetId}"]`;
-    const linkSel  = `link[data-bloco="${targetId}"]`;
-    const scriptSel = `script[data-bloco="${targetId}"]`;
+      <div class="byline-right">
+        <div class="byline-date">
+          <time datetime="2026-02-02T06:00:00-03:00">02/02/2026 | 06h00</time>
+        </div>
+      </div>
+    </div>
 
-    document.querySelectorAll(styleSel).forEach(el => el.remove());
-    document.querySelectorAll(linkSel).forEach(el => el.remove());
-    document.querySelectorAll(scriptSel).forEach(el => el.remove());
+    <div class="intro-split">
+      <div class="intro-media">
+        <img
+          src="assets/dhobalance.png"
+          alt="Ilustração sobre equilíbrio entre desenvolvimento humano e resultados no trabalho, conectando pessoas, carreira profissional e performance organizacional por meio de análise e gestão"
+          loading="lazy"
+          width="1200"
+          height="650"
+        >
+      </div>
 
-    try{
-      if (window.Chart && typeof Chart.getChart === "function") {
-        host.querySelectorAll("canvas").forEach((c) => {
-          const ch = Chart.getChart(c);
-          if (ch && typeof ch.destroy === "function") ch.destroy();
-        });
-      }
-    }catch(e){
-      console.warn("[loader] falha ao destruir charts antigos:", e);
-    }
+      <div class="intro-body prose">
+        <p>
+          A pesquisa piloto DHO 360º - Futuro do Trabalho em Foco nasceu da observação das dores dos negócios e das pessoas nas relações de trabalho:
+          quando o acordo entre negócio e trabalhador falha, os dois lados relatam <b>sintomas parecidos</b>.
+        </p>
 
-    const nextFrame = () => new Promise(r => requestAnimationFrame(r));
+        <p>
+          De um lado os donos e decisores do negócio sentem a sobrecarga das falhas na força de trabalho. Do outro, trabalhadores sentem sobrecarga por
+          pressão por resultado e esgotamento. As causas parecem diferentes, mas elas surgem a partir de um mesmo ponto: Desenvolvimento Humano.
+        </p>
+      </div>
+    </div>
 
-    function appendScriptAndWait(scriptEl){
-      return new Promise((resolve, reject) => {
-        const s = document.createElement("script");
+    <div class="intro-goal">
+      <p>
+        <strong>Objetivo da pesquisa:</strong>
+        entender quais aspectos desse pilar são mais demandados e como integrá-los para sustentar resultados e qualidade de vida e estabelecer uma coerência entre trabalho e negócios.
+      </p>
+    </div>
 
-        for (const attr of scriptEl.attributes) {
-          if (attr.name.toLowerCase() === "data-bloco") continue;
-          s.setAttribute(attr.name, attr.value);
-        }
-        s.setAttribute("data-bloco", targetId);
+    <div class="intro-panels">
+      <div class="panel">
+        <p class="panel-title">O que você encontrará nesta página</p>
+        <div class="panel-text prose">
+          <p>
+            Serão apresentados os resultados da pesquisa a partir de recortes objetivos das tensões mais citadas pelos respondentes. O foco será despertar
+            reflexões a respeito dos pontos que unem trabalhadores e negócios, e o que os levam para lados extremos das situações, e ainda dar pistas de qual é
+            o papel da liderança e do RH para construir essa coerência no dia a dia.
+          </p>
+        </div>
+      </div>
 
-        if (scriptEl.src) {
-          s.src = scriptEl.src;
-          s.async = false;
-          s.onload = () => resolve();
-          s.onerror = (err) => reject(err);
-          document.body.appendChild(s);
-        } else {
-          s.textContent = scriptEl.textContent || "";
-          document.body.appendChild(s);
-          resolve();
-        }
-      });
-    }
+      <div class="panel">
+        <p class="panel-title">Como ler</p>
+        <div class="panel-text prose">
+          <p>
+            Ao rolar a página você encontrará as <b>10 Dimensões Críticas</b> mais citadas pelos respondentes com um enunciado curto, um gráfico e uma pergunta reflexiva.
+            Em alguns, você poderá abrir detalhes, filtrar ou interagir para explorar conforme a sua necessidade.
+          </p>
+        </div>
+      </div>
+    </div>
 
-    try{
-      const res = await fetch(url, { cache: "no-store" });
-      if(!res.ok) throw new Error("Falha ao carregar " + url + ": " + res.status);
+    <div class="intro-acc">
+      <details class="acc">
+        <summary class="acc-btn">
+          <span>Quem conduziu</span>
+          <span class="acc-arrow" aria-hidden="true">›</span>
+        </summary>
+        <div class="acc-body prose">
+          <p>
+            Lisandra Lencina, Administradora de Negócios com ênfase em Desenvolvimento Humano, que de forma independente construiu um piloto para transformar
+            percepções recorrentes em dados organizados e abrir conversa com quem decide e com quem faz o negócio girar.
+          </p>
+        </div>
+      </details>
 
-      const html = await res.text();
-      const doc = new DOMParser().parseFromString(html, "text/html");
+      <details class="acc">
+        <summary class="acc-btn">
+          <span>Limites do piloto</span>
+          <span class="acc-arrow" aria-hidden="true">›</span>
+        </summary>
+        <div class="acc-body prose">
+          <p>
+            O “n” (Número de Respondentes) varia por pergunta. Por isso os resultados devem ser aproveitados de forma mais qualitativa e utilizados como bússola
+            para identificar tensões e hipóteses, e não como conclusão definitiva. A Onda 2 abre em julho de 2026 e vai ampliar a base.
+          </p>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
 
-      host.innerHTML = (doc.body && doc.body.innerHTML) ? doc.body.innerHTML : "";
+<section id="metodologia" class="dho-met" aria-labelledby="dho-met-title">
+  <div class="dho-met-wrap">
 
-      doc.querySelectorAll('link[rel="stylesheet"]').forEach(linkEl => {
-        const l = document.createElement("link");
-        l.setAttribute("rel", "stylesheet");
-        l.setAttribute("href", linkEl.getAttribute("href") || "");
-        l.setAttribute("data-bloco", targetId);
-        document.head.appendChild(l);
-      });
+    <header class="dho-met-header">
+      <h2 id="dho-met-title" class="dho-met-title">Metodologia</h2>
 
-      doc.querySelectorAll("style").forEach(styleEl => {
-        const s = document.createElement("style");
-        s.setAttribute("data-bloco", targetId);
-        s.textContent = styleEl.textContent || "";
-        document.head.appendChild(s);
-      });
+      <p class="dho-met-subtitle" id="dhoMetIntro">
+        Este piloto combinou survey e entrevistas para capturar sinais iniciais, padrões recorrentes e hipóteses de desenvolvimento a serem aprofundadas na próxima fase.
+      </p>
+    </header>
 
-      const scripts = Array.from(doc.querySelectorAll("script"));
-      for (const old of scripts) {
-        await appendScriptAndWait(old);
-      }
+    <div class="dho-met-kpis" role="list">
+      <article class="dho-met-card" role="listitem">
+        <p class="dho-met-card-label">Respondentes totais</p>
+        <div class="dho-met-number">32</div>
+        <p class="dho-met-small">
+          Survey: <strong>29</strong> <span class="dho-met-dot">•</span> Entrevistas: <strong>3</strong>
+        </p>
+      </article>
 
-      await nextFrame();
-      await nextFrame();
+      <article class="dho-met-card" role="listitem">
+        <p class="dho-met-card-label">Dimensões Criticas</p>
 
-      if (initFnName && typeof initFnName === "string" && initFnName.trim().length){
-        const fn = window[initFnName];
-        if (typeof fn === "function") {
-          try { fn(); }
-          catch (e) { console.error(`[loader] erro ao executar ${initFnName}:`, e); }
-        } else {
-          console.warn(`[loader] initFn não encontrada: ${initFnName}`);
-        }
-      }
+        <div class="dho-met-inflexao-hero" aria-label="Resumo das temáticas do piloto">
+          <div class="dho-met-inflexao-hero-num">10</div>
+          <div class="dho-met-inflexao-hero-right">
+            <div class="dho-met-inflexao-hero-title">temáticas</div>
+            <div class="dho-met-inflexao-hero-desc">
+              Organizadas para analisar as Dimensões Criticas.
+            </div>
+          </div>
+        </div>
+      </article>
 
-    }catch(err){
-      console.error(err);
-      host.innerHTML =
-        '<section style="max-width:1100px;margin:24px auto;padding:0 20px;color:var(--muted)">' +
-        'Não foi possível carregar o arquivo ' + url +
-        '</section>';
+      <article class="dho-met-card" role="listitem">
+        <p class="dho-met-card-label">Abordagens metodológicas</p>
+        <ul class="dho-met-bullets" aria-label="Componentes do piloto">
+          <li><strong>Survey</strong> para escala e foco</li>
+          <li><strong>Entrevistas</strong> para contexto e nuances</li>
+          <li><strong>Checagens</strong> para refinar hipóteses</li>
+        </ul>
+        <p class="dho-met-small dho-met-muted">
+          Combinação para priorizar a qualidade.
+        </p>
+      </article>
+    </div>
+
+    <div class="dho-met-grid">
+      <article class="dho-met-panel">
+        <div class="dho-met-panel-head">
+          <h3 class="dho-met-h3">Composição da amostra</h3>
+          <p class="dho-met-p">Distribuição por público (PRO, LID, NEG, RH).</p>
+        </div>
+
+        <div class="dho-met-comp">
+          <div class="dho-met-comp-chart">
+            <div class="dho-met-chart dho-met-chart-donut">
+              <canvas id="dhoChartAmostraDonut" role="img" aria-label="Gráfico donut: composição da amostra"></canvas>
+            </div>
+          </div>
+
+          <div class="dho-met-keylist" aria-label="Legenda do gráfico: composição da amostra">
+            <div class="dho-met-keyitem dho-met-pro">
+              <div class="dho-met-keyleft">
+                <span class="dho-met-keysq dho-met-sw-pro" aria-hidden="true"></span>
+                <span class="dho-met-keyname">Profissionais no geral</span>
+                <span class="dho-met-keytag">(PRO)</span>
+              </div>
+              <span class="dho-met-keyval">56%</span>
+            </div>
+
+            <div class="dho-met-keyitem dho-met-lid">
+              <div class="dho-met-keyleft">
+                <span class="dho-met-keysq dho-met-sw-lid" aria-hidden="true"></span>
+                <span class="dho-met-keyname">Lideranças</span>
+                <span class="dho-met-keytag">(LID)</span>
+              </div>
+              <span class="dho-met-keyval">19%</span>
+            </div>
+
+            <div class="dho-met-keyitem dho-met-neg">
+              <div class="dho-met-keyleft">
+                <span class="dho-met-keysq dho-met-sw-neg" aria-hidden="true"></span>
+                <span class="dho-met-keyname">Negócios</span>
+                <span class="dho-met-keytag">(NEG)</span>
+              </div>
+              <span class="dho-met-keyval">19%</span>
+            </div>
+
+            <div class="dho-met-keyitem dho-met-rh">
+              <div class="dho-met-keyleft">
+                <span class="dho-met-keysq dho-met-sw-rh" aria-hidden="true"></span>
+                <span class="dho-met-keyname">Recursos Humanos</span>
+                <span class="dho-met-keytag">(RH)</span>
+              </div>
+              <span class="dho-met-keyval">6%</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="dho-met-panel">
+        <div class="dho-met-panel-head">
+          <h3 class="dho-met-h3">Situação de trabalho dos respondentes</h3>
+          <p class="dho-met-p">Contexto atual no momento da pesquisa.</p>
+        </div>
+
+        <div class="dho-met-chart dho-met-chart-bar">
+          <canvas id="dhoChartTrabalhoBar" role="img" aria-label="Gráfico barras: situação de trabalho"></canvas>
+        </div>
+
+        <p class="dho-met-note">
+          Nota: o “n” pode variar por pergunta. Os resultados devem ser aproveitados qualitativamente como bússola para identificar pontos de inflexão e hipóteses, e não como conclusão definitiva.
+        </p>
+      </article>
+    </div>
+
+    <details class="dho-met-details">
+      <summary class="dho-met-summary">
+        <span>Por que o RH participou pouco da pesquisa?</span>
+        <span class="dho-met-summary-icon" aria-hidden="true"></span>
+      </summary>
+
+      <div class="dho-met-details-body">
+        <div class="dho-met-rh-enunciado" aria-label="Enunciado da checagem complementar">
+          Em resposta à baixa adesão de RH no piloto, realizamos uma checagem complementar no LinkedIn. Objetivo: entender barreiras de engajamento e ajustar a estratégia de amostragem na próxima fase.
+        </div>
+
+        <div class="dho-met-rh-toprow" aria-label="Métricas e nota">
+          <div class="dho-met-rh-metricas" role="list" aria-label="Métricas da checagem no LinkedIn">
+            <div class="dho-met-rh-metrica" role="listitem">
+              <div class="dho-met-rh-metrica-num">100</div>
+              <div class="dho-met-rh-metrica-label">Abordagens no LinkedIn</div>
+            </div>
+
+            <div class="dho-met-rh-metrica" role="listitem">
+              <div class="dho-met-rh-metrica-num">9</div>
+              <div class="dho-met-rh-metrica-label">Devolutivas recebidas</div>
+            </div>
+          </div>
+
+          <aside class="dho-met-rh-nota" aria-label="Nota sobre o perfil de quem respondeu">
+            <div class="dho-met-rh-nota-kicker">Nota</div>
+            <div class="dho-met-rh-nota-text">A maior parte dos retornos veio de Chefes de RH.</div>
+          </aside>
+        </div>
+
+        <h4 class="dho-met-rh-subtitle">
+          O que os profissionais que retornaram relataram
+        </h4>
+
+        <div class="dho-met-rh-feedbacks" aria-label="Feedbacks qualitativos">
+          <div class="dho-met-rh-feedback">
+            Há percepção recorrente de excesso de abordagens comerciais, o que faz com que propostas de cooperação legítimas sejam descartadas já na primeira impressão.
+          </div>
+
+          <div class="dho-met-rh-feedback">
+            A rotina é descrita como intensa e reativa, com pouco tempo disponível para iniciativas de comunidade e para o aprofundamento de boas práticas de gestão de pessoas.
+          </div>
+
+          <div class="dho-met-rh-feedback">
+            Profissionais mais seniores tendem a participar de grupos menores e bem curados de networking, preservando a qualidade das trocas e evitando dinâmicas de interesse puramente comercial.
+          </div>
+
+          <div class="dho-met-rh-feedback">
+            Também aparece a frustração com pesquisas que não devolvem resultados prometidos, o que reduz a disposição para se engajar nas próximas iniciativas.
+          </div>
+        </div>
+      </div>
+    </details>
+
+  </div>
+</section>
+
+<section id="r_objetivos" class="dho-objetivos" aria-labelledby="dho-objetivos-title">
+  <div class="dho-objetivos-wrap">
+
+    <header class="dho-objetivos-header">
+      <p class="dho-kicker">DIMENSÃO 1 | OBJETIVOS E PRIORIDADES DE DESENVOLVIMENTO</p>
+
+      <h2 id="dho-objetivos-title" class="dho-title">
+        Quando se sabe qual é o objetivo, o próximo passo é priorizar por onde começar.
+      </h2>
+
+      <p class="dho-subtitle">
+        É unânime: 100% dos respondentes descreveram seus objetivos a serem alcançados, ou seja, todos têm um ponto de chegada claro.
+        Os relatos traçam um caminho para a conquista de estabilidade (profissional, emocional e financeira) até alta realização (liderança, legado e impacto).
+        Primeiro segurança, depois expansão.
+        Então o que se perguntou foi: onde a energia está concentrada, e qual é o top aspecto da vida para desenvolver-se e chegar lá!
+      </p>
+    </header>
+
+    <div class="dho-objetivos-grid">
+      <!-- Card A: Pizza -->
+      <article class="dho-card dho-card--chart" aria-label="Distribuição dos objetivos por área da vida">
+        <div class="dho-card-head">
+          <h3 class="dho-card-title">Em que área da vida os objetivos dos respondentes se enquadram?</h3>
+        </div>
+
+        <div class="dho-chart-row">
+          <div class="dho-chart-canvas dho-plain-surface">
+            <div class="dho-chart-box" aria-label="Área do gráfico">
+              <canvas id="dhoObjetivosPizza" aria-label="Gráfico de pizza"></canvas>
+            </div>
+          </div>
+
+          <div class="dho-legend dho-plain-surface" id="dhoObjetivosLegenda" aria-label="Legenda do gráfico"></div>
+        </div>
+
+        <p class="dho-footnote">
+          A maior parte dos objetivos se concentra no campo profissional, mas há uma concentração relevante ligada a saúde, mente e equilíbrio:
+          um fio condutor que começa a revelar o tema da coerência entre desempenho e qualidade de vida.
+        </p>
+      </article>
+
+      <!-- Card B: Ranking -->
+      <article class="dho-rank-card" aria-label="Fatores mais importantes para desenvolver">
+        <div class="dho-card-head">
+          <h3 class="dho-card-title">Ranking de iniciativas de desenvolvimento</h3>
+          <p class="dho-card-note">
+            A leitura do ranking é simples: antes de sofisticar a visão, as pessoas querem conseguir agir.
+          </p>
+        </div>
+
+        <div class="dho-rank-wrap" id="dhoRankWrap">
+          <ol class="dho-rank" id="dhoObjetivosRank">
+            <li class="dho-rank-item dho-rank-item--top" data-rank="1">
+              <span class="dho-rank-n">1</span>
+              <div class="dho-rank-txt">
+                <p class="dho-rank-title">Corpo e ambiente</p>
+                <p class="dho-rank-desc">Condições e recursos adequados (saúde, tempo, ferramentas, rede de apoio) para agir.</p>
+              </div>
+            </li>
+
+            <li class="dho-rank-item dho-rank-item--top is-hidden" data-rank="2">
+              <span class="dho-rank-n">2</span>
+              <div class="dho-rank-txt">
+                <p class="dho-rank-title">Habilidades</p>
+                <p class="dho-rank-desc">Mais conhecimento sobre si e sobre o mundo, e aplicação prática no dia a dia.</p>
+              </div>
+            </li>
+
+            <li class="dho-rank-item dho-rank-item--top is-hidden" data-rank="3">
+              <span class="dho-rank-n">3</span>
+              <div class="dho-rank-txt">
+                <p class="dho-rank-title">Comportamento</p>
+                <p class="dho-rank-desc">Entender padrões que ajudam (ou travam) produtividade, consistência e novas ações.</p>
+              </div>
+            </li>
+
+            <li class="dho-rank-item is-hidden" data-rank="4">
+              <span class="dho-rank-n">4</span>
+              <div class="dho-rank-txt">
+                <p class="dho-rank-title">Crenças e valores</p>
+                <p class="dho-rank-desc">Clarear o que se acredita e valoriza para agir com coerência.</p>
+              </div>
+            </li>
+
+            <li class="dho-rank-item is-hidden" data-rank="5">
+              <span class="dho-rank-n">5</span>
+              <div class="dho-rank-txt">
+                <p class="dho-rank-title">Visão e missão</p>
+                <p class="dho-rank-desc">Definir propósito, futuro desejado e escolher como viver isso.</p>
+              </div>
+            </li>
+
+            <li class="dho-rank-item is-hidden" data-rank="6">
+              <span class="dho-rank-n">6</span>
+              <div class="dho-rank-txt">
+                <p class="dho-rank-title">Legado</p>
+                <p class="dho-rank-desc">Gerar impacto positivo e duradouro em pessoas, times e sociedade.</p>
+              </div>
+            </li>
+
+            <li class="dho-rank-item is-hidden" data-rank="7">
+              <span class="dho-rank-n">7</span>
+              <div class="dho-rank-txt">
+                <p class="dho-rank-title">Identidade</p>
+                <p class="dho-rank-desc">Compreender papéis e expressão autêntica de quem se é.</p>
+              </div>
+            </li>
+          </ol>
+
+          <div class="dho-rank-cta">
+            <button class="dho-btn dho-btn--glow" id="dhoRankNextBtn" type="button">
+              Descobrir o Top 2
+            </button>
+            <p class="dho-rank-hint" id="dhoRankHint">
+              Dica: clique para abrir o próximo nível do ranking.
+            </p>
+
+            <div class="dho-rank-final" id="dhoRankFinal" aria-live="polite">
+              <p class="dho-rank-final-q">
+                E para você, qual é seu Top 1 hoje para o seu desenvolvimento?
+              </p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card C: Reflexões -->
+      <aside class="dho-insight-box dho-insight-box--flow" aria-label="Reflexão orientada pelos dados">
+        <h3 class="dho-flow-title">Reflexão</h3>
+
+        <p class="dho-flow-top">
+          A pesquisa revela que os profissionais no geral priorizam desenvolver condições, habilidades e comportamento
+          antes de refinar sua visão. Eles preferem aplicar esforços para agir efetivamente.
+        </p>
+
+        <img class="dho-flow-img" src="assets/fluxodedesenvolvimento.png" alt="Fluxo de desenvolvimento">
+
+        <p class="dho-flow-bottom">
+          Ou seja, esta sequência sugere que para chegar lá, os primeiros passos devem ser desenvolver corpo/ambiente,
+          habilidades e comportamento para tornar possível o alcance da coerência na relação de trabalho.
+        </p>
+      </aside>
+    </div>
+
+  </div>
+</section>
+
+<section id="r_objetivosNeg" class="dho-objetivos-negocio" aria-labelledby="dho-objetivos-negocio-title">
+  <div class="dho-objetivos-negocio-wrap">
+
+    <!-- =========================
+      HEADER
+    ========================== -->
+    <header class="dho-on-header">
+      <h2 id="dho-objetivos-negocio-title">DIMENSÃO 2 - OBJETIVOS DO NEGÓCIO</h2>
+      <div class="dho-on-divider" aria-hidden="true"></div>
+    </header>
+
+    <!-- =========================
+      ABERTURA EDITORIAL
+    ========================== -->
+    <div class="dho-on-editorial">
+      <p class="dho-on-lead">
+        Os objetivos do negócio e os planos para alcançá-los estão claros. O próximo desafio é sustentar a execução.
+      </p>
+      <p>
+        Diferente dos trabalhadores, os negócios precisam de objetivos pragmáticos para superar barreiras e manter resultados.
+        Os respondentes demonstram clareza sobre onde querem chegar. O ponto central desta dimensão não está na definição dos
+        objetivos, mas na maturidade da estrutura que sustenta a execução.
+      </p>
+    </div>
+
+    <!-- Insight-chave -->
+    <div class="dho-on-insight" role="note" aria-label="Insight-chave">
+      <span class="dho-on-insight-mark" aria-hidden="true">↗</span>
+      <p><strong>Objetivo não é o problema.</strong> Governança, foco e pessoas são.</p>
+    </div>
+
+    <!-- =========================
+      CONTEXTO DO NEGÓCIO
+    ========================== -->
+    <section class="dho-on-section" aria-labelledby="dho-on-contexto-title">
+      <h3 id="dho-on-contexto-title">Empresas médias com desafios de empresas grandes</h3>
+
+      <div class="dho-on-micro">
+        <div class="dho-on-micro-kpi">
+          <div class="dho-on-kpi-num">15</div>
+          <div class="dho-on-kpi-label">colaboradores em média</div>
+        </div>
+        <div class="dho-on-micro-note">
+          <p class="dho-on-note">
+            Base respondente: variação observada entre aproximadamente <strong>5</strong> e <strong>20</strong> colaboradores.
+          </p>
+        </div>
+      </div>
+
+      <p>
+        Com ~15 colaboradores, a coordenação deixa de ser opcional: processos, decisões compartilhadas e rituais mínimos passam a ser requisito.
+        Nesse contexto, informalidade excessiva deixa de ser agilidade e passa a representar risco.
+      </p>
+
+      <p class="dho-on-note">
+        <em>Crescimento sem estrutura cobra seu preço na execução.</em>
+      </p>
+    </section>
+
+    <!-- =========================
+      MATURIDADE DE GOVERNANÇA
+    ========================== -->
+    <section class="dho-on-section" aria-labelledby="dho-on-gov-title">
+      <div class="dho-on-section-head">
+        <h3 id="dho-on-gov-title">Nível de maturidade da governança</h3>
+        <p class="dho-on-sub">
+          A maior parte das empresas ainda opera em níveis iniciais: <strong>66,7%</strong> no nível Inicial e <strong>33,3%</strong> no nível Básico.
+          Os níveis mais avançados aparecem atenuados para evidenciar a distância entre o estágio atual e o desejado.
+        </p>
+      </div>
+
+      <div class="dho-on-chartCard">
+        <div class="dho-on-chartTop">
+          <div class="dho-on-legend" aria-label="Legenda do gráfico">
+            <span class="dho-on-legend-item">
+              <span class="dho-on-dot dho-on-dot-primary" aria-hidden="true"></span>
+              Participação (%)
+            </span>
+            <span class="dho-on-legend-item dho-on-legend-muted">
+              <span class="dho-on-dot dho-on-dot-muted" aria-hidden="true"></span>
+              Níveis sem dados (referência visual)
+            </span>
+          </div>
+        </div>
+        <div class="dho-on-canvasWrap" style="height: 260px;">
+          <canvas id="chartGovMaturidade" aria-label="Gráfico de maturidade de governança" role="img"></canvas>
+        </div>
+      </div>
+
+      <p class="dho-on-insightline">
+        ➡️ <strong>O crescimento do negócio está acontecendo antes da maturidade da governança.</strong>
+      </p>
+
+      <details class="dho-on-details">
+        <summary>Ver descrição de todos os níveis de maturidade</summary>
+        <div class="dho-on-details-body">
+          <ul class="dho-on-list">
+            <li><strong>1º Nível - Inicial:</strong> decisões concentradas nos sócios, sem reuniões formais, contabilidade focada no fiscal, inexistência de orçamento anual, políticas e alçadas não documentadas.</li>
+            <li><strong>2º Nível - Básica:</strong> reuniões gerenciais mensais, DRE e caixa fechados até D+20, orçamento simples, responsabilidades definidas, contratos e alçadas parcialmente documentados.</li>
+            <li><strong>3º Nível - Estruturada:</strong> plano anual aprovado, orçamento e forecast revistos trimestralmente, relatórios até D+10, políticas escritas mínimas (alçadas, compras, LGPD básico), separação parcial entre propriedade e gestão.</li>
+            <li><strong>4º Nível - Avançada:</strong> conselho consultivo ativo com atas, indicadores por área, matriz de riscos e compliance operando, revisão independente ou auditoria anual, remuneração variável atrelada a metas, separação clara entre sócios e executivos.</li>
+            <li><strong>5º Nível - Madura:</strong> conselho de administração ou consultivo maduro, auditoria independente recorrente, planejamento estratégico com metas e OKRs, políticas robustas de partes relacionadas e sucessão, governança de dados e comitês ativos, transparência e prestação de contas.</li>
+          </ul>
+        </div>
+      </details>
+    </section>
+
+    <!-- =========================
+      OBJETIVOS PROFUNDOS (QUALI)
+    ========================== -->
+    <section class="dho-on-section" aria-labelledby="dho-on-qual-title">
+      <h3 id="dho-on-qual-title">Objetivos profundos por trás das prioridades</h3>
+      <p>
+        Os objetivos declarados revelam ambição que vai além do curto prazo. Sustentabilidade financeira, crescimento consistente e
+        solidez do negócio aparecem como pano de fundo das decisões estratégicas.
+      </p>
+
+      <div class="dho-on-card">
+        <ul class="dho-on-list">
+          <li>Aposentadoria financeira em 10 anos</li>
+          <li>Ser bem-sucedido e crescer com consistência</li>
+          <li>Entender cada vez mais a complexidade de liderar</li>
+          <li>Proporcionar ambiente de crescimento e desenvolvimento para empresa e colaboradores</li>
+          <li>Ampliar impacto e “transbordar” na vida das pessoas</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- =========================
+      PRIORIDADES (TOP 4)
+    ========================== -->
+    <section class="dho-on-section" aria-labelledby="dho-on-top-title">
+      <div class="dho-on-section-head">
+        <h3 id="dho-on-top-title">Principais prioridades estratégicas para os próximos 12 meses</h3>
+        <p class="dho-on-sub">
+          Quando observamos as prioridades, a ambição se traduz em focos claros de execução. Abaixo, as quatro prioridades mais citadas.
+        </p>
+      </div>
+
+      <div class="dho-on-chartCard">
+        <div class="dho-on-chartTop">
+          <div class="dho-on-legend" aria-label="Legenda do gráfico">
+            <span class="dho-on-legend-item">
+              <span class="dho-on-dot dho-on-dot-primary" aria-hidden="true"></span>
+              Contagem de menções
+            </span>
+          </div>
+        </div>
+
+        <div class="dho-on-canvasWrap" style="height: 280px;">
+          <canvas id="chartTopPrioridades" aria-label="Gráfico das principais prioridades estratégicas" role="img"></canvas>
+        </div>
+
+        <p class="dho-on-note">
+          Também apareceram com 1 menção cada: lançamento de novos produtos/serviços; retenção e customer success; talentos, liderança e sucessão;
+          digitalização e automação de processos; expansão geográfica/novos mercados.
+        </p>
+      </div>
+    </section>
+
+    <!-- =========================
+      MATURIDADE DOS PLANOS (SEM GRÁFICO)
+    ========================== -->
+    <section class="dho-on-section" aria-labelledby="dho-on-planos-title">
+      <h3 id="dho-on-planos-title">Quão preparado o negócio está para entregar as prioridades?</h3>
+      <p>
+        Os respondentes indicam que os planos existem e que os recursos necessários estão, em grande parte, encaminhados.
+        O ponto mais frágil permanece na governança e no acompanhamento contínuo da execução.
+      </p>
+
+      <div class="dho-on-planos">
+        <div class="dho-on-pl-row">
+          <div class="dho-on-pl-label">Plano tático (MVP, etapas, datas e responsáveis)</div>
+          <div class="dho-on-pl-scale" aria-label="Escala de 1 a 5">
+            <span class="dho-on-pl-dot"></span><span class="dho-on-pl-dot"></span><span class="dho-on-pl-dot"></span><span class="dho-on-pl-dot"></span><span class="dho-on-pl-dot is-on"></span>
+          </div>
+          <div class="dho-on-pl-val">5</div>
+          <div class="dho-on-pl-txt">Plano completo</div>
+        </div>
+
+        <div class="dho-on-pl-row">
+          <div class="dho-on-pl-label">Recursos financeiros</div>
+          <div class="dho-on-pl-scale">
+            <span class="dho-on-pl-dot"></span><span class="dho-on-pl-dot"></span><span class="dho-on-pl-dot"></span><span class="dho-on-pl-dot is-on"></span><span class="dho-on-pl-dot"></span>
+          </div>
+          <div class="dho-on-pl-val">4</div>
+          <div class="dho-on-pl-txt">Quase pronto</div>
+        </div>
+
+        <div class="dho-on-pl-row">
+          <div class="dho-on-pl-label">Força de trabalho e clareza de competências críticas</div>
+          <div class="dho-on-pl-scale">
+            <span class="dho-on-pl-dot"></span><span class="dho-on-pl-dot"></span><span class="dho-on-pl-dot"></span><span class="dho-on-pl-dot is-on"></span><span class="dho-on-pl-dot"></span>
+          </div>
+          <div class="dho-on-pl-val">4</div>
+          <div class="dho-on-pl-txt">Quase pronto</div>
+        </div>
+
+        <div class="dho-on-pl-row">
+          <div class="dho-on-pl-label">Infraestrutura, ferramentas e tecnologia</div>
+          <div class="dho-on-pl-scale">
+            <span class="dho-on-pl-dot"></span><span class="dho-on-pl-dot"></span><span class="dho-on-pl-dot"></span><span class="dho-on-pl-dot is-on"></span><span class="dho-on-pl-dot"></span>
+          </div>
+          <div class="dho-on-pl-val">4</div>
+          <div class="dho-on-pl-txt">Quase pronto</div>
+        </div>
+
+        <div class="dho-on-pl-row">
+          <div class="dho-on-pl-label">Parcerias e fornecedores críticos</div>
+          <div class="dho-on-pl-scale">
+            <span class="dho-on-pl-dot"></span><span class="dho-on-pl-dot"></span><span class="dho-on-pl-dot"></span><span class="dho-on-pl-dot is-on"></span><span class="dho-on-pl-dot"></span>
+          </div>
+          <div class="dho-on-pl-val">4</div>
+          <div class="dho-on-pl-txt">Quase pronto</div>
+        </div>
+
+        <div class="dho-on-pl-row">
+          <div class="dho-on-pl-label">Mapa de riscos e planos de contingência</div>
+          <div class="dho-on-pl-scale">
+            <span class="dho-on-pl-dot"></span><span class="dho-on-pl-dot"></span><span class="dho-on-pl-dot"></span><span class="dho-on-pl-dot is-on"></span><span class="dho-on-pl-dot"></span>
+          </div>
+          <div class="dho-on-pl-val">4</div>
+          <div class="dho-on-pl-txt">Quase pronto</div>
+        </div>
+
+        <div class="dho-on-pl-row is-fragil">
+          <div class="dho-on-pl-label">Governança e agendas de acompanhamento (metas e indicadores)</div>
+          <div class="dho-on-pl-scale">
+            <span class="dho-on-pl-dot"></span><span class="dho-on-pl-dot"></span><span class="dho-on-pl-dot is-on"></span><span class="dho-on-pl-dot"></span><span class="dho-on-pl-dot"></span>
+          </div>
+          <div class="dho-on-pl-val">3</div>
+          <div class="dho-on-pl-txt">Plano parcial</div>
+        </div>
+      </div>
+
+      <div class="dho-on-insight dho-on-insight--soft" role="note" aria-label="Mini insight">
+        <span class="dho-on-insight-mark" aria-hidden="true">↗</span>
+        <p>Quando há objetivos e recursos, o risco passa a ser humano e organizacional.</p>
+      </div>
+    </section>
+
+    <!-- =========================
+      BARREIRAS (APENAS TOTAL)
+    ========================== -->
+    <section class="dho-on-section" aria-labelledby="dho-on-barreiras-title">
+      <div class="dho-on-section-head">
+        <h3 id="dho-on-barreiras-title">O que mais pode comprometer a entrega dos objetivos?</h3>
+        <p class="dho-on-sub">
+          As principais barreiras não são técnicas. Elas aparecem na forma como as pessoas se organizam, se comunicam e são lideradas.
+        </p>
+      </div>
+
+      <div class="dho-on-chartCard dho-on-chartCard--dark">
+        <div class="dho-on-chartTop">
+          <div class="dho-on-legend" aria-label="Legenda do gráfico">
+            <span class="dho-on-legend-item">
+              <span class="dho-on-dot dho-on-dot-primary" aria-hidden="true"></span>
+              Total de menções
+            </span>
+          </div>
+        </div>
+
+        <div class="dho-on-canvasWrap" style="height: 260px;">
+          <canvas id="chartBarreirasTotal" aria-label="Gráfico das principais barreiras (total)" role="img"></canvas>
+        </div>
+
+        <p class="dho-on-note">
+          Também citados (1 menção cada): absenteísmo/licenças não planejadas; sobrecarga e risco de burnout; baixo espírito de equipe; falta de competências comportamentais.
+        </p>
+      </div>
+
+      <p class="dho-on-insightline">
+        ➡️ <strong>O entrave não está em fazer mais, mas em fazer com clareza, foco e liderança.</strong>
+      </p>
+    </section>
+
+    <!-- =========================
+      FECHO (REFLEXÃO + CTA)
+    ========================== -->
+    <section class="dho-on-close" aria-label="Fecho editorial">
+      <p>
+        O negócio tem clareza de objetivos e de quais estratégias pretende seguir. O ponto de inflexão está na coerência entre governança,
+        liderança e desenvolvimento humano. Sem coerência, a barreira não é errar o caminho - é sustentar o percurso completo.
+      </p>
+
+      <div class="dho-on-cta" role="note" aria-label="Pergunta final">
+        <p>E na sua empresa, o que hoje mais ameaça a execução dos objetivos?</p>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- =========================
+    STYLES (ESCOPADOS AO BLOCO)
+  ========================== -->
+  
+
+  <!-- =========================
+    JS (ENCAPSULADO)
+  ========================== -->
+  
+</section>
+
+<section id="r_motivacoes" class="dho-motivacoes" aria-labelledby="dho-motivacoes-title">
+  <div class="dho-motivacoes-wrap">
+
+    <header class="dho-motivacoes-head">
+      <p class="dho-kicker">DIMENSÃO 3 | MOTIVAÇÕES PROFISSIONAIS</p>
+      <h2 id="dho-motivacoes-title">Motivação profissional não é uma coisa só. Ela muda conforme o lugar que se ocupa na relação de trabalho.</h2>
+      <p class="dho-subtitle">
+        A mesma temática foi observada por quatro perspectivas: profissionais empregados, profissionais desempregados, RH e liderança.
+        O objetivo não é buscar certo ou errado, e sim evidenciar desencontros de leitura e zonas de coerência. Quando esses olhares aparecem lado a lado,
+        o que emerge é um mapa claro do que sustenta, ameaça ou reorganiza a permanência.
+      </p>
+    </header>
+
+    <!-- QUADRO COMPARATIVO -->
+    <section class="dho-quad" aria-labelledby="dho-quad-title">
+      <div class="dho-quad-titleRow">
+        <div>
+          <h3 id="dho-quad-title">A mesma motivação, quatro leituras diferentes</h3>
+          <p class="dho-quad-sub">
+            Como papéis distintos interpretam o que mais pesa na decisão de sair, rejeitar uma oferta ou sustentar o vínculo com o trabalho.
+          </p>
+        </div>
+      </div>
+
+      <div class="dho-quad-grid" role="group" aria-label="Quadro comparativo por perspectiva">
+        <!-- Coluna 1 -->
+        <article class="dho-col" aria-label="Profissionais empregados">
+          <div class="dho-col-head">
+            <h4>Profissionais empregados</h4>
+            <p class="dho-col-sub">O que mais me faria pedir demissão</p>
+          </div>
+
+          <ol class="dho-rank" aria-label="Top 3 empregados">
+            <li class="is-top">
+              <span class="dho-rank-n">1</span>
+              <span class="dho-rank-t">Pacote de compensação</span>
+              <span class="dho-rank-d">Salário, bônus, PLR</span>
+            </li>
+            <li class="is-top">
+              <span class="dho-rank-n">2</span>
+              <span class="dho-rank-t">Segurança psicológica</span>
+              <span class="dho-rank-d">burnout, assédio moral, autonomia, conflito de valores, estabilidade</span>
+            </li>
+            <li class="is-top">
+              <span class="dho-rank-n">3</span>
+              <span class="dho-rank-t">Relevância do trabalho</span>
+              <span class="dho-rank-d">valores, propósito e crescimento pessoal</span>
+            </li>
+          </ol>
+
+          <div class="dho-others" aria-label="Outros fatores citados empregados">
+            <p class="dho-others-label">Outros fatores citados (sem ordenação exibida)</p>
+            <ul>
+              <li>Benefícios</li>
+              <li>Flexibilidade de horário</li>
+              <li>Home office</li>
+              <li>Segurança do trabalho</li>
+            </ul>
+          </div>
+
+          <p class="dho-col-note">
+            Leitura prática: aqui o peso recai primeiro sobre condições concretas (compensação) e proteção emocional (segurança psicológica), com propósito como terceiro eixo.
+          </p>
+        </article>
+
+        <!-- Coluna 2 -->
+        <article class="dho-col" aria-label="Profissionais desempregados">
+          <div class="dho-col-head">
+            <h4>Profissionais desempregados</h4>
+            <p class="dho-col-sub">O que me faria rejeitar uma nova oferta</p>
+          </div>
+
+          <ol class="dho-rank" aria-label="Top 3 desempregados">
+            <li class="is-top">
+              <span class="dho-rank-n">1</span>
+              <span class="dho-rank-t">Pacote de compensação</span>
+              <span class="dho-rank-d">salário, bônus, PLR</span>
+            </li>
+            <li class="is-top">
+              <span class="dho-rank-n">2</span>
+              <span class="dho-rank-t">Relevância do trabalho</span>
+              <span class="dho-rank-d">valores, propósito e crescimento pessoal</span>
+            </li>
+            <li class="is-top">
+              <span class="dho-rank-n">3</span>
+              <span class="dho-rank-t">Benefícios</span>
+              <span class="dho-rank-d">VR, VA, seguro médico, dental, vida</span>
+            </li>
+          </ol>
+
+          <div class="dho-others" aria-label="Outros fatores citados desempregados">
+            <p class="dho-others-label">Outros fatores citados (sem ordenação exibida)</p>
+            <ul>
+              <li>Segurança psicológica</li>
+              <li>Flexibilidade de horário</li>
+              <li>Home office</li>
+              <li>Segurança do trabalho</li>
+            </ul>
+          </div>
+
+          <p class="dho-col-note">
+            Leitura prática: além de compensação, propósito ganha força mais cedo, e benefícios entram como critério de recusa com mais presença.
+          </p>
+        </article>
+
+        <!-- Coluna 3 -->
+        <article class="dho-col" aria-label="RH">
+          <div class="dho-col-head">
+            <h4>RH</h4>
+            <p class="dho-col-sub">O que acreditamos que mais motiva os colaboradores</p>
+          </div>
+
+          <ol class="dho-rank" aria-label="Top 3 RH">
+            <li class="is-top">
+              <span class="dho-rank-n">1</span>
+              <span class="dho-rank-t">Pacote de compensação</span>
+              <span class="dho-rank-d">salário, bônus, PLR</span>
+            </li>
+            <li class="is-top">
+              <span class="dho-rank-n">2</span>
+              <span class="dho-rank-t">Benefícios</span>
+              <span class="dho-rank-d">VR, VA, seguros, incentivos</span>
+            </li>
+            <li class="is-top">
+              <span class="dho-rank-n">3</span>
+              <span class="dho-rank-t">Liderança e gestão de equipe</span>
+              <span class="dho-rank-d">clareza, escuta, coerência e incentivo ao desenvolvimento</span>
+            </li>
+          </ol>
+
+          <div class="dho-others" aria-label="Outros fatores citados RH">
+            <p class="dho-others-label">Outros fatores citados (sem ordenação exibida)</p>
+            <ul>
+              <li>Relevância do trabalho</li>
+              <li>Flexibilidade de horário</li>
+              <li>Home office</li>
+              <li>Segurança do trabalho</li>
+              <li>Segurança psicológica</li>
+            </ul>
+          </div>
+
+          <p class="dho-col-note">
+            Leitura prática: o olhar institucional prioriza pacote e benefícios, e traz liderança como eixo explícito de sustentação.
+          </p>
+        </article>
+
+        <!-- Coluna 4 -->
+        <article class="dho-col" aria-label="Liderança">
+          <div class="dho-col-head">
+            <h4>Liderança</h4>
+            <p class="dho-col-sub">O que acreditamos que mais motiva no dia a dia</p>
+          </div>
+
+          <ol class="dho-rank" aria-label="Top 3 Liderança">
+            <li class="is-top">
+              <span class="dho-rank-n">1</span>
+              <span class="dho-rank-t">Relevância do trabalho</span>
+              <span class="dho-rank-d">propósito, impacto e crescimento</span>
+            </li>
+            <li class="is-top">
+              <span class="dho-rank-n">2</span>
+              <span class="dho-rank-t">Liderança e gestão de equipe</span>
+              <span class="dho-rank-d">condução, apoio e inspiração cotidiana</span>
+            </li>
+            <li class="is-top">
+              <span class="dho-rank-n">3</span>
+              <span class="dho-rank-t">Benefícios</span>
+              <span class="dho-rank-d">VR, VA, seguros, incentivos</span>
+            </li>
+          </ol>
+
+          <div class="dho-others" aria-label="Outros fatores citados Liderança">
+            <p class="dho-others-label">Outros fatores citados (sem ordenação exibida)</p>
+            <ul>
+              <li>Pacote de compensação</li>
+              <li>Segurança psicológica</li>
+              <li>Home office</li>
+              <li>Segurança do trabalho</li>
+              <li>Flexibilidade de horário</li>
+            </ul>
+          </div>
+
+          <p class="dho-col-note">
+            Leitura prática: o centro desloca para propósito e qualidade de condução. Condições materiais permanecem, mas perdem protagonismo na narrativa.
+          </p>
+        </article>
+      </div>
+
+      <p class="dho-footnote">
+        Nota metodológica: as perguntas são equivalentes em intenção, com pequenas variações de instrumento entre grupos. Este quadro deve ser lido como comparação de percepção,
+        e não como medida estatística rígida.
+      </p>
+    </section>
+
+    <p class="dho-bridge">
+      Quando os quatro olhares aparecem lado a lado, o contraste é nítido. Entre profissionais, compensação e propósito alternam protagonismo.
+      Já no olhar institucional, RH ancora em pacote e benefícios, enquanto a liderança desloca o centro para relevância do trabalho e qualidade da condução direta.
+      O desalinhamento não é um erro. É um sinal de onde a experiência vivida e a proposta percebida deixam de coincidir.
+    </p>
+
+    <!-- RETENÇÃO -->
+    <section class="dho-retencao" aria-labelledby="dho-retencao-title">
+      <header class="dho-ret-head">
+        <h3 id="dho-retencao-title">Quando sair já é uma decisão, o que ainda faz alguém ficar?</h3>
+        <p class="dho-ret-sub">
+          Aqui a pergunta muda. Não é sobre o ideal. É sobre retenção em cenário imperfeito, quando a decisão de sair já foi considerada seriamente.
+        </p>
+      </header>
+
+      <div class="dho-ret-grid">
+        <div class="dho-ret-chartCard" aria-label="Gráfico de retenção">
+          <div class="dho-ret-chartHead">
+            <div>
+              <h4>O que faria você reconsiderar um pedido de demissão?</h4>
+              <p class="dho-ret-caption">Base: n = 16. Valores em percentual.</p>
+            </div>
+            <div class="dho-ret-legend" aria-label="Legenda">
+              <span class="dho-dot"></span>
+              <span>Percentual de menções</span>
+            </div>
+          </div>
+
+          <div class="dho-chartWrap">
+            <canvas id="chartRetencao" aria-label="Gráfico de barras verticais de retenção" role="img"></canvas>
+          </div>
+
+          <div class="dho-ret-note">
+            <p class="dho-ret-noteTitle">Observação</p>
+            <p class="dho-ret-noteText">
+              Os dois eixos mais fortes combinam trilha de crescimento (desenvolvimento) e relação de confiança (liderança direta).
+              Em momentos críticos, o vínculo se sustenta menos por promessa ampla e mais por direção clara, suporte e trajetória percebida.
+            </p>
+          </div>
+        </div>
+
+        <div class="dho-ret-list" aria-label="Lista de resultados de retenção">
+          <h4>Resultados (top 5)</h4>
+          <ul class="dho-metrics">
+            <li><span>Desenvolvimento de carreira</span><strong>50,0%</strong></li>
+            <li><span>Confiança na liderança direta</span><strong>37,5%</strong></li>
+            <li><span>Autodesenvolvimento</span><strong>37,5%</strong></li>
+            <li><span>Reposicionamento de carreira</span><strong>31,25%</strong></li>
+            <li><span>Projeto interno</span><strong>18,75%</strong></li>
+          </ul>
+
+          <div class="dho-callout" role="note" aria-label="Insight-chave">
+            <p>
+              Liderança aparece como fator decisivo nos momentos críticos. Ela não é apenas um item de motivação, mas um critério de confiança que sustenta permanência
+              quando as condições ideais não estão presentes.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEGÓCIO -->
+    <section class="dho-neg" aria-labelledby="dho-neg-title">
+      <header class="dho-neg-head">
+        <h3 id="dho-neg-title">O que o negócio acredita conseguir garantir nos próximos 12 meses</h3>
+        <p class="dho-neg-sub">
+          A seguir, os itens citados como entregáveis no curto prazo. A leitura aqui é de viabilidade percebida, não de promessa formal.
+        </p>
+      </header>
+
+      <div class="dho-neg-list" aria-label="Itens que o negócio acredita conseguir garantir">
+        <div class="dho-neg-item"><span>Home office</span><strong>2</strong></div>
+        <div class="dho-neg-item"><span>Pacote de compensação</span><strong>2</strong></div>
+        <div class="dho-neg-item"><span>Segurança do trabalho</span><strong>1</strong></div>
+        <div class="dho-neg-item"><span>Liderança e gestão de equipe</span><strong>1</strong></div>
+        <div class="dho-neg-item"><span>Segurança psicológica</span><strong>1</strong></div>
+        <div class="dho-neg-item"><span>Flexibilidade de horário</span><strong>1</strong></div>
+        <div class="dho-neg-item"><span>Relevância do trabalho</span><strong>1</strong></div>
+      </div>
+
+      <p class="dho-footnote">
+        Nota metodológica: base do negócio n = 3 respondentes. Números representam contagem de menções.
+      </p>
+
+      <p class="dho-close">
+        O que o negócio se sente capaz de garantir tende a se concentrar em modelo de trabalho e pacote.
+        Já os fatores que retêm pessoas quando a ruptura está próxima envolvem confiança na liderança e trajetórias de desenvolvimento.
+        Essa distância costuma ser o lugar onde a rotatividade começa a se formar.
+      </p>
+
+      <p class="dho-question">
+        Se liderança e desenvolvimento seguram pessoas nos momentos críticos, por que ainda aparecem como variáveis secundárias naquilo que o negócio assume conseguir entregar?
+      </p>
+    </section>
+
+  </div>
+
+  
+
+  <!-- Chart.js (somente quando houver gráficos) -->
+  
+  
+</section>
+
+<section id="r_praticas" class="dho-praticas" aria-labelledby="dho-praticas-title">
+  <div class="dho-praticas-wrap">
+    <!-- 1) Header editorial -->
+    <header class="dho-praticas-head">
+      <div class="dho-praticas-kicker">DIMENSÃO X</div>
+      <h2 id="dho-praticas-title">Práticas de gestão e liderança de pessoas</h2>
+      <p class="dho-praticas-sub">
+        Entre promover e aplicar, existe um espaço onde a estratégia se perde ou se sustenta. Nesta dimensão, as práticas
+        são observadas por múltiplas perspectivas para evidenciar consistência, lacunas e oportunidades de sustentação no dia a dia.
+      </p>
+
+      <div class="dho-praticas-insight">
+        <div class="insight-badge">Insight</div>
+        <p class="insight-text">
+          A maturidade não está na existência das práticas, mas na consistência da aplicação.
+        </p>
+      </div>
+    </header>
+
+    <!-- 2) Como ler -->
+    <div class="dho-praticas-guide card">
+      <h3 class="h3">Como ler esta dimensão</h3>
+      <ul class="guide-list">
+        <li><span class="tag">RH promove</span> o quanto as práticas são promovidas institucionalmente na companhia atual.</li>
+        <li><span class="tag">Liderança aplica</span> o quanto as práticas são efetivamente aplicadas no cotidiano da gestão.</li>
+        <li><span class="tag">Trajetória</span> o quanto as práticas são conhecidas e já foram vivenciadas (duas lentes: Negócio e RH).</li>
+      </ul>
+      <p class="guide-note">
+        A leitura não é sobre “certo” ou “errado”. É sobre coerência: quando a execução aperta, quais práticas resistem e quais viram esforço individual.
+      </p>
+    </div>
+
+    <!-- 3) Núcleo: Heatmap comparativo -->
+    <div class="dho-praticas-core">
+      <div class="core-top">
+        <div>
+          <h3 class="h3">Heatmap comparativo</h3>
+          <p class="core-desc">
+            Tons mais claros indicam maior nível (1 a 5). O objetivo é tornar visível onde há promoção e conhecimento, mas a aplicação oscila.
+          </p>
+        </div>
+
+        <div class="view-toggle" role="tablist" aria-label="Filtro de trajetória">
+          <button class="toggle-btn is-active" type="button" data-view="traj_avg" role="tab" aria-selected="true">
+            Trajetória (média)
+          </button>
+          <button class="toggle-btn" type="button" data-view="traj_neg" role="tab" aria-selected="false">
+            Trajetória (Negócio)
+          </button>
+          <button class="toggle-btn" type="button" data-view="traj_rh" role="tab" aria-selected="false">
+            Trajetória (RH)
+          </button>
+        </div>
+      </div>
+
+      <div class="heatwrap">
+        <div class="heat-head">
+          <div class="heat-th col-pratica">Prática</div>
+          <div class="heat-th">RH promove</div>
+          <div class="heat-th">Liderança aplica</div>
+          <div class="heat-th">Trajetória</div>
+          <div class="heat-th col-gap">Gap</div>
+        </div>
+        <div id="dho-praticas-heat" class="heat-body" aria-label="Heatmap de práticas"></div>
+
+        <div class="legend">
+          <div class="legend-row">
+            <span class="legend-label">Baixo (1)</span>
+            <span class="swatch s1" aria-hidden="true"></span>
+            <span class="swatch s2" aria-hidden="true"></span>
+            <span class="swatch s3" aria-hidden="true"></span>
+            <span class="swatch s4" aria-hidden="true"></span>
+            <span class="swatch s5" aria-hidden="true"></span>
+            <span class="legend-label">Alto (5)</span>
+          </div>
+          <p class="legend-note">
+            Gap = Trajetória (conhecimento e vivência) menos Liderança aplica. Quanto maior, maior a chance de existir método, mas faltar sustentação no contexto atual.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4) Leitura guiada -->
+    <div class="dho-praticas-reading">
+      <div class="reading-text">
+        <h3 class="h3">Leitura guiada</h3>
+        <p>
+          O padrão geral sugere que o conhecimento existe e as práticas são reconhecidas como importantes. O ponto sensível aparece na transição entre
+          intenção e rotina: quando não há sistema (rituais, cadência, métricas simples e espaço na agenda), a aplicação tende a depender do perfil individual
+          de cada liderança.
+        </p>
+        <div class="reading-callout">
+          <div class="callout-dot" aria-hidden="true"></div>
+          <p class="callout-text"><strong>Conhecimento não é o gargalo.</strong> O gargalo é a consistência sob pressão operacional.</p>
+        </div>
+      </div>
+
+      <div class="reading-list card">
+        <h4 class="h4">Maiores gaps de sustentação</h4>
+        <div id="dho-praticas-gaps" class="gaps-list" aria-label="Lista de maiores gaps"></div>
+        <p class="note">
+          Este recorte prioriza onde a trajetória indica maturidade, mas a aplicação atual não acompanha na mesma intensidade.
+        </p>
+      </div>
+    </div>
+
+    <!-- 5) Recorte por perspectiva -->
+    <div class="dho-praticas-perspectives">
+      <div class="persp-grid">
+        <div class="persp card">
+          <h4 class="h4">O olhar do RH</h4>
+          <p>
+            O RH sinaliza promoção moderada de práticas essenciais, mas parte do conjunto aparece com baixa sustentação.
+            O risco não está no desenho das iniciativas, e sim na aderência cotidiana e no espaço real na agenda.
+          </p>
+          <p class="mini">
+            Mini insight: promover não garante aplicação.
+          </p>
+        </div>
+
+        <div class="persp card">
+          <h4 class="h4">O olhar do negócio</h4>
+          <p>
+            A trajetória do negócio mostra alta valorização e vivência ampla das práticas. Em outras palavras: existe apetite por bons rituais de gestão.
+            Quando a aplicação cai, a fricção tende a estar no contexto (prioridade, tempo, governança), não na relevância do tema.
+          </p>
+          <p class="mini">
+            Mini insight: existe expectativa de que funcione.
+          </p>
+        </div>
+
+        <div class="persp card">
+          <h4 class="h4">A prática da liderança</h4>
+          <p>
+            A liderança reporta aplicação estável, mas com pouca diferenciação entre práticas. Isso pode indicar padronização mínima (o básico acontece)
+            e, ao mesmo tempo, espaço para elevar profundidade em temas como desenvolvimento, mentoria e gestão contínua.
+          </p>
+          <p class="mini">
+            Mini insight: sem sistema, a prática vira esforço individual.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6) Síntese visual -->
+    <div class="dho-praticas-synth">
+      <div class="synth-strip">
+        <div class="synth-step">
+          <span class="synth-k">RH promove</span>
+          <span class="synth-v" id="synth-rh">-</span>
+        </div>
+        <div class="synth-arrow" aria-hidden="true">→</div>
+        <div class="synth-step">
+          <span class="synth-k">Trajetória</span>
+          <span class="synth-v" id="synth-traj">-</span>
+        </div>
+        <div class="synth-arrow" aria-hidden="true">→</div>
+        <div class="synth-step">
+          <span class="synth-k">Liderança aplica</span>
+          <span class="synth-v" id="synth-lid">-</span>
+        </div>
+        <div class="synth-note">
+          <p>
+            Esta dimensão revela menos um problema de intenção e mais um desafio de sustentação.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7) Conexão com negócio -->
+    <div class="dho-praticas-bridge">
+      <h3 class="h3">Ponte estratégica</h3>
+      <p>
+        Em ambientes de crescimento acelerado e baixa maturidade de governança, práticas de gestão de pessoas tendem a perder espaço para urgências operacionais.
+        O efeito costuma ser cumulativo: menos cadência, menos feedback estruturado, menos desenvolvimento, e mais dependência do “heroísmo” individual.
+      </p>
+      <div class="bridge-em">
+        <span class="bridge-icon" aria-hidden="true">◈</span>
+        <p><strong>Quando a execução aperta, o humano é o primeiro a ser comprimido.</strong></p>
+      </div>
+    </div>
+
+    <!-- 8) Reflexão -->
+    <div class="dho-praticas-reflection">
+      <h3 class="h3">Reflexão DHO 360</h3>
+      <p>
+        Gestão de pessoas não falha por falta de método. Ela falha quando não encontra espaço, prioridade e coerência com o modelo de negócio.
+        A diferença entre “ter” e “ser” uma prática está no ritual: o que acontece toda semana, mesmo com o calendário cheio.
+      </p>
+    </div>
+
+    <!-- 9) CTA editorial -->
+    <div class="dho-praticas-cta card">
+      <h3 class="h3">Pergunta para fechar</h3>
+      <p>
+        O que hoje impede boas práticas de se sustentarem no seu dia a dia: falta de tempo, falta de clareza, falta de ritual ou falta de prioridade?
+      </p>
+    </div>
+  </div>
+
+  
+
+  
+</section>
+
+<section id="onda2" class="dho-participar-da-onda2" aria-labelledby="onda2-title">
+  <div class="dho-participar-da-onda2-wrap">
+
+    <header class="dho-participar-da-onda2-head">
+      <h2 id="onda2-title">Participar da Onda 2</h2>
+      <p class="dho-participar-da-onda2-sub">
+        Este formulário coleta as informações necessárias para sua participação na próxima etapa do piloto.
+        O preenchimento leva poucos minutos.
+      </p>
+      <p class="dho-participar-da-onda2-note">
+        Se o formulário não carregar, verifique bloqueadores de pop-up/trackers do navegador ou tente em uma aba anônima.
+      </p>
+    </header>
+
+    <div class="dho-participar-da-onda2-embed" role="region" aria-label="Formulário - Participar da Onda 2">
+      <iframe
+        title="Formulário - Participar da Onda 2"
+        src="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAO__ccdThxUN1oxVjJTNUFDNEhXWFVGTjlVN0dDTVZPNy4u&embed=true"
+        frameborder="0"
+        marginwidth="0"
+        marginheight="0"
+        allowfullscreen
+        webkitallowfullscreen
+        mozallowfullscreen
+        msallowfullscreen>
+      </iframe>
+    </div>
+
+  </div>
+</section>
+
+  <script>
+
+    /* /Metodologia */
+function ensureChartJS(){
+    if (window.Chart) return Promise.resolve();
+    if (window.__dhoChartJsPromise) return window.__dhoChartJsPromise;
+
+    window.__dhoChartJsPromise = new Promise((resolve, reject) => {
+      const s = document.createElement("script");
+      s.src = "https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js";
+      s.async = true;
+      s.onload = () => resolve();
+      s.onerror = () => reject(new Error("Falha ao carregar Chart.js"));
+      document.head.appendChild(s);
+    });
+
+    return window.__dhoChartJsPromise;
+  }
+
+  function readMetColors(root){
+    const css = getComputedStyle(root);
+    const get = (v, fb) => (css.getPropertyValue(v).trim() || fb);
+
+    return {
+      pro: get("--pro", "#c08ad6"),
+      lid: get("--lid", "#8d5aa6"),
+      neg: get("--neg", "#5b2e73"),
+      rh:  get("--rh",  "#e2c6ec"),
+      muted: get("--muted2", "rgba(255,255,255,0.60)"),
+      grid: "rgba(255,255,255,0.10)"
+    };
+  }
+
+  function destroyIfAny(canvas){
+    const prev = canvas && canvas.__chartInstance;
+    if (prev && typeof prev.destroy === "function") {
+      prev.destroy();
+      canvas.__chartInstance = null;
     }
   }
 
-  /* Intro sem init (não existe script no bloco) */
-  carregarBloco({ url: "blocks/01-intro.html", targetId: "intro", initFnName: "" });
+  window.initBloco_metodologia = async function(){
+    const root = document.querySelector(".dho-met");
+    if(!root) return;
 
-  carregarBloco({ url: "blocks/02-metodologia.html", targetId: "metodologia", initFnName: "initBloco_metodologia" });
-  carregarBloco({ url: "blocks/03-R-objetivos.html", targetId: "r_objetivos", initFnName: "initBloco_objetivos" });
-  carregarBloco({ url: "blocks/04-R-objetivosNeg.html", targetId: "r_objetivosNeg", initFnName: "initBloco_objetivosNeg" });
-  carregarBloco({ url: "blocks/05-R-motivacoes.html", targetId: "r_motivacoes", initFnName: "initBloco_motivacoes" });
+    const donutEl = root.querySelector("#dhoChartAmostraDonut");
+    const barEl   = root.querySelector("#dhoChartTrabalhoBar");
+    if(!donutEl || !barEl) return;
 
-  /* NOVO: Bloco 06 - Práticas */
-  carregarBloco({ url: "blocks/06-R-praticas.html", targetId: "r_praticas", initFnName: "initBloco_praticas" });
+    if (donutEl.__chartInstance && barEl.__chartInstance) return;
 
-  /* Onda 2 */
-  carregarBloco({
-    url: "blocks/Participar_da_Onda2.html",
-    targetId: "onda2",
-    initFnName: "initBloco_Participar_da_Onda2"
-  });
+    await ensureChartJS();
+
+    destroyIfAny(donutEl);
+    destroyIfAny(barEl);
+
+    const colors = readMetColors(root);
+
+    donutEl.__chartInstance = new Chart(donutEl, {
+      type: "doughnut",
+      data: {
+        labels: ["PRO", "LID", "NEG", "RH"],
+        datasets: [{
+          data: [56, 19, 19, 6],
+          backgroundColor: [colors.pro, colors.lid, colors.neg, colors.rh],
+          borderWidth: 0,
+          hoverOffset: 6,
+          cutout: "62%"
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: { callbacks: { label: (ctx) => `${ctx.label}: ${ctx.parsed}%` } }
+        }
+      }
+    });
+
+    barEl.__chartInstance = new Chart(barEl, {
+      type: "bar",
+      data: {
+        labels: [
+          "Empregado regime CLT",
+          "Empregado regime PJ",
+          "Implantando meu próprio negócio",
+          "Autônomo",
+          "Em busca de recolocação",
+          "Desempregado"
+        ],
+        datasets: [{
+          label: "Percentual",
+          data: [41, 19, 16, 9, 9, 6],
+          borderWidth: 0,
+          borderRadius: 10,
+          backgroundColor: colors.pro
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        indexAxis: "y",
+        scales: {
+          x: {
+            beginAtZero: true,
+            max: 50,
+            grid: { color: colors.grid },
+            ticks: { color: colors.muted, callback: (v) => v + "%" }
+          },
+          y: {
+            grid: { display: false },
+            ticks: { color: colors.muted }
+          }
+        },
+        plugins: {
+          legend: { display: false },
+          tooltip: { callbacks: { label: (ctx) => ctx.parsed.x + "%" } }
+        }
+      }
+    });
+  };
+
+    /* /Dimensao 1 Objetivos */
+window.initBloco_objetivos = function initBloco_objetivos() {
+    try {
+      const root = document.querySelector(".dho-objetivos");
+      if (!root) return;
+
+      // ========= util: carregar Chart.js com fallback =========
+      const ensureChart = () => new Promise((resolve) => {
+        if (window.Chart) return resolve(true);
+
+        if (window.__dhoChartLoading === true) {
+          const t = setInterval(() => {
+            if (window.Chart) { clearInterval(t); resolve(true); }
+          }, 60);
+          setTimeout(() => { clearInterval(t); resolve(!!window.Chart); }, 2500);
+          return;
+        }
+
+        window.__dhoChartLoading = true;
+
+        const s = document.createElement("script");
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js";
+        s.async = true;
+        s.onload = () => resolve(true);
+        s.onerror = () => resolve(false);
+        document.head.appendChild(s);
+      });
+
+      // ========= 1) Pizza =========
+      const renderPizza = () => {
+        const dataPizza = [
+          { label: "Trabalho e carreira", sub: "carreira, propósito, renda", value: 45, color: "rgba(180,130,255,0.95)" },
+          { label: "Autodesenvolvimento e saúde", sub: "saúde, intelecto, equilíbrio emocional", value: 28, color: "rgba(150,170,255,0.92)" },
+          { label: "Bem-estar e sentido", sub: "hobbies, felicidade, espiritualidade", value: 17, color: "rgba(210,170,255,0.85)" },
+          { label: "Relações", sub: "família, social, conjugal", value: 10, color: "rgba(255,255,255,0.72)" }
+        ];
+
+        const legendaEl = root.querySelector("#dhoObjetivosLegenda");
+        if (legendaEl) {
+          legendaEl.innerHTML = dataPizza.map(item => `
+            <div class="dho-legend-item">
+              <span class="dho-legend-dot" style="background:${item.color}"></span>
+              <div>
+                <p class="dho-legend-label">${item.label}</p>
+                <p class="dho-legend-sub">${item.sub}</p>
+              </div>
+              <div class="dho-legend-pct">${item.value}%</div>
+            </div>
+          `).join("");
+        }
+
+        const canvas = root.querySelector("#dhoObjetivosPizza");
+        if (!canvas) return;
+
+        canvas.removeAttribute("width");
+        canvas.removeAttribute("height");
+
+        if (canvas._chartInstance) canvas._chartInstance.destroy();
+
+        const ctx = canvas.getContext("2d");
+        const chart = new Chart(ctx, {
+          type: "doughnut",
+          data: {
+            labels: dataPizza.map(d => d.label),
+            datasets: [{
+              data: dataPizza.map(d => d.value),
+              backgroundColor: dataPizza.map(d => d.color),
+              borderColor: "rgba(255,255,255,0.10)",
+              borderWidth: 1.2,
+              hoverOffset: 6
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            cutout: "62%",
+            animation: { duration: 650 },
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                backgroundColor: "rgba(10,10,14,0.92)",
+                borderColor: "rgba(255,255,255,0.10)",
+                borderWidth: 1,
+                titleColor: "rgba(255,255,255,0.92)",
+                bodyColor: "rgba(255,255,255,0.85)",
+                padding: 10,
+                callbacks: { label: (context) => ` ${context.raw}%` }
+              }
+            }
+          }
+        });
+
+        canvas._chartInstance = chart;
+
+        const force = () => { try { chart.resize(); } catch(e){} };
+        requestAnimationFrame(force);
+        setTimeout(force, 80);
+        setTimeout(force, 260);
+      };
+
+      // ========= 2) Ranking progressivo =========
+      const wrap = root.querySelector("#dhoRankWrap");
+      const btn  = root.querySelector("#dhoRankNextBtn");
+      const hint = root.querySelector("#dhoRankHint");
+      const list = root.querySelector("#dhoObjetivosRank");
+      const finalBox = root.querySelector("#dhoRankFinal");
+
+      if (wrap && btn && list) {
+        const items = Array.from(list.querySelectorAll(".dho-rank-item"));
+        items.forEach(li => {
+          const r = li.getAttribute("data-rank");
+          if (r !== "1") li.classList.add("is-hidden");
+          else li.classList.remove("is-hidden");
+        });
+
+        if (finalBox) finalBox.classList.remove("is-visible");
+        btn.disabled = false;
+        btn.classList.add("dho-btn--glow");
+
+        const getNextHidden = () => list.querySelector(".dho-rank-item.is-hidden");
+
+        const syncButtonLabel = () => {
+          const nextHidden = getNextHidden();
+          if (nextHidden) {
+            const nextRank = nextHidden.getAttribute("data-rank");
+            btn.textContent = `Descobrir o Top ${nextRank}`;
+            if (hint) hint.textContent = "Dica: clique para abrir o próximo nível do ranking.";
+            return;
+          }
+          btn.textContent = "Ranking completo";
+          btn.disabled = true;
+          btn.classList.remove("dho-btn--glow");
+          if (hint) hint.textContent = "Pronto: agora o ranking está totalmente aberto.";
+          if (finalBox) finalBox.classList.add("is-visible");
+        };
+
+        if (wrap.dataset.bound !== "1") {
+          wrap.dataset.bound = "1";
+          btn.addEventListener("click", () => {
+            const hidden = getNextHidden();
+            if (!hidden) return;
+            hidden.classList.remove("is-hidden");
+            syncButtonLabel();
+          });
+        }
+
+        syncButtonLabel();
+      }
+
+      ensureChart().then((ok) => {
+        if (!ok) {
+          console.warn("[Bloco objetivos] Não foi possível carregar Chart.js (CDN bloqueado).");
+          return;
+        }
+        renderPizza();
+      });
+
+    } catch (err) {
+      console.error("[Bloco objetivos] Erro ao inicializar:", err);
+    }
+  };
+
+    /* /Dimensao 2 Objetivos do Negocio */
+(function(){
+      const ensureChartJs = () => new Promise((resolve, reject) => {
+        if (window.Chart) return resolve();
+        const existing = document.querySelector('script[data-chartjs="true"]');
+        if (existing) {
+          existing.addEventListener('load', resolve);
+          existing.addEventListener('error', reject);
+          return;
+        }
+        const s = document.createElement('script');
+        s.src = 'https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js';
+        s.async = true;
+        s.setAttribute('data-chartjs', 'true');
+        s.onload = resolve;
+        s.onerror = reject;
+        document.head.appendChild(s);
+      });
+
+      const makeCommonOptions = () => ({
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            enabled: true,
+            callbacks: {
+              label: (ctx) => {
+                const v = ctx.raw;
+                if (v === null || typeof v === 'undefined') return '';
+                return `${ctx.dataset.label}: ${v}`;
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            grid: { color: 'rgba(255,255,255,0.08)' },
+            ticks: { color: 'rgba(255,255,255,0.70)', font: { size: 11 } }
+          },
+          y: {
+            grid: { color: 'rgba(255,255,255,0.08)' },
+            ticks: { color: 'rgba(255,255,255,0.70)', font: { size: 11 } }
+          }
+        }
+      });
+
+      const rgba = (r,g,b,a) => `rgba(${r},${g},${b},${a})`;
+
+      window.initBloco_objetivosNegocio = async function(){
+        try{
+          await ensureChartJs();
+
+          // -------------------------
+          // 1) Governança (5 níveis, dados apenas em 1 e 2)
+          // -------------------------
+          const govEl = document.getElementById('chartGovMaturidade');
+          if (govEl && !govEl.dataset.rendered){
+            const ctx = govEl.getContext('2d');
+
+            const labels = [
+              '1) Inicial',
+              '2) Básica',
+              '3) Estruturada',
+              '4) Avançada',
+              '5) Madura'
+            ];
+
+            // Valores: percentuais (N3-N5 como null para referência visual)
+            const dataValues = [66.67, 33.33, null, null, null];
+
+            // Para tornar N3-N5 visíveis (atenuados) sem "inventar dado",
+            // desenhamos uma segunda série "referência" com um valor mínimo visual.
+            const refValues = [null, null, 5, 5, 5];
+
+            const opt = makeCommonOptions();
+            opt.scales.y = {
+              ...opt.scales.y,
+              beginAtZero: true,
+              max: 100,
+              ticks: {
+                color: 'rgba(255,255,255,0.70)',
+                callback: (v) => v + '%',
+                font: { size: 11 }
+              }
+            };
+
+            new Chart(ctx, {
+              type: 'bar',
+              data: {
+                labels,
+                datasets: [
+                  {
+                    label: 'Participação (%)',
+                    data: dataValues,
+                    backgroundColor: rgba(168,85,247,0.72),
+                    borderColor: rgba(168,85,247,0.30),
+                    borderWidth: 1,
+                    borderRadius: 10
+                  },
+                  {
+                    label: 'Referência visual',
+                    data: refValues,
+                    backgroundColor: rgba(255,255,255,0.10),
+                    borderColor: 'rgba(255,255,255,0.10)',
+                    borderWidth: 1,
+                    borderRadius: 10
+                  }
+                ]
+              },
+              options: opt
+            });
+
+            govEl.dataset.rendered = 'true';
+          }
+
+          // -------------------------
+          // 2) Prioridades (Top 4)
+          // -------------------------
+          const topEl = document.getElementById('chartTopPrioridades');
+          if (topEl && !topEl.dataset.rendered){
+            const ctx = topEl.getContext('2d');
+
+            const labels = [
+              'Aquisição de clientes\ne novos canais',
+              'Crescimento de receita\norgânica',
+              'Caixa e capital\nde giro',
+              'Lucratividade e\neficiência operacional'
+            ];
+
+            const values = [3,3,2,2];
+
+            const opt = makeCommonOptions();
+            opt.scales.y = {
+              ...opt.scales.y,
+              beginAtZero: true,
+              suggestedMax: 4,
+              ticks: { color: 'rgba(255,255,255,0.70)', font: { size: 11 }, precision: 0 }
+            };
+
+            new Chart(ctx, {
+              type: 'bar',
+              data: {
+                labels,
+                datasets: [{
+                  label: 'Menções',
+                  data: values,
+                  backgroundColor: rgba(168,85,247,0.72),
+                  borderColor: rgba(168,85,247,0.30),
+                  borderWidth: 1,
+                  borderRadius: 10
+                }]
+              },
+              options: opt
+            });
+
+            topEl.dataset.rendered = 'true';
+          }
+
+          // -------------------------
+          // 3) Barreiras (apenas total)
+          // -------------------------
+          const barEl = document.getElementById('chartBarreirasTotal');
+          if (barEl && !barEl.dataset.rendered){
+            const ctx = barEl.getContext('2d');
+
+            const labels = [
+              'Comunicação e processos\ndesalinhados',
+              'Saída de talentos e\nrotatividade alta',
+              'Liderança não preparada',
+              'Excesso de iniciativas,\nbaixa priorização',
+              'Falta de capacitação técnica'
+            ];
+
+            const values = [3,2,2,2,2];
+
+            const opt = makeCommonOptions();
+            // Horizontal bar
+            opt.indexAxis = 'y';
+            opt.scales.x = {
+              ...opt.scales.x,
+              beginAtZero: true,
+              suggestedMax: 4,
+              ticks: { color: 'rgba(255,255,255,0.70)', font: { size: 11 }, precision: 0 }
+            };
+            opt.scales.y = {
+              ...opt.scales.y,
+              ticks: { color: 'rgba(255,255,255,0.70)', font: { size: 11 } }
+            };
+
+            new Chart(ctx, {
+              type: 'bar',
+              data: {
+                labels,
+                datasets: [{
+                  label: 'Total de menções',
+                  data: values,
+                  backgroundColor: rgba(168,85,247,0.72),
+                  borderColor: rgba(168,85,247,0.30),
+                  borderWidth: 1,
+                  borderRadius: 10
+                }]
+              },
+              options: opt
+            });
+
+            barEl.dataset.rendered = 'true';
+          }
+
+        } catch (e) {
+          console.error('[DHO360] initBloco_objetivosNegocio falhou:', e);
+        }
+      };
+    })();
+
+    /* /Dimensao 3 Motivacoes */
+window.initBloco_motivacoes = function initBloco_motivacoes(){
+      const canvas = document.getElementById('chartRetencao');
+      if (!canvas || !window.Chart) return;
+
+      // Evita duplicação ao recarregar via fetch()
+      if (window.__dhoCharts && window.__dhoCharts.retencao) {
+        try { window.__dhoCharts.retencao.destroy(); } catch(e) {}
+      }
+      window.__dhoCharts = window.__dhoCharts || {};
+
+      const labels = [
+        'Desenv. carreira',
+        'Confiança liderança',
+        'Autodesenvolvimento',
+        'Reposicionamento',
+        'Projeto interno'
+      ];
+
+      const dataVals = [50.0, 37.5, 37.5, 31.25, 18.75];
+
+      const ctx = canvas.getContext('2d');
+
+      window.__dhoCharts.retencao = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels,
+          datasets: [{
+            label: 'Percentual de menções',
+            data: dataVals,
+            borderWidth: 1,
+            borderColor: 'rgba(255,255,255,0.25)',
+            backgroundColor: 'rgba(255,255,255,0.28)',
+            borderRadius: 10,
+            maxBarThickness: 44
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          animation: { duration: 650 },
+          plugins: {
+            legend: { display: false }, // legenda customizada em HTML
+            tooltip: {
+              enabled: true,
+              callbacks: {
+                label: function(ctx){
+                  const v = ctx.parsed.y;
+                  const txt = (Math.round(v * 100) / 100).toString().replace('.', ',');
+                  return txt + '%';
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              ticks: {
+                color: 'rgba(255,255,255,0.78)',
+                font: { size: 12 }
+              },
+              grid: { color: 'rgba(255,255,255,0.08)' }
+            },
+            y: {
+              suggestedMin: 0,
+              suggestedMax: 55,
+              ticks: {
+                color: 'rgba(255,255,255,0.70)',
+                callback: function(value){
+                  return String(value).replace('.', ',') + '%';
+                }
+              },
+              grid: { color: 'rgba(255,255,255,0.08)' }
+            }
+          }
+        }
+      });
+    };
+
+    /* /Dimensao 4 Praticas */
+window.initBloco_praticas = function initBloco_praticas(){
+      const DATA = {
+        practices: [
+          "1:1 e Feedback Estruturado",
+          "Agenda de Equipe e Comunicação Interna",
+          "Gestão Baseada em Dados (People Analytics)",
+          "Gestão de Clima e Engajamento",
+          "Gestão de Desempenho Contínuo",
+          "Gestão por Competências",
+          "Gestão por OKRs",
+          "Liderança Situacional",
+          "Mapeamento de Skills Críticas",
+          "Mentoria e Desenvolvimento de Talentos",
+          "Plano de Desenvolvimento Individual (PDI)"
+        ],
+
+        // Companhia atual: o quanto RH promove (1 a 5)
+        rh_promove: [3,3,2,3,1,4,2,2,2,1,1],
+
+        // Companhia atual: o quanto liderança aplica (1 a 5)
+        lid_aplica: [3,4,3,4,3,3,4,3,3,3,3],
+
+        // Trajetória: quanto conhece e já praticou (1 a 5)
+        traj_neg: [5,5,4,5,5,5,5,5,5,5,5],
+        traj_rh:  [5,4,4,4,5,4,3,5,3,3,4]
+      };
+
+      const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
+      const avg = (a,b) => (a + b) / 2;
+
+      // Escala visual 1..5 (leve, sutil, sem “neon forte”)
+      function bgForValue(v){
+        const x = clamp(v, 1, 5);
+        // 1: quase preto / 5: lilás mais claro
+        const map = {
+          1: "rgba(20,20,30,0.55)",
+          2: "rgba(124,58,237,0.18)",
+          3: "rgba(124,58,237,0.28)",
+          4: "rgba(168,85,247,0.30)",
+          5: "rgba(233,213,255,0.34)"
+        };
+        return map[x];
+      }
+
+      const elHeat = document.getElementById("dho-praticas-heat");
+      const elGaps = document.getElementById("dho-praticas-gaps");
+      const elSynthRH = document.getElementById("synth-rh");
+      const elSynthTraj = document.getElementById("synth-traj");
+      const elSynthLid = document.getElementById("synth-lid");
+
+      const toggles = Array.from(document.querySelectorAll(".dho-praticas .toggle-btn"));
+      let view = "traj_avg"; // traj_avg | traj_neg | traj_rh
+
+      function getTraj(i){
+        if(view === "traj_neg") return DATA.traj_neg[i];
+        if(view === "traj_rh") return DATA.traj_rh[i];
+        return avg(DATA.traj_neg[i], DATA.traj_rh[i]);
+      }
+
+      function fmt(n){
+        const v = Math.round(n * 10) / 10;
+        return String(v).replace(".", ",");
+      }
+
+      function renderHeat(){
+        if(!elHeat) return;
+        elHeat.innerHTML = "";
+
+        const rows = DATA.practices.map((name, i) => {
+          const rh = DATA.rh_promove[i];
+          const lid = DATA.lid_aplica[i];
+          const t = getTraj(i);
+          const gap = (t - lid);
+
+          const row = document.createElement("div");
+          row.className = "row";
+
+          // Prática
+          const c0 = document.createElement("div");
+          c0.className = "cell";
+          c0.innerHTML = '<div class="pratica">' + name + "</div>";
+
+          // RH promove
+          const c1 = document.createElement("div");
+          c1.className = "cell";
+          c1.innerHTML = `
+            <div class="heatbox" style="background:${bgForValue(rh)}">
+              <span class="lab">Nível</span>
+              <span class="val">${rh}</span>
+            </div>
+          `;
+
+          // Liderança aplica
+          const c2 = document.createElement("div");
+          c2.className = "cell";
+          c2.innerHTML = `
+            <div class="heatbox" style="background:${bgForValue(lid)}">
+              <span class="lab">Nível</span>
+              <span class="val">${lid}</span>
+            </div>
+          `;
+
+          // Trajetória
+          const c3 = document.createElement("div");
+          c3.className = "cell";
+          c3.innerHTML = `
+            <div class="heatbox" style="background:${bgForValue(t)}">
+              <span class="lab">Nível</span>
+              <span class="val">${fmt(t)}</span>
+            </div>
+          `;
+
+          // Gap
+          const c4 = document.createElement("div");
+          c4.className = "cell";
+          const gapTxt = (gap >= 0 ? "+" : "") + fmt(gap);
+          const gapBg = gap >= 2 ? "linear-gradient(135deg, rgba(233,213,255,0.18), rgba(124,58,237,0.10))" : "rgba(0,0,0,0.10)";
+          c4.innerHTML = `<span class="gap-pill" style="background:${gapBg}">${gapTxt}</span>`;
+
+          row.appendChild(c0);
+          row.appendChild(c1);
+          row.appendChild(c2);
+          row.appendChild(c3);
+          row.appendChild(c4);
+
+          elHeat.appendChild(row);
+
+          return { name, rh, lid, t, gap };
+        });
+
+        renderTopGaps(rows);
+        renderSynthesis(rows);
+      }
+
+      function renderTopGaps(rows){
+        if(!elGaps) return;
+        const sorted = rows
+          .slice()
+          .sort((a,b) => (b.gap - a.gap))
+          .slice(0, 4);
+
+        elGaps.innerHTML = "";
+        sorted.forEach(item => {
+          const div = document.createElement("div");
+          div.className = "gap-item";
+          const gapTxt = (item.gap >= 0 ? "+" : "") + fmt(item.gap);
+
+          // Texto editorial curto, sem julgamento
+          const desc =
+            item.gap >= 2
+              ? "A prática é amplamente conhecida, mas perde força na rotina. Normalmente isso aponta falta de ritual, cadência e espaço na agenda."
+              : "A prática tende a ser conhecida e aplicada em níveis próximos. Aqui, o ganho está mais em consistência do que em adoção.";
+
+          div.innerHTML = `
+            <div class="gap-top">
+              <div class="gap-name">${item.name}</div>
+              <div class="gap-val">Gap ${gapTxt}</div>
+            </div>
+            <div class="gap-desc">${desc}</div>
+          `;
+          elGaps.appendChild(div);
+        });
+      }
+
+      function renderSynthesis(rows){
+        const mean = arr => arr.reduce((s,x) => s + x, 0) / arr.length;
+
+        const rhM = mean(rows.map(r => r.rh));
+        const lidM = mean(rows.map(r => r.lid));
+        const tM  = mean(rows.map(r => r.t));
+
+        if(elSynthRH)  elSynthRH.textContent  = fmt(rhM) + " / 5";
+        if(elSynthTraj) elSynthTraj.textContent = fmt(tM) + " / 5";
+        if(elSynthLid) elSynthLid.textContent = fmt(lidM) + " / 5";
+      }
+
+      // Toggle handlers
+      toggles.forEach(btn => {
+        btn.addEventListener("click", () => {
+          toggles.forEach(b => {
+            b.classList.remove("is-active");
+            b.setAttribute("aria-selected", "false");
+          });
+          btn.classList.add("is-active");
+          btn.setAttribute("aria-selected", "true");
+          view = btn.dataset.view || "traj_avg";
+          renderHeat();
+        });
+      });
+
+      // First render
+      renderHeat();
+    };
+
+    /* /Onda 2 */
+// ===== DHO 360 init pattern =====
+  window.initBloco_Participar_da_Onda2 = function initBloco_Participar_da_Onda2(){
+    // Bloco simples: sem dependências e sem estado.
+    // Mantido para compatibilidade com carregamento via fetch().
+    return true;
+  };
+
+    // /Inicializacao (sem fetch)
+    document.addEventListener('DOMContentLoaded', function(){
+      try{ if (window.initBloco_metodologia) window.initBloco_metodologia(); }catch(e){ console.error('[DHO360] initBloco_metodologia falhou:', e); }
+      try{ if (window.initBloco_objetivos) window.initBloco_objetivos(); }catch(e){ console.error('[DHO360] initBloco_objetivos falhou:', e); }
+      try{ if (window.initBloco_objetivosNegocio) window.initBloco_objetivosNegocio(); }catch(e){ console.error('[DHO360] initBloco_objetivosNegocio falhou:', e); }
+      try{ if (window.initBloco_motivacoes) window.initBloco_motivacoes(); }catch(e){ console.error('[DHO360] initBloco_motivacoes falhou:', e); }
+      try{ if (window.initBloco_praticas) window.initBloco_praticas(); }catch(e){ console.error('[DHO360] initBloco_praticas falhou:', e); }
+      try{ if (window.initBloco_Participar_da_Onda2) window.initBloco_Participar_da_Onda2(); }catch(e){ console.error('[DHO360] initBloco_Participar_da_Onda2 falhou:', e); }
+    });
+  
+    // Header fixo: ajusta offset para âncoras e espaçamento do topo
+    function setHeaderOffset(){
+      const h = document.querySelector('.siteHeader');
+      if(!h) return;
+      const px = Math.max(64, Math.round(h.getBoundingClientRect().height));
+      document.documentElement.style.setProperty('--headerH', px + 'px');
+    }
+    window.addEventListener('load', setHeaderOffset);
+    window.addEventListener('resize', setHeaderOffset);
+
 </script>
 
 </body>
+
 </html>
