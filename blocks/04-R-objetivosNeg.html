@@ -295,6 +295,10 @@
   ========================== -->
   <style>
     .dho-objetivos-negocio{
+      /* ✅ AJUSTE: garantir que max-width inclua padding/borda (mesmo fix do Bloco 1) */
+      box-sizing: border-box;
+      padding: 26px 16px 34px;
+
       --fg: rgba(255,255,255,0.96);
       --muted: rgba(255,255,255,0.85);
       --note: rgba(255,255,255,0.70);
@@ -305,8 +309,12 @@
       --blur: blur(10px);
       --violet: rgba(168,85,247,0.95);
       --violet2: rgba(124,58,237,0.95);
+    }
 
-      padding: 26px 16px 34px;
+    /* ✅ AJUSTE: aplicar box-sizing no “vidro” e em todos os filhos deste bloco */
+    .dho-objetivos-negocio-wrap,
+    .dho-objetivos-negocio-wrap *{
+      box-sizing: border-box;
     }
 
     .dho-objetivos-negocio-wrap{
@@ -390,9 +398,7 @@
       -webkit-backdrop-filter: var(--blur);
       margin: 10px 0 18px;
     }
-    .dho-on-insight p{
-      color: var(--fg);
-    }
+    .dho-on-insight p{ color: var(--fg); }
     .dho-on-insight-mark{
       color: rgba(233,213,255,0.95);
       font-weight: 700;
@@ -505,9 +511,7 @@
       gap: 8px;
       text-align: left;
     }
-    .dho-on-legend-muted{
-      opacity: .85;
-    }
+    .dho-on-legend-muted{ opacity: .85; }
     .dho-on-dot{
       width: 10px;
       height: 10px;
@@ -515,12 +519,8 @@
       display: inline-block;
       border: 1px solid var(--stroke);
     }
-    .dho-on-dot-primary{
-      background: rgba(168,85,247,0.75);
-    }
-    .dho-on-dot-muted{
-      background: rgba(255,255,255,0.10);
-    }
+    .dho-on-dot-primary{ background: rgba(168,85,247,0.75); }
+    .dho-on-dot-muted{ background: rgba(255,255,255,0.10); }
 
     .dho-on-canvasWrap{
       position: relative;
@@ -551,9 +551,7 @@
       outline: none;
     }
     .dho-on-details summary::-webkit-details-marker{ display:none; }
-    .dho-on-details-body{
-      margin-top: 10px;
-    }
+    .dho-on-details-body{ margin-top: 10px; }
 
     /* Planos (escala 1-5) */
     .dho-on-planos{
@@ -634,9 +632,7 @@
 
     /* Responsivo */
     @media (max-width: 820px){
-      .dho-on-micro{
-        grid-template-columns: 1fr;
-      }
+      .dho-on-micro{ grid-template-columns: 1fr; }
       .dho-on-pl-row{
         grid-template-columns: 1fr;
         gap: 8px;
@@ -646,9 +642,7 @@
         justify-items: start;
         width: fit-content;
       }
-      .dho-on-cta p{
-        text-align: justify;
-      }
+      .dho-on-cta p{ text-align: justify; }
     }
   </style>
 
@@ -708,27 +702,14 @@
         try{
           await ensureChartJs();
 
-          // -------------------------
           // 1) Governança (5 níveis, dados apenas em 1 e 2)
-          // -------------------------
           const govEl = document.getElementById('chartGovMaturidade');
           if (govEl && !govEl.dataset.rendered){
             const ctx = govEl.getContext('2d');
 
-            const labels = [
-              '1) Inicial',
-              '2) Básica',
-              '3) Estruturada',
-              '4) Avançada',
-              '5) Madura'
-            ];
-
-            // Valores: percentuais (N3-N5 como null para referência visual)
+            const labels = ['1) Inicial','2) Básica','3) Estruturada','4) Avançada','5) Madura'];
             const dataValues = [66.67, 33.33, null, null, null];
-
-            // Para tornar N3-N5 visíveis (atenuados) sem "inventar dado",
-            // desenhamos uma segunda série "referência" com um valor mínimo visual.
-            const refValues = [null, null, 5, 5, 5];
+            const refValues  = [null, null, 5, 5, 5];
 
             const opt = makeCommonOptions();
             opt.scales.y = {
@@ -771,9 +752,7 @@
             govEl.dataset.rendered = 'true';
           }
 
-          // -------------------------
           // 2) Prioridades (Top 4)
-          // -------------------------
           const topEl = document.getElementById('chartTopPrioridades');
           if (topEl && !topEl.dataset.rendered){
             const ctx = topEl.getContext('2d');
@@ -784,7 +763,6 @@
               'Caixa e capital\nde giro',
               'Lucratividade e\neficiência operacional'
             ];
-
             const values = [3,3,2,2];
 
             const opt = makeCommonOptions();
@@ -814,9 +792,7 @@
             topEl.dataset.rendered = 'true';
           }
 
-          // -------------------------
           // 3) Barreiras (apenas total)
-          // -------------------------
           const barEl = document.getElementById('chartBarreirasTotal');
           if (barEl && !barEl.dataset.rendered){
             const ctx = barEl.getContext('2d');
@@ -828,11 +804,9 @@
               'Excesso de iniciativas,\nbaixa priorização',
               'Falta de capacitação técnica'
             ];
-
             const values = [3,2,2,2,2];
 
             const opt = makeCommonOptions();
-            // Horizontal bar
             opt.indexAxis = 'y';
             opt.scales.x = {
               ...opt.scales.x,
