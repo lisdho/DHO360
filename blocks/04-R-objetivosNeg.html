@@ -1,3 +1,19 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>DHO 360º | Dimensão 2 - Objetivos</title>
+  <style>
+    body {
+      margin: 0;
+      background: #07070b;
+      color: #F5F5F7;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+  </style>
+</head>
+<body>
 <section class="dho-objetivos" id="dimensao-2-objetivos">
 
   <style>
@@ -145,6 +161,86 @@
       border-radius: 0 !important;
       box-shadow: none !important;
       backdrop-filter: none !important;
+    }
+
+    /* Insight + Context (layout do print) */
+    .dho-ic-stage{
+      grid-column: 1 / -1;
+      width: min(940px, 100%);
+      justify-self: center;
+      padding: 12px;
+    }
+    .dho-ic-row{
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 14px;
+      align-items: stretch;
+      min-height: 132px;
+    }
+    .dho-ic-box{
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.10);
+      position: relative;
+      overflow: hidden;
+    }
+    .dho-ic-insight{
+      background: rgba(255,255,255,0.06);
+      padding: 12px 12px 10px;
+    }
+    .dho-ic-insight h4{
+      margin: 0 0 8px 0;
+      font-size: 16px;
+      font-weight: 800;
+      color: rgba(255,255,255,0.92);
+      text-transform: lowercase;
+      letter-spacing: 0.01em;
+    }
+    .dho-ic-list{
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 6px;
+    }
+    .dho-ic-item{
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: rgba(255,255,255,0.92);
+      font-size: 15px;
+      line-height: 1.2;
+    }
+    .dho-ic-dot{
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      flex: 0 0 auto;
+      background: rgba(255,255,255,0.35);
+      box-shadow: 0 0 0 4px rgba(255,255,255,0.06);
+    }
+    .dho-ic-dot.is-green{ background: rgba(158, 230, 85, 0.95); box-shadow: 0 0 0 4px rgba(158, 230, 85, 0.10); }
+    .dho-ic-dot.is-yellow{ background: rgba(255, 196, 46, 0.95); box-shadow: 0 0 0 4px rgba(255, 196, 46, 0.10); }
+
+    .dho-ic-context{
+      background: rgba(14, 94, 120, 0.92);
+      border-color: rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 10px;
+    }
+    .dho-ic-context span{
+      font-size: 26px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.92);
+      letter-spacing: 0.01em;
+    }
+
+    @media (max-width: 920px){
+      .dho-ic-stage{ width: min(860px, 100%); }
+      .dho-ic-row{ grid-template-columns: 1fr; }
+      .dho-ic-context span{ font-size: 22px; }
     }
 
     /* Ranking */
@@ -354,19 +450,24 @@
         </p>
       </div>
 
-      <div class="dho-full dho-card">
-        <h3 class="dho-card-title">Insight-chave</h3>
-        <p class="dho-card-note">Objetivo não é o problema. Governança, foco e pessoas são.</p>
-      </div>
+      <!-- Insight + Contexto (ajuste conforme print) -->
+      <div class="dho-card dho-ic-stage">
+        <div class="dho-ic-row">
+          <div class="dho-ic-box dho-ic-insight" aria-label="Insight">
+            <h4>insight</h4>
+            <ul class="dho-ic-list">
+              <li class="dho-ic-item"><span class="dho-ic-dot is-green" aria-hidden="true"></span>Objetivo</li>
+              <li class="dho-ic-item"><span class="dho-ic-dot is-green" aria-hidden="true"></span>Plano</li>
+              <li class="dho-ic-item"><span class="dho-ic-dot is-yellow" aria-hidden="true"></span>Governança</li>
+              <li class="dho-ic-item"><span class="dho-ic-dot is-yellow" aria-hidden="true"></span>Foco</li>
+              <li class="dho-ic-item"><span class="dho-ic-dot is-yellow" aria-hidden="true"></span>Pessoas</li>
+            </ul>
+          </div>
 
-      <!-- Seção 1 | Contexto do negócio -->
-      <div class="dho-full dho-card">
-        <h3 class="dho-card-title">Contexto do negócio</h3>
-        <p class="dho-card-note">
-          As empresas respondentes possuem, em média, cerca de <strong>15 colaboradores</strong>. Estruturas desse porte já demandam coordenação mínima,
-          processos claros e decisões compartilhadas. Nesse contexto, informalidade excessiva deixa de ser agilidade e passa a representar risco.
-        </p>
-        <p class="dho-footnote">Crescimento sem estrutura cobra seu preço na execução.</p>
+          <div class="dho-ic-box dho-ic-context" aria-label="Contexto do negócio">
+            <span>Contexto do negocio</span>
+          </div>
+        </div>
       </div>
 
       <!-- Seção 2 | Maturidade de governança -->
@@ -422,6 +523,44 @@
         </div>
 
         <p class="dho-footnote"><strong>Insight:</strong> o crescimento do negócio está acontecendo antes da maturidade da governança.</p>
+      </div>
+
+      <!-- Micro-card | Objetivos profundos (paráfrase) -->
+      <div class="dho-full dho-card">
+        <h3 class="dho-card-title">Objetivos profundos por trás das decisões</h3>
+        <p class="dho-card-note">
+          Nas respostas abertas, a ambição aparece em camadas que ajudam a explicar as escolhas estratégicas. Em síntese, três temas se repetem:
+        </p>
+
+        <div class="dho-rank" style="margin-top:12px">
+          <div class="dho-rank-item dho-rank-item--top">
+            <div>1</div>
+            <div>
+              <strong>Independência financeira e prosperidade</strong><br>
+              <span>Construir segurança no longo prazo, ampliar patrimônio e ganhar liberdade de escolha.</span>
+            </div>
+          </div>
+
+          <div class="dho-rank-item">
+            <div>2</div>
+            <div>
+              <strong>Maturidade de liderança</strong><br>
+              <span>Aprender a lidar com a complexidade de liderar, decidir e sustentar resultados sem perder direção.</span>
+            </div>
+          </div>
+
+          <div class="dho-rank-item">
+            <div>3</div>
+            <div>
+              <strong>Impacto humano e ambiente de desenvolvimento</strong><br>
+              <span>Crescer gerando valor para pessoas, com um contexto de trabalho que desenvolva e multiplique capacidades.</span>
+            </div>
+          </div>
+        </div>
+
+        <p class="dho-footnote">
+          Essa camada de intenção ajuda a entender por que execução e governança se tornam o ponto crítico a partir de certo estágio de crescimento.
+        </p>
       </div>
 
       <!-- Seção 3 | Prioridades estratégicas em 12 meses -->
@@ -519,7 +658,6 @@
     const governancaData = [66.67, 33.33, 0, 0, 0];
 
     // Top 5 objetivos (qtd)
-    // Top 5 pela sua tabela: 3,3,2,2 e depois 1 (escolhendo "Lançamento..." como 5º para manter o Top 5)
     const top5Labels = [
       'Aquisição de clientes e novos canais',
       'Crescimento de receita orgânica',
@@ -607,10 +745,8 @@
     (function(){
       if(typeof Chart === 'undefined') return;
 
-      // Shared styling (sem estourar branco)
       const tickColor = 'rgba(255,255,255,0.72)';
       const gridColor = 'rgba(255,255,255,0.10)';
-      const titleColor = 'rgba(255,255,255,0.86)';
 
       // Governança
       const ctxGov = document.getElementById('chartGovernanca');
@@ -753,7 +889,6 @@
       // Ajuste fino de altura no horizontal
       const barCanvas = document.getElementById('chartBarreiras');
       if(barCanvas){
-        // aumenta altura conforme quantidade de itens (leve, sem quebrar mobile)
         const h = Math.max(320, barreiras.length * 34);
         barCanvas.style.height = h + 'px';
         barCanvas.parentElement.style.height = h + 'px';
@@ -763,3 +898,5 @@
   </script>
 
 </section>
+</body>
+</html>
