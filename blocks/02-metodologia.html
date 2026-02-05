@@ -177,6 +177,7 @@
     --bg0: #23142f;
     --bg1: #2a1637;
 
+    /* uniformizado (sem faixa mais clara) */
     --wrapTop: rgba(255,255,255,0.06);
     --wrapBot: rgba(255,255,255,0.06);
 
@@ -200,11 +201,9 @@
 
   .dho-met *{ box-sizing: border-box; }
 
-  /* ✅ padrão de largura DHO 360: max-width 980px + margin 0 auto */
   .dho-met .dho-met-wrap{
     max-width: 980px;
     margin: 0 auto;
-
     background: linear-gradient(180deg, var(--wrapTop), var(--wrapBot));
     border: 1px solid var(--stroke);
     border-radius: 22px;
@@ -214,6 +213,7 @@
     backdrop-filter: blur(6px);
   }
 
+  /* ✅ FORÇA o header a respeitar o fluxo (evita sticky/fixed vindos do CSS global) */
   .dho-met .dho-met-header{
     position: static !important;
     top: auto !important;
