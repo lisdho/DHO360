@@ -305,7 +305,22 @@
       color: #F5F5F7;
       margin: 0 0 8px 0;
     }
-    .dho-subtitle{
+    
+    /* =========================================================
+       Ajuste solicitado: largura do título (dho-title)
+       - Permite que o título use a largura interna total do wrap (~944px)
+       - Mantém o restante dos blocos internos em 860px (regra existente)
+    ========================================================= */
+    .dho-objetivos-grid > .dho-full:first-child{
+      width: min(944px, 100%) !important;
+      max-width: 944px !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+      justify-self: center !important;
+      box-sizing: border-box;
+    }
+
+.dho-subtitle{
       font-size: 15.5px;
       line-height: 1.65;
       color: rgba(255,255,255,0.85);
@@ -650,13 +665,15 @@
 
       aspect-ratio: 1 / 1;
       display: grid;
+      place-items: center;
       align-content: center;
+      justify-items: center;
 
       padding: 9px 9px;
       color: rgba(255,255,255,0.90);
-      font-size: 12.2px;
+      font-size: 15px;
       line-height: 1.5;
-      text-align: left;
+      text-align: center;
     }
     .dho-cta::before{
       content:"";
@@ -680,18 +697,19 @@
     .dho-cta > *{ position: relative; z-index: 1; }
 
     .dho-cta strong{
-      display:inline-flex;
+      display: inline-block;
       align-items:center;
       gap: 8px;
       margin: 0 0 7px 0;
-      padding: 2px 7px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,0.14);
-      background: rgba(0,0,0,0.14);
+      padding: 0;
+      border-radius: 0;
+      border: 0;
+      background: transparent;
       color: rgba(255,255,255,0.92);
       font-weight: 700;
       letter-spacing: 0.02em;
       white-space: normal;
+      text-align: center;
     }
 /* Full width within wrap */
     .dho-full{ grid-column: 1 / -1; }
@@ -713,7 +731,7 @@
       <!-- Header editorial -->
       <div class="dho-full">
         <div class="dho-kicker">DIMENSÃO 2 | OBJETIVOS DO NEGÓCIO</div>
-        <h2 class="dho-title">Com objetivos e planos alinhados, a próxima etapa é amadurecer a estrutura./h2>
+        <h2 class="dho-title">Com objetivos e planos alinhados, a próxima etapa é amadurecer a estrutura.</h2>
         <p class="dho-subtitle">
           Os negócios também tem objetivos claros e com eles planos estruturados, o próximo passo é entender como sustentar toda a execução. O ponto central dessa dimensão não é sobre definição de objetivos, e sim sobre a maturidade que sustenta o caminho até lá. 
 
