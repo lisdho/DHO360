@@ -1,205 +1,453 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>DHO 360º | Dimensão 4 — Práticas</title>
+  <style>
+    body{
+      margin:0;
+      min-height:100vh;
+      background:
+        radial-gradient(1100px 680px at 18% 12%, rgba(124,58,237,.18), transparent 56%),
+        radial-gradient(900px 600px at 84% 18%, rgba(168,85,247,.14), transparent 58%),
+        radial-gradient(900px 660px at 50% 96%, rgba(233,213,255,.10), transparent 62%),
+        #07070b;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Helvetica Neue", "Noto Sans", "Liberation Sans", sans-serif;
+    }
+  
+    /* Guia recolhível */
+    .dho-praticas-guide{ position: relative; }
+    .dho-praticas-guide-toggle{
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 14px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(0,0,0,0.10);
+      color: #F5F5F7;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: left;
+    }
+    .dho-praticas-guide-toggle .chev{
+      opacity: .85;
+      transition: transform .22s ease;
+    }
+    .dho-praticas-guide-toggle[aria-expanded="true"] .chev{ transform: rotate(180deg); }
+    .dho-praticas-guide-body{ padding: 10px 6px 0; }
+
+    /* Guia recolhível (minimal) */
+    .dho-praticas-guide-toggle{
+      padding: 7px 8px;
+      border-radius: 10px;
+      font-size: 12.2px;
+      font-weight: 600;
+      background: rgba(0,0,0,0.06);
+    }
+    .dho-praticas-guide-toggle .chev{ opacity: .8; }
+    .dho-praticas-guide-body{
+      font-size: 12.8px;
+      line-height: 1.55;
+    }
+    .dho-praticas-guide-body ul{ margin: 8px 0 10px; }
+    .dho-praticas-guide-body li{ font-size: 11.8px; }
+    .dho-praticas-guide-body p{ font-size: 12.8px; }
+    .dho-praticas-guide-body .tag{ font-size: 10.5px; padding: 4px 8px; border-radius: 999px; }
+    .dho-praticas-guide.card{ padding: 10px 10px 8px; }
+
+    .is-hidden{ display: none !important; }
+
+    /* Cabeçalhos e células centrais (RH/Liderança/Trajetória/Gap) */
+    .heat-head .heat-th:nth-child(n+2){ text-align:center; }
+    .heat-body .row .cell:nth-child(n+2){ justify-content:center; }
+
+  /* v17: tornar a área de síntese (texto à direita) totalmente invisível */
+.synth-strip,
+.synth-note{
+  border-color: transparent !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+.synth-strip::before,
+.synth-note::before{
+  display:none !important;
+  content:none !important;
+}
+/* v18: centralizar todo o conteúdo visível da síntese */
+.synth-strip{
+  display: flex !important;
+  justify-content: center !important;
+}
+
+.synth-strip-inner{
+  margin: 0 auto !important;
+}
+
+.synth-flow{
+  justify-content: center !important;
+}
+
+.synth-flow > *{
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+</style>
+</head>
+<body>
 
 <section class="dho-praticas" aria-labelledby="dho-praticas-title">
-  <div class="dho-praticas-wrap">
-    <!-- 1) Header editorial -->
-    <header class="dho-praticas-head">
-      <div class="dho-praticas-kicker">DIMENSÃO X</div>
-      <h2 id="dho-praticas-title">Práticas de gestão e liderança de pessoas</h2>
-      <p class="dho-praticas-sub">
-        Entre promover e aplicar, existe um espaço onde a estratégia se perde ou se sustenta. Nesta dimensão, as práticas
-        são observadas por múltiplas perspectivas para evidenciar consistência, lacunas e oportunidades de sustentação no dia a dia.
-      </p>
 
-      <div class="dho-praticas-insight">
-        <div class="insight-badge">Insight</div>
-        <p class="insight-text">
-          A maturidade não está na existência das práticas, mas na consistência da aplicação.
-        </p>
-      </div>
+  <div class="dho-praticas-wrap">
+
+    <!-- 1) Header editorial -->
+
+    <header class="dho-praticas-head">
+
+      <div class="dho-praticas-kicker">DIMENSÃO 4 | PRÁTICAS DE GESTÃO DE PESSOAS</div>
+
+      <h2 id="dho-praticas-title">Práticas de gestão e liderança de pessoas</h2>
+
+      <p class="dho-praticas-sub">
+
+        Entre promover e aplicar, existe um espaço onde a estratégia se perde ou se sustenta. Nesta dimensão, as práticas
+
+        são observadas por múltiplas perspectivas para evidenciar consistência, lacunas e oportunidades de sustentação no dia a dia.
+
+      </p>
     </header>
 
+
+
     <!-- 2) Como ler -->
-    <div class="dho-praticas-guide card">
-      <h3 class="h3">Como ler esta dimensão</h3>
-      <ul class="guide-list">
-        <li><span class="tag">RH promove</span> o quanto as práticas são promovidas institucionalmente na companhia atual.</li>
-        <li><span class="tag">Liderança aplica</span> o quanto as práticas são efetivamente aplicadas no cotidiano da gestão.</li>
-        <li><span class="tag">Trajetória</span> o quanto as práticas são conhecidas e já foram vivenciadas (duas lentes: Negócio e RH).</li>
-      </ul>
-      <p class="guide-note">
-        A leitura não é sobre “certo” ou “errado”. É sobre coerência: quando a execução aperta, quais práticas resistem e quais viram esforço individual.
-      </p>
-    </div>
+
+
+
 
     <!-- 3) Núcleo: Heatmap comparativo -->
-    <div class="dho-praticas-core">
-      <div class="core-top">
-        <div>
-          <h3 class="h3">Heatmap comparativo</h3>
-          <p class="core-desc">
-            Tons mais claros indicam maior nível (1 a 5). O objetivo é tornar visível onde há promoção e conhecimento, mas a aplicação oscila.
-          </p>
-        </div>
 
-        <div class="view-toggle" role="tablist" aria-label="Filtro de trajetória">
-          <button class="toggle-btn is-active" type="button" data-view="traj_avg" role="tab" aria-selected="true">
-            Trajetória (média)
-          </button>
-          <button class="toggle-btn" type="button" data-view="traj_neg" role="tab" aria-selected="false">
-            Trajetória (Negócio)
-          </button>
-          <button class="toggle-btn" type="button" data-view="traj_rh" role="tab" aria-selected="false">
-            Trajetória (RH)
-          </button>
+    <div class="dho-praticas-core">
+
+      <div class="core-top">
+
+        <div>
+
+          <h3 class="h3">Heatmap comparativo</h3>
+
+          <p class="core-desc">
+
+            Tons mais claros indicam maior nível (1 a 5). O objetivo é tornar visível onde há promoção e conhecimento, mas a aplicação oscila.
+
+          </p>
+
         </div>
-      </div>
+</div>
+
+
+
+    <div class="dho-praticas-guide card">
+      <button class="dho-praticas-guide-toggle" type="button" aria-expanded="false" aria-controls="dho-praticas-guide-body">
+        <span>Como ler esta dimensão</span>
+        <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <div id="dho-praticas-guide-body" class="dho-praticas-guide-body is-hidden">
+
+      <ul class="guide-list">
+
+        <li><span class="tag">RH promove</span> o quanto as práticas são promovidas institucionalmente na companhia atual.</li>
+
+        <li><span class="tag">Liderança aplica</span> o quanto as práticas são efetivamente aplicadas no cotidiano da gestão.</li>
+
+        <li><span class="tag">Trajetória</span> o quanto as práticas são conhecidas e já foram vivenciadas (duas lentes: Negócio e RH).</li>
+
+      </ul>
+
+      <p class="guide-note">
+
+        A leitura não é sobre “certo” ou “errado”. É sobre coerência: quando a execução aperta, quais práticas resistem e quais viram esforço individual.
+
+      </p>
+
+    </div>
+
+    </div>
+
+
+
 
       <div class="heatwrap">
-        <div class="heat-head">
-          <div class="heat-th col-pratica">Prática</div>
-          <div class="heat-th">RH promove</div>
-          <div class="heat-th">Liderança aplica</div>
-          <div class="heat-th">Trajetória</div>
-          <div class="heat-th col-gap">Gap</div>
+
+        <div class="heat-controls">
+
+
+
+
+        <div class="view-toggle" role="tablist" aria-label="Filtro de trajetória">
+
+          <button class="toggle-btn is-active" type="button" data-view="traj_avg" role="tab" aria-selected="true">
+
+            Trajetória (média)
+
+          </button>
+
+          <button class="toggle-btn" type="button" data-view="traj_neg" role="tab" aria-selected="false">
+
+            Trajetória (Negócio)
+
+          </button>
+
+          <button class="toggle-btn" type="button" data-view="traj_rh" role="tab" aria-selected="false">
+
+            Trajetória (RH)
+
+          </button>
+
         </div>
+
+      
+        </div>
+          <div class="heat-controls-note">Clique para filtrar a trajetória exibida.</div>
+<div class="heat-head">
+
+          <div class="heat-th col-pratica">Prática</div>
+
+          <div class="heat-th">RH promove</div>
+
+          <div class="heat-th">Liderança aplica</div>
+
+          <div class="heat-th">Trajetória</div>
+
+          <div class="heat-th col-gap">Gap</div>
+
+        </div>
+
         <div id="dho-praticas-heat" class="heat-body" aria-label="Heatmap de práticas"></div>
 
+
+
         <div class="legend">
+
           <div class="legend-row">
+
             <span class="legend-label">Baixo (1)</span>
+
             <span class="swatch s1" aria-hidden="true"></span>
+
             <span class="swatch s2" aria-hidden="true"></span>
+
             <span class="swatch s3" aria-hidden="true"></span>
+
             <span class="swatch s4" aria-hidden="true"></span>
+
             <span class="swatch s5" aria-hidden="true"></span>
+
             <span class="legend-label">Alto (5)</span>
+
           </div>
+
           <p class="legend-note">
+
             Gap = Trajetória (conhecimento e vivência) menos Liderança aplica. Quanto maior, maior a chance de existir método, mas faltar sustentação no contexto atual.
+
           </p>
-        </div>
-      </div>
-    </div>
 
-    <!-- 4) Leitura guiada -->
-    <div class="dho-praticas-reading">
-      <div class="reading-text">
-        <h3 class="h3">Leitura guiada</h3>
+          <div class="legend-reading">
+            <div class="legend-reading-title">Leitura guiada</div>
+            <div class="reading-text">
+
+        
+
         <p>
+
           O padrão geral sugere que o conhecimento existe e as práticas são reconhecidas como importantes. O ponto sensível aparece na transição entre
+
           intenção e rotina: quando não há sistema (rituais, cadência, métricas simples e espaço na agenda), a aplicação tende a depender do perfil individual
+
           de cada liderança.
+
         </p>
-        <div class="reading-callout">
-          <div class="callout-dot" aria-hidden="true"></div>
-          <p class="callout-text"><strong>Conhecimento não é o gargalo.</strong> O gargalo é a consistência sob pressão operacional.</p>
+</div>
+
+
         </div>
+
       </div>
 
-      <div class="reading-list card">
-        <h4 class="h4">Maiores gaps de sustentação</h4>
-        <div id="dho-praticas-gaps" class="gaps-list" aria-label="Lista de maiores gaps"></div>
-        <p class="note">
-          Este recorte prioriza onde a trajetória indica maturidade, mas a aplicação atual não acompanha na mesma intensidade.
-        </p>
-      </div>
     </div>
+
+    <!-- 4b) Imagem de apoio -->
+    <div class="dho-praticas-figure" aria-label="Figura de apoio da dimensão">
+      <img class="dho-praticas-figure-img" src="assets/praticasdegestao.png" alt="Práticas de gestão e liderança de pessoas" loading="lazy" />
+    </div>
+
 
     <!-- 5) Recorte por perspectiva -->
+
     <div class="dho-praticas-perspectives">
+
       <div class="persp-grid">
-        <div class="persp card">
+
+        <div class="persp card persp--rh">
+
           <h4 class="h4">O olhar do RH</h4>
+
           <p>
-            O RH sinaliza promoção moderada de práticas essenciais, mas parte do conjunto aparece com baixa sustentação.
-            O risco não está no desenho das iniciativas, e sim na aderência cotidiana e no espaço real na agenda.
+
+            O RH sinaliza a promoção de práticas essenciais, mas com baixa sustentação no dia a dia. O risco não está no desenho das iniciativas, e sim na adesão real à agenda operacional.
+
           </p>
+
           <p class="mini">
+
             Mini insight: promover não garante aplicação.
+
           </p>
+
         </div>
 
-        <div class="persp card">
+
+
+        <div class="persp card persp--neg">
+
           <h4 class="h4">O olhar do negócio</h4>
+
           <p>
-            A trajetória do negócio mostra alta valorização e vivência ampla das práticas. Em outras palavras: existe apetite por bons rituais de gestão.
-            Quando a aplicação cai, a fricção tende a estar no contexto (prioridade, tempo, governança), não na relevância do tema.
+
+            O negócio reconhece valor nas práticas e demonstra expectativa clara de funcionamento. Quando a aplicação falha, o entrave está menos no tema e mais no contexto: prioridade, tempo e governança.
+
           </p>
+
           <p class="mini">
-            Mini insight: existe expectativa de que funcione.
+
+            Mini insight: há expectativa de entrega, não resistência ao modelo.
+
           </p>
+
         </div>
 
-        <div class="persp card">
+
+
+        <div class="persp card persp--lid">
+
           <h4 class="h4">A prática da liderança</h4>
+
           <p>
-            A liderança reporta aplicação estável, mas com pouca diferenciação entre práticas. Isso pode indicar padronização mínima (o básico acontece)
-            e, ao mesmo tempo, espaço para elevar profundidade em temas como desenvolvimento, mentoria e gestão contínua.
+
+            A liderança relata aplicação estável, porém pouco diferenciada entre práticas. O básico acontece, mas há espaço evidente para aprofundar desenvolvimento, mentoria e gestão contínua.
+
           </p>
+
           <p class="mini">
+
             Mini insight: sem sistema, a prática vira esforço individual.
+
           </p>
+
         </div>
+
       </div>
+
     </div>
+
+
 
     <!-- 6) Síntese visual -->
-    <div class="dho-praticas-synth">
-      <div class="synth-strip">
-        <div class="synth-step">
-          <span class="synth-k">RH promove</span>
-          <span class="synth-v" id="synth-rh">-</span>
-        </div>
-        <div class="synth-arrow" aria-hidden="true">→</div>
-        <div class="synth-step">
-          <span class="synth-k">Trajetória</span>
-          <span class="synth-v" id="synth-traj">-</span>
-        </div>
-        <div class="synth-arrow" aria-hidden="true">→</div>
-        <div class="synth-step">
-          <span class="synth-k">Liderança aplica</span>
-          <span class="synth-v" id="synth-lid">-</span>
-        </div>
-        <div class="synth-note">
-          <p>
-            Esta dimensão revela menos um problema de intenção e mais um desafio de sustentação.
-          </p>
-        </div>
-      </div>
-    </div>
 
-    <!-- 7) Conexão com negócio -->
-    <div class="dho-praticas-bridge">
-      <h3 class="h3">Ponte estratégica</h3>
-      <p>
-        Em ambientes de crescimento acelerado e baixa maturidade de governança, práticas de gestão de pessoas tendem a perder espaço para urgências operacionais.
-        O efeito costuma ser cumulativo: menos cadência, menos feedback estruturado, menos desenvolvimento, e mais dependência do “heroísmo” individual.
-      </p>
-      <div class="bridge-em">
-        <span class="bridge-icon" aria-hidden="true">◈</span>
-        <p><strong>Quando a execução aperta, o humano é o primeiro a ser comprimido.</strong></p>
+    <div class="dho-praticas-synth">
+
+      <div class="synth-strip">
+
+        <div class="synth-step">
+
+          <span class="synth-k">RH promove</span>
+
+          <span class="synth-v" id="synth-rh">-</span>
+
+        </div>
+
+        <div class="synth-arrow" aria-hidden="true">→</div>
+
+        <div class="synth-step">
+
+          <span class="synth-k">Trajetória</span>
+
+          <span class="synth-v" id="synth-traj">-</span>
+
+        </div>
+
+        <div class="synth-arrow" aria-hidden="true">→</div>
+
+        <div class="synth-step">
+
+          <span class="synth-k">Liderança aplica</span>
+
+          <span class="synth-v" id="synth-lid">-</span>
+
+        </div>
+
+        <div class="synth-note">
+
+          <p>
+
+            Esta dimensão revela menos um problema de intenção e mais um desafio de sustentação.
+
+          </p>
+
+        </div>
+
       </div>
+
     </div>
 
     <!-- 8) Reflexão -->
+
+
+
+
+    <!-- 8) Reflexão -->
+
     <div class="dho-praticas-reflection">
-      <h3 class="h3">Reflexão DHO 360</h3>
+
+      <h3 class="h3">Reflexão</h3>
+
       <p>
-        Gestão de pessoas não falha por falta de método. Ela falha quando não encontra espaço, prioridade e coerência com o modelo de negócio.
-        A diferença entre “ter” e “ser” uma prática está no ritual: o que acontece toda semana, mesmo com o calendário cheio.
+
+        Gestão de pessoas não falha por falta de método. Falha quando não encontra espaço, prioridade e coerência com o negócio. A diferença entre “ter” e “ser” prática está no ritual: o que acontece toda semana, mesmo com a agenda cheia.
+
       </p>
+
     </div>
+
+
 
     <!-- 9) CTA editorial -->
+
     <div class="dho-praticas-cta card">
-      <h3 class="h3">Pergunta para fechar</h3>
+
+      <h3 class="h3">Pergunta ao leitor</h3>
+
       <p>
-        O que hoje impede boas práticas de se sustentarem no seu dia a dia: falta de tempo, falta de clareza, falta de ritual ou falta de prioridade?
+
+        O que hoje impede a sustentação das boas práticas no seu dia a dia: tempo, clareza, ritual ou prioridade?
+
       </p>
+
     </div>
+
   </div>
 
+
+
   <style>
+
     /* =========================
        DHO 360 | Bloco: Práticas
        ========================= */
@@ -207,11 +455,24 @@
       position: relative;
       padding: 22px 0 28px;
     }
+
+    /* AJUSTE ÚNICO: card principal (wrap) em estilo glass */
     .dho-praticas-wrap{
-      max-width: 1040px;
+      max-width: 980px;
       margin: 0 auto;
       padding: 0 18px;
+
+      /* glass principal: preenchimento + bordas */
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.06);
+      box-shadow: 0 18px 44px rgba(0,0,0,0.40);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      overflow: hidden;
     }
+
+
 
     /* Paleta e base */
     .dho-praticas{
@@ -250,7 +511,7 @@
       font-weight: 760;
     }
     .dho-praticas .h3{
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 720;
       line-height: 1.25;
     }
@@ -263,7 +524,7 @@
       margin: 0 0 10px 0;
       font-size: var(--p);
       line-height: 1.6;
-      text-align: justify; /* Regra obrigatória */
+      text-align: justify;
       text-justify: inter-word;
     }
 
@@ -271,7 +532,7 @@
     .dho-praticas .card{
       background: var(--card);
       border: 1px solid var(--stroke);
-      border-radius: 14px;
+      border-radius: 10px;
       box-shadow: var(--shadow);
       backdrop-filter: var(--blur);
       -webkit-backdrop-filter: var(--blur);
@@ -280,27 +541,43 @@
 
     /* Header */
     .dho-praticas-head{
-      margin-bottom: 14px;
+      margin: 0 0 14px 0;
+      padding: 18px 0 0;
     }
+
+    /* Kicker editorial (linha superior, sem “pílula”) */
     .dho-praticas-kicker{
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 10px;
-      margin-bottom: 10px;
-      border: 1px solid var(--stroke);
-      border-radius: 999px;
-      background: linear-gradient(135deg, rgba(124,58,237,0.16), rgba(168,85,247,0.10));
-      color: var(--muted);
+      display: block;
+      margin: 0 0 8px 0;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: rgba(255,255,255,0.70);
       font-size: 12px;
       letter-spacing: 0.12em;
       text-transform: uppercase;
     }
-    .dho-praticas-sub{
-      color: var(--sub);
-      margin-top: 8px;
-      max-width: 980px;
+
+    /* Título principal */
+    .dho-praticas-head h2{
+      font-size: clamp(22px, 2.3vw, 34px);
+      line-height: 1.15;
+      font-weight: 700;
+      color: #F5F5F7;
+      margin: 0 0 10px 0;
+      letter-spacing: 0.2px;
     }
+
+    /* Subtítulo editorial */
+    .dho-praticas-sub{
+      margin: 0;
+      max-width: 980px;
+      font-size: 15.5px;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.85);
+      text-align: justify;
+    }
+
     .dho-praticas-insight{
       margin-top: 12px;
       display: grid;
@@ -308,7 +585,7 @@
       gap: 10px;
       align-items: start;
       padding: 12px 14px;
-      border-radius: 14px;
+      border-radius: 10px;
       border: 1px solid var(--stroke);
       background: linear-gradient(135deg, rgba(124,58,237,0.12), rgba(233,213,255,0.06));
     }
@@ -324,25 +601,17 @@
       white-space: nowrap;
       margin-top: 1px;
     }
-    .insight-text{
-      margin: 0;
-      color: var(--fg);
-    }
+    .insight-text{ margin: 0; color: var(--fg); }
 
     /* Guide */
-    .dho-praticas-guide{
-      margin: 14px 0;
-    }
-    .guide-list{
-      margin: 10px 0 8px 0;
-      padding-left: 18px;
-    }
+    .dho-praticas-guide{ margin: 14px 0; }
+    .guide-list{ margin: 10px 0 8px 0; padding-left: 18px; }
     .guide-list li{
       margin: 8px 0;
       font-size: var(--p);
       line-height: 1.55;
       color: var(--sub);
-      text-align: justify; /* regra */
+      text-align: justify;
       text-justify: inter-word;
     }
     .tag{
@@ -357,16 +626,10 @@
       margin-right: 6px;
       white-space: nowrap;
     }
-    .guide-note{
-      color: var(--muted);
-      margin-top: 8px;
-      font-size: var(--small);
-    }
+    .guide-note{ color: var(--muted); margin-top: 8px; font-size: var(--small); }
 
     /* Core */
-    .dho-praticas-core{
-      margin-top: 10px;
-    }
+    .dho-praticas-core{ margin-top: 10px; }
     .core-top{
       display: grid;
       grid-template-columns: 1fr auto;
@@ -374,14 +637,10 @@
       align-items: start;
       margin: 8px 0 10px;
     }
-    .core-desc{
-      color: var(--muted);
-      margin-top: 2px;
-      font-size: var(--small);
-    }
+    .core-desc{ color: var(--muted); margin-top: 2px; font-size: var(--small); }
     .view-toggle{
       display: flex;
-      gap: 8px;
+      gap: 6px;
       flex-wrap: wrap;
       justify-content: flex-end;
     }
@@ -392,7 +651,7 @@
       color: var(--muted);
       padding: 8px 10px;
       border-radius: 999px;
-      font-size: 12.5px;
+      font-size: 11.8px;
       letter-spacing: .02em;
       cursor: pointer;
       transition: transform .08s ease, background .2s ease, color .2s ease;
@@ -404,7 +663,28 @@
     }
 
     /* Heatmap container */
-    .heatwrap{
+    /* Heat controls */
+.heat-controls{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 0 10px;
+  gap: 6px;
+}
+.heat-controls .view-toggle{ margin: 0; }
+.heat-controls .toggle-btn{ font-size: 12px; padding: 7px 10px; border-radius: 999px; }
+.heat-controls-note{
+  font-size: 10.5px;
+  line-height: 1.3;
+  color: rgba(255,255,255,0.62);
+  text-align: center;
+}
+@media (max-width: 720px){
+  .heat-controls{ align-items: flex-start; }
+}
+
+.heatwrap{
       border: 1px solid var(--stroke);
       border-radius: 16px;
       background: rgba(255,255,255,0.03);
@@ -413,7 +693,7 @@
     }
     .heat-head{
       display: grid;
-      grid-template-columns: 1.6fr 0.7fr 0.9fr 0.8fr 0.55fr;
+      grid-template-columns: 1.55fr 0.85fr 0.85fr 0.85fr 0.85fr;
       gap: 0;
       border-bottom: 1px solid var(--stroke);
       background: linear-gradient(135deg, rgba(124,58,237,0.10), rgba(0,0,0,0.12));
@@ -429,21 +709,26 @@
     }
     .heat-th:last-child{ border-right: none; }
 
+    /* Colunas padronizadas (RH/Liderança/Trajetória/Gap) */
+    .heat-th.col-rh, .heat-th.col-lid, .heat-th.col-traj, .heat-th.col-gap{ text-align: center; }
+    .cell.col-rh, .cell.col-lid, .cell.col-traj, .cell.col-gap{ justify-content: center; }
+
+
     .heat-body .row{
       display: grid;
-      grid-template-columns: 1.6fr 0.7fr 0.9fr 0.8fr 0.55fr;
+      grid-template-columns: 1.55fr 0.85fr 0.85fr 0.85fr 0.85fr;
       border-bottom: 1px solid rgba(255,255,255,0.06);
       background: rgba(0,0,0,0.10);
     }
     .heat-body .row:last-child{ border-bottom: none; }
 
     .cell{
-      padding: 10px 10px;
+      padding: 8px 10px;
       border-right: 1px solid rgba(255,255,255,0.06);
       display: flex;
       align-items: center;
-      gap: 10px;
-      min-height: 44px;
+      gap: 6px;
+      min-height: 38px;
     }
     .cell:last-child{ border-right: none; }
 
@@ -459,19 +744,19 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
-      border-radius: 12px;
-      padding: 8px 10px;
+      gap: 6px;
+      border-radius: 10px;
+      padding: 6px 10px;
       border: 1px solid rgba(255,255,255,0.08);
       background: rgba(255,255,255,0.03);
     }
     .heatbox .val{
-      font-size: 13px;
+      font-size: 10.5px;
       color: var(--fg);
       font-weight: 720;
     }
     .heatbox .lab{
-      font-size: 12px;
+      font-size: 10.5px;
       color: var(--muted);
       letter-spacing: .02em;
       text-align: left;
@@ -481,12 +766,12 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 8px 10px;
+      padding: 6px 10px;
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,0.10);
       background: rgba(0,0,0,0.10);
       color: var(--fg);
-      font-size: 12.5px;
+      font-size: 10.5px;
       font-weight: 700;
     }
 
@@ -500,14 +785,11 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 6px;
       flex-wrap: wrap;
       margin-bottom: 6px;
     }
-    .legend-label{
-      font-size: 12px;
-      color: var(--muted);
-    }
+    .legend-label{ font-size: 12px; color: var(--muted); }
     .swatch{
       width: 22px;
       height: 12px;
@@ -520,12 +802,29 @@
     .s4{ background: rgba(168,85,247,0.30); }
     .s5{ background: rgba(233,213,255,0.34); }
     .legend-note{
-      font-size: 12.5px;
+      font-size: 11.8px;
       color: var(--muted);
       margin: 0;
       text-align: justify;
       text-justify: inter-word;
     }
+        .legend-reading{
+          margin-top: 10px;
+          padding-top: 10px;
+          border-top: 1px solid rgba(255,255,255,0.08);
+        }
+        .legend-reading-title{
+          font-size: 12px;
+          letter-spacing: .10em;
+          text-transform: uppercase;
+          color: rgba(255,255,255,0.68);
+          margin-bottom: 6px;
+        }
+        .legend-reading p{ margin: 0 0 10px; font-size: 12.2px; line-height: 1.55; color: rgba(255,255,255,0.86); text-align: justify; }
+        .legend-reading .reading-callout{ margin-top: 8px; border-radius: 10px; padding: 10px 10px; border: 1px solid rgba(255,255,255,0.10); background: rgba(0,0,0,0.06); display:flex; gap:10px; align-items:flex-start; }
+        .legend-reading .callout-dot{ width: 10px; height: 10px; border-radius: 999px; margin-top: 4px; background: rgba(168,85,247,0.65); box-shadow: 0 0 0 4px rgba(168,85,247,0.14); flex: 0 0 auto; }
+        .legend-reading .callout-text{ margin: 0; font-size: 12.2px; line-height: 1.55; color: rgba(255,255,255,0.90); }
+        .legend-reading .callout-text strong{ color: #F5F5F7; }
 
     /* Reading */
     .dho-praticas-reading{
@@ -541,7 +840,7 @@
       gap: 10px;
       align-items: start;
       padding: 10px 12px;
-      border-radius: 14px;
+      border-radius: 10px;
       border: 1px solid rgba(255,255,255,0.10);
       background: linear-gradient(135deg, rgba(124,58,237,0.10), rgba(0,0,0,0.10));
       margin-top: 10px;
@@ -554,20 +853,13 @@
       margin-top: 6px;
       box-shadow: 0 0 0 4px rgba(168,85,247,0.12);
     }
-    .callout-text{
-      margin: 0;
-      color: var(--sub);
-    }
+    .callout-text{ margin: 0; color: var(--sub); }
 
     /* Gaps list */
-    .gaps-list{
-      display: grid;
-      gap: 10px;
-      margin-top: 10px;
-    }
+    .gaps-list{ display: grid; gap: 10px; margin-top: 10px; }
     .gap-item{
       border: 1px solid rgba(255,255,255,0.10);
-      border-radius: 12px;
+      border-radius: 10px;
       background: rgba(255,255,255,0.04);
       padding: 10px 12px;
     }
@@ -580,14 +872,14 @@
     .gap-name{
       color: var(--fg);
       font-weight: 680;
-      font-size: 13px;
+      font-size: 12.2px;
       line-height: 1.25;
       text-align: left;
     }
     .gap-val{
       color: var(--fg);
       font-weight: 760;
-      font-size: 12.5px;
+      font-size: 11.8px;
       padding: 4px 8px;
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,0.10);
@@ -596,85 +888,230 @@
     }
     .gap-desc{
       margin-top: 6px;
-      font-size: 12.5px;
+      font-size: 11.8px;
       color: var(--muted);
       text-align: justify;
       text-justify: inter-word;
     }
     .note{
       margin-top: 10px;
-      font-size: 12.5px;
+      font-size: 11.8px;
       color: var(--muted);
       text-align: justify;
       text-justify: inter-word;
     }
 
     /* Perspectives */
-    .dho-praticas-perspectives{
-      margin-top: 14px;
-    }
-    .persp-grid{
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-    }
+    /* Figura de apoio (entre leitura guiada e recorte por perspectiva) */
+.dho-praticas-figure{
+  grid-column: 1 / -1;
+  width: min(860px, 100%);
+  margin: 12px auto 6px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.03);
+  box-shadow: 0 10px 26px rgba(0,0,0,0.22);
+  overflow: hidden;
+}
+.dho-praticas-figure-img{
+  display: block;
+  width: 100%;
+  height: auto;
+  opacity: 0.95;
+}
+@media (max-width: 520px){
+  .dho-praticas-figure{ border-radius: 10px; }
+}
+
+
+/* Perspectivas com glass tint (RH laranja, Negócio roxo, Liderança azul) */
+.dho-praticas-perspectives .persp{
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.06);
+  box-shadow: 0 14px 38px rgba(0,0,0,0.30);
+  backdrop-filter: blur(10px);
+}
+
+/* brilho suave no topo */
+.dho-praticas-perspectives .persp::before{
+  content:"";
+  position:absolute;
+  inset:-1px;
+  background:
+    radial-gradient(120px 80px at 18% 18%, rgba(255,255,255,0.10), rgba(255,255,255,0.00) 60%),
+    radial-gradient(220px 140px at 85% 5%, rgba(255,255,255,0.06), rgba(255,255,255,0.00) 68%);
+  opacity: .9;
+  pointer-events:none;
+}
+
+/* “tinta” de cor, mantendo glass */
+.dho-praticas-perspectives .persp::after{
+  content:"";
+  position:absolute;
+  inset:-1px;
+  background:
+    radial-gradient(260px 180px at 18% 28%, var(--tintA), rgba(0,0,0,0.00) 62%),
+    radial-gradient(340px 220px at 78% 16%, var(--tintB), rgba(0,0,0,0.00) 70%),
+    linear-gradient(180deg, rgba(255,255,255,0.05), rgba(0,0,0,0.00) 42%);
+  opacity: .95;
+  mix-blend-mode: screen;
+  pointer-events:none;
+}
+
+/* borda com nuance colorida */
+.dho-praticas-perspectives .persp{
+  outline: 1px solid rgba(255,255,255,0.06);
+  outline-offset: -1px;
+}
+.dho-praticas-perspectives .persp{ box-shadow:
+  0 14px 38px rgba(0,0,0,0.30),
+  0 0 0 1px rgba(255,255,255,0.06) inset,
+  0 0 0 1px rgba(0,0,0,0.22);
+}
+.dho-praticas-perspectives .persp{ border-color: rgba(255,255,255,0.12); }
+.dho-praticas-perspectives .persp{ --edge: rgba(255,255,255,0.10); }
+
+/* título com “ponto” discreto e alinhamento */
+.dho-praticas-perspectives .persp .h4{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.dho-praticas-perspectives .persp .h4::before{
+  content:"";
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--dot);
+  box-shadow: 0 0 0 5px rgba(255,255,255,0.06), 0 0 0 1px rgba(0,0,0,0.35);
+  flex: 0 0 auto;
+}
+
+/* RH (eixo laranja/rosa) */
+.persp--rh{
+  --tintA: rgba(255,140,90,0.28);
+  --tintB: rgba(255,90,160,0.18);
+  --dot: rgba(255,155,95,0.95);
+  border-color: rgba(255,155,95,0.22);
+  box-shadow:
+    0 14px 38px rgba(0,0,0,0.30),
+    0 0 0 1px rgba(255,155,95,0.10) inset,
+    0 0 26px rgba(255,155,95,0.10);
+}
+
+/* Negócio (roxo) */
+.persp--neg{
+  --tintA: rgba(168,85,247,0.26);
+  --tintB: rgba(124,58,237,0.18);
+  --dot: rgba(168,85,247,0.95);
+  border-color: rgba(168,85,247,0.22);
+  box-shadow:
+    0 14px 38px rgba(0,0,0,0.30),
+    0 0 0 1px rgba(168,85,247,0.10) inset,
+    0 0 26px rgba(168,85,247,0.10);
+}
+
+/* Liderança (azul) */
+.persp--lid{
+  --tintA: rgba(56,189,248,0.22);
+  --tintB: rgba(34,211,238,0.16);
+  --dot: rgba(56,189,248,0.95);
+  border-color: rgba(56,189,248,0.22);
+  box-shadow:
+    0 14px 38px rgba(0,0,0,0.30),
+    0 0 0 1px rgba(56,189,248,0.10) inset,
+    0 0 26px rgba(56,189,248,0.10);
+}
+
+/* Mini insight mais delicado */
+.dho-praticas-perspectives .mini{
+  margin-top: 12px;
+  color: rgba(255,255,255,0.74);
+  font-size: 11.8px;
+  line-height: 1.55;
+}
+
+.dho-praticas-perspectives{ margin-top: 14px; }
+    .persp-grid{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
     .mini{
       margin-top: 8px;
       color: var(--muted);
-      font-size: 12.5px;
+      font-size: 11.8px;
       text-align: justify;
       text-justify: inter-word;
     }
 
     /* Synth */
-    .dho-praticas-synth{
-      margin-top: 14px;
-    }
+    .dho-praticas-synth{ margin-top: 10px; }
     .synth-strip{
       display: grid;
       grid-template-columns: auto auto auto auto auto 1fr;
-      gap: 10px;
+      gap: 6px;
       align-items: center;
-      padding: 12px 14px;
+      padding: 7px 8px;
       border: 1px solid var(--stroke);
-      border-radius: 16px;
-      background: linear-gradient(135deg, rgba(124,58,237,0.10), rgba(0,0,0,0.12));
-      box-shadow: 0 12px 28px rgba(0,0,0,.28);
+      border-radius: 10px;
+      background: linear-gradient(135deg, rgba(124,58,237,0.10), rgba(0,0,0,0.10));
+      box-shadow: 0 8px 18px rgba(0,0,0,.24);
     }
     .synth-step{
       display: grid;
-      gap: 4px;
+      gap: 3px;
       align-items: start;
-      padding: 8px 10px;
-      border-radius: 14px;
+      padding: 5px 7px;
+      border-radius: 10px;
       border: 1px solid rgba(255,255,255,0.10);
-      background: rgba(0,0,0,0.10);
-      min-width: 150px;
+      background: rgba(0,0,0,0.08);
+      min-width: 112px;
     }
     .synth-k{
-      font-size: 12px;
+      font-size: 10.5px;
       color: var(--muted);
       letter-spacing: .06em;
       text-transform: uppercase;
     }
     .synth-v{
-      font-size: 14px;
+      font-size: 12.2px;
       color: var(--fg);
-      font-weight: 760;
+      font-weight: 740;
       text-align: left;
     }
     .synth-arrow{
-      color: rgba(233,213,255,0.55);
-      font-size: 18px;
+      color: rgba(233,213,255,0.50);
+      font-size: 14px;
       text-align: center;
-      padding: 0 2px;
+      padding: 0 1px;
     }
-    .synth-note p{
+    .synth-note{
+  position: relative;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid transparent;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+.synth-note::before{ display:none !important; }
+.synth-note > *{ position: relative; z-index: 1; }
+.synth-note p{
+
       margin: 0;
       color: var(--sub);
-      font-size: 13px;
+      font-size: 11.8px;
+      line-height: 1.45;
+      max-width: 42ch;
       text-align: justify;
       text-justify: inter-word;
+    }
+
+    @media (max-width: 920px){
+      .synth-strip{ grid-template-columns: 1fr; gap: 6px; }
+      .synth-step{ min-width: 0; }
+      .synth-arrow{ display: none; }
+      .synth-note p{ max-width: none; }
     }
 
     /* Bridge + Reflection */
@@ -690,54 +1127,80 @@
       gap: 10px;
       align-items: start;
       padding: 10px 12px;
-      border-radius: 14px;
+      border-radius: 10px;
       border: 1px solid rgba(255,255,255,0.10);
       background: rgba(255,255,255,0.03);
     }
     .bridge-icon{
       color: rgba(233,213,255,0.60);
-      font-size: 16px;
+      font-size: 14px;
       margin-top: 2px;
     }
-    .bridge-em p{
-      margin: 0;
-      color: var(--fg);
-    }
+    .bridge-em p{ margin: 0; color: var(--fg); }
 
     /* CTA */
     .dho-praticas-cta{
-      margin-top: 14px;
+      grid-column: 1 / -1;
+      width: min(520px, 100%);
+      margin: 16px auto 1cm;
+      padding: 14px 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.06);
+      box-shadow: 0 16px 38px rgba(0,0,0,0.32);
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+    }
+    .dho-praticas-cta::before{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      background:
+        radial-gradient(220px 140px at 18% 20%, rgba(168,85,247,0.30), rgba(168,85,247,0.00) 65%),
+        radial-gradient(260px 160px at 82% 18%, rgba(124,58,237,0.22), rgba(124,58,237,0.00) 70%),
+        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(0,0,0,0.00) 52%);
+      opacity: .95;
+      pointer-events:none;
+    }
+    .dho-praticas-cta > *{ position: relative; z-index: 1; }
+    .dho-praticas-cta .h3{
+      margin: 0 0 8px;
+      font-size: 13px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.78);
+      text-align: center;
+    }
+    .dho-praticas-cta p{
+      margin: 0;
+      font-size: 13.5px;
+      line-height: 1.55;
+      color: rgba(255,255,255,0.90);
+      text-align: justify;
+      text-justify: inter-word;
+    }
+    @media (max-width: 520px){
+      .dho-praticas-cta{ padding: 12px 12px; border-radius: 16px; }
+      .dho-praticas-cta p{ font-size: 13px; }
     }
 
     /* Responsive */
     @media (max-width: 980px){
-      .core-top{
-        grid-template-columns: 1fr;
-      }
-      .view-toggle{
-        justify-content: flex-start;
-      }
-      .dho-praticas-reading{
-        grid-template-columns: 1fr;
-      }
-      .persp-grid{
-        grid-template-columns: 1fr;
-      }
+      .core-top{ grid-template-columns: 1fr; }
+      .view-toggle{ justify-content: flex-start; }
+      .dho-praticas-reading{ grid-template-columns: 1fr; }
+      .persp-grid{ grid-template-columns: 1fr; }
       .heat-head,
-      .heat-body .row{
-        grid-template-columns: 1.4fr 0.65fr 0.8fr 0.75fr 0.55fr;
-      }
-      .synth-strip{
-        grid-template-columns: 1fr;
-      }
+      .heat-body .row{ grid-template-columns: 1.4fr 0.65fr 0.8fr 0.75fr 0.55fr; }
+      .synth-strip{ grid-template-columns: 1fr; }
       .synth-arrow{ display: none; }
       .synth-step{ min-width: 0; }
     }
-
     @media (max-width: 640px){
       .dho-praticas-wrap{ padding: 0 14px; }
-      .heat-th{ font-size: 11px; }
-      .pratica{ font-size: 13px; }
+      .heat-th{ font-size: 10.5px; }
+      .pratica{ font-size: 12.2px; }
       .heatbox{ padding: 8px 9px; }
       .heatbox .lab{ display: none; }
     }
@@ -759,14 +1222,8 @@
           "Mentoria e Desenvolvimento de Talentos",
           "Plano de Desenvolvimento Individual (PDI)"
         ],
-
-        // Companhia atual: o quanto RH promove (1 a 5)
         rh_promove: [3,3,2,3,1,4,2,2,2,1,1],
-
-        // Companhia atual: o quanto liderança aplica (1 a 5)
         lid_aplica: [3,4,3,4,3,3,4,3,3,3,3],
-
-        // Trajetória: quanto conhece e já praticou (1 a 5)
         traj_neg: [5,5,4,5,5,5,5,5,5,5,5],
         traj_rh:  [5,4,4,4,5,4,3,5,3,3,4]
       };
@@ -774,10 +1231,8 @@
       const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
       const avg = (a,b) => (a + b) / 2;
 
-      // Escala visual 1..5 (leve, sutil, sem “neon forte”)
       function bgForValue(v){
         const x = clamp(v, 1, 5);
-        // 1: quase preto / 5: lilás mais claro
         const map = {
           1: "rgba(20,20,30,0.55)",
           2: "rgba(124,58,237,0.18)",
@@ -795,7 +1250,7 @@
       const elSynthLid = document.getElementById("synth-lid");
 
       const toggles = Array.from(document.querySelectorAll(".dho-praticas .toggle-btn"));
-      let view = "traj_avg"; // traj_avg | traj_neg | traj_rh
+      let view = "traj_avg";
 
       function getTraj(i){
         if(view === "traj_neg") return DATA.traj_neg[i];
@@ -821,12 +1276,10 @@
           const row = document.createElement("div");
           row.className = "row";
 
-          // Prática
           const c0 = document.createElement("div");
           c0.className = "cell";
           c0.innerHTML = '<div class="pratica">' + name + "</div>";
 
-          // RH promove
           const c1 = document.createElement("div");
           c1.className = "cell";
           c1.innerHTML = `
@@ -836,7 +1289,6 @@
             </div>
           `;
 
-          // Liderança aplica
           const c2 = document.createElement("div");
           c2.className = "cell";
           c2.innerHTML = `
@@ -846,7 +1298,6 @@
             </div>
           `;
 
-          // Trajetória
           const c3 = document.createElement("div");
           c3.className = "cell";
           c3.innerHTML = `
@@ -856,7 +1307,6 @@
             </div>
           `;
 
-          // Gap
           const c4 = document.createElement("div");
           c4.className = "cell";
           const gapTxt = (gap >= 0 ? "+" : "") + fmt(gap);
@@ -880,18 +1330,13 @@
 
       function renderTopGaps(rows){
         if(!elGaps) return;
-        const sorted = rows
-          .slice()
-          .sort((a,b) => (b.gap - a.gap))
-          .slice(0, 4);
-
+        const sorted = rows.slice().sort((a,b) => (b.gap - a.gap)).slice(0, 4);
         elGaps.innerHTML = "";
         sorted.forEach(item => {
           const div = document.createElement("div");
           div.className = "gap-item";
           const gapTxt = (item.gap >= 0 ? "+" : "") + fmt(item.gap);
 
-          // Texto editorial curto, sem julgamento
           const desc =
             item.gap >= 2
               ? "A prática é amplamente conhecida, mas perde força na rotina. Normalmente isso aponta falta de ritual, cadência e espaço na agenda."
@@ -910,23 +1355,17 @@
 
       function renderSynthesis(rows){
         const mean = arr => arr.reduce((s,x) => s + x, 0) / arr.length;
-
         const rhM = mean(rows.map(r => r.rh));
         const lidM = mean(rows.map(r => r.lid));
         const tM  = mean(rows.map(r => r.t));
-
         if(elSynthRH)  elSynthRH.textContent  = fmt(rhM) + " / 5";
         if(elSynthTraj) elSynthTraj.textContent = fmt(tM) + " / 5";
         if(elSynthLid) elSynthLid.textContent = fmt(lidM) + " / 5";
       }
 
-      // Toggle handlers
       toggles.forEach(btn => {
         btn.addEventListener("click", () => {
-          toggles.forEach(b => {
-            b.classList.remove("is-active");
-            b.setAttribute("aria-selected", "false");
-          });
+          toggles.forEach(b => { b.classList.remove("is-active"); b.setAttribute("aria-selected", "false"); });
           btn.classList.add("is-active");
           btn.setAttribute("aria-selected", "true");
           view = btn.dataset.view || "traj_avg";
@@ -934,8 +1373,32 @@
         });
       });
 
-      // First render
+      // Toggle "Como ler" (recolher/expandir)
+      const guideBtn = document.querySelector(".dho-praticas-guide-toggle");
+      const guideBody = document.getElementById("dho-praticas-guide-body");
+      if(guideBtn && guideBody){
+        // garante bind único
+        if(guideBtn.dataset.bound !== "1"){
+          guideBtn.dataset.bound = "1";
+          guideBtn.addEventListener("click", () => {
+            const expanded = guideBtn.getAttribute("aria-expanded") === "true";
+            guideBtn.setAttribute("aria-expanded", String(!expanded));
+            guideBody.classList.toggle("is-hidden", expanded);
+          });
+        }
+      }
+
+
       renderHeat();
     };
+
+    // auto-init for standalone preview
+    window.initBloco_praticas();
   </script>
+
+  </div>
+
 </section>
+
+</body>
+</html>
