@@ -88,6 +88,16 @@
       text-align: justify;
       margin: 0;
     }
+    .dho-flow-title{
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      color: rgba(232, 202, 255, 0.95);
+      text-align: center;
+      line-height: 1.2;
+      margin: 0 0 10px;
+    }
+
     .dho-card-title{
       font-size: 16px;
       font-weight: 700;
@@ -178,7 +188,7 @@
   .dho-nps-sidecopy{ justify-self: stretch; max-width: none; }
 }.dho-nps-sidecopy{ max-width: none; }
       .dho-nps-row .dho-nps-gauge{ transform:none; }
-    }
+
     .dho-nps-grid{
       position: relative;
       display: grid;
@@ -770,6 +780,10 @@
     /* ========= Headline da dimensão ========= */
     .dho-dim-header{
       grid-column: 1 / -1;
+      width: min(860px, 100%);
+      justify-self: center;
+      margin-left: auto;
+      margin-right: auto;
       padding: 12px 11px;
       border-radius: 18px;
       border: 1px solid rgba(255,255,255,0.10);
@@ -1463,7 +1477,7 @@ article[aria-label="Reflexão"]{
 article[aria-label="Reflexão"]::before{
   content: none !important;
 }
-article[aria-label="Reflexão"] .dho-card-title{
+article[aria-label="Reflexão"] .dho-flow-title{
   text-align: center !important;
 }
 
@@ -1482,29 +1496,116 @@ article[aria-label="Reflexão"].dho-card::before{
   content: none !important;
   display: none !important;
 }
-article[aria-label="Reflexão"] .dho-card-title{
+article[aria-label="Reflexão"] .dho-flow-title{
   text-align: center !important;
   width: 100% !important;
 }
 
 
-/* === Ajuste solicitado: "Pergunta ao leitor" no mesmo design/proporção da referência (card compacto com linha lilás) === */
+/* === Ajuste solicitado: "Pergunta ao leitor" (CTA editorial quadrado DHO 360) === */
 article[aria-label="CTA final"].dho-cta-compact{
   grid-column: 1 / -1;
   justify-self: center;
-  width: min(420px, 100%);
-  margin: 10px auto 0;
-  padding: 14px 16px 16px;
+
+  /* Geometria */
+  width: min(258px, 90%);
+  height: 172px;
+
+  /* Layout interno */
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 8px;
+  padding: 9px;
+  margin: 12px auto 0;
+
   text-align: center;
+  cursor: default;
+
+  /* Superfície glass */
   border-radius: 14px;
-  background: linear-gradient(180deg, rgba(168,85,247,.16), rgba(0,0,0,.18)) !important;
-  border: 1px solid rgba(255,255,255,.12) !important;
-  box-shadow: 0 12px 28px rgba(0,0,0,.28) !important;
+  border: 1px solid rgba(255,255,255,0.12);
+
+  background: linear-gradient(
+    135deg,
+    rgba(124,58,237,0.12),
+    rgba(59,130,246,0.08),
+    rgba(0,0,0,0.06)
+  ) !important;
+
+  box-shadow: 0 12px 34px rgba(0,0,0,0.32) !important;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+
   position: relative;
   overflow: hidden;
 }
+
+/* Atmosfera cromática (overlay) */
+article[aria-label="CTA final"].dho-cta-compact::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(180px 160px at 18% 20%, rgba(168,85,247,1), transparent 62%),
+    radial-gradient(200px 180px at 82% 82%, rgba(59,130,246,1), transparent 62%);
+  opacity: .65;
+  pointer-events:none;
+  z-index:0;
+}
+
+/* Marcador editorial (barra lateral esquerda) */
+article[aria-label="CTA final"].dho-cta-compact::after{
+  content:"";
+  position:absolute;
+  left:0;
+  top:10px;
+  bottom:10px;
+  width:3px;
+  border-radius: 3px;
+  background: linear-gradient(180deg, rgba(168,85,247,0.85), rgba(59,130,246,0.85));
+  opacity: .85;
+  pointer-events:none;
+  z-index:0;
+}
+
+/* Conteúdo acima dos overlays */
+article[aria-label="CTA final"].dho-cta-compact > *{
+  position: relative;
+  z-index: 1;
+}
+
+/* Tipografia interna */
+article[aria-label="CTA final"].dho-cta-compact .dho-card-title{
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: rgba(255,255,255,0.92);
+  text-transform: none;
+  font-size: 13px;
+  line-height: 1.2;
+}
+
+article[aria-label="CTA final"].dho-cta-compact .dho-subtitle{
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.5;
+  color: rgba(255,255,255,0.90);
+  text-align: center !important;
+}
+
+/* Deliberadamente estática: sem hover/animações */
+article[aria-label="CTA final"].dho-cta-compact:hover{
+  transform: none !important;
+  filter: none !important;
+}
+
+/* Sem notas/expansão dentro do CTA */
+article[aria-label="CTA final"].dho-cta-compact .dho-expand-panel,
+article[aria-label="CTA final"].dho-cta-compact .dho-expand-hint{
+  display:none !important;
+}
+
 
 article[aria-label="CTA final"].dho-cta-compact::before{
   content:"";
@@ -1560,20 +1661,113 @@ article[aria-label="CTA final"].dho-cta-compact .dho-subtitle{
 
 /* === Correção: garantir que elementos com [hidden] fiquem realmente ocultos === */
 [hidden]{ display: none !important; }
+
+/* ===== CTA Editorial Quadrado (Pergunta ao leitor) — override final ===== */
+#dho-bloco-objetivos article[aria-label="CTA final"].dho-cta-compact{
+  grid-column: 1 / -1 !important;
+  justify-self: center !important;
+
+  /* Geometria */
+  width: min(258px, 90%) !important;
+  height: 172px !important;
+
+  /* Container */
+  position: relative !important;
+  overflow: hidden !important;
+
+  /* Layout interno */
+  display: grid !important;
+  place-items: center !important;
+  align-content: center !important;
+  padding: 9px !important;
+  margin: 12px auto 0 !important;
+  text-align: center !important;
+  cursor: default !important;
+
+  /* Superfície glass */
+  border-radius: 14px !important;
+  border: 1px solid rgba(255,255,255,0.12) !important;
+  background: linear-gradient(
+    135deg,
+    rgba(124,58,237,0.12),
+    rgba(59,130,246,0.08),
+    rgba(0,0,0,0.06)
+  ) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  box-shadow: 0 12px 34px rgba(0,0,0,0.32) !important;
+
+  /* Deliberadamente estática */
+  transition: none !important;
+}
+
+#dho-bloco-objetivos article[aria-label="CTA final"].dho-cta-compact::before{
+  content:"" !important;
+  position:absolute !important;
+  inset:0 !important;
+  background:
+    radial-gradient(180px 160px at 18% 20%, rgba(168,85,247,1), transparent 62%),
+    radial-gradient(200px 180px at 82% 82%, rgba(59,130,246,1), transparent 62%) !important;
+  opacity: .65 !important;
+  pointer-events:none !important;
+  z-index:0 !important;
+}
+
+#dho-bloco-objetivos article[aria-label="CTA final"].dho-cta-compact::after{
+  content:"" !important;
+  position:absolute !important;
+  left:0 !important;
+  top:10px !important;
+  bottom:10px !important;
+  width:3px !important;
+  border-radius: 3px !important;
+  background: linear-gradient(180deg, rgba(168,85,247,0.85), rgba(59,130,246,0.85)) !important;
+  opacity: .85 !important;
+  pointer-events:none !important;
+  z-index:0 !important;
+}
+
+#dho-bloco-objetivos article[aria-label="CTA final"].dho-cta-compact > *{
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+#dho-bloco-objetivos article[aria-label="CTA final"].dho-cta-compact strong{
+  display:block !important;
+  font-weight: 700 !important;
+  color: rgba(255,255,255,0.92) !important;
+  letter-spacing: 0.02em !important;
+  text-transform: none !important;
+  margin: 0 !important;
+  font-size: 13px !important;
+  line-height: 1.2 !important;
+}
+
+#dho-bloco-objetivos article[aria-label="CTA final"].dho-cta-compact p{
+  margin: 0 !important;
+  font-size: 15px !important;
+  line-height: 1.5 !important;
+  color: rgba(255,255,255,0.90) !important;
+  text-align: center !important;
+  overflow-wrap: anywhere !important;
+}
+
+#dho-bloco-objetivos article[aria-label="CTA final"].dho-cta-compact:hover{
+  transform: none !important;
+  filter: none !important;
+}
+
+#dho-bloco-objetivos article[aria-label="CTA final"].dho-cta-compact .dho-expand-panel,
+#dho-bloco-objetivos article[aria-label="CTA final"].dho-cta-compact .dho-expand-hint{
+  display: none !important;
+}
+
 </style>
 </head>
 <body>
 <section id="dho-bloco-objetivos" aria-labelledby="dho-d5-title" class="dho-objetivos">
 <div class="dho-objetivos-wrap">
-    <button class="dho-btn dho-btn--glow dho-dim-toggle dho-btn--start" data-dho-toggle="start" aria-expanded="false" aria-controls="dho-objetivos-content" type="button">
-      <span class="dho-dim-toggle__left">
-        <span class="dho-dim-toggle__badge-slot" aria-hidden="true"></span>
-        <span class="dho-dim-toggle__main">Iniciar leitura</span>
-      </span>
-      <span class="dho-dim-toggle__sub">DIMENSÃO 5</span>
-    </button>
-
-    <div id="dho-objetivos-content" class="dho-dim-content is-collapsed">
+<div id="dho-objetivos-content" class="dho-dim-content">
 
 <div class="dho-objetivos-grid">
 <!-- BLOCO 1 | HEADER DA DIMENSÃO -->
@@ -1954,12 +2148,12 @@ As respostas são apresentadas à partir de dois pontos de vistas: enquanto os l
 </article>
 <!-- BLOCO 10 | SÍNTESE E FECHAMENTO -->
 <article aria-label="Reflexão" class="dho-card dho-close">
-<h3 class="dho-card-title">Reflexão</h3>
+<h3 class="dho-flow-title">Reflexão</h3>
 <p class="dho-subtitle">Os desafios da liderança não decorrem de falta de percepção ou método, mas da tensão entre a demanda por práticas sustentáveis, estruturas ainda em consolidação e pouco tempo dedicado à gestão, em detrimento da operação.</p>
 </article>
 <!-- BLOCO 11 | CTA FINAL -->
 <article aria-label="CTA final" class="dho-card dho-cta dho-cta-compact">
-<h3 class="dho-card-title">Pergunta ao leitor</h3>
+<strong>Pergunta ao leitor</strong>
 <p class="dho-subtitle">O que hoje mais dificulta a sustentação do papel da liderança na sua organização: tempo, clareza ou estrutura?</p>
 <div aria-label="Nota de leitura do CTA" class="dho-expand-panel is-hidden" id="cta-nota" role="region">
 <p class="dho-footnote">
@@ -1970,186 +2164,10 @@ As respostas são apresentadas à partir de dois pontos de vistas: enquanto os l
 </article>
 </div>
 </div>
-
-  <div class="dho-end-cta is-soft-hidden" data-dho-end-wrap>
-    <button class="dho-end-check" data-dho-toggle="end" aria-expanded="false" aria-controls="dho-objetivos-content" type="button">
-      <span class="dho-end-check__icon" aria-hidden="true">✓</span>
-      <span class="dho-dim-toggle__main sr-only">Concluir dimensão</span>
-      <span class="dho-dim-toggle__sub sr-only">recolher</span>
-    </button>
-    <div class="dho-end-caption">Concluir dimensão</div>
-  </div>
+</div>
 </div>
 </section>
 <script>
-    (function(){
-  const root = document.querySelector("#dho-bloco-objetivos") || document.querySelector(".dho-objetivos");
-  if(!root) return;
-  if(window.__dho_objetivos_inited) return;
-  window.__dho_objetivos_inited = true;
-
-  // compat: o v9 dispara montagem lazy (aqui não é necessário)
-  const mountPizzaOnce = () => {};
-
-      const setupDimToggles = () => {
-        const content  = root.querySelector("#dho-objetivos-content");
-        const btnStart = root.querySelector('[data-dho-toggle="start"]');
-        const btnEnd   = root.querySelector('[data-dho-toggle="end"]');
-        const endWrap  = root.querySelector("[data-dho-end-wrap]");
-        const badgeSlot = btnStart ? btnStart.querySelector(".dho-dim-toggle__badge-slot") : null;
-        const endCaption = root.querySelector(".dho-end-caption");
-
-        if (!content || !btnStart || !btnEnd) return;
-
-        const kickerText = (root.querySelector(".dho-kicker")?.textContent || "").trim();
-        const dimMatch = kickerText.match(/DIMENSÃO\s*\d+/i);
-        const dimLabelPretty = dimMatch
-          ? dimMatch[0].replace(/\s+/g, " ").replace(/^d/i, "D")
-          : "Dimensão";
-        const dimLabelUpper = dimMatch ? dimMatch[0].toUpperCase() : "DIMENSÃO";
-        const wrapBox = root.querySelector('.dho-objetivos-wrap');
-
-
-
-        // Estado interno
-        let isCollapsed = content.classList.contains("is-collapsed");
-        let isDone = btnEnd.classList.contains("is-done"); // se vier marcado por algum motivo, respeita
-
-        const setBtnText = (btn, main, sub) => {
-          const m = btn.querySelector(".dho-dim-toggle__main");
-          const s = btn.querySelector(".dho-dim-toggle__sub");
-          if (m) m.textContent = main;
-          if (s) s.textContent = sub;
-          if (btn.matches('[data-dho-toggle="end"]') && endCaption) endCaption.textContent = main;
-        };
-
-        const undockEnd = () => {
-          if (!endWrap) return;
-          // devolve o botão para o rodapé
-          if (btnEnd.parentElement !== endWrap) {
-            endWrap.insertBefore(btnEnd, endCaption || null);
-          }
-          btnEnd.classList.remove("is-docked");
-          endWrap.classList.remove("is-docked-away");
-        };
-
-        const dockEndToTop = () => {
-          if (!badgeSlot || !endWrap) return;
-          // move o botão verde para dentro da barra rosa (slot à esquerda)
-          if (btnEnd.parentElement !== badgeSlot) badgeSlot.appendChild(btnEnd);
-          btnEnd.classList.add("is-docked");
-          endWrap.classList.add("is-docked-away");
-          endWrap.classList.remove("is-soft-hidden");
-        };
-
-        const applyEndVisibility = () => {
-          if (!endWrap) return;
-
-          // Caso concluído + recolhido: botão verde vai para o topo (dentro da barra rosa)
-          if (isCollapsed && isDone) {
-            dockEndToTop();
-            return;
-          }
-
-          // Caso não esteja nesse estado, garante que o botão verde fica no final do bloco
-          undockEnd();
-
-          // Quando recolhido e ainda não concluído: esconde o final para dar sensação de “iniciar leitura”
-          if (isCollapsed && !isDone) {
-            endWrap.classList.add("is-soft-hidden");
-          } else {
-            endWrap.classList.remove("is-soft-hidden");
-          }
-
-          // Pulso enquanto aberto e ainda não concluído
-          if (!isCollapsed && !isDone) endWrap.classList.add("is-pulsing");
-          else endWrap.classList.remove("is-pulsing");
-        };
-
-        const syncLabels = () => {
-          // Topo
-          if (isCollapsed && isDone) {
-            setBtnText(btnStart, "Dimensão Concluída", dimLabelUpper);
-          } else {
-            setBtnText(btnStart, isCollapsed ? "Iniciar leitura" : "Recolher leitura", dimLabelUpper);
-          }
-
-
-          // Estilo visual de concluído (barra verde)
-          if (isCollapsed && isDone) btnStart.classList.add("is-completed");
-          else btnStart.classList.remove("is-completed");
-
-
-// Base
-          setBtnText(btnEnd, `Concluir ${dimLabelPretty}`, isCollapsed ? "reabrir leitura" : "recolher dimensão");
-
-          btnStart.setAttribute("aria-expanded", String(!isCollapsed));
-          btnEnd.setAttribute("aria-expanded", String(!isCollapsed));
-
-          if (wrapBox) wrapBox.classList.toggle("is-concluded", (isCollapsed && isDone));
-
-
-
-          btnStart.classList.toggle("is-attn", (isCollapsed && !isDone));
-
-          applyEndVisibility();
-        };
-
-        const collapse = (source) => {
-          if (isCollapsed) return;
-
-          // fixa altura atual para transição suave
-          content.classList.remove("is-collapsed");
-          content.style.maxHeight = content.scrollHeight + "px";
-          content.offsetHeight; // force reflow
-
-          content.classList.add("is-collapsed");
-          content.style.maxHeight = "0px";
-          isCollapsed = true;
-
-          if (source === "end") {
-            isDone = true;
-            btnEnd.classList.add("is-done");
-          }
-
-          syncLabels();
-        };
-
-        const expand = () => {
-          if (!isCollapsed) return;
-
-          // se estava “concluída”, ao reabrir a leitura a conclusão continua marcada,
-          // mas o botão verde volta para o final (para manter o fluxo de leitura)
-          content.classList.remove("is-collapsed");
-
-          const h = content.scrollHeight;
-          content.style.maxHeight = h + "px";
-
-          window.setTimeout(() => {
-            content.style.maxHeight = "none";
-            window.dispatchEvent(new Event("resize"));
-            try { mountPizzaOnce(); } catch(e){}
-          }, 280);
-
-          isCollapsed = false;
-          syncLabels();
-        };
-
-        btnStart.addEventListener("click", () => (isCollapsed ? expand() : collapse("start")));
-        btnEnd.addEventListener("click", (e) => {
-          e.stopPropagation();
-          (isCollapsed ? expand() : collapse("end"));
-        });
-
-        // Estado inicial
-        content.style.maxHeight = isCollapsed ? "0px" : "none";
-        syncLabels();
-      };
-
-      setupDimToggles();
-
-})();
-
 (function(){
       const toggles = document.querySelectorAll('[data-toggle]');
       toggles.forEach(btn => {
