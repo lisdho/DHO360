@@ -62,7 +62,7 @@
 
     .is-hidden{ display: none !important; }
 
-    /* Cabeçalhos e células centrais (RH/Liderança/Trajetória/Gap) */
+    /* Cabeçalhos e células centrais (RH/Liderança/Vivência/Gap) */
     .heat-head .heat-th:nth-child(n+2){ text-align:center; }
     .heat-body .row .cell:nth-child(n+2){ justify-content:center; }
 
@@ -116,7 +116,7 @@
 
       <p class="dho-praticas-sub">
 
-        Entre promover e aplicar, existe um espaço onde a estratégia se perde ou se sustenta. Nesta dimensão, as práticas
+        Nesta dimensão, as práticas de gestão de pessoas 
 
         são observadas por múltiplas perspectivas para evidenciar consistência, lacunas e oportunidades de sustentação no dia a dia.
 
@@ -166,13 +166,13 @@
 
         <li><span class="tag">Liderança aplica</span> o quanto as práticas são efetivamente aplicadas no cotidiano da gestão.</li>
 
-        <li><span class="tag">Trajetória</span> o quanto as práticas são conhecidas e já foram vivenciadas (duas lentes: Negócio e RH).</li>
+        <li><span class="tag">Vivência</span> o quanto as práticas são conhecidas e já foram vivenciadas (duas lentes: Negócio e RH).</li>
 
       </ul>
 
       <p class="guide-note">
 
-        A leitura não é sobre “certo” ou “errado”. É sobre coerência: quando a execução aperta, quais práticas resistem e quais viram esforço individual.
+        A leitura não deve ser sobre “certo” ou “errado”, mas sobre coerência: quando a pressão aumenta, quais práticas resistem e quais viram esforço individual.
 
       </p>
 
@@ -190,23 +190,23 @@
 
 
 
-        <div class="view-toggle" role="tablist" aria-label="Filtro de trajetória">
+        <div class="view-toggle" role="tablist" aria-label="Filtro de vivência">
 
           <button class="toggle-btn is-active" type="button" data-view="traj_avg" role="tab" aria-selected="true">
 
-            Trajetória (média)
+            Vivência (média)
 
           </button>
 
           <button class="toggle-btn" type="button" data-view="traj_neg" role="tab" aria-selected="false">
 
-            Trajetória (Negócio)
+            Vivência (Negócio)
 
           </button>
 
           <button class="toggle-btn" type="button" data-view="traj_rh" role="tab" aria-selected="false">
 
-            Trajetória (RH)
+            Vivência (RH)
 
           </button>
 
@@ -214,7 +214,7 @@
 
       
         </div>
-          <div class="heat-controls-note">Clique para filtrar a trajetória exibida.</div>
+          <div class="heat-controls-note">Clique para filtrar a vivência exibida.</div>
 <div class="heat-head">
 
           <div class="heat-th col-pratica">Prática</div>
@@ -223,7 +223,7 @@
 
           <div class="heat-th">Liderança aplica</div>
 
-          <div class="heat-th">Trajetória</div>
+          <div class="heat-th">Vivência</div>
 
           <div class="heat-th col-gap">Gap</div>
 
@@ -255,7 +255,7 @@
 
           <p class="legend-note">
 
-            Gap = Trajetória (conhecimento e vivência) menos Liderança aplica. Quanto maior, maior a chance de existir método, mas faltar sustentação no contexto atual.
+            Gap = (Vivência - Liderança): Quanto maioro Gap, maior a chance de existir método e sustentação.
 
           </p>
 
@@ -267,9 +267,8 @@
 
         <p>
 
-          O padrão geral sugere que o conhecimento existe e as práticas são reconhecidas como importantes. O ponto sensível aparece na transição entre
-
-          intenção e rotina: quando não há sistema (rituais, cadência, métricas simples e espaço na agenda), a aplicação tende a depender do perfil individual
+          O padrão geral sugere que as práticas são conhecidas e já foram vivenciadas pelo RH e pelo representante do negócio. Contudo, o ponto de atenção está sobre o quanto
+          essa vivencia é transferida aos líderes, pois quando não há sistema (ritmo, cadência, métricas simples e espaço na agenda), a aplicação tende a depender do perfil individual
 
           de cada liderança.
 
@@ -377,7 +376,7 @@
 
         <div class="synth-step">
 
-          <span class="synth-k">Trajetória</span>
+          <span class="synth-k">Vivência</span>
 
           <span class="synth-v" id="synth-traj">-</span>
 
@@ -709,7 +708,7 @@
     }
     .heat-th:last-child{ border-right: none; }
 
-    /* Colunas padronizadas (RH/Liderança/Trajetória/Gap) */
+    /* Colunas padronizadas (RH/Liderança/Vivência/Gap) */
     .heat-th.col-rh, .heat-th.col-lid, .heat-th.col-traj, .heat-th.col-gap{ text-align: center; }
     .cell.col-rh, .cell.col-lid, .cell.col-traj, .cell.col-gap{ justify-content: center; }
 
