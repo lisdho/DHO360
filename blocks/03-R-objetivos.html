@@ -1,5 +1,50 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>DHO 360º | Dimensão</title>
+
+  <style>
+    html, body{ height:100%; }
+    body{
+      margin:0;
+      background:#07070b;
+      color:#f4f4f8;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    }
+  
+
+  /* Ícone do topo: invisível até "Concluir" (fica no fluxo, à esquerda do texto) */
+  .dho-dim-toggle.dho-btn--start .dho-dim-toggle__icon{
+    opacity: 0;
+    color: rgba(255,255,255,0);
+  }
+  .dho-dim-toggle.dho-btn--start.is-concluded .dho-dim-toggle__icon{
+    opacity: 1;
+  }
+</style>
+</head>
+<body>
+
 <section class="dho-objetivos" aria-labelledby="dho-objetivos-title">
   <div class="dho-objetivos-wrap">
+
+    <!-- Toggle (Topo): iniciar leitura / recolher -->
+    <button type="button"
+            class="dho-btn dho-btn--glow dho-dim-toggle dho-btn--start"
+            data-dho-toggle="start"
+            aria-expanded="false"
+            aria-controls="dho-objetivos-content">
+      <span class="dho-dim-toggle__left">
+        <span class="dho-dim-toggle__badge-slot" aria-hidden="true"></span>
+        <span class="dho-dim-toggle__main">Iniciar leitura</span>
+      </span>
+      <span class="dho-dim-toggle__sub">DIMENSÃO</span>
+    </button>
+
+    <div id="dho-objetivos-content" class="dho-dim-content is-collapsed">
+
 
     <header class="dho-objetivos-header">
       <p class="dho-kicker">DIMENSÃO 1 | OBJETIVOS E PRIORIDADES DE DESENVOLVIMENTO</p>
@@ -139,6 +184,25 @@
           Com essa sequência de desenvolvimento, torna-se possível alcançar mais coerência nas relações de trabalho.
         </p>
       </aside>
+    </div>
+
+    </div>
+
+    <!-- Toggle (Base): leitura concluída / recolher -->
+    <div class="dho-end-cta is-soft-hidden" data-dho-end-wrap>
+      <button type="button"
+              class="dho-end-check"
+              data-dho-toggle="end"
+              aria-expanded="false"
+              aria-controls="dho-objetivos-content">
+        <!-- Mantidos para compatibilidade com o JS (atualiza rótulos) -->
+        <span class="dho-dim-toggle__main sr-only">Concluir dimensão</span>
+        <span class="dho-dim-toggle__sub sr-only">recolher dimensão</span>
+
+        <!-- Visual -->
+        <span class="dho-end-check__icon" aria-hidden="true"></span>
+      </button>
+      <div class="dho-end-caption" aria-hidden="true">Concluir dimensão</div>
     </div>
 
   </div>
@@ -590,13 +654,550 @@
     .dho-objetivos{ --pizzaSize: 220px; }
     .dho-objetivos-wrap{ padding: 16px 14px; border-radius: 20px; }
   }
+
+
+  /* ───────────────────────────────────────────────────────────────
+     Toggle do Bloco (Topo / Base) — colapsar / expandir a dimensão
+     ─────────────────────────────────────────────────────────────── */
+
+  .dho-dim-toggle{
+    height: 42px;
+    min-height: 42px;
+    padding: 0 12px;
+    position: relative;
+    overflow: visible;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: min(860px, 100%);
+    margin: 0 auto 12px;
+    text-align: left;
+  
+}
+
+  .dho-dim-toggle__main{
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: 0.01em;
+  }
+
+  .dho-dim-toggle__sub{
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.78);
+    font-weight: 800;
+    opacity: 0.92;
+    white-space: nowrap;
+  }
+
+  /* Topo: lilás/rosa, sensação de "iniciar leitura" */
+  .dho-dim-toggle.dho-btn--start{
+    border-color: rgba(255, 180, 230, 0.34);
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.18), rgba(236, 72, 153, 0.14));
+  }
+  .dho-dim-toggle.dho-btn--start:hover{
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.22), rgba(236, 72, 153, 0.18));
+    border-color: rgba(255, 200, 245, 0.42);
+  }
+
+  /* Base: "apagado", sensação de conclusão */
+  .dho-dim-toggle.dho-btn--end{
+    margin: 14px auto 0;
+    border-color: rgba(255,255,255,0.14);
+    background: rgba(255,255,255,0.04);
+    color: rgba(255,255,255,0.88);
+  }
+  .dho-dim-toggle.dho-btn--end:hover{
+    background: rgba(255,255,255,0.06);
+    border-color: rgba(255,255,255,0.20);
+  }
+
+  /* Esconde o botão final quando a dimensão está recolhida (exceto quando marcado como concluído) */
+  .dho-dim-toggle.dho-btn--end.is-soft-hidden{
+    display: none !important;
+  }
+
+  /* Farol verde ao recolher via "Leitura concluída" */
+  .dho-dim-toggle.dho-btn--end.is-done{
+    border-color: rgba(34, 197, 94, 0.55);
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.18), rgba(16, 185, 129, 0.12));
+    box-shadow:
+      0 0 0 1px rgba(34, 197, 94, 0.18),
+      0 18px 44px rgba(0,0,0,0.40),
+      0 10px 34px rgba(34, 197, 94, 0.14);
+  }
+  .dho-dim-toggle.dho-btn--end.is-done .dho-dim-toggle__sub{
+    color: rgba(220, 255, 235, 0.88);
+  }
+
+  /* Conteúdo colapsável */
+  .dho-dim-content{
+    overflow: hidden;
+    max-height: none;
+    opacity: 1;
+    transition: max-height 260ms ease, opacity 220ms ease;
+  }
+  .dho-dim-content.is-collapsed{
+    max-height: 0px !important;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+
+    /* ─────────────────────────────────────────────────────────────
+       CTA final (Concluir Dimensão): checklist redondo (pulsante)
+       ───────────────────────────────────────────────────────────── */
+    .dho-end-cta{
+      grid-column: 1 / -1;
+      justify-self: center;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      padding: 18px 0 8px;
+    }
+    .dho-end-cta.is-soft-hidden{ display:none; }
+
+    .dho-end-check{
+      width: 55px;
+      height: 55px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.05);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.35);
+      backdrop-filter: blur(10px);
+      display: grid;
+      place-items: center;
+      position: relative;
+      cursor: pointer;
+      outline: none;
+      transition: transform .16s ease, border-color .16s ease, background .16s ease, box-shadow .16s ease;
+    }
+    .dho-end-check:hover{ transform: translateY(-1px); border-color: rgba(255,255,255,0.22); background: rgba(255,255,255,0.07); }
+    .dho-end-check:active{ transform: translateY(0px) scale(0.99); }
+
+    /* “caixa de checklist” no centro */
+    .dho-end-check__icon{
+      width: 18px;
+      height: 18px;
+      border-radius: 6px;
+      border: 2px solid rgba(255,255,255,0.40);
+      background: rgba(0,0,0,0.10);
+      position: relative;
+      transition: border-color .18s ease, background .18s ease, box-shadow .18s ease, transform .18s ease;
+    }
+
+    /* brilho/pulso enquanto a dimensão estiver aberta (incentivo a concluir) */
+    .dho-end-cta.is-pulsing .dho-end-check{
+      animation: dhoPulseSoft 1.25s ease-in-out infinite;
+    }
+    .dho-end-cta.is-pulsing .dho-end-check__icon{
+      border-color: rgba(232, 202, 255, 0.78);
+      box-shadow: 0 0 0 7px rgba(168, 85, 247, 0.06);
+    }
+    @keyframes dhoPulseSoft{
+      0%, 100% { box-shadow: 0 12px 30px rgba(0,0,0,0.38), 0 0 0 0 rgba(168,85,247,0.00); }
+      50%      { box-shadow: 0 12px 30px rgba(0,0,0,0.38), 0 0 0 13px rgba(168,85,247,0.10); }
+    }
+
+    /* estado “concluída” (farol verde + check) */
+    .dho-end-check.is-done{
+      border-color: rgba(34, 197, 94, 0.95);
+      background: rgba(34, 197, 94, 0.10);
+      box-shadow:
+        0 14px 40px rgba(0,0,0,0.45),
+        0 0 0 1px rgba(34,197,94,0.22),
+        0 0 24px rgba(34,197,94,0.55);
+    }
+    .dho-end-check.is-done .dho-end-check__icon{
+      border-color: rgba(34,197,94,1);
+      background: rgba(34,197,94,0.20);
+      box-shadow: 0 0 18px rgba(34,197,94,0.38);
+      transform: scale(1.02);
+    }
+    .dho-end-check.is-done .dho-end-check__icon::after{
+      content:"";
+      position:absolute;
+      left: 5px;
+      top: 4px;
+      width: 6px;
+      height: 10px;
+      border-right: 2px solid rgba(245,245,247,0.95);
+      border-bottom: 2px solid rgba(245,245,247,0.95);
+      transform: rotate(40deg);
+    }
+
+    .dho-end-caption{
+      font-size: 12.5px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.72);
+      text-align: center;
+      max-width: 520px;
+    }
+    .dho-end-check.is-done + .dho-end-caption{
+      color: rgba(34,197,94,0.92);
+      text-shadow: 0 0 16px rgba(34,197,94,0.35);
+    }
+
+    /* acessibilidade */
+    .sr-only{
+      position:absolute !important;
+      width:1px !important;
+      height:1px !important;
+      padding:0 !important;
+      margin:-1px !important;
+      overflow:hidden !important;
+      clip:rect(0,0,0,0) !important;
+      white-space:nowrap !important;
+      border:0 !important;
+    }
+
+
+  
+
+  /* ===== Ajustes finais: dock do botão “Concluir” no topo ===== */
+  .dho-dim-toggle__left{
+    display:flex;
+    align-items:center;
+    gap: 12px;
+    min-width: 0;
+  }
+
+  .dho-dim-toggle__main{
+    white-space: nowrap;
+  }
+
+  .dho-dim-toggle__badge-slot{
+    width: 44px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex: 0 0 auto;
+  }
+  .dho-dim-toggle__badge-slot:empty{
+    width: 0;
+  }
+
+  /* Quando o botão verde estiver anexado ao topo */
+  .dho-end-check.is-docked .dho-end-check__icon{
+    width: 13px;
+    height: 13px;
+    border-radius: 5px;
+  }
+
+  /* Oculta o “rodapé de concluir” quando o botão estiver dockado no topo */
+  .dho-end-cta.is-docked-away{
+    display:none !important;
+  }
+
+
+  /* Correção: check dentro da caixinha quando o botão está dockado no topo */
+  .dho-end-check.is-docked .dho-end-check__icon{
+    width: 13px !important;
+    height: 13px !important;
+    border-radius: 5px !important;
+  }
+  .dho-end-check.is-docked .dho-end-check__icon::after{
+    left: 3.2px !important;
+    top: 1.6px !important;
+    width: 4.2px !important;
+    height: 7.2px !important;
+    border-right: 2px solid rgba(245,245,247,0.95) !important;
+    border-bottom: 2px solid rgba(245,245,247,0.95) !important;
+    transform: rotate(40deg) !important;
+  }
+
+
+  .dho-end-check.is-docked .dho-end-check__icon{
+    width: 12px !important;
+    height: 12px !important;
+    border-radius: 5px !important;
+  }
+  .dho-end-check.is-docked .dho-end-check__icon::after{
+    left: 3.0px !important;
+    top: 1.5px !important;
+    width: 4.0px !important;
+    height: 6.8px !important;
+  }
+
+
+  /* ===== FIX: tamanho do botão dockado (força 30x30) ===== */
+  .dho-end-check{
+    box-sizing: border-box;
+    padding: 0;
+    line-height: 0;
+  }
+
+  .dho-end-check.is-docked{
+    width: 30px !important;
+    height: 30px !important;
+    min-width: 30px !important;
+    min-height: 30px !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+    display: grid !important;
+    place-items: center !important;
+    border-radius: 999px !important;
+    margin: 0 !important;
+    transform: none !important;
+  }
+
+
+  /* Estado concluído: barra do topo fica verde claro (sensação de “finalizado”) */
+  .dho-dim-toggle.dho-btn--start.is-completed{
+    border-color: rgba(34,197,94,0.34) !important;
+    background:
+      radial-gradient(120% 160% at 10% 10%, rgba(74,222,128,0.22), rgba(34,197,94,0.10) 42%, rgba(255,255,255,0.04) 100%),
+      linear-gradient(90deg, rgba(34,197,94,0.16), rgba(74,222,128,0.08)) !important;
+    box-shadow:
+      0 0 0 1px rgba(34,197,94,0.10),
+      0 14px 34px rgba(0,0,0,0.38),
+      0 0 34px rgba(34,197,94,0.18) !important;
+  }
+  .dho-dim-toggle.dho-btn--start.is-completed .dho-dim-toggle__main{
+    color: rgba(245,245,247,0.96);
+  }
+  .dho-dim-toggle.dho-btn--start.is-completed .dho-dim-toggle__sub{
+    color: rgba(245,245,247,0.82);
+  }
+
+
+  /* Ajuste solicitado: remover pisca/brilho do botao do topo (sem shimmer/pulsacao) */
+  .dho-dim-toggle.dho-btn--start.dho-btn--glow::after{
+    display: none !important; /* remove o shimmer animado */
+  }
+
+  /* Mantem a sensacao de concluido, porem sem halo/brilho extra */
+  .dho-dim-toggle.dho-btn--start.is-completed{
+    box-shadow: 0 14px 34px rgba(0,0,0,0.38) !important;
+  }
+
+
+
+  /* Após “Concluir”: remove totalmente o overlay decorativo do wrap (::before) */
+  .dho-objetivos-wrap.is-concluded::before{
+    opacity: 0 !important;
+    background: transparent !important;
+  }
+
+
+  /* Após “Concluir”: o que ainda aparece é o “glass” do próprio wrap (não o ::before).
+     Então, ao concluir, deixamos o wrap inteiro invisível (sem fundo, borda, sombra e blur). */
+  .dho-objetivos-wrap.is-concluded{
+    background: transparent !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+
+  /* Atenção: botão “Iniciar leitura” pisca apenas antes de abrir o conteúdo */
+  @keyframes dhoStartPulse{
+    0%, 100%{
+      border-color: rgba(232, 202, 255, 0.22);
+      box-shadow:
+        0 14px 34px rgba(0,0,0,0.38),
+        0 0 0 1px rgba(168,85,247,0.10),
+        0 0 18px rgba(168,85,247,0.18);
+      filter: saturate(1);
+    }
+    50%{
+      border-color: rgba(232, 202, 255, 0.36);
+      box-shadow:
+        0 14px 34px rgba(0,0,0,0.38),
+        0 0 0 1px rgba(168,85,247,0.18),
+        0 0 26px rgba(168,85,247,0.30);
+      filter: saturate(1.08);
+    }
+  }
+
+  .dho-dim-toggle.dho-btn--start.is-attn{
+    animation: dhoStartPulse 1.55s ease-in-out infinite;
+  }
+
+  /* Respeita preferências de movimento */
+  @media (prefers-reduced-motion: reduce){
+    .dho-dim-toggle.dho-btn--start.is-attn{ animation: none; }
+  }
 </style>
 
 <script>
   window.initBloco_objetivos = function initBloco_objetivos() {
     try {
+      // Evita dupla inicialização (útil tanto no site quanto em testes locais)
+      if (window.__dho_objetivos_inited === true) return;
+      window.__dho_objetivos_inited = true;
       const root = document.querySelector(".dho-objetivos");
       if (!root) return;
+
+      // Lazy mount dos gráficos (evita Chart.js renderizar com o bloco recolhido)
+      let mountPizzaOnce = function(){};
+
+      // ─────────────────────────────────────────────────────────────
+      // Toggle do bloco (Topo / Base): recolher / expandir a dimensão
+      // ─────────────────────────────────────────────────────────────
+      const setupDimToggles = () => {
+        const content  = root.querySelector("#dho-objetivos-content");
+        const btnStart = root.querySelector('[data-dho-toggle="start"]');
+        const btnEnd   = root.querySelector('[data-dho-toggle="end"]');
+        const endWrap  = root.querySelector("[data-dho-end-wrap]");
+        const badgeSlot = btnStart ? btnStart.querySelector(".dho-dim-toggle__badge-slot") : null;
+        const endCaption = root.querySelector(".dho-end-caption");
+
+        if (!content || !btnStart || !btnEnd) return;
+
+        const kickerText = (root.querySelector(".dho-kicker")?.textContent || "").trim();
+        const dimMatch = kickerText.match(/DIMENSÃO\s*\d+/i);
+        const dimLabelPretty = dimMatch
+          ? dimMatch[0].replace(/\s+/g, " ").replace(/^d/i, "D")
+          : "Dimensão";
+        const dimLabelUpper = dimMatch ? dimMatch[0].toUpperCase() : "DIMENSÃO";
+        const wrapBox = root.querySelector('.dho-objetivos-wrap');
+
+
+
+        // Estado interno
+        let isCollapsed = content.classList.contains("is-collapsed");
+        let isDone = btnEnd.classList.contains("is-done"); // se vier marcado por algum motivo, respeita
+
+        const setBtnText = (btn, main, sub) => {
+          const m = btn.querySelector(".dho-dim-toggle__main");
+          const s = btn.querySelector(".dho-dim-toggle__sub");
+          if (m) m.textContent = main;
+          if (s) s.textContent = sub;
+          if (btn.matches('[data-dho-toggle="end"]') && endCaption) endCaption.textContent = main;
+        };
+
+        const undockEnd = () => {
+          if (!endWrap) return;
+          // devolve o botão para o rodapé
+          if (btnEnd.parentElement !== endWrap) {
+            endWrap.insertBefore(btnEnd, endCaption || null);
+          }
+          btnEnd.classList.remove("is-docked");
+          endWrap.classList.remove("is-docked-away");
+        };
+
+        const dockEndToTop = () => {
+          if (!badgeSlot || !endWrap) return;
+          // move o botão verde para dentro da barra rosa (slot à esquerda)
+          if (btnEnd.parentElement !== badgeSlot) badgeSlot.appendChild(btnEnd);
+          btnEnd.classList.add("is-docked");
+          endWrap.classList.add("is-docked-away");
+          endWrap.classList.remove("is-soft-hidden");
+        };
+
+        const applyEndVisibility = () => {
+          if (!endWrap) return;
+
+          // Caso concluído + recolhido: botão verde vai para o topo (dentro da barra rosa)
+          if (isCollapsed && isDone) {
+            dockEndToTop();
+            return;
+          }
+
+          // Caso não esteja nesse estado, garante que o botão verde fica no final do bloco
+          undockEnd();
+
+          // Quando recolhido e ainda não concluído: esconde o final para dar sensação de “iniciar leitura”
+          if (isCollapsed && !isDone) {
+            endWrap.classList.add("is-soft-hidden");
+          } else {
+            endWrap.classList.remove("is-soft-hidden");
+          }
+
+          // Pulso enquanto aberto e ainda não concluído
+          if (!isCollapsed && !isDone) endWrap.classList.add("is-pulsing");
+          else endWrap.classList.remove("is-pulsing");
+        };
+
+        const syncLabels = () => {
+          // Topo
+          if (isCollapsed && isDone) {
+            setBtnText(btnStart, "Dimensão Concluída", dimLabelUpper);
+          } else {
+            setBtnText(btnStart, isCollapsed ? "Iniciar leitura" : "Recolher leitura", dimLabelUpper);
+          }
+
+
+          // Estilo visual de concluído (barra verde)
+          if (isCollapsed && isDone) btnStart.classList.add("is-completed");
+          else btnStart.classList.remove("is-completed");
+
+
+// Base
+          setBtnText(btnEnd, `Concluir ${dimLabelPretty}`, isCollapsed ? "reabrir leitura" : "recolher dimensão");
+
+          btnStart.setAttribute("aria-expanded", String(!isCollapsed));
+          btnEnd.setAttribute("aria-expanded", String(!isCollapsed));
+
+          if (wrapBox) wrapBox.classList.toggle("is-concluded", (isCollapsed && isDone));
+
+
+
+          btnStart.classList.toggle("is-attn", (isCollapsed && !isDone));
+
+          applyEndVisibility();
+        };
+
+        const collapse = (source) => {
+          if (isCollapsed) return;
+
+          // fixa altura atual para transição suave
+          content.classList.remove("is-collapsed");
+          content.style.maxHeight = content.scrollHeight + "px";
+          content.offsetHeight; // force reflow
+
+          content.classList.add("is-collapsed");
+          content.style.maxHeight = "0px";
+          isCollapsed = true;
+
+          if (source === "end") {
+            isDone = true;
+            btnEnd.classList.add("is-done");
+          }
+
+          syncLabels();
+        };
+
+        const expand = () => {
+          if (!isCollapsed) return;
+
+          // se estava “concluída”, ao reabrir a leitura a conclusão continua marcada,
+          // mas o botão verde volta para o final (para manter o fluxo de leitura)
+          content.classList.remove("is-collapsed");
+
+          const h = content.scrollHeight;
+          content.style.maxHeight = h + "px";
+
+          window.setTimeout(() => {
+            content.style.maxHeight = "none";
+            window.dispatchEvent(new Event("resize"));
+            try { mountPizzaOnce(); } catch(e){}
+          }, 280);
+
+          isCollapsed = false;
+          syncLabels();
+        };
+
+        btnStart.addEventListener("click", () => (isCollapsed ? expand() : collapse("start")));
+        btnEnd.addEventListener("click", (e) => {
+          e.stopPropagation();
+          (isCollapsed ? expand() : collapse("end"));
+        });
+
+        // Estado inicial
+        content.style.maxHeight = isCollapsed ? "0px" : "none";
+        syncLabels();
+      };
+
+      setupDimToggles();
+
 
       const ensureChart = () => new Promise((resolve) => {
         if (window.Chart) return resolve(true);
@@ -690,6 +1291,31 @@
         setTimeout(force, 260);
       };
 
+
+      // Inicialização sob demanda (primeira expansão) + reflow ao reabrir
+      let __pizzaMounted = false;
+      mountPizzaOnce = () => {
+        const canvas = root.querySelector("#dhoObjetivosPizza");
+        if (__pizzaMounted) {
+          try {
+            const inst = canvas && canvas._chartInstance;
+            if (inst) { inst.resize(); inst.update("none"); }
+          } catch(e){}
+          return;
+        }
+
+        ensureChart().then((ok) => {
+          if (!ok) {
+            console.warn("[Bloco objetivos] Não foi possível carregar Chart.js (CDN bloqueado).");
+            return;
+          }
+          // espera um frame para garantir layout após expandir
+          requestAnimationFrame(() => {
+            try { renderPizza(); __pizzaMounted = true; } catch(e){}
+          });
+        });
+      };
+
       const wrap = root.querySelector("#dhoRankWrap");
       const btn  = root.querySelector("#dhoRankNextBtn");
       const hint = root.querySelector("#dhoRankHint");
@@ -738,16 +1364,30 @@
         syncButtonLabel();
       }
 
-      ensureChart().then((ok) => {
-        if (!ok) {
-          console.warn("[Bloco objetivos] Não foi possível carregar Chart.js (CDN bloqueado).");
-          return;
-        }
-        renderPizza();
-      });
+      // Monta o gráfico apenas se o bloco estiver expandido no load.
+      try {
+        const contentNow = root.querySelector("#dho-objetivos-content");
+        const collapsedNow = !!contentNow && contentNow.classList.contains("is-collapsed");
+        if (!collapsedNow) mountPizzaOnce();
+      } catch(e){}
 
     } catch (err) {
       console.error("[Bloco objetivos] Erro ao inicializar:", err);
     }
   };
+  // Auto-init seguro (para o bloco funcionar mesmo em arquivo isolado)
+  (function(){
+    const run = () => {
+      try { window.initBloco_objetivos(); } catch(e){}
+    };
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", run, { once: true });
+    } else {
+      run();
+    }
+  })();
+
 </script>
+
+</body>
+</html>
