@@ -521,6 +521,7 @@
       .dho-flow-img{ width: 96%; }
     }
   </style>
+
 </head>
 
 <body>
@@ -669,26 +670,10 @@
       if (root.dataset.inited === "1") return;
       root.dataset.inited = "1";
 
-      const ensureChart = () => new Promise((resolve) => {
-        if (window.Chart) return resolve(true);
-
-        /* dedup global de carregamento */
-        if (window.__dhoChartLoading === true) {
-          const t = setInterval(() => {
-            if (window.Chart) { clearInterval(t); resolve(true); }
-          }, 60);
-          setTimeout(() => { clearInterval(t); resolve(!!window.Chart); }, 2500);
-          return;
-        }
-
-        window.__dhoChartLoading = true;
-        const s = document.createElement("script");
-        s.src = "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js";
-        s.async = true;
-        s.onload = () => resolve(true);
-        s.onerror = () => resolve(false);
-        document.head.appendChild(s);
-      });
+      // Chart.js deve ser carregado centralmente pelo index.html
+      if(!window.Chart){
+        console.warn("[DHO 360] Chart.js não encontrado. Carregue Chart.js (versão fixa) no index.html antes de inicializar o bloco Dimensão 1.");
+      }
 
       const dataPizza = [
         { label: "Trabalho e carreira", sub: "carreira, propósito, renda", value: 45, color: "rgba(180,130,255,0.95)" },
@@ -806,7 +791,7 @@
       /* init */
       renderLegenda();
       initRanking();
-      ensureChart().then(ok => { if (ok) renderPizza(); });
+      if (window.Chart) renderPizza();
     })();
   </script>
 </body>
