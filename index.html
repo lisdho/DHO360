@@ -7,6 +7,7 @@
 
   <style>
     :root{
+      --headerH: 92px;
       --bg:#07070b;
       --fg:#f4f4f8;
       --muted:#c7c7d6;
@@ -73,9 +74,11 @@
     a:hover{ opacity:1; }
 
     header.siteHeader{
-      position: sticky;
+      position: fixed;
       top: 0;
-      z-index: 98;
+      left: 0;
+      right: 0;
+      z-index: 5000;
       background: rgba(7,7,11,.62);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--line);
@@ -229,14 +232,17 @@
     }
 
 
-  main{flex:1 0 auto;}
+  main{flex:1 0 auto;
+      padding: calc(var(--headerH) + 22px) 20px 64px;
+    }
 
     /* Marcas d'água (discretas) */
     .dho-watermark-layer{
       position: fixed;
       inset: -20%;
-      z-index: 0;
+      z-index: 9999;
       pointer-events: none;
+      mix-blend-mode: screen;
       opacity: 0.07;
       transform: rotate(-18deg);
       background-image: url("data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%22640%22%20height=%22240%22%20viewBox=%220%200%20640%20240%22%3E%0A%20%20%3Crect%20width=%22100%%22%20height=%22100%%22%20fill=%22transparent%22/%3E%0A%20%20%3Ctext%20x=%220%22%20y=%22130%22%20font-family=%22system-ui,-apple-system,Segoe%20UI,Roboto,Arial,sans-serif%22%0A%20%20%20%20%20%20%20%20font-size=%2218%22%20fill=%22rgba(255,255,255,0.18)%22%20letter-spacing=%221.2%22%3E%C2%A9%202026%20DHO%20360%20-%20O%20futuro%20do%20trabalho%20em%20Foco.%3C/text%3E%0A%3C/svg%3E");
@@ -244,10 +250,6 @@
       background-size: 640px 240px;
       filter: blur(0.2px);
     }
-
-    /* Garante que o conteúdo fique acima da marca d'água */
-    body > *{ position: relative; z-index: 1; }
-
 </style>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -432,6 +434,22 @@
       © 2026 <span>DHO 360</span> - O futuro do trabalho em Foco. Todos os direitos reservados.
     </div>
   </footer>
+
+
+  <script>
+    (function(){
+      function syncHeaderHeight(){
+        var h = document.querySelector('.siteHeader');
+        if(!h) return;
+        var px = Math.ceil(h.getBoundingClientRect().height) + 'px';
+        document.documentElement.style.setProperty('--headerH', px);
+      }
+      window.addEventListener('load', syncHeaderHeight, { once:true });
+      window.addEventListener('resize', syncHeaderHeight);
+      // also run immediately for faster paint
+      syncHeaderHeight();
+    })();
+  </script>
 
 </body>
 </html>
