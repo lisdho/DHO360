@@ -1,0 +1,798 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>DHO 360º | Dimensão 1</title>
+
+  <!--
+    Bloco: Dimensão 1 | Objetivos e Prioridades de Desenvolvimento
+    Revisão técnica: limpeza de CSS/JS redundantes, escopo por classe, sem background global,
+    header alinhado às margens do card principal, textos longos justificados e mobile otimizado.
+  -->
+
+  <style>
+    /* ============ Escopo do bloco (não afeta o site-mãe) ============ */
+    .dho-objetivos,
+    .dho-objetivos *{ box-sizing: border-box; }
+
+    .dho-objetivos{
+      padding: 28px 16px;
+      --fg: #f4f4f8;
+      --title: #F5F5F7;
+      --muted-1: rgba(255,255,255,0.85);
+      --muted-2: rgba(255,255,255,0.70);
+      --muted-3: rgba(255,255,255,0.80);
+      --line: rgba(255,255,255,0.10);
+
+      --pizzaSize: 260px;
+      --chartGap: 22px;
+      --legendMax: 420px;
+    }
+
+    /* ===== Wrap principal (glass) ===== */
+    .dho-objetivos-wrap{
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 18px 18px;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.06);
+      box-shadow: 0 18px 44px rgba(0,0,0,0.40);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      position: relative;
+      overflow: hidden;
+      color: var(--fg);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    }
+
+    .dho-objetivos-wrap::before{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      background:
+        radial-gradient(900px 380px at 22% 12%, rgba(180,130,255,0.12), transparent 62%),
+        radial-gradient(760px 340px at 84% 26%, rgba(130,160,255,0.09), transparent 58%),
+        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(0,0,0,0.00) 55%);
+      pointer-events:none;
+      opacity: 0.95;
+    }
+    .dho-objetivos-wrap > *{ position: relative; z-index: 1; }
+
+    /* ===== Header editorial (alinhado às margens do wrap) ===== */
+    .dho-objetivos-header{
+      margin: 30px;
+      padding: 10;
+      /* mantém leitura confortável, mas sem “cortar” a margem interna */
+      max-width: 860px;
+    }
+
+    .dho-kicker{
+      margin: 0 0 10px 0;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.70);
+    }
+
+    .dho-title{
+      margin: 0 0 10px 0;
+      font-size: clamp(22px, 2.3vw, 34px);
+      line-height: 1.15;
+      font-weight: 700;
+      color: var(--title);
+    }
+
+    .dho-subtitle{
+      margin: 0;
+      font-size: 15.5px;
+      line-height: 1.65;
+      color: var(--muted-1);
+      text-align: justify; /* solicitado */
+    }
+
+    /* ===== Grid do bloco ===== */
+    .dho-objetivos-grid{
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 14px;
+      align-items: start;
+    }
+
+    /* Política: elementos “full-width dentro do wrap” */
+    .dho-card--chart,
+    .dho-rank-card,
+    .dho-insight-box--flow{
+      grid-column: 1 / -1;
+      justify-self: center;
+    }
+
+    .dho-card--chart{ width: min(860px, 100%); }
+    .dho-rank-card{ width: min(750px, 100%); }
+
+    /* ===== Cards (glass) ===== */
+    .dho-card{
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.07);
+      border-radius: 18px;
+      padding: 14px 14px 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dho-card::before{
+      content: "";
+      position: absolute;
+      inset: -1px;
+      background:
+        radial-gradient(900px 280px at 20% 0%, rgba(180,130,255,0.14), transparent 60%),
+        radial-gradient(700px 260px at 80% 20%, rgba(130,160,255,0.10), transparent 55%);
+      pointer-events: none;
+      opacity: 0.9;
+    }
+    .dho-card > *{ position: relative; z-index: 1; }
+
+    .dho-card-head{ margin-bottom: 10px; }
+
+    .dho-card-title{
+      margin: 0 0 6px 0;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--title);
+      letter-spacing: 0.01em;
+    }
+
+    .dho-card-note{
+      margin: 0;
+      font-size: 13.5px;
+      line-height: 1.55;
+      color: var(--muted-2);
+      text-align: justify;
+    }
+
+    /* ===== Gráfico + legenda ===== */
+    .dho-chart-row{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: var(--chartGap);
+      padding-top: 4px;
+    }
+
+    .dho-chart-box{
+      width: var(--pizzaSize);
+      height: var(--pizzaSize);
+      position: relative;
+    }
+
+    #dhoObjetivosPizza{
+      position: absolute;
+      inset: 0;
+      width: 100% !important;
+      height: 100% !important;
+      display: block;
+    }
+
+    #dhoObjetivosLegenda{
+      display: grid;
+      grid-template-columns: 1fr;
+      row-gap: 12px;
+      align-content: center;
+      max-width: var(--legendMax);
+      width: 100%;
+    }
+
+    .dho-legend-item{
+      display: grid;
+      grid-template-columns: 10px 1fr auto;
+      gap: 10px;
+      align-items: start;
+    }
+
+    .dho-legend-dot{
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      margin-top: 4px;
+      box-shadow: 0 0 0 2px rgba(255,255,255,0.08);
+    }
+
+    .dho-legend-label{
+      font-size: 13.5px;
+      line-height: 1.35;
+      color: rgba(255,255,255,0.85);
+      margin: 0;
+    }
+
+    .dho-legend-sub{
+      font-size: 12px;
+      line-height: 1.35;
+      color: var(--muted-2);
+      margin: 2px 0 0 0;
+      text-align: justify;
+    }
+
+    .dho-legend-pct{
+      font-variant-numeric: tabular-nums;
+      font-weight: 700;
+      color: var(--title);
+      font-size: 13.5px;
+      opacity: 0.95;
+      white-space: nowrap;
+    }
+
+    .dho-footnote{
+      margin: 8px 0 0 0;
+      font-size: 12.8px;
+      line-height: 1.55;
+      color: var(--muted-3);
+      text-align: justify;
+    }
+
+    /* ===== Ranking (card “sem card”) ===== */
+    .dho-rank-card{
+      background: transparent;
+      border: 0;
+      box-shadow: none;
+      padding: 0;
+    }
+
+    .dho-rank-card .dho-card-head{ text-align: center; }
+
+    .dho-rank{
+      list-style: none;
+      padding: 0;
+      margin: 10px 0 0 0;
+      display: grid;
+      gap: 8px;
+    }
+
+    .dho-rank-item{
+      display: grid;
+      grid-template-columns: 30px 1fr;
+      gap: 10px;
+      padding: 10px 10px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,0.12);
+    }
+
+    .dho-rank-item--top{
+      border-color: rgba(255,255,255,0.14);
+      background: linear-gradient(180deg, rgba(180,130,255,0.10), rgba(0,0,0,0.12));
+    }
+
+    .dho-rank-n{
+      width: 28px;
+      height: 28px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.92);
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .dho-rank-title{
+      margin: 0;
+      font-size: 13.5px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.92);
+    }
+
+    .dho-rank-desc{
+      margin: 3px 0 0 0;
+      font-size: 12.8px;
+      line-height: 1.45;
+      color: var(--muted-2);
+      text-align: justify;
+    }
+
+    .is-hidden{ display: none !important; }
+
+    .dho-rank-cta{
+      margin-top: 10px;
+      display: grid;
+      gap: 6px;
+    }
+
+    /* ===== Botão padrão ===== */
+    .dho-btn{
+      width: 100%;
+      border: 1px solid rgba(206, 182, 255, 0.26);
+      border-radius: 14px;
+      padding: 11px 12px;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+      cursor: pointer;
+      color: rgba(255,255,255,0.94);
+      background: rgba(165, 125, 255, 0.16);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.22);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: transform 0.12s ease, background 0.12s ease, border-color 0.12s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .dho-btn:hover{
+      transform: translateY(-1px);
+      background: rgba(175, 140, 255, 0.20);
+      border-color: rgba(220, 200, 255, 0.34);
+    }
+    .dho-btn:active{ transform: translateY(0px); }
+    .dho-btn:disabled{
+      cursor: default;
+      opacity: 0.70;
+      transform: none;
+    }
+
+    .dho-btn--glow::after{
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: linear-gradient(
+        110deg,
+        transparent 0%,
+        rgba(245, 235, 255, 0.06) 35%,
+        rgba(245, 235, 255, 0.22) 50%,
+        rgba(245, 235, 255, 0.06) 65%,
+        transparent 100%
+      );
+      transform: translateX(-55%) rotate(8deg);
+      animation: dhoShimmer 3.6s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes dhoShimmer{
+      0%   { transform: translateX(-60%) rotate(8deg); opacity: 0.0; }
+      18%  { opacity: 0.55; }
+      50%  { transform: translateX(60%) rotate(8deg); opacity: 0.35; }
+      100% { transform: translateX(60%) rotate(8deg); opacity: 0.0; }
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .dho-btn--glow::after{ animation: none; }
+    }
+
+    .dho-rank-hint{
+      margin: 0;
+      font-size: 12.5px;
+      line-height: 1.45;
+      color: var(--muted-2);
+      text-align: justify;
+    }
+
+    /* ===== CTA editorial (Pergunta ao leitor) ===== */
+    .dho-rank-final{
+      display: none;
+      justify-self: center;
+      width: min(258px, 70%);
+      aspect-ratio: 1 / 0.6;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background:
+        linear-gradient(
+          135deg,
+          rgba(124,58,237,0.12),
+          rgba(59,130,246,0.08),
+          rgba(0,0,0,0.06)
+        );
+      box-shadow: 0 12px 34px rgba(0,0,0,0.32);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+      padding: 9px;
+      pointer-events: none;
+    }
+    .dho-rank-final.is-visible{ display: grid; }
+
+    .dho-rank-final::before{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      background:
+        radial-gradient(220px 180px at 18% 18%, rgba(180,130,255,0.65), transparent 62%),
+        radial-gradient(240px 200px at 82% 82%, rgba(130,160,255,0.65), transparent 64%);
+      opacity: 0.65;
+      pointer-events:none;
+    }
+    .dho-rank-final::after{
+      content:"";
+      position:absolute;
+      left:0;
+      top:0;
+      bottom:0;
+      width: 3px;
+      background: linear-gradient(180deg, rgba(180,130,255,0.85), rgba(130,160,255,0.85));
+      opacity: 0.85;
+      pointer-events:none;
+    }
+
+    .dho-note-reflexive__inner{
+      position: relative;
+      z-index: 1;
+      display: grid;
+      place-items: center;
+      align-content: center;
+      gap: 8px;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+    }
+
+    .dho-note-reflexive__kicker{
+      font-weight: 700;
+      color: rgba(255,255,255,0.92);
+      letter-spacing: 0.02em;
+    }
+    .dho-note-reflexive__q{
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.5;
+      color: rgba(255,255,255,0.90);
+      text-align: center;
+    }
+
+    /* ===== Reflexão (sem “caixa”) ===== */
+    .dho-insight-box--flow{
+      background: transparent;
+      border: 0;
+      box-shadow: none;
+      padding: 0;
+      max-width: 860px;
+      width: 100%;
+    }
+
+    .dho-flow-title{
+      text-align: center;
+      margin: 0 0 10px 0;
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      color: rgba(232, 202, 255, 0.95);
+    }
+
+    .dho-flow-top,
+    .dho-flow-bottom{
+      margin: 0 auto;
+      font-size: 15px;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.90);
+      text-align: justify;
+    }
+
+    .dho-flow-img{
+      display:block;
+      width: 99%;
+      max-width: 860px;
+      height:auto;
+      margin: 16px auto;
+    }
+
+    /* ============ Responsivo ============ */
+    @media (max-width: 920px){
+      .dho-objetivos{ --pizzaSize: 240px; --legendMax: 100%; --chartGap: 12px; }
+      .dho-objetivos-grid{ grid-template-columns: 1fr; }
+
+      .dho-objetivos-header{
+        max-width: 100%;
+      }
+
+      .dho-card--chart,
+      .dho-rank-card,
+      .dho-insight-box--flow{
+        width: 100%;
+        justify-self: stretch;
+      }
+
+      .dho-chart-row{
+        display: grid;
+        grid-template-columns: 1fr;
+        align-items: start;
+        justify-items: center;
+        gap: 12px;
+      }
+
+      #dhoObjetivosLegenda{
+        max-width: 560px;
+      }
+    }
+
+    @media (max-width: 520px){
+      .dho-objetivos{ --pizzaSize: 220px; }
+      .dho-objetivos-wrap{ padding: 16px 14px; border-radius: 20px; }
+
+      .dho-card{ padding: 12px 12px 10px; border-radius: 16px; }
+
+      .dho-title{ font-size: clamp(20px, 6vw, 28px); }
+      .dho-subtitle{ font-size: 15px; }
+
+      .dho-legend-item{ grid-template-columns: 10px 1fr auto; }
+      .dho-legend-pct{ font-size: 13px; }
+
+      .dho-flow-img{ width: 96%; }
+    }
+  </style>
+
+</head>
+
+<body>
+  <section class="dho-objetivos" aria-labelledby="dho-objetivos-title">
+    <div class="dho-objetivos-wrap">
+      <header class="dho-objetivos-header">
+        <p class="dho-kicker">DIMENSÃO 1 | OBJETIVOS E PRIORIDADES DE DESENVOLVIMENTO</p>
+        <h2 id="dho-objetivos-title" class="dho-title">Quando se sabe qual é o objetivo, o próximo passo é priorizar por onde começar</h2>
+
+        <p class="dho-subtitle">
+          É unânime: 100% dos respondentes descreveram seus objetivos a serem alcançados, ou seja, todos têm um ponto de chegada claro.
+          Os relatos traçam um caminho para a conquista de estabilidade (profissional, emocional e financeira) até alta realização (liderança, legado e impacto).
+          O primeiro passo é estabelecer a base, e depois apliar para novos horizontes. 
+        </p>
+
+        <P class="dho-subtitle">
+          Então o que se perguntou foi: onde a energia está concentrada, e qual é o top aspecto da vida para desenvolver-se e chegar lá!
+        </p>
+      </header>
+
+      <div class="dho-objetivos-grid">
+        <!-- Card A: Pizza -->
+        <article class="dho-card dho-card--chart" aria-label="Distribuição dos objetivos por área da vida">
+          <div class="dho-card-head">
+            <h3 class="dho-card-title">Em que área da vida os objetivos dos respondentes se enquadram?</h3>
+          </div>
+
+          <div class="dho-chart-row">
+            <div class="dho-chart-box" aria-label="Área do gráfico">
+              <canvas id="dhoObjetivosPizza" aria-label="Gráfico de pizza"></canvas>
+            </div>
+
+            <div class="dho-legend" id="dhoObjetivosLegenda" aria-label="Legenda do gráfico"></div>
+          </div>
+
+          <p class="dho-footnote">
+            A maior parte dos objetivos estão no campo profissional, mas há uma concentração relevante ligada a saúde, mente e equilíbrio:
+            um fio condutor que começa a revelar o tema da coerência entre desempenho e qualidade de vida.
+          </p>
+        </article>
+
+        <!-- Card B: Ranking -->
+        <article class="dho-rank-card" aria-label="Fatores mais importantes para desenvolver">
+          <div class="dho-card-head">
+            <h3 class="dho-card-title">Ranking de iniciativas de desenvolvimento</h3>
+            <p class="dho-card-note">Os respondentes ranquearam os aspectos da vida por onde iniciariam seu desenvolvimento.</p>
+          </div>
+
+          <ol class="dho-rank" id="dhoObjetivosRank">
+            <li class="dho-rank-item dho-rank-item--top" data-rank="1">
+              <span class="dho-rank-n">1</span>
+              <div>
+                <p class="dho-rank-title">Corpo e ambiente</p>
+                <p class="dho-rank-desc">Condições e recursos adequados (saúde, tempo, ferramentas, rede de apoio) para agir.</p>
+              </div>
+            </li>
+
+            <li class="dho-rank-item dho-rank-item--top is-hidden" data-rank="2">
+              <span class="dho-rank-n">2</span>
+              <div>
+                <p class="dho-rank-title">Habilidades</p>
+                <p class="dho-rank-desc">Mais conhecimento sobre si e sobre o mundo, e aplicação prática no dia a dia.</p>
+              </div>
+            </li>
+
+            <li class="dho-rank-item dho-rank-item--top is-hidden" data-rank="3">
+              <span class="dho-rank-n">3</span>
+              <div>
+                <p class="dho-rank-title">Comportamento</p>
+                <p class="dho-rank-desc">Entender padrões que ajudam (ou travam) produtividade, consistência e novas ações.</p>
+              </div>
+            </li>
+
+            <li class="dho-rank-item is-hidden" data-rank="4">
+              <span class="dho-rank-n">4</span>
+              <div>
+                <p class="dho-rank-title">Crenças e valores</p>
+                <p class="dho-rank-desc">Clarear o que se acredita e valoriza para agir com coerência.</p>
+              </div>
+            </li>
+
+            <li class="dho-rank-item is-hidden" data-rank="5">
+              <span class="dho-rank-n">5</span>
+              <div>
+                <p class="dho-rank-title">Visão e missão</p>
+                <p class="dho-rank-desc">Definir propósito, futuro desejado e escolher como viver isso.</p>
+              </div>
+            </li>
+
+            <li class="dho-rank-item is-hidden" data-rank="6">
+              <span class="dho-rank-n">6</span>
+              <div>
+                <p class="dho-rank-title">Legado</p>
+                <p class="dho-rank-desc">Gerar impacto positivo e duradouro em pessoas, times e sociedade.</p>
+              </div>
+            </li>
+
+            <li class="dho-rank-item is-hidden" data-rank="7">
+              <span class="dho-rank-n">7</span>
+              <div>
+                <p class="dho-rank-title">Identidade</p>
+                <p class="dho-rank-desc">Compreender papéis e expressão autêntica de quem se é.</p>
+              </div>
+            </li>
+          </ol>
+
+          <div class="dho-rank-cta">
+            <button class="dho-btn dho-btn--glow" id="dhoRankNextBtn" type="button">Descobrir o Top 2</button>
+            <p class="dho-rank-hint" id="dhoRankHint">Dica: clique para abrir o próximo nível do ranking.</p>
+
+            <div class="dho-rank-final" id="dhoRankFinal" aria-live="polite">
+              <div class="dho-note-reflexive__inner" role="note" aria-label="Pergunta ao leitor">
+                <strong class="dho-note-reflexive__kicker">Pergunta ao leitor</strong>
+                <p class="dho-note-reflexive__q">E para você, hoje, qual é o Top 1 para iniciar o seu desenvolvimento?</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card C: Reflexões -->
+        <aside class="dho-insight-box--flow" aria-label="Reflexão orientada pelos dados">
+          <h3 class="dho-flow-title">Reflexão</h3>
+
+          <p class="dho-flow-top">
+            Aqui as respostas demonstram que os profissionais em geral priorizam desenvolver condições, habilidades e comportamento
+            antes de ampliar sua visão e atuação, ou seja, eles preferem aplicar esforços para construir base e autonômia.
+          </p>
+
+          <img class="dho-flow-img" src="assets/fluxodedesenvolvimento.png" alt="Fluxo de desenvolvimento" loading="lazy" decoding="async">
+
+          <p class="dho-flow-bottom">
+            Com essa sequência de desenvolvimento, torna-se possível alcançar mais coerência nas relações de trabalho.
+          </p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    /* init isolado e seguro: não cria dependências com outros blocos */
+    (function(){
+      const root = document.querySelector(".dho-objetivos");
+      if (!root) return;
+
+      /* evita dupla inicialização */
+      if (root.dataset.inited === "1") return;
+      root.dataset.inited = "1";
+
+      // Chart.js deve ser carregado centralmente pelo index.html
+      if(!window.Chart){
+        console.warn("[DHO 360] Chart.js não encontrado. Carregue Chart.js (versão fixa) no index.html antes de inicializar o bloco Dimensão 1.");
+      }
+
+      const dataPizza = [
+        { label: "Trabalho e carreira", sub: "carreira, propósito, renda", value: 45, color: "rgba(180,130,255,0.95)" },
+        { label: "Autodesenvolvimento e saúde", sub: "saúde, intelecto, equilíbrio emocional", value: 28, color: "rgba(150,170,255,0.92)" },
+        { label: "Bem-estar e sentido", sub: "hobbies, felicidade, espiritualidade", value: 17, color: "rgba(210,170,255,0.85)" },
+        { label: "Relações", sub: "família, social, conjugal", value: 10, color: "rgba(255,255,255,0.72)" }
+      ];
+
+      const renderLegenda = () => {
+        const legendaEl = root.querySelector("#dhoObjetivosLegenda");
+        if (!legendaEl) return;
+        legendaEl.innerHTML = dataPizza.map(item => `
+          <div class="dho-legend-item">
+            <span class="dho-legend-dot" style="background:${item.color}"></span>
+            <div>
+              <p class="dho-legend-label">${item.label}</p>
+              <p class="dho-legend-sub">${item.sub}</p>
+            </div>
+            <div class="dho-legend-pct">${item.value}%</div>
+          </div>
+        `).join("");
+      };
+
+      const renderPizza = () => {
+        const canvas = root.querySelector("#dhoObjetivosPizza");
+        if (!canvas || !window.Chart) return;
+
+        if (canvas._chartInstance) {
+          try { canvas._chartInstance.destroy(); } catch(e){}
+        }
+
+        const ctx = canvas.getContext("2d");
+        const chart = new Chart(ctx, {
+          type: "doughnut",
+          data: {
+            labels: dataPizza.map(d => d.label),
+            datasets: [{
+              data: dataPizza.map(d => d.value),
+              backgroundColor: dataPizza.map(d => d.color),
+              borderColor: "rgba(255,255,255,0.10)",
+              borderWidth: 1.2,
+              hoverOffset: 6
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            cutout: "62%",
+            animation: { duration: 650 },
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                backgroundColor: "rgba(10,10,14,0.92)",
+                borderColor: "rgba(255,255,255,0.10)",
+                borderWidth: 1,
+                titleColor: "rgba(255,255,255,0.92)",
+                bodyColor: "rgba(255,255,255,0.85)",
+                padding: 10,
+                callbacks: { label: (context) => ` ${context.raw}%` }
+              }
+            }
+          }
+        });
+
+        canvas._chartInstance = chart;
+
+        const force = () => { try { chart.resize(); chart.update("none"); } catch(e){} };
+        requestAnimationFrame(force);
+        setTimeout(force, 120);
+        setTimeout(force, 320);
+      };
+
+      const initRanking = () => {
+        const btn  = root.querySelector("#dhoRankNextBtn");
+        const hint = root.querySelector("#dhoRankHint");
+        const list = root.querySelector("#dhoObjetivosRank");
+        const finalBox = root.querySelector("#dhoRankFinal");
+        if (!btn || !list) return;
+
+        const getNextHidden = () => list.querySelector(".dho-rank-item.is-hidden");
+
+        const syncButtonLabel = () => {
+          const nextHidden = getNextHidden();
+          if (nextHidden) {
+            const nextRank = nextHidden.getAttribute("data-rank");
+            btn.textContent = `Descobrir o Top ${nextRank}`;
+            if (hint) hint.textContent = "Dica: clique para abrir o próximo nível do ranking.";
+            return;
+          }
+          btn.textContent = "Ranking completo";
+          btn.disabled = true;
+          btn.classList.remove("dho-btn--glow");
+          if (hint) hint.textContent = "Pronto: agora o ranking está totalmente aberto.";
+          if (finalBox) finalBox.classList.add("is-visible");
+        };
+
+        /* estado inicial: só o Top 1 visível */
+        Array.from(list.querySelectorAll(".dho-rank-item")).forEach(li => {
+          li.classList.toggle("is-hidden", li.getAttribute("data-rank") !== "1");
+        });
+        if (finalBox) finalBox.classList.remove("is-visible");
+        btn.disabled = false;
+        btn.classList.add("dho-btn--glow");
+
+        btn.addEventListener("click", () => {
+          const hidden = getNextHidden();
+          if (!hidden) return;
+          hidden.classList.remove("is-hidden");
+          syncButtonLabel();
+        }, { passive: true });
+
+        syncButtonLabel();
+      };
+
+      /* init */
+      renderLegenda();
+      initRanking();
+      if (window.Chart) renderPizza();
+    })();
+  </script>
+</body>
+</html>
