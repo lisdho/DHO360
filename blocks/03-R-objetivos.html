@@ -10,8 +10,6 @@
 
   <title>DHO 360º | Dimensão</title>
 
-
-
   <style>
 
     html, body{ height:100%; }
@@ -27,10 +25,6 @@
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
 
     }
-
-
-
-
 
   /* Ícone do topo: invisível até "Concluir" (fica no fluxo, à esquerda do texto) */
 
@@ -48,65 +42,59 @@
 
   }
 
+/* ─────────────────────────────────────────────────────────────
+   Ajuste: remover botões de leitura (mantém layout estável)
+   - Esconde qualquer sobra de toggle (caso exista)
+   - Força conteúdo sempre visível (sem colapso)
+──────────────────────────────────────────────────────────── */
+.dho-dim-toggle,
+.dho-end-cta{ display:none !important; }
+
+/* Conteúdo sempre expandido */
+.dho-dim-content{
+  max-height: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+  pointer-events: auto !important;
+  margin-top: 0 !important;
+}
+.dho-dim-content.is-collapsed{ max-height:none !important; }
+
+/* Evita estados "concluded" alterarem o wrap */
+.dho-objetivos-wrap.is-concluded{
+  border-color: rgba(255,255,255,0.10) !important;
+  background: rgba(255,255,255,0.06) !important;
+  box-shadow: 0 18px 44px rgba(0,0,0,0.40) !important;
+}
+
+
+/* Ajuste: largura da forma (header editorial) para 860px */
+.dho-objetivos-header{
+  width: min(860px, 100%);
+  margin-left: auto;
+  margin-right: auto;
+}
+
 </style>
 
 </head>
 
 <body>
 
-
-
 <section class="dho-objetivos" aria-labelledby="dho-objetivos-title">
 
   <div class="dho-objetivos-wrap">
-
-
-
-    <!-- Toggle (Topo): iniciar leitura / recolher -->
-
-    <button type="button"
-
-            class="dho-btn dho-btn--glow dho-dim-toggle dho-btn--start"
-
-            data-dho-toggle="start"
-
-            aria-expanded="false"
-
-            aria-controls="dho-objetivos-content">
-
-      <span class="dho-dim-toggle__left">
-
-        <span class="dho-dim-toggle__badge-slot" aria-hidden="true"></span>
-
-        <span class="dho-dim-toggle__main">Iniciar leitura</span>
-
-      </span>
-
-      <span class="dho-dim-toggle__sub">DIMENSÃO</span>
-
-    </button>
-
-
-
-    <div id="dho-objetivos-content" class="dho-dim-content is-collapsed">
-
-
-
-
+<div id="dho-objetivos-content" class="dho-dim-content ">
 
     <header class="dho-objetivos-header">
 
       <p class="dho-kicker">DIMENSÃO 1 | OBJETIVOS E PRIORIDADES DE DESENVOLVIMENTO</p>
-
-
 
       <h2 id="dho-objetivos-title" class="dho-title">
 
         Quando se sabe qual é o objetivo, o próximo passo é priorizar por onde começar.
 
       </h2>
-
-
 
       <p class="dho-subtitle">
 
@@ -122,8 +110,6 @@
 
     </header>
 
-
-
     <div class="dho-objetivos-grid">
 
       <!-- Card A: Pizza -->
@@ -135,8 +121,6 @@
           <h3 class="dho-card-title">Em que área da vida os objetivos dos respondentes se enquadram?</h3>
 
         </div>
-
-
 
         <div class="dho-chart-row">
 
@@ -150,13 +134,9 @@
 
           </div>
 
-
-
           <div class="dho-legend dho-plain-surface" id="dhoObjetivosLegenda" aria-label="Legenda do gráfico"></div>
 
         </div>
-
-
 
         <p class="dho-footnote">
 
@@ -167,8 +147,6 @@
         </p>
 
       </article>
-
-
 
       <!-- Card B: Ranking -->
 
@@ -185,8 +163,6 @@
           </p>
 
         </div>
-
-
 
         <div class="dho-rank-wrap" id="dhoRankWrap">
 
@@ -206,8 +182,6 @@
 
             </li>
 
-
-
             <li class="dho-rank-item dho-rank-item--top is-hidden" data-rank="2">
 
               <span class="dho-rank-n">2</span>
@@ -221,8 +195,6 @@
               </div>
 
             </li>
-
-
 
             <li class="dho-rank-item dho-rank-item--top is-hidden" data-rank="3">
 
@@ -238,8 +210,6 @@
 
             </li>
 
-
-
             <li class="dho-rank-item is-hidden" data-rank="4">
 
               <span class="dho-rank-n">4</span>
@@ -253,8 +223,6 @@
               </div>
 
             </li>
-
-
 
             <li class="dho-rank-item is-hidden" data-rank="5">
 
@@ -270,8 +238,6 @@
 
             </li>
 
-
-
             <li class="dho-rank-item is-hidden" data-rank="6">
 
               <span class="dho-rank-n">6</span>
@@ -285,8 +251,6 @@
               </div>
 
             </li>
-
-
 
             <li class="dho-rank-item is-hidden" data-rank="7">
 
@@ -304,8 +268,6 @@
 
           </ol>
 
-
-
           <div class="dho-rank-cta">
 
             <button class="dho-btn dho-btn--glow" id="dhoRankNextBtn" type="button">
@@ -319,8 +281,6 @@
               Dica: clique para abrir o próximo nível do ranking.
 
             </p>
-
-
 
             <!-- CTA Editorial Quadrado DHO 360 (Nota Reflexiva) -->
 
@@ -346,15 +306,11 @@
 
       </article>
 
-
-
       <!-- Card C: Reflexões -->
 
       <aside class="dho-insight-box dho-insight-box--flow" aria-label="Reflexão orientada pelos dados">
 
         <h3 class="dho-flow-title">Reflexão</h3>
-
-
 
         <p class="dho-flow-top">
 
@@ -364,11 +320,7 @@
 
         </p>
 
-
-
         <img class="dho-flow-img" src="assets/fluxodedesenvolvimento.png" alt="Fluxo de desenvolvimento">
-
-
 
         <p class="dho-flow-bottom">
 
@@ -380,63 +332,20 @@
 
     </div>
 
-
-
     </div>
-
-
-
-    <!-- Toggle (Base): leitura concluída / recolher -->
-
-    <div class="dho-end-cta is-soft-hidden" data-dho-end-wrap>
-
-      <button type="button"
-
-              class="dho-end-check"
-
-              data-dho-toggle="end"
-
-              aria-expanded="false"
-
-              aria-controls="dho-objetivos-content">
-
-        <!-- Mantidos para compatibilidade com o JS (atualiza rótulos) -->
-
-        <span class="dho-dim-toggle__main sr-only">Concluir dimensão</span>
-
-        <span class="dho-dim-toggle__sub sr-only">recolher dimensão</span>
-
-
-
-        <!-- Visual -->
-
-        <span class="dho-end-check__icon" aria-hidden="true"></span>
-
-      </button>
-
-      <div class="dho-end-caption" aria-hidden="true">Concluir dimensão</div>
-
-    </div>
-
-
+</div>
 
   </div>
 
 </section>
 
-
-
 <style>
 
   .dho-objetivos { padding: 28px 16px; }
 
-
-
   /* ✅ AJUSTE DE TAMANHO: garante que padding/borda entrem no max-width (igual ao bloco Metodologia) */
 
   .dho-objetivos, .dho-objetivos *{ box-sizing: border-box; }
-
-
 
   /* ===== Fundo "vidro" do bloco inteiro (igual referência do print) ===== */
 
@@ -446,8 +355,6 @@
 
     margin: 0 auto;
 
-
-
     border: 1px solid rgba(255,255,255,0.10);
 
     border-radius: 22px;
@@ -456,25 +363,17 @@
 
     box-shadow: 0 18px 44px rgba(0,0,0,0.40);
 
-
-
     backdrop-filter: blur(12px);
 
     -webkit-backdrop-filter: blur(12px);
-
-
 
     position: relative;
 
     overflow: hidden;
 
-
-
     padding: 18px 18px;
 
   }
-
-
 
   .dho-objetivos-wrap::before{
 
@@ -498,11 +397,7 @@
 
   }
 
-
-
   .dho-objetivos-wrap > *{ position: relative; z-index: 1; }
-
-
 
   .dho-kicker{
 
@@ -518,8 +413,6 @@
 
   }
 
-
-
   .dho-title{
 
     margin: 0 0 10px 0;
@@ -533,8 +426,6 @@
     font-weight: 700;
 
   }
-
-
 
   .dho-subtitle{
 
@@ -552,8 +443,6 @@
 
   }
 
-
-
   .dho-objetivos-grid{
 
     margin-top: 18px;
@@ -567,8 +456,6 @@
     align-items: start;
 
   }
-
-
 
   .dho-card{
 
@@ -592,8 +479,6 @@
 
   }
 
-
-
   .dho-card::before{
 
     content: "";
@@ -614,13 +499,9 @@
 
   }
 
-
-
   .dho-card > *{ position: relative; z-index: 1; }
 
   .dho-card-head{ margin-bottom: 10px; }
-
-
 
   .dho-card-title{
 
@@ -636,8 +517,6 @@
 
   }
 
-
-
   .dho-card-note{
 
     margin: 0;
@@ -651,8 +530,6 @@
     text-align: justify;
 
   }
-
-
 
   .dho-plain-surface{
 
@@ -670,8 +547,6 @@
 
   }
 
-
-
   .dho-objetivos{
 
     --pizzaSize: 260px;
@@ -681,8 +556,6 @@
     --legendMax: 420px;
 
   }
-
-
 
   .dho-chart-row{
 
@@ -698,8 +571,6 @@
 
   }
 
-
-
   .dho-chart-canvas{
 
     display: grid;
@@ -709,8 +580,6 @@
     align-items: center;
 
   }
-
-
 
   .dho-chart-box{
 
@@ -723,8 +592,6 @@
     margin: 0;
 
   }
-
-
 
   #dhoObjetivosPizza{
 
@@ -740,8 +607,6 @@
 
   }
 
-
-
   #dhoObjetivosLegenda{
 
     display: grid;
@@ -755,8 +620,6 @@
     max-width: var(--legendMax);
 
   }
-
-
 
   .dho-legend-item{
 
@@ -772,8 +635,6 @@
 
   }
 
-
-
   .dho-legend-item + .dho-legend-item{
 
     border-top: 0 !important;
@@ -783,8 +644,6 @@
     padding-top: 0 !important;
 
   }
-
-
 
   .dho-legend-dot{
 
@@ -800,8 +659,6 @@
 
   }
 
-
-
   .dho-legend-label{
 
     font-size: 13.5px;
@@ -813,8 +670,6 @@
     margin: 0;
 
   }
-
-
 
   .dho-legend-sub{
 
@@ -830,8 +685,6 @@
 
   }
 
-
-
   .dho-legend-pct{
 
     font-variant-numeric: tabular-nums;
@@ -846,8 +699,6 @@
 
   }
 
-
-
   .dho-footnote{
 
     margin: 8px 0 0 0;
@@ -861,8 +712,6 @@
     text-align: justify;
 
   }
-
-
 
   .dho-rank-card{
 
@@ -888,11 +737,7 @@
 
   }
 
-
-
   .dho-rank-wrap{ margin-top: 10px; }
-
-
 
   .dho-rank{
 
@@ -907,8 +752,6 @@
     gap: 8px;
 
   }
-
-
 
   .dho-rank-item{
 
@@ -928,8 +771,6 @@
 
   }
 
-
-
   .dho-rank-item--top{
 
     border-color: rgba(255,255,255,0.14);
@@ -937,8 +778,6 @@
     background: linear-gradient(180deg, rgba(180,130,255,0.10), rgba(0,0,0,0.12));
 
   }
-
-
 
   .dho-rank-n{
 
@@ -964,8 +803,6 @@
 
   }
 
-
-
   .dho-rank-title{
 
     margin: 0;
@@ -977,8 +814,6 @@
     color: rgba(255,255,255,0.92);
 
   }
-
-
 
   .dho-rank-desc{
 
@@ -994,11 +829,7 @@
 
   }
 
-
-
   .is-hidden{ display: none !important; }
-
-
 
   .dho-rank-cta{
 
@@ -1009,8 +840,6 @@
     gap: 6px;
 
   }
-
-
 
   .dho-btn{
 
@@ -1046,8 +875,6 @@
 
   }
 
-
-
   .dho-btn:hover{
 
     transform: translateY(-1px);
@@ -1058,11 +885,7 @@
 
   }
 
-
-
   .dho-btn:active{ transform: translateY(0px); }
-
-
 
   .dho-btn:disabled{
 
@@ -1073,8 +896,6 @@
     transform: none;
 
   }
-
-
 
   .dho-btn--glow::after{
 
@@ -1108,8 +929,6 @@
 
   }
 
-
-
   @keyframes dhoShimmer{
 
     0%   { transform: translateX(-60%) rotate(8deg); opacity: 0.0; }
@@ -1122,15 +941,11 @@
 
   }
 
-
-
   @media (prefers-reduced-motion: reduce){
 
     .dho-btn--glow::after{ animation: none; }
 
   }
-
-
 
   .dho-rank-hint{
 
@@ -1145,8 +960,6 @@
     text-align: justify;
 
   }
-
-
 
   /* ─────────────────────────────────────────────────────────────
      CTA editorial quadrado (Pergunta ao leitor)
@@ -1239,8 +1052,6 @@
     text-align: center;
   }
 
-
-
   .dho-insight-box--flow{
 
     background: transparent !important;
@@ -1257,11 +1068,7 @@
 
   }
 
-
-
   .dho-flow-img{ display:block; width:90%; height:auto; margin:16px auto 16px auto; }
-
-
 
   .dho-flow-title{
 
@@ -1278,8 +1085,6 @@
     color: rgba(232, 202, 255, 0.95);
 
   }
-
-
 
   .dho-flow-top,
 
@@ -1299,11 +1104,7 @@
 
   }
 
-
-
   .dho-objetivos-header{ position: static !important; }
-
-
 
   .dho-card--chart{ grid-column: 1 / -1; justify-self: center; width: min(860px, 100%); }
 
@@ -1311,15 +1112,11 @@
 
   .dho-rank-card .dho-card-head{ text-align:center; }
 
-
-
   @media (max-width: 920px){
 
     .dho-objetivos{ --pizzaSize: 240px; --legendMax: 100%; --chartGap: 12px; }
 
     .dho-objetivos-grid{ grid-template-columns: 1fr; }
-
-
 
     .dho-chart-row{
 
@@ -1335,8 +1132,6 @@
 
     }
 
-
-
     #dhoObjetivosLegenda{
 
       width: 100%;
@@ -1347,14 +1142,10 @@
 
     }
 
-
-
     .dho-chart-canvas{ justify-items: center; }
 
     .dho-chart-box{ margin: 0 auto; }
   }
-
-
 
   @media (max-width: 520px){
 
@@ -1364,17 +1155,11 @@
 
   }
 
-
-
-
-
   /* ───────────────────────────────────────────────────────────────
 
      Toggle do Bloco (Topo / Base) — colapsar / expandir a dimensão
 
      ─────────────────────────────────────────────────────────────── */
-
-
 
   .dho-dim-toggle{
 
@@ -1402,11 +1187,7 @@
 
     text-align: left;
 
-
-
 }
-
-
 
   .dho-dim-toggle__main{
 
@@ -1417,8 +1198,6 @@
     letter-spacing: 0.01em;
 
   }
-
-
 
   .dho-dim-toggle__sub{
 
@@ -1438,8 +1217,6 @@
 
   }
 
-
-
   /* Topo: lilás/rosa, sensação de "iniciar leitura" */
 
   .dho-dim-toggle.dho-btn--start{
@@ -1457,8 +1234,6 @@
     border-color: rgba(255, 200, 245, 0.42);
 
   }
-
-
 
   /* Base: "apagado", sensação de conclusão */
 
@@ -1482,8 +1257,6 @@
 
   }
 
-
-
   /* Esconde o botão final quando a dimensão está recolhida (exceto quando marcado como concluído) */
 
   .dho-dim-toggle.dho-btn--end.is-soft-hidden{
@@ -1491,8 +1264,6 @@
     display: none !important;
 
   }
-
-
 
   /* Farol verde ao recolher via "Leitura concluída" */
 
@@ -1518,8 +1289,6 @@
 
   }
 
-
-
   /* Conteúdo colapsável */
 
   .dho-dim-content{
@@ -1543,10 +1312,6 @@
     pointer-events: none;
 
   }
-
-
-
-
 
     /* ─────────────────────────────────────────────────────────────
 
@@ -1575,8 +1340,6 @@
     }
 
     .dho-end-cta.is-soft-hidden{ display:none; }
-
-
 
     .dho-end-check{
 
@@ -1612,8 +1375,6 @@
 
     .dho-end-check:active{ transform: translateY(0px) scale(0.99); }
 
-
-
     /* “caixa de checklist” no centro */
 
     .dho-end-check__icon{
@@ -1633,8 +1394,6 @@
       transition: border-color .18s ease, background .18s ease, box-shadow .18s ease, transform .18s ease;
 
     }
-
-
 
     /* brilho/pulso enquanto a dimensão estiver aberta (incentivo a concluir) */
 
@@ -1659,8 +1418,6 @@
       50%      { box-shadow: 0 12px 30px rgba(0,0,0,0.38), 0 0 0 13px rgba(168,85,247,0.10); }
 
     }
-
-
 
     /* estado “concluída” (farol verde + check) */
 
@@ -1713,8 +1470,6 @@
 
     }
 
-
-
     .dho-end-caption{
 
       font-size: 12.5px;
@@ -1737,8 +1492,6 @@
       text-shadow: 0 0 16px rgba(34,197,94,0.35);
 
     }
-
-
 
     /* acessibilidade */
 
@@ -1764,14 +1517,6 @@
 
     }
 
-
-
-
-
-
-
-
-
   /* ===== Ajustes finais: dock do botão “Concluir” no topo ===== */
 
   .dho-dim-toggle__left{
@@ -1786,15 +1531,11 @@
 
   }
 
-
-
   .dho-dim-toggle__main{
 
     white-space: nowrap;
 
   }
-
-
 
   .dho-dim-toggle__badge-slot{
 
@@ -1815,8 +1556,6 @@
 
   }
 
-
-
   /* Quando o botão verde estiver anexado ao topo */
 
   .dho-end-check.is-docked .dho-end-check__icon{
@@ -1829,8 +1568,6 @@
 
   }
 
-
-
   /* Oculta o “rodapé de concluir” quando o botão estiver dockado no topo */
 
   .dho-end-cta.is-docked-away{
@@ -1838,10 +1575,6 @@
     display:none !important;
 
   }
-
-
-
-
 
   /* Correção: check dentro da caixinha quando o botão está dockado no topo */
 
@@ -1872,10 +1605,6 @@
 
   }
 
-
-
-
-
   .dho-end-check.is-docked .dho-end-check__icon{
 
     width: 12px !important;
@@ -1897,10 +1626,6 @@
 
   }
 
-
-
-
-
   /* ===== FIX: tamanho do botão dockado (força 30x30) ===== */
 
   .dho-end-check{
@@ -1912,8 +1637,6 @@
     line-height: 0;
 
   }
-
-
 
   .dho-end-check.is-docked{
 
@@ -1940,10 +1663,6 @@
     transform: none !important;
 
   }
-
-
-
-
 
   /* Estado concluído: barra do topo fica verde claro (sensação de “finalizado”) */
 
@@ -1977,10 +1696,6 @@
 
   }
 
-
-
-
-
   /* Ajuste solicitado: remover pisca/brilho do botao do topo (sem shimmer/pulsacao) */
 
   .dho-dim-toggle.dho-btn--start.dho-btn--glow::after{
@@ -1989,8 +1704,6 @@
 
   }
 
-
-
   /* Mantem a sensacao de concluido, porem sem halo/brilho extra */
 
   .dho-dim-toggle.dho-btn--start.is-completed{
@@ -1998,12 +1711,6 @@
     box-shadow: 0 14px 34px rgba(0,0,0,0.38) !important;
 
   }
-
-
-
-
-
-
 
   /* Após “Concluir”: remove totalmente o overlay decorativo do wrap (::before) */
 
@@ -2014,10 +1721,6 @@
     background: transparent !important;
 
   }
-
-
-
-
 
   /* Após “Concluir”: o que ainda aparece é o “glass” do próprio wrap (não o ::before).
 
@@ -2036,10 +1739,6 @@
     -webkit-backdrop-filter: none !important;
 
   }
-
-
-
-
 
   /* Atenção: botão “Iniciar leitura” pisca apenas antes de abrir o conteúdo */
 
@@ -2079,15 +1778,11 @@
 
   }
 
-
-
   .dho-dim-toggle.dho-btn--start.is-attn{
 
     animation: dhoStartPulse 1.55s ease-in-out infinite;
 
   }
-
-
 
   /* Respeita preferências de movimento */
 
@@ -2098,8 +1793,6 @@
   }
 
 </style>
-
-
 
 <script>
 
@@ -2117,13 +1810,9 @@
 
       if (!root) return;
 
-
-
       // Lazy mount dos gráficos (evita Chart.js renderizar com o bloco recolhido)
 
       let mountPizzaOnce = function(){};
-
-
 
       // ─────────────────────────────────────────────────────────────
 
@@ -2145,11 +1834,7 @@
 
         const endCaption = root.querySelector(".dho-end-caption");
 
-
-
         if (!content || !btnStart || !btnEnd) return;
-
-
 
         const kickerText = (root.querySelector(".dho-kicker")?.textContent || "").trim();
 
@@ -2165,19 +1850,11 @@
 
         const wrapBox = root.querySelector('.dho-objetivos-wrap');
 
-
-
-
-
-
-
         // Estado interno
 
         let isCollapsed = content.classList.contains("is-collapsed");
 
-        let isDone = btnEnd.classList.contains("is-done"); // se vier marcado por algum motivo, respeita
-
-
+        let isDone = btnEnd && btnEnd.classList.contains("is-done"); // se vier marcado por algum motivo, respeita
 
         const setBtnText = (btn, main, sub) => {
 
@@ -2193,8 +1870,6 @@
 
         };
 
-
-
         const undockEnd = () => {
 
           if (!endWrap) return;
@@ -2207,13 +1882,11 @@
 
           }
 
-          btnEnd.classList.remove("is-docked");
+          btnEnd && btnEnd.classList.remove("is-docked");
 
           endWrap.classList.remove("is-docked-away");
 
         };
-
-
 
         const dockEndToTop = () => {
 
@@ -2223,7 +1896,7 @@
 
           if (btnEnd.parentElement !== badgeSlot) badgeSlot.appendChild(btnEnd);
 
-          btnEnd.classList.add("is-docked");
+          btnEnd && btnEnd.classList.add("is-docked");
 
           endWrap.classList.add("is-docked-away");
 
@@ -2231,13 +1904,9 @@
 
         };
 
-
-
         const applyEndVisibility = () => {
 
           if (!endWrap) return;
-
-
 
           // Caso concluído + recolhido: botão verde vai para o topo (dentro da barra rosa)
 
@@ -2249,13 +1918,9 @@
 
           }
 
-
-
           // Caso não esteja nesse estado, garante que o botão verde fica no final do bloco
 
           undockEnd();
-
-
 
           // Quando recolhido e ainda não concluído: esconde o final para dar sensação de “iniciar leitura”
 
@@ -2269,8 +1934,6 @@
 
           }
 
-
-
           // Pulso enquanto aberto e ainda não concluído
 
           if (!isCollapsed && !isDone) endWrap.classList.add("is-pulsing");
@@ -2278,8 +1941,6 @@
           else endWrap.classList.remove("is-pulsing");
 
         };
-
-
 
         const syncLabels = () => {
 
@@ -2295,55 +1956,31 @@
 
           }
 
-
-
-
-
           // Estilo visual de concluído (barra verde)
 
-          if (isCollapsed && isDone) btnStart.classList.add("is-completed");
+          if (isCollapsed && isDone) btnStart && btnStart.classList.add("is-completed");
 
-          else btnStart.classList.remove("is-completed");
-
-
-
-
+          else btnStart && btnStart.classList.remove("is-completed");
 
 // Base
 
           setBtnText(btnEnd, `Concluir ${dimLabelPretty}`, isCollapsed ? "reabrir leitura" : "recolher dimensão");
 
+          btnStart && btnStart.setAttribute("aria-expanded", String(!isCollapsed));
 
-
-          btnStart.setAttribute("aria-expanded", String(!isCollapsed));
-
-          btnEnd.setAttribute("aria-expanded", String(!isCollapsed));
-
-
+          btnEnd && btnEnd.setAttribute("aria-expanded", String(!isCollapsed));
 
           if (wrapBox) wrapBox.classList.toggle("is-concluded", (isCollapsed && isDone));
 
-
-
-
-
-
-
-          btnStart.classList.toggle("is-attn", (isCollapsed && !isDone));
-
-
+          btnStart && btnStart.classList.toggle("is-attn", (isCollapsed && !isDone));
 
           applyEndVisibility();
 
         };
 
-
-
         const collapse = (source) => {
 
           if (isCollapsed) return;
-
-
 
           // fixa altura atual para transição suave
 
@@ -2353,37 +1990,27 @@
 
           content.offsetHeight; // force reflow
 
-
-
           content.classList.add("is-collapsed");
 
           content.style.maxHeight = "0px";
 
           isCollapsed = true;
 
-
-
           if (source === "end") {
 
             isDone = true;
 
-            btnEnd.classList.add("is-done");
+            btnEnd && btnEnd.classList.add("is-done");
 
           }
-
-
 
           syncLabels();
 
         };
 
-
-
         const expand = () => {
 
           if (!isCollapsed) return;
-
-
 
           // se estava “concluída”, ao reabrir a leitura a conclusão continua marcada,
 
@@ -2391,13 +2018,9 @@
 
           content.classList.remove("is-collapsed");
 
-
-
           const h = content.scrollHeight;
 
           content.style.maxHeight = h + "px";
-
-
 
           window.setTimeout(() => {
 
@@ -2409,27 +2032,21 @@
 
           }, 280);
 
-
-
           isCollapsed = false;
 
           syncLabels();
 
         };
 
+        btnStart && btnStart.addEventListener("click", () => (isCollapsed ? expand() : collapse("start")));
 
-
-        btnStart.addEventListener("click", () => (isCollapsed ? expand() : collapse("start")));
-
-        btnEnd.addEventListener("click", (e) => {
+        btnEnd && btnEnd.addEventListener("click", (e) => {
 
           e.stopPropagation();
 
           (isCollapsed ? expand() : collapse("end"));
 
         });
-
-
 
         // Estado inicial
 
@@ -2439,19 +2056,11 @@
 
       };
 
-
-
       setupDimToggles();
-
-
-
-
 
       const ensureChart = () => new Promise((resolve) => {
 
         if (window.Chart) return resolve(true);
-
-
 
         if (window.__dhoChartLoading === true) {
 
@@ -2467,11 +2076,7 @@
 
         }
 
-
-
         window.__dhoChartLoading = true;
-
-
 
         const s = document.createElement("script");
 
@@ -2487,8 +2092,6 @@
 
       });
 
-
-
       const renderPizza = () => {
 
         const dataPizza = [
@@ -2502,8 +2105,6 @@
           { label: "Relações", sub: "família, social, conjugal", value: 10, color: "rgba(255,255,255,0.72)" }
 
         ];
-
-
 
         const legendaEl = root.querySelector("#dhoObjetivosLegenda");
 
@@ -2531,23 +2132,15 @@
 
         }
 
-
-
         const canvas = root.querySelector("#dhoObjetivosPizza");
 
         if (!canvas) return;
-
-
 
         canvas.removeAttribute("width");
 
         canvas.removeAttribute("height");
 
-
-
         if (canvas._chartInstance) canvas._chartInstance.destroy();
-
-
 
         const ctx = canvas.getContext("2d");
 
@@ -2613,11 +2206,7 @@
 
         });
 
-
-
         canvas._chartInstance = chart;
-
-
 
         const force = () => { try { chart.resize(); } catch(e){} };
 
@@ -2628,10 +2217,6 @@
         setTimeout(force, 260);
 
       };
-
-
-
-
 
       // Inicialização sob demanda (primeira expansão) + reflow ao reabrir
 
@@ -2655,8 +2240,6 @@
 
         }
 
-
-
         ensureChart().then((ok) => {
 
           if (!ok) {
@@ -2679,8 +2262,6 @@
 
       };
 
-
-
       const wrap = root.querySelector("#dhoRankWrap");
 
       const btn  = root.querySelector("#dhoRankNextBtn");
@@ -2690,8 +2271,6 @@
       const list = root.querySelector("#dhoObjetivosRank");
 
       const finalBox = root.querySelector("#dhoRankFinal");
-
-
 
       if (wrap && btn && list) {
 
@@ -2707,19 +2286,13 @@
 
         });
 
-
-
         if (finalBox) finalBox.classList.remove("is-visible");
 
         btn.disabled = false;
 
         btn.classList.add("dho-btn--glow");
 
-
-
         const getNextHidden = () => list.querySelector(".dho-rank-item.is-hidden");
-
-
 
         const syncButtonLabel = () => {
 
@@ -2748,8 +2321,6 @@
 
         };
 
-
-
         if (wrap.dataset.bound !== "1") {
 
           wrap.dataset.bound = "1";
@@ -2768,13 +2339,9 @@
 
         }
 
-
-
         syncButtonLabel();
 
       }
-
-
 
       // Monta o gráfico apenas se o bloco estiver expandido no load.
 
@@ -2787,8 +2354,6 @@
         if (!collapsedNow) mountPizzaOnce();
 
       } catch(e){}
-
-
 
     } catch (err) {
 
@@ -2820,11 +2385,7 @@
 
   })();
 
-
-
 </script>
-
-
 
 </body>
 
