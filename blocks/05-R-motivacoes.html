@@ -1,710 +1,1410 @@
 <!doctype html>
+
 <html lang="pt-BR">
+
 <head>
+
   <meta charset="utf-8" />
+
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+
   <title>DHO 360º | Dimensão 3 | Motivações Profissionais</title>
 
+
+
   <style>
+
     :root{
+
       --bg:#07070b;
+
       --fg:#f4f4f8;
 
+
+
       --violet1:#7c3aed;
+
       --violet2:#a855f7;
+
       --violet3:#e9d5ff;
 
+
+
       --ok: rgba(52, 211, 153, 0.95);
+
       --warn: rgba(251, 191, 36, 0.95);
+
       --zero: rgba(255,255,255,0.58);
+
     }
+
+
 
     *, *::before, *::after{ box-sizing: border-box; }
 
+
+
     html, body{
+
       height:100%;
+
       background: radial-gradient(1200px 700px at 15% 10%, rgba(124,58,237,.18), transparent 55%),
+
                   radial-gradient(900px 600px at 85% 30%, rgba(168,85,247,.14), transparent 60%),
+
                   radial-gradient(900px 600px at 55% 90%, rgba(59,130,246,.10), transparent 60%),
+
                   var(--bg);
+
       color: var(--fg);
+
       margin:0;
+
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+
       -webkit-font-smoothing: antialiased;
+
       -moz-osx-font-smoothing: grayscale;
+
     }
+
+
 
     .dho-objetivos{ padding: 28px 16px; --pizzaSize: 260px; --chartGap: 22px; --legendMax: 420px; }
 
+
+
     .dho-objetivos-wrap{
+
       max-width: 980px;
+
       width: 100%;
+
       margin: 0 auto;
-      padding: 18px 18px;
+
+      padding: 18px 39px;
+
       border-radius: 22px;
+
       border: 1px solid rgba(255,255,255,0.10);
+
       background: rgba(255,255,255,0.06);
+
       box-shadow: 0 18px 44px rgba(0,0,0,0.40);
+
       backdrop-filter: blur(12px);
+
       position: relative;
+
       overflow: hidden;
+
     }
+
     .dho-objetivos-wrap::before{
+
       content:"";
+
       position:absolute;
+
       inset:-2px;
+
       background:
+
         radial-gradient(600px 420px at 12% 10%, rgba(168,85,247,.18), transparent 60%),
+
         radial-gradient(520px 380px at 88% 18%, rgba(59,130,246,.14), transparent 62%),
+
         radial-gradient(520px 380px at 55% 95%, rgba(233,213,255,.10), transparent 60%);
+
       pointer-events:none;
+
       z-index:0;
+
     }
+
     .dho-objetivos-wrap > *{ position: relative; z-index:1; }
 
-    .dho-kicker{
-    margin: 0 0 10px 0;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    font-size: 12px;
-    color: rgba(255,255,255,0.70);
-    }
-    .dho-title{
-    margin: 0 0 10px 0;
-    font-size: clamp(22px, 2.3vw, 34px);
-    line-height: 1.15;
-    color: #F5F5F7;
-    font-weight: 700;
-    }
+    /* ====== AJUSTE SOLICITADO (PRINT): alinhar texto do cabeçalho com o conteúdo interno do card abaixo ======
+       Referência: o conteúdo do card inicia após (padding do wrap 18px) + (padding do card 14px).
+       Como o wrap já cria o primeiro recuo, aqui aplicamos apenas o recuo do card (14px). */
+    .dho-kicker,
+    .dho-title,
     .dho-subtitle{
-    margin: 0;
-    max-width: 980px;
-    font-size: 15.5px;
-    line-height: 1.65;
-    color: rgba(255,255,255,0.85);
-    text-align: justify;
+      padding-left: 14px;
+      padding-right: 14px;
+      box-sizing: border-box;
     }
+    /* ============================================================================================ */
+
+
+
+    /* ====== AJUSTE SOLICITADO (PRINT): largura do cabeçalho em 860px ====== */
+
+    .dho-kicker,
+
+    .dho-title,
+
+    .dho-subtitle{
+
+      max-width: 860px;
+
+      margin-left: auto;
+
+      margin-right: auto;
+
+    }
+
+    /* ===================================================================== */
+
+
+
+    .dho-kicker{
+
+    margin: 0 0 10px 0;
+
+    letter-spacing: 0.12em;
+
+    text-transform: uppercase;
+
+    font-size: 12px;
+
+    color: rgba(255,255,255,0.70);
+
+    }
+
+    .dho-title{
+
+    margin: 0 0 10px 0;
+
+    font-size: clamp(22px, 2.3vw, 34px);
+
+    line-height: 1.15;
+
+    color: #F5F5F7;
+
+    font-weight: 700;
+
+    }
+
+    .dho-subtitle{
+
+    margin: 0;
+
+    font-size: 15.5px;
+
+    line-height: 1.65;
+
+    color: rgba(255,255,255,0.85);
+
+    text-align: justify;
+
+    }
+
+
 
     .dho-objetivos-grid{
+
     margin-top: 18px;
+
     display: grid;
+
     grid-template-columns: 1.05fr 0.95fr;
+
     gap: 14px;
+
     align-items: start;
+
     }
+
+
 
     .dho-card{
+
       border: 1px solid rgba(255,255,255,0.10);
+
       background: rgba(255,255,255,0.07);
+
       border-radius: 18px;
+
       padding: 14px 14px 12px;
+
       box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+
       backdrop-filter: blur(10px);
+
       position: relative;
+
       overflow: hidden;
+
     }
+
     .dho-card::before{
+
       content:"";
+
       position:absolute;
+
       inset:-2px;
+
       background:
+
         radial-gradient(420px 220px at 18% 18%, rgba(124,58,237,.12), transparent 60%),
+
         radial-gradient(420px 220px at 82% 22%, rgba(168,85,247,.10), transparent 60%);
+
       pointer-events:none;
+
       z-index:0;
+
     }
+
     .dho-card > *{ position: relative; z-index:1; }
 
+
+
     .dho-footnote{
+
       font-size: 12.8px;
+
       line-height: 1.55;
+
       color: rgba(255,255,255,0.80);
+
       text-align: justify;
+
       margin: 12px 0 0;
+
     }
+
+
 
     .dho-card--chart{ width: min(860px, 100%); justify-self:center; grid-column: 1 / -1; }
 
+
+
     .dho-plain-surface{
+
       background: transparent !important;
+
       border: 0 !important;
+
       box-shadow: none !important;
+
       padding: 0 !important;
+
       border-radius: 0 !important;
+
     }
 
+
+
     .cmp-head{
+
       display:grid;
+
       grid-template-columns: 1fr;
+
       gap: 6px;
+
       margin-bottom: 10px;
+
     }
+
     .cmp-head--center{ }
+
     .cmp-head--center .cmp-meta{ }
     .cmp-head--center .cmp-sub{ }
     .cmp-head--center .cmp-title{ }
 
+
+
     .cmp-title{
+
       margin:0;
+
       font-size: 16px;
+
       font-weight: 800;
+
       color: rgba(245,245,247,0.98);
+
       letter-spacing: .01em;
-    }
-    .cmp-meta{
-      margin: 0;
-      font-size: 12.5px;
-      color: rgba(255,255,255,0.68);
-      width: fit-content;
-      padding: 0;
-      border-radius: 0;
-      border: 1px solid transparent;
-      background: transparent;
-    }
-    .cmp-sub{
-      margin: 0;
-      font-size: 13.5px;
-      line-height: 1.55;
-      color: rgba(255,255,255,0.75);
-      text-align: justify;
+
     }
 
-    .cmp-grid{
-      display:grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 10px;
-      margin-top: 10px;
+    .cmp-meta{
+
+      margin: 0;
+
+      font-size: 12.5px;
+
+      color: rgba(255,255,255,0.68);
+
+      width: fit-content;
+
+      padding: 0;
+
+      border-radius: 0;
+
+      border: 1px solid transparent;
+
+      background: transparent;
+
     }
+
+    .cmp-sub{
+
+      margin: 0;
+
+      font-size: 13.5px;
+
+      line-height: 1.55;
+
+      color: rgba(255,255,255,0.75);
+
+      text-align: justify;
+
+    }
+
+
+
+    .cmp-grid{
+
+      display:grid;
+
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+
+      gap: 10px;
+
+      margin-top: 10px;
+
+    }
+
     .cmp-col{
+
       border-radius: 16px;
+
       border: 1px solid rgba(255,255,255,0.10);
+
       background: rgba(0,0,0,0.12);
+
       padding: 12px;
+
       position: relative;
+
       overflow: hidden;
+
       min-height: 250px;
+
     }
     .cmp-col::before{
+
       content:"";
+
       position:absolute;
+
       inset:-2px;
+
       background:
+
         radial-gradient(360px 220px at 15% 8%, rgba(168,85,247,.10), transparent 60%),
+
         radial-gradient(360px 220px at 85% 12%, rgba(59,130,246,.08), transparent 60%);
+
       pointer-events:none;
+
       z-index:0;
+
     }
     .cmp-col > *{ position: relative; z-index:1; }
 
+
+
     .cmp-col h4{
+
       margin: 0 0 2px;
+
       font-size: 14px;
+
       font-weight: 800;
+
       color: rgba(245,245,247,0.98);
+
       text-align: center;
+
     }
+
+
 
     .cmp-col-head{
+
       height: 92px;
+
       display: flex;
+
       flex-direction: column;
+
       justify-content: flex-start;
+
       align-items: center;
+
       gap: 6px;
+
       padding-top: 6px;
+
       margin-bottom: 10px;
+
     }
+
+
 
     .cmp-col .cmp-col-sub{
+
       margin: 0;
+
       font-size: 12.8px;
+
       line-height: 1.45;
+
       color: rgba(255,255,255,0.70);
+
       text-align: center;
+
     }
+
+
 
     .cmp-rank{
+
       list-style: none;
+
       margin: 0;
+
       padding: 0;
+
       display: grid;
+
       gap: 6px;
+
     }
     .cmp-item{
+
       display:grid;
+
       grid-template-columns: 28px 1fr;
+
       gap: 10px;
+
       align-items: start;
+
       border-radius: 14px;
+
       border: 1px solid rgba(255,255,255,0.10);
+
       background: rgba(0,0,0,0.10);
+
       padding: 7px 10px;
+
     }
     .cmp-n{
+
       width: 26px;
+
       height: 26px;
+
       display:flex;
+
       align-items:center;
+
       justify-content:center;
+
       border-radius: 10px;
+
       border: 1px solid rgba(255,255,255,0.10);
+
       background: rgba(255,255,255,0.06);
+
       color: rgba(255,255,255,0.82);
+
       font-size: 12.2px;
+
       font-weight: 800;
+
       font-variant-numeric: tabular-nums;
+
     }
     .cmp-label{
+
       font-size: 12.7px;
+
       line-height: 1.3;
+
       color: rgba(255,255,255,0.86);
+
       display: -webkit-box;
+
       -webkit-line-clamp: 2;
+
       -webkit-box-orient: vertical;
+
       overflow: hidden;
+
     }
 
+
+
     .cmp-item{
+
       min-height: 44px;
+
       align-items: center;
+
     }
     .cmp-item--top{ min-height: 44px; }
 
 
+
+
+
     .cmp-item--top{
+
       border-color: rgba(233,213,255,0.22);
+
       background: linear-gradient(135deg, rgba(124,58,237,.16), rgba(168,85,247,.10));
+
       padding: 6px 10px;
+
     }
     .cmp-item--top .cmp-n{
+
       border-color: rgba(233,213,255,0.22);
+
       background: rgba(233,213,255,0.08);
+
       color: rgba(245,245,247,0.95);
+
     }
+
+
 
     .cmp-foot{
+
       margin-top: 12px;
+
       display:grid;
+
       gap: 6px;
+
     }
     .cmp-foot p{
+
       margin:0;
+
       font-size: 12.8px;
+
       line-height: 1.55;
+
       color: rgba(255,255,255,0.80);
+
       text-align: justify;
+
     }
+
+
 
     .cmp-guided{
+
       margin-top: 12px;
+
       padding-top: 12px;
+
       border-top: 1px solid rgba(255,255,255,0.10);
+
     }
     .cmp-guided h3{
+
       margin: 0 0 6px;
+
       font-size: 16px;
+
       font-weight: 800;
+
       color: rgba(245,245,247,0.98);
+
     }
     .cmp-guided p{
+
       margin: 0;
+
       font-size: 13.5px;
+
       line-height: 1.55;
+
       color: rgba(255,255,255,0.76);
+
       text-align: justify;
+
     }
     .cmp-guided .cmp-guided-foot{
+
       margin-top: 10px;
+
       font-size: 12.8px;
+
       line-height: 1.55;
+
       color: rgba(255,255,255,0.82);
+
       text-align: justify;
+
     }
+
+
 
     .dho-break{
+
       grid-column: 1 / -1;
+
       width: min(860px, 100%);
+
       justify-self: center;
+
       padding: 0;
+
       margin-top: 2px;
+
     }
     .dho-break h3{
+
       margin: 0 0 6px;
+
       font-size: 18px;
+
       font-weight: 800;
+
       color: rgba(245,245,247,0.98);
+
     }
     .dho-break p{
+
       margin: 0;
+
       font-size: 15px;
+
       line-height: 1.65;
+
       color: rgba(255,255,255,0.85);
+
       text-align: justify;
+
     }
+
+
 
     .ret-row{
+
       display:flex;
+
       gap: var(--chartGap);
+
       align-items: center;
+
       justify-content: space-between;
+
       flex-wrap: wrap;
+
       margin-top: 10px;
+
     }
     .ret-chart{
+
       flex: 0 0 520px;
+
       max-width: 520px;
+
       width: 100%;
+
       min-height: 280px;
+
       position: relative;
+
     }
     .ret-legend{
+
       flex: 1 1 260px;
+
       max-width: var(--legendMax);
+
       width: 100%;
+
       display:grid;
+
       gap: 10px;
+
     }
     .ret-li{
+
       display:grid;
+
       grid-template-columns: 12px 1fr auto;
+
       gap: 10px;
+
       align-items: center;
+
       padding: 9px 12px;
+
       border-radius: 14px;
+
       border: 1px solid rgba(255,255,255,0.10);
+
       background: rgba(0,0,0,0.10);
+
     }
     .ret-dot{
+
       width: 10px;
+
       height: 10px;
+
       border-radius: 999px;
+
       background: rgba(233,213,255,0.75);
+
       box-shadow: 0 0 0 4px rgba(233,213,255,0.08);
+
     }
     .ret-name{
+
       font-size: 13.4px;
+
       line-height: 1.35;
+
       color: rgba(255,255,255,0.88);
+
     }
     .ret-val{
+
       font-size: 13px;
+
       font-variant-numeric: tabular-nums;
+
       color: rgba(255,255,255,0.78);
+
     }
+
+
 
     .ret-insight{
+
       margin-top: 12px;
+
       padding-top: 12px;
+
       border-top: 1px solid rgba(255,255,255,0.10);
+
       font-size: 15px;
+
       line-height: 1.65;
+
       color: rgba(255,255,255,0.90);
+
       text-align: justify;
+
     }
 
+
+
     .biz-grid{
+
       display:grid;
+
       grid-template-columns: 1fr;
+
       gap: 10px;
+
       margin-top: 10px;
+
       justify-items: center;
+
     }
     .biz-list{
+
       list-style:none;
+
       padding:0;
+
       margin:0;
+
       width: min(430px, 100%);
+
       display:grid;
+
       gap: 6px;
+
     }
     .biz-item{
+
       display:flex;
+
       align-items: flex-start;
+
       gap: 10px;
+
       padding: 8px 10px;
+
       border-radius: 12px;
+
       border: 1px solid rgba(255,255,255,0.10);
+
       background: rgba(0,0,0,0.10);
+
     }
     .biz-ic{
+
       width: 16px;
+
       height: 16px;
+
       margin-top: 2px;
+
       flex: 0 0 16px;
+
       opacity: .95;
+
     }
     .biz-text{
+
       flex:1;
+
       font-size: 13.2px;
+
       line-height: 1.42;
+
       color: rgba(255,255,255,0.88);
+
     }
     .biz-count{
+
       font-variant-numeric: tabular-nums;
+
       color: rgba(255,255,255,0.75);
+
       margin-left: 10px;
+
       white-space: nowrap;
+
       font-size: 13px;
+
     }
     .biz-2 .biz-ic path{ fill: var(--ok); }
     .biz-1 .biz-ic path{ fill: var(--warn); }
     .biz-0 .biz-ic path{ fill: var(--zero); }
 
+
+
     .dho-close{
+
       grid-column: 1 / -1;
+
       width: min(860px, 100%);
+
       justify-self: center;
+
       margin-top: 4px;
+
     }
         .dho-close p{
+
       margin: 0 0 10px;
+
       font-size: 15px;
+
       line-height: 1.65;
+
       color: rgba(255,255,255,0.88);
+
       text-align: justify;
+
     }
     .dho-question{
+
       margin: 0;
+
       padding: 12px 14px;
+
       border-radius: 16px;
+
       border: 1px solid rgba(255,255,255,0.10);
+
       background: rgba(0,0,0,0.12);
+
       font-size: 15px;
+
       line-height: 1.65;
+
       color: rgba(255,255,255,0.92);
+
       text-align: justify;
+
     }
 
+
+
     /* ================================
+
        Disclosure (expandir/recolher)
+
        ================================ */
+
     .dho-disclosure{
+
       margin-top: 12px;
+
     }
     .dho-btn{
+
       width: 100%;
+
       display: inline-flex;
+
       align-items: center;
+
       justify-content: space-between;
+
       gap: 10px;
+
       padding: 10px 12px;
+
       border-radius: 14px;
+
       border: 1px solid rgba(255,255,255,0.10);
+
       background: rgba(0,0,0,0.10);
+
       color: rgba(245,245,247,0.95);
+
       cursor: pointer;
+
       text-align: left;
+
       box-shadow: 0 10px 22px rgba(0,0,0,0.18);
+
       backdrop-filter: blur(10px);
+
       position: relative;
+
       overflow: hidden;
+
     }
     .dho-btn::before{
+
       content:"";
+
       position:absolute;
+
       inset:-2px;
+
       background: radial-gradient(360px 220px at 18% 20%, rgba(168,85,247,.14), transparent 60%),
+
                   radial-gradient(360px 220px at 82% 10%, rgba(59,130,246,.10), transparent 60%);
+
       pointer-events:none;
+
       opacity: .9;
+
     }
     .dho-btn > *{ position: relative; z-index:1; }
     .dho-btn__text{
+
       font-size: 13.6px;
+
       line-height: 1.35;
+
       color: rgba(255,255,255,0.90);
+
     }
     .dho-btn__icon{
+
       width: 28px;
+
       height: 28px;
+
       display:flex;
+
       align-items:center;
+
       justify-content:center;
+
       border-radius: 12px;
+
       border: 1px solid rgba(255,255,255,0.10);
+
       background: rgba(255,255,255,0.06);
+
       color: rgba(255,255,255,0.82);
+
       font-weight: 900;
+
       font-variant-numeric: tabular-nums;
+
     }
     .dho-btn:focus-visible{
+
       outline: 2px solid rgba(233,213,255,0.35);
+
       outline-offset: 2px;
+
     }
     .dho-disclosure-panel{
+
       margin-top: 10px;
+
       border-radius: 16px;
+
       border: 1px solid rgba(255,255,255,0.10);
+
       background: rgba(0,0,0,0.10);
+
       padding: 12px 12px;
+
     }
     .dho-def-list{
+
       margin: 0;
+
       padding-left: 18px;
+
       display: grid;
+
       gap: 8px;
+
     }
     .dho-def-list li{
+
       font-size: 13.4px;
+
       line-height: 1.55;
+
       color: rgba(255,255,255,0.82);
+
       text-align: justify;
+
     }
     .dho-def-list strong{
+
       color: rgba(245,245,247,0.96);
+
     }
+
+
 
     .is-hidden{ display:none !important; }
 
+
+
     /* ================================
+
        Pergunta ao leitor (card com header)
+
        ================================ */
+
     .dho-qcard{
+
       width: min(360px, 100%);
+
       margin: 0 auto;
+
       border-radius: 16px;
+
       border: 1px solid rgba(255,255,255,0.10);
+
       background: linear-gradient(135deg, rgba(124,58,237,.22), rgba(168,85,247,.12));
+
       overflow: hidden;
+
       box-shadow: 0 10px 22px rgba(0,0,0,0.18);
+
       backdrop-filter: blur(10px);
+
     }
     .dho-qcard__head{
+
       padding: 10px 12px;
+
       font-size: 13.2px;
+
       font-weight: 800;
+
       color: rgba(245,245,247,0.92);
+
       background: rgba(0,0,0,0.10);
+
       border-bottom: 1px solid rgba(255,255,255,0.10);
+
     }
     .dho-qcard__body{
+
       padding: 12px 12px;
+
       font-size: 14.6px;
+
       line-height: 1.6;
+
       color: rgba(255,255,255,0.92);
+
       text-align: left;
+
     }
 
 
+
+
+
     /* ================================
+
        Ajuste fino (Quadro comparativo)
+
        Print 1: tipografia e espaçamento
+
        ================================ */
+
     .cmp-grid .cmp-label{
+
       font-size: 11px;
+
       line-height: 1.25;
+
       -webkit-line-clamp: 2;
+
     }
     .cmp-grid .cmp-item{
+
       min-height: 40px;
+
       padding: 8px 10px;
+
       border-radius: 14px;
+
     }
     .cmp-grid .cmp-n{
+
       width: 22px;
+
       height: 22px;
+
       font-size: 11px;
+
     }
     .cmp-grid .cmp-list{
+
       gap: 8px;
+
     }
+
+
+
 
 
     /* ================================
+
        Pergunta ao leitor (tile) – override no padrão do dho-cta
+
        ================================ */
+
     .dho-qcard.dho-qcard--cta{
+
       width: 314px;
+
       height: 172px;
+
       padding: 9px;
 
+
+
       position: relative;
+
       overflow: hidden;
 
+
+
       border-radius: 14px;
+
       border: 1px solid rgba(255,255,255,0.12);
+
       background: linear-gradient(
+
         135deg,
+
         rgba(124,58,237,0.12),
+
         rgba(59,130,246,0.08),
+
         rgba(0,0,0,0.06)
+
       );
+
+
 
       box-shadow: 0 12px 34px rgba(0,0,0,0.32);
+
       backdrop-filter: blur(10px);
 
+
+
       display: flex;
+
       flex-direction: column;
+
       justify-content: center;
+
       gap: 8px;
 
+
+
       text-align: center;
+
     }
+
+
 
     .dho-qcard.dho-qcard--cta::before{
+
       content:"";
+
       position:absolute;
+
       inset:-1px;
+
       background:
+
         radial-gradient(340px 220px at 18% 35%, rgba(168,85,247,0.18), transparent 62%),
+
         radial-gradient(340px 220px at 85% 70%, rgba(96,165,250,0.14), transparent 64%);
+
       opacity: .65;
+
       pointer-events:none;
+
     }
+
+
 
     .dho-qcard.dho-qcard--cta::after{
+
       content:"";
+
       position:absolute;
+
       left:0; top:0; bottom:0;
+
       width: 3px;
+
       background: linear-gradient(
+
         180deg,
+
         rgba(168,85,247,0.92),
+
         rgba(96,165,250,0.72)
+
       );
+
       opacity: .85;
+
       pointer-events:none;
+
     }
+
+
 
     .dho-qcard.dho-qcard--cta > *{
+
       position: relative;
+
       z-index: 1;
+
     }
+
+
 
     .dho-qcard.dho-qcard--cta .dho-qcard__head{
+
       padding: 0;
+
       margin: 0 0 2px 0;
+
       background: transparent;
+
       border: 0;
 
+
+
       font-size: 13px;
+
       font-weight: 700;
+
       letter-spacing: 0.02em;
+
       color: rgba(255,255,255,0.92);
+
       text-align: center;
+
     }
+
+
 
     .dho-qcard.dho-qcard--cta .dho-qcard__body{
+
       padding: 0;
+
       margin: 0;
 
+
+
       font-size: 13.6px;
+
       line-height: 1.35;
+
       color: rgba(255,255,255,0.86);
+
       text-align: center;
+
     }
+
+
 
     .dho-close .dho-qcard.dho-qcard--cta{
+
       margin: 0 auto;
+
       justify-self: center;
+
     }
 
 
+
+
+
+    .dho-flow-title{
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      color: rgba(232, 202, 255, 0.95);
+      text-align: center;
+      margin: 6px 0 0 0;
+    }
+
     @media (max-width: 920px){
+
       .dho-objetivos-grid{ grid-template-columns: 1fr; }
+
       .cmp-grid{ grid-template-columns: 1fr 1fr; }
+
       .ret-chart{ flex-basis: 100%; max-width: 100%; }
+
       .ret-legend{ max-width: 100%; }
+
     }
     @media (max-width: 640px){
       .cmp-grid{ grid-template-columns: 1fr; }
@@ -712,335 +1412,660 @@
     @media (max-width: 520px){
       .dho-objetivos-wrap{ padding: 14px 14px; border-radius: 18px; }
     }
+
   </style>
+
 </head>
+
+
 
 <body>
 
+
+
   <section class="dho-objetivos" id="dim3-motivacoes">
+
     <div class="dho-objetivos-wrap">
+
+
 
       <div class="dho-kicker">DIMENSÃO 3 | MOTIVAÇÕES PROFISSIONAIS</div>
 
-      <h2 class="dho-title">A motivação profissional não é igual para todos, e ela muda principalmente de acordo com o lugar que se ocupa na relação de trabalho.</h2>
+
+
+      <h2 class="dho-title">A percepção da motivação profissional muda conforme a posição ocupada na relação de trabalho.</h2>
+
+
 
       <p class="dho-subtitle">
+
         Os fatores motivacionais foram analisados por quatro perspectivas: profissionais empregados, profissionais desempregados, RH e liderança.
+
         O objetivo não é buscar o fator certo ou errado, ou o melhor e pior, e sim evidenciar os contrastes de percepção e as zonas de coerência de acordo com quem percebe.
+
       </p>
+
+
 
       <div class="dho-objetivos-grid">
 
+
+
         <div class="dho-card dho-card--chart" aria-labelledby="cmp-title">
+
           <div class="cmp-head">
+
             <p class="cmp-title" id="cmp-title">Mesmas motivações, mas impacto e priorizações diferentes.</p>
-         
+
+
+
             <p class="cmp-sub">
+
               Como pontos de vistas diferentes interpretam quais são os fatores de maior peso nas decisões de sustentar o vínculo com o trabalho.
+
             </p>
+
                <p class="cmp-meta">Base: n = 16</p>
+
           </div>
+
+
 
           <div class="cmp-grid" role="table" aria-label="Quadro comparativo de motivações por perspectiva">
+
             <div class="cmp-col" role="columnheader" aria-label="Profissionais empregados">
+
               <div class="cmp-col-head"><h4>Profissionais empregados</h4>
+
               <p class="cmp-col-sub">O que mais me faria pedir demissão</p></div>
+
               <ul class="cmp-rank">
+
                 <li class="cmp-item cmp-item--top"><span class="cmp-n">1</span><span class="cmp-label">Pacote de compensação</span></li>
+
                 <li class="cmp-item cmp-item--top"><span class="cmp-n">2</span><span class="cmp-label">Segurança psicológica</span></li>
+
                 <li class="cmp-item cmp-item--top"><span class="cmp-n">3</span><span class="cmp-label">Relevância do trabalho</span></li>
+
                 <li class="cmp-item"><span class="cmp-n">4</span><span class="cmp-label">Benefícios</span></li>
+
                 <li class="cmp-item"><span class="cmp-n">5</span><span class="cmp-label">Liderança / gestão de equipe</span></li>
+
                 <li class="cmp-item"><span class="cmp-n">6</span><span class="cmp-label">Flexibilidade de horário</span></li>
+
                 <li class="cmp-item"><span class="cmp-n">7</span><span class="cmp-label">Home office</span></li>
+
                 <li class="cmp-item"><span class="cmp-n">8</span><span class="cmp-label">Segurança do trabalho</span></li>
+
               </ul>
+
             </div>
+
+
 
             <div class="cmp-col" role="columnheader" aria-label="Profissionais desempregados">
+
               <div class="cmp-col-head"><h4>Profissionais desempregados</h4>
+
               <p class="cmp-col-sub">O que me faria rejeitar uma nova oferta</p></div>
+
               <ul class="cmp-rank">
+
                 <li class="cmp-item cmp-item--top"><span class="cmp-n">1</span><span class="cmp-label">Pacote de compensação</span></li>
+
                 <li class="cmp-item cmp-item--top"><span class="cmp-n">2</span><span class="cmp-label">Relevância do trabalho</span></li>
+
                 <li class="cmp-item cmp-item--top"><span class="cmp-n">3</span><span class="cmp-label">Benefícios</span></li>
+
                 <li class="cmp-item"><span class="cmp-n">4</span><span class="cmp-label">Segurança do trabalho</span></li>
+
                 <li class="cmp-item"><span class="cmp-n">5</span><span class="cmp-label">Flexibilidade de horário</span></li>
+
                 <li class="cmp-item"><span class="cmp-n">6</span><span class="cmp-label">Home office</span></li>
+
                 <li class="cmp-item"><span class="cmp-n">7</span><span class="cmp-label">Liderança / gestão de equipe</span></li>
+
                 <li class="cmp-item"><span class="cmp-n">8</span><span class="cmp-label">Segurança psicológica</span></li>
+
               </ul>
+
             </div>
+
+
 
             <div class="cmp-col" role="columnheader" aria-label="RH">
+
               <div class="cmp-col-head"><h4>RH</h4>
+
               <p class="cmp-col-sub">O que acreditamos que mais motiva os profissionais</p></div>
+
               <ul class="cmp-rank">
+
                 <li class="cmp-item cmp-item--top"><span class="cmp-n">1</span><span class="cmp-label">Pacote de compensação</span></li>
+
                 <li class="cmp-item cmp-item--top"><span class="cmp-n">2</span><span class="cmp-label">Benefícios</span></li>
+
                 <li class="cmp-item cmp-item--top"><span class="cmp-n">3</span><span class="cmp-label">Liderança / gestão de equipe</span></li>
+
                 <li class="cmp-item"><span class="cmp-n">4</span><span class="cmp-label">Segurança psicológica</span></li>
+
                 <li class="cmp-item"><span class="cmp-n">5</span><span class="cmp-label">Relevância do trabalho</span></li>
+
                 <li class="cmp-item"><span class="cmp-n">6</span><span class="cmp-label">Flexibilidade de horário</span></li>
+
                 <li class="cmp-item"><span class="cmp-n">7</span><span class="cmp-label">Home office</span></li>
+
                 <li class="cmp-item"><span class="cmp-n">8</span><span class="cmp-label">Segurança do trabalho</span></li>
+
               </ul>
+
             </div>
+
+
 
             <div class="cmp-col" role="columnheader" aria-label="Liderança">
+
               <div class="cmp-col-head"><h4>Liderança</h4>
+
               <p class="cmp-col-sub">O que acreditamos que mais motiva os profissionais</p></div>
+
               <ul class="cmp-rank">
+
                 <li class="cmp-item cmp-item--top"><span class="cmp-n">1</span><span class="cmp-label">Relevância do trabalho</span></li>
+
                 <li class="cmp-item cmp-item--top"><span class="cmp-n">2</span><span class="cmp-label">Liderança / gestão de equipe</span></li>
+
                 <li class="cmp-item cmp-item--top"><span class="cmp-n">3</span><span class="cmp-label">Benefícios</span></li>
+
                 <li class="cmp-item"><span class="cmp-n">4</span><span class="cmp-label">Pacote de compensação</span></li>
+
                 <li class="cmp-item"><span class="cmp-n">5</span><span class="cmp-label">Segurança psicológica</span></li>
+
                 <li class="cmp-item"><span class="cmp-n">6</span><span class="cmp-label">Segurança do trabalho</span></li>
+
                 <li class="cmp-item"><span class="cmp-n">7</span><span class="cmp-label">Flexibilidade de horário</span></li>
+
                 <li class="cmp-item"><span class="cmp-n">8</span><span class="cmp-label">Home office</span></li>
+
               </ul>
+
             </div>
+
           </div>
+
+
 
           <div class="cmp-foot" aria-label="Notas metodológicas do quadro">
+
             <p><strong>Nota 1:</strong> As perguntas são equivalentes em intenção, com pequenas variações de instrumento entre grupos.</p>
+
             <p><strong>Nota 2:</strong> O quadro deve ser lido como comparação de percepção, não como medida estatística rígida.</p>
+
           </div>
+
+
 
           <div class="dho-disclosure" aria-label="Descrição detalhada dos fatores">
+
             <button class="dho-btn" type="button" id="fatoresToggle" aria-expanded="false" aria-controls="fatoresPanel">
+
               <span class="dho-btn__text">Veja a descrição detalhada dos fatores</span>
+
               <span class="dho-btn__icon" aria-hidden="true">+</span>
+
             </button>
 
+
+
             <div class="dho-disclosure-panel is-hidden" id="fatoresPanel" role="region" aria-labelledby="fatoresToggle">
+
               <ul class="dho-def-list">
+
                 <li><strong>Pacote de Compensação</strong> (Salário, Bônus, PLR)</li>
+
                 <li><strong>Segurança do Trabalho</strong> (Ambiente, escritórios, instalações, região)</li>
+
                 <li><strong>Segurança Psicológica</strong> (Burnout, Assédio Moral, Falta de Autonomia, Conflito de Valores, Insegurança de Estabilidade)</li>
+
                 <li><strong>Relevância do Trabalho</strong> ("O que eu faço no trabalho precisa respeitar os meus valores pessoais e propósito de vida, e contribuir para meu crescimento pessoal")</li>
+
                 <li><strong>Benefícios</strong> (Vale-Refeição, Vale-Alimentação, Seguro Médico, Seguro Dental, Seguro de Vida)</li>
+
                 <li><strong>Flexibilidade de Horário</strong> (Entrada e saída ajustáveis, Semana Compacta, Autogestão de horários)</li>
+
                 <li><strong>Home Office</strong> (Trabalhar em casa/à distância)</li>
+
                 <li><strong>Líderes/Gestores de Equipe</strong> (A forma como esses agentes conduzem, apoiam e inspiram suas equipes, clareza nas diretrizes, disponibilidade para escuta, coerência entre discurso e prática, incentivo ao desenvolvimento individual)</li>
+
               </ul>
+
             </div>
-          
+
+
+
+
 
           <div class="cmp-guided" aria-label="Linha de leitura guiada">
-            <h3>Linha de leitura guiada</h3>
+            <h3>Leitura Guiada</h3>
             <p>
-              Entre profissionais empregados e desempregados, compensação e propósito (relevância do trabalho) aparecem de forma recorrente no top 3, ainda que se alternem entre si.
-              No olhar institucional, o RH tende a acreditar que compensação e benefícios ocupam o topo das prioridades dos profissionais.
-              Já a liderança apresenta um contraste tanto em relação ao RH quanto aos próprios profissionais, ao entender que o que realmente os move é a relevância do trabalho e a qualidade da condução direta.
+              Entre empregados e desempregados, compensação e relevância do trabalho aparecem de forma recorrente entre as principais motivações, ainda que em ordens distintas.
+              O RH tende a priorizar compensação e benefícios, enquanto a liderança destaca a relevância do trabalho e a qualidade da condução direta.
             </p>
+
             <p class="cmp-guided-foot">
-              Esse desalinhamento não representa um erro, mas um sinal claro da necessidade de alinhar expectativas e fortalecer a coerência nas relações de trabalho.
+              Esse desalinhamento não indica erro, mas a necessidade de alinhar expectativas e fortalecer a coerência nas relações de trabalho.
             </p>
+
           </div>
-        </div>
 
         </div>
+
+
+
+        </div>
+
+
 
         <div class="dho-card dho-card--chart" aria-labelledby="ret-title">
+
           <div class="cmp-head">
+
             <p class="cmp-title" id="ret-title">Ao tomar a decisão de sair do trabalho, quais fatores mudariam essa escolha?</p>
+
             <p>
+
             Aqui a pergunta não é sobre o que é ideal, e sim sobre a retenção dentro de um cenário imperfeito, mesmo quando a decisão de sair já foi considerada seriamente.
+
           </p>
-           
+
+
+
             <p class="cmp-sub">
+
               Top 5 fatores apontados como mais decisivos nos momentos críticos de permanência.
+
             </p>
+
              <p class="cmp-meta">Base: n = 16</p>
+
           </div>
+
+
 
           <div class="ret-row">
+
             <div class="ret-chart">
+
               <canvas id="retencaoChart" aria-label="Gráfico de barras do top 5 de retenção"></canvas>
+
             </div>
+
             <div class="ret-legend" id="retLegend" aria-label="Legenda do gráfico de retenção"></div>
+
           </div>
+
+
 
           <div class="ret-insight" aria-label="Insight chave do bloco">
+
             A oportunidade de um Desenvolvimento de Carreira e a Confiança na Liderança aparecem como os fatores mais decisivos nos momentos críticos.
+
             A combinação destes 2 fatores pode ser o que sustenta a permanência quando as condições ideais não estão presentes.
+
           </div>
+
         </div>
+
+
 
         <div class="dho-card dho-card--chart" aria-labelledby="biz-title">
+
           <div class="cmp-head">
+
             <p class="cmp-title" id="biz-title">Quais fatores os negócios dizem que podem garantir nos próximos 12 meses</p>
-           
+
+
+
             <p class="cmp-sub">
+
               Aplicado apenas aos negócios que declararam já estar com as operações iniciais estabilizadas.
+
             </p>
+
              <p class="cmp-meta">Base: n = 3</p>
+
           </div>
+
+
 
           <div class="biz-grid" aria-label="Lista de fatores que o negócio afirma conseguir garantir">
+
             <ul class="biz-list">
+
               <li class="biz-item biz-2">
+
                 <svg class="biz-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.2 16.6 4.9 12.3l1.4-1.4 2.9 2.9 8.1-8.1 1.4 1.4z"/></svg>
+
                 <span class="biz-text">Home office</span>
+
                 <span class="biz-count">(2)</span>
+
               </li>
+
               <li class="biz-item biz-2">
+
                 <svg class="biz-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.2 16.6 4.9 12.3l1.4-1.4 2.9 2.9 8.1-8.1 1.4 1.4z"/></svg>
+
                 <span class="biz-text">Pacote de compensação</span>
+
                 <span class="biz-count">(2)</span>
+
               </li>
+
               <li class="biz-item biz-1">
+
                 <svg class="biz-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.2 16.6 4.9 12.3l1.4-1.4 2.9 2.9 8.1-8.1 1.4 1.4z"/></svg>
+
                 <span class="biz-text">Segurança do trabalho</span>
+
                 <span class="biz-count">(1)</span>
+
               </li>
+
               <li class="biz-item biz-1">
+
                 <svg class="biz-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.2 16.6 4.9 12.3l1.4-1.4 2.9 2.9 8.1-8.1 1.4 1.4z"/></svg>
+
                 <span class="biz-text">Liderança / gestão de equipe</span>
+
                 <span class="biz-count">(1)</span>
+
               </li>
+
               <li class="biz-item biz-1">
+
                 <svg class="biz-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.2 16.6 4.9 12.3l1.4-1.4 2.9 2.9 8.1-8.1 1.4 1.4z"/></svg>
+
                 <span class="biz-text">Segurança psicológica</span>
+
                 <span class="biz-count">(1)</span>
+
               </li>
+
               <li class="biz-item biz-1">
+
                 <svg class="biz-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.2 16.6 4.9 12.3l1.4-1.4 2.9 2.9 8.1-8.1 1.4 1.4z"/></svg>
+
                 <span class="biz-text">Flexibilidade de horário</span>
+
                 <span class="biz-count">(1)</span>
+
               </li>
+
               <li class="biz-item biz-1">
+
                 <svg class="biz-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.2 16.6 4.9 12.3l1.4-1.4 2.9 2.9 8.1-8.1 1.4 1.4z"/></svg>
+
                 <span class="biz-text">Relevância do trabalho</span>
+
                 <span class="biz-count">(1)</span>
+
               </li>
+
               <li class="biz-item biz-0">
+
                 <svg class="biz-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.2 16.6 4.9 12.3l1.4-1.4 2.9 2.9 8.1-8.1 1.4 1.4z"/></svg>
+
                 <span class="biz-text">Benefícios</span>
+
                 <span class="biz-count">(0)</span>
+
               </li>
+
             </ul>
+
           </div>
+
+
 
           <p class="dho-footnote">
+
             Diante do tamanho reduzido da amostra, faz mais sentido olhar para esses resultados sob uma lente qualitativa.
+
             Eles indicam que os fatores que o negócio se sente mais capaz de garantir tendem a se concentrar no modelo de trabalho e no pacote de compensação.
+
             Os demais aspectos, por sua vez, parecem estar apenas no radar ou ainda nem ter sido considerados.
+
           </p>
+
         </div>
+
+
 
         <div class="dho-close dho-plain-surface" aria-label="Fechamento do bloco">
-          <p>
+
+          
+          <h3 class="dho-flow-title">Reflexão</h3>
+<p>
+
             O que sustenta permanência dos talentos nem sempre é o que a empresa se sente confortável em prometer.
+
             E a distância entre essas expectativas pode ser onde as incoerências e rotatividade começam a se formar.
+
           </p>
-          
+
+
+
           <div class="dho-qcard dho-qcard--cta" role="note" aria-label="Pergunta ao leitor">
+
             <div class="dho-qcard__head">Pergunta ao leitor</div>
+
             <div class="dho-qcard__body">
+
               Se desenvolvimento e liderança pode ser o elo que sustenta o trabalho nos momentos críticos, por que ainda esses fatores aparecem como variáveis secundárias naquilo que o negócio assume conseguir entregar?
+
             </div>
+
           </div>
-          
+
+
+
           </div>
+
         </div>
+
+
 
       </div>
+
     </div>
+
   </section>
 
+
+
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
   <script>
+
     const retData = [
+
       { label: "Desenvolvimento de carreira", value: 50.0 },
+
       { label: "Confiança na liderança direta", value: 37.5 },
+
       { label: "Autodesenvolvimento", value: 37.5 },
+
       { label: "Reposicionamento de carreira", value: 31.25 },
+
       { label: "Projeto interno", value: 18.75 },
+
     ];
 
+
+
     const ctx = document.getElementById("retencaoChart");
+
     const labels = retData.map(d => d.label);
+
     const values = retData.map(d => d.value);
 
+
+
     const legendEl = document.getElementById("retLegend");
+
     legendEl.innerHTML = retData.map((d) => {
+
       const val = (Math.round(d.value * 100) / 100).toLocaleString("pt-BR", { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+
       return `
+
         <div class="ret-li">
+
           <div class="ret-dot" aria-hidden="true"></div>
+
           <div class="ret-name">${d.label}</div>
+
           <div class="ret-val">${val}%</div>
+
         </div>
+
       `;
+
     }).join("");
 
+
+
     /* Toggle: descrição detalhada dos fatores */
+
     const toggleBtn = document.getElementById('fatoresToggle');
+
     const panel = document.getElementById('fatoresPanel');
+
     if(toggleBtn && panel){
+
       toggleBtn.addEventListener('click', () => {
+
         const isOpen = toggleBtn.getAttribute('aria-expanded') === 'true';
+
         toggleBtn.setAttribute('aria-expanded', String(!isOpen));
+
         panel.classList.toggle('is-hidden', isOpen);
+
         const icon = toggleBtn.querySelector('.dho-btn__icon');
+
         if(icon) icon.textContent = isOpen ? '+' : '–';
+
       });
+
     }
 
+
+
 new Chart(ctx, {
+
       type: "bar",
+
       data: {
+
         labels,
+
         datasets: [{
+
           label: "Percentual",
+
           data: values,
+
           borderWidth: 1,
+
           borderColor: "rgba(233,213,255,0.34)",
+
           backgroundColor: "rgba(233,213,255,0.18)",
+
           hoverBackgroundColor: "rgba(233,213,255,0.26)",
+
           borderRadius: 10
+
         }]
+
       },
+
       options: {
+
         responsive: true,
+
         maintainAspectRatio: false,
+
         layout: { padding: { top: 6, right: 10, bottom: 4, left: 6 } },
+
         plugins: {
+
           legend: { display: false },
+
           tooltip: {
+
             callbacks: {
+
               label: (ctx) => ` ${ctx.raw.toLocaleString("pt-BR", { maximumFractionDigits: 2 })}%`
+
             }
+
           }
+
         },
+
         scales: {
+
           x: {
+
             grid: { color: "rgba(255,255,255,0.08)" },
+
             ticks: {
+
               color: "rgba(255,255,255,0.72)",
+
               maxRotation: 0,
+
               autoSkip: false,
+
               callback: function(value){
+
                 const lbl = this.getLabelForValue(value) || "";
+
                 return lbl.length > 16 ? (lbl.slice(0, 16) + "…") : lbl;
+
               }
+
             }
+
           },
+
           y: {
+
             beginAtZero: true,
+
             suggestedMax: 55,
+
             grid: { color: "rgba(255,255,255,0.08)" },
+
             ticks: {
+
               color: "rgba(255,255,255,0.72)",
+
               callback: (v) => v + "%"
+
             }
+
           }
+
         }
+
       }
+
     });
+
   </script>
+
 </body>
+
 </html>
