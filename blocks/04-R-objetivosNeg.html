@@ -3,239 +3,24 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>DHO 360º | Dimensão 2 - Objetivos</title>
+  <title>DHO 360º | Dimensão | Objetivos do Negócio</title>
+
   <style>
-    body {
-      margin: 0;
-      background: #07070b;
-      color: #F5F5F7;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-    }
-  </style>
-</head>
-<body>
-<section class="dho-objetivos" id="dimensao-2-objetivos">
-  <style>
-    
-    /* =========================================================
-       Cards (Checklist + Contexto) — versão mini (260px)
-       Substitui os cards do print (insight/contexto)
-       Nota: regras com maior especificidade para evitar conflito
-    ========================================================= */
-    .dho-ic-stage.dho-ic-stage--mini{
-      grid-column: 1 / -1;
-      width: min(860px, 100%);
-      justify-self: center;
-      display: flex;
-      justify-content: center; /* garante centralização do conteúdo */
-      margin-top: 2px;
-    }
+    /* ==========================================================
+       DHO 360º — DIMENSÃO | OBJETIVOS DO NEGÓCIO
+       Revisão técnica: limpeza, escopo, consistência e responsivo
+       - Sem background próprio (reflete o background do site-mãe)
+       - Estilos totalmente escopados em .dho-objetivos
+       ========================================================== */
 
-    .dho-ic-stage--mini .dho-mini-cards{
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-      align-items: stretch;
-      justify-content: center; /* centraliza no card principal */
-      margin: 6px auto 0;      /* respiro e centralização */
-    }
+    .dho-objetivos{ padding: 28px 16px; }
 
-    .dho-ic-stage--mini .dho-mini-card{
-      width: min(260px, 100%);
-      border: 1px solid rgba(255,255,255,0.10);
-      background: rgba(255,255,255,0.07);
-      border-radius: 18px;
-      padding: 14px 14px 12px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-      backdrop-filter: blur(10px);
-      position: relative;
-      overflow: hidden;
+    /* escopo seguro */
+    .dho-objetivos, .dho-objetivos *{ box-sizing: border-box; }
 
-      display: flex;
-      flex-direction: column;
-      min-height: 268px;
-    }
-
-    .dho-ic-stage--mini .dho-mini-card::before{
-      content:"";
-      position:absolute;
-      inset:-80px -90px -90px -80px;
-      background:
-        radial-gradient(260px 220px at 20% 15%, rgba(168, 85, 247, .18), transparent 62%),
-        radial-gradient(260px 220px at 85% 25%, rgba(59, 130, 246, .12), transparent 64%),
-        radial-gradient(320px 260px at 50% 110%, rgba(124, 58, 237, .10), transparent 66%);
-      pointer-events:none;
-      z-index:0;
-    }
-    .dho-ic-stage--mini .dho-mini-card > *{ position: relative; z-index:1; }
-
-    .dho-ic-stage--mini .dho-mini-title{
-      margin: 0 0 8px;
-      font-size: 16px;
-      font-weight: 800;
-      color: #F5F5F7;
-      letter-spacing: .01em;
-    }
-
-    .dho-ic-stage--mini .dho-mini-note{
-      margin: 0 0 10px;
-      font-size: 13.5px;
-      line-height: 1.55;
-      color: rgba(255,255,255,.70);
-      text-align: justify;
-    }
-
-    /* Checklist: sem bullets / sem padding */
-    .dho-ic-stage--mini .dho-mini-list{
-      margin: 0 !important;
-      padding: 0 !important;
-      list-style: none !important;
-      display: grid;
-      gap: 6px;
-    }
-    .dho-ic-stage--mini .dho-mini-item{
-      display: grid;
-      grid-template-columns: 10px 1fr;
-      gap: 10px;
-      align-items: center;
-      padding: 2px 0;
-      border: 0;
-      background: transparent;
-      border-radius: 0;
-      list-style: none !important;
-    }
-
-    /* Faróis */
-    .dho-ic-stage--mini .pill{
-      width: 10px;
-      height: 10px;
-      border-radius: 999px;
-      display: inline-block;
-      transform: translateY(1px);
-      box-shadow: 0 0 6px rgba(255,255,255,.05);
-    }
-    .dho-ic-stage--mini .pill--green{
-      background: rgba(120, 255, 200, .90);
-      box-shadow: 0 0 0 1px rgba(120, 255, 200, .18), 0 0 8px rgba(120, 255, 200, .18);
-    }
-    .dho-ic-stage--mini .pill--yellow{
-      background: rgba(255, 220, 150, .90);
-      box-shadow: 0 0 0 1px rgba(255, 220, 150, .18), 0 0 8px rgba(255, 220, 150, .18);
-    }
-
-    .dho-ic-stage--mini .label{
-      font-size: 13.5px;
-      color: rgba(255,255,255,.90);
-      line-height: 1.25;
-      font-weight: 600;
-    }
-
-    .dho-ic-stage--mini .section-tag{
-      margin: 10px 0 7px;
-      font-size: 12px;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,.70);
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .dho-ic-stage--mini .sublist{
-      margin: 0 !important;
-      padding: 0 !important;
-      list-style: none !important;
-      display: grid;
-      gap: 8px;
-    }
-    .dho-ic-stage--mini .subitem{
-      display: grid;
-      grid-template-columns: 16px 1fr;
-      gap: 10px;
-      align-items: center;
-      padding: 2px 2px;
-      color: rgba(255,255,255,.88);
-      font-size: 13.5px;
-      list-style: none !important;
-    }
-    .dho-ic-stage--mini .arrow{
-      width: 16px; height: 16px;
-      opacity: .90;
-      filter: drop-shadow(0 8px 18px rgba(0,0,0,.22));
-    }
-
-    /* Rodapé fixo e CTA sem shimmer */
-    .dho-ic-stage--mini .dho-mini-footer{
-      margin-top: auto;
-      padding-top: 10px;
-      border-top: 1px solid rgba(255,255,255,0.10);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 44px;
-    }
-    .dho-ic-stage--mini .cta{
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 9px 12px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(0,0,0,0.10);
-      color: rgba(255,255,255,0.88);
-      font-size: 13.5px;
-      white-space: nowrap;
-      position: relative;
-      overflow: hidden;
-      min-width: 150px;
-    }
-
-    /* trava ícones contra regras globais de svg */
-    .dho-ic-stage--mini .cta svg,
-    .dho-ic-stage--mini svg.icon{
-      width: 16px !important;
-      height: 16px !important;
-      max-width: 16px !important;
-      max-height: 16px !important;
-      flex: 0 0 auto;
-    }
-
-    @media (max-width: 560px){
-      .dho-ic-stage--mini .dho-mini-card{ width: 100%; }
-      .dho-ic-stage--mini .dho-mini-cards{ justify-content: stretch; }
-    }
-
-
-/* ===========================
-       DIMENSÃO 2 | OBJETIVOS
-       Padrão DHO 360
-    =========================== */
-    .dho-objetivos{
-      padding: 28px 16px;
-      --pizzaSize: 260px;
-      --chartGap: 22px;
-      --legendMax: 420px;
-      --fg:#F5F5F7;
-      --muted: rgba(255,255,255,0.70);
-      --muted2: rgba(255,255,255,0.85);
-      --line: rgba(255,255,255,0.10);
-      --glass: rgba(255,255,255,0.06);
-      --glass2: rgba(255,255,255,0.07);
-      --ink: rgba(0,0,0,0.12);
-      --violet1:#7c3aed;
-      --violet2:#a855f7;
-      --violet3:#e9d5ff;
-      --blue1:#60a5fa;
-
-      --shadow: 0 10px 30px rgba(0,0,0,.25);
-      --greenSolid: rgba(70, 255, 189, 1);
-      --yellowSolid: rgba(255, 214, 102, 1);
-
-    }
-    .dho-objetivos-wrap{
-      max-width: 980px !important;
-      width: 100%;
+    /* ===== Wrap principal (glass) ===== */
+    .dho-objetivos .dho-objetivos-wrap{
+      max-width: 980px;
       margin: 0 auto;
       padding: 18px 18px;
       border-radius: 22px;
@@ -243,999 +28,778 @@
       background: rgba(255,255,255,0.06);
       box-shadow: 0 18px 44px rgba(0,0,0,0.40);
       backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       position: relative;
       overflow: hidden;
-      box-sizing: border-box;
     }
-    
-    /* =========================================================
-       Ajuste: largura máxima dos blocos internos (div) no card principal
-       Mantém consistência editorial (860px) sem quebrar o grid base
-    ========================================================= */
-    .dho-objetivos-wrap > div{
-      width: min(860px, 100%);
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    /* =========================================================
-       Ajuste adicional: containers internos que extrapolavam (ex.: .dho-full / .dho-card--chart)
-       Força teto de 860px em qualquer profundidade dentro do wrap
-    ========================================================= */
-    .dho-objetivos-wrap .dho-full,
-    .dho-objetivos-wrap .dho-card--chart,
-    .dho-objetivos-wrap .dho-card--chart.dho-full{
-      width: min(860px, 100%) !important;
-      max-width: 860px !important;
-      margin-left: auto !important;
-      margin-right: auto !important;
-      box-sizing: border-box;
-    }
-.dho-objetivos-wrap::before{
+    .dho-objetivos .dho-objetivos-wrap::before{
       content:"";
       position:absolute;
-      inset:-2px;
+      inset:-1px;
       background:
-        radial-gradient(600px 240px at 15% 8%, rgba(168,85,247,0.22), transparent 60%),
-        radial-gradient(560px 240px at 85% 14%, rgba(96,165,250,0.18), transparent 62%),
-        radial-gradient(520px 220px at 50% 95%, rgba(233,213,255,0.14), transparent 62%);
+        radial-gradient(900px 380px at 22% 12%, rgba(180,130,255,0.12), transparent 62%),
+        radial-gradient(760px 340px at 84% 26%, rgba(130,160,255,0.09), transparent 58%),
+        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(0,0,0,0.00) 55%);
       pointer-events:none;
-      z-index:0;
-      filter: saturate(1.02);
+      opacity: 0.95;
     }
-    .dho-objetivos-grid{
-      position: relative;
-      z-index: 1;
-      display:grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 14px;
-      align-items: start;
+    .dho-objetivos .dho-objetivos-wrap > *{ position: relative; z-index: 1; }
+
+    /* ===== Tipografia (escopo do bloco) ===== */
+    .dho-objetivos{
+      color:#f4f4f8;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      --pizzaSize: 260px;
+      --chartGap: 22px;
+      --legendMax: 420px;
     }
-    .dho-kicker{
+
+    .dho-objetivos .dho-kicker{
+      margin: 0 0 10px 0;
       font-size: 12px;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: rgba(255,255,255,0.70);
-      margin-bottom: 6px;
     }
-    .dho-title{
+    .dho-objetivos .dho-title{
+      margin: 0 0 10px 0;
       font-size: clamp(22px, 2.3vw, 34px);
       line-height: 1.15;
       font-weight: 700;
       color: #F5F5F7;
-      margin: 0 0 8px 0;
+      text-align: justify;              /* solicitado */
+      text-justify: inter-word;
+      hyphens: auto;
     }
-    
-    /* =========================================================
-       Ajuste solicitado: largura do título (dho-title)
-       - Permite que o título use a largura interna total do wrap (~944px)
-       - Mantém o restante dos blocos internos em 860px (regra existente)
-    ========================================================= */
-    .dho-objetivos-grid > .dho-full:first-child{
-      width: min(944px, 100%) !important;
-      max-width: 944px !important;
-      margin-left: auto !important;
-      margin-right: auto !important;
-      justify-self: center !important;
-      box-sizing: border-box;
-    }
-
-.dho-subtitle{
+    .dho-objetivos .dho-subtitle{
+      margin: 0;
       font-size: 15.5px;
       line-height: 1.65;
       color: rgba(255,255,255,0.85);
       text-align: justify;
-      margin: 0;
+      hyphens: auto;
     }
-    .dho-card{
+
+    /* ===== Header: alinhado às margens internas do card principal ===== */
+    .dho-objetivos .dho-objetivos-header{
+      max-width: 860px; /* legibilidade sem “cortar” */
+      margin: 0;        /* alinha na borda interna do wrap */
+    }
+
+    /* ===== Grid principal ===== */
+    .dho-objetivos .dho-objetivos-grid{
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 14px;
+      align-items: start;
+    }
+
+    /* ===== Card base (glass) ===== */
+    .dho-objetivos .dho-card{
       border: 1px solid rgba(255,255,255,0.10);
       background: rgba(255,255,255,0.07);
       border-radius: 18px;
       padding: 14px 14px 12px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.25);
       backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       position: relative;
       overflow: hidden;
     }
-    .dho-card::before{
-      content:"";
-      position:absolute;
-      inset:-2px;
+    .dho-objetivos .dho-card::before{
+      content: "";
+      position: absolute;
+      inset: -1px;
       background:
-        radial-gradient(360px 180px at 18% 22%, rgba(168,85,247,0.16), transparent 62%),
-        radial-gradient(360px 180px at 82% 18%, rgba(96,165,250,0.12), transparent 62%);
-      pointer-events:none;
-      z-index:0;
+        radial-gradient(900px 280px at 20% 0%, rgba(180,130,255,0.14), transparent 60%),
+        radial-gradient(700px 260px at 80% 20%, rgba(130,160,255,0.10), transparent 55%);
+      pointer-events: none;
+      opacity: 0.9;
     }
-    .dho-card > *{
-      position: relative;
-      z-index: 1;
-    }
-    .dho-card--chart{ width: min(860px, 100%); justify-self:center; }
-    .dho-rank-card{ width: min(750px, 100%); justify-self:center; background:transparent; border:0; box-shadow:none; padding:0; }
-    .dho-card-title{
+    .dho-objetivos .dho-card > *{ position: relative; z-index: 1; }
+
+    .dho-objetivos .dho-card-head{ margin-bottom: 10px; }
+    .dho-objetivos .dho-card-title{
+      margin: 0 0 6px 0;
       font-size: 16px;
       font-weight: 700;
       color: #F5F5F7;
-      margin: 0 0 8px 0;
+      letter-spacing: 0.01em;
     }
-    .dho-card-note{
+    .dho-objetivos .dho-card-note{
+      margin: 0;
       font-size: 13.5px;
       line-height: 1.55;
       color: rgba(255,255,255,0.70);
       text-align: justify;
-      margin: 0;
+      hyphens: auto;
     }
-    .dho-footnote{
-      font-size: 12.8px;
-      line-height: 1.55;
-      color: rgba(255,255,255,0.80);
-      text-align: justify;
-      margin: 10px 0 0 0;
-    }
-    .dho-plain-surface{
+
+    /* “Superfície limpa” */
+    .dho-objetivos .dho-plain-surface{
       border: 0 !important;
       background: transparent !important;
       padding: 0 !important;
       border-radius: 0 !important;
       box-shadow: none !important;
-      backdrop-filter: none !important;
     }
-    /* =========================================================
-       AJUSTE (inspirado): Cards Insight + Contexto
-       - Mantém conteúdo, melhora presença visual
-       - Contexto sincroniza altura com Insight (JS já existente)
-    ========================================================= */
-    .dho-ic-stage{
+
+    /* ===== Card do gráfico: full-width dentro do wrap ===== */
+    .dho-objetivos .dho-card--chart{
       grid-column: 1 / -1;
-      width: min(860px, 100%);
       justify-self: center;
-      display: grid;
-      grid-template-columns: 260px 1fr;
-      gap: 16px;
-      align-items: stretch;
-      margin-top: 2px;
+      width: min(860px, 100%);
     }
 
-    .dho-neo-card{
+    .dho-objetivos .dho-chart-row{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: var(--chartGap);
+      padding-top: 4px;
+    }
+    .dho-objetivos .dho-chart-box{
+      width: var(--pizzaSize);
+      height: var(--pizzaSize);
       position: relative;
-      overflow: hidden;
-      border-radius: 18px;
-      border: 1px solid rgba(255,255,255,0.12);
-      box-shadow: 0 16px 44px rgba(0,0,0,0.38);
-      backdrop-filter: blur(12px);
-    }
-
-    .dho-neo-card::before{
-      content:"";
-      position:absolute;
-      inset:-2px;
-      background:
-        radial-gradient(520px 240px at 18% 18%, rgba(168,85,247,0.22), transparent 62%),
-        radial-gradient(520px 240px at 82% 22%, rgba(96,165,250,0.16), transparent 62%),
-        radial-gradient(520px 260px at 50% 110%, rgba(233,213,255,0.12), transparent 66%);
-      pointer-events:none;
-      z-index:0;
-      filter: saturate(1.02);
-    }
-
-    .dho-neo-card::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        repeating-linear-gradient(120deg, rgba(255,255,255,0.05) 0 1px, transparent 1px 10px);
-      opacity: .05;
-      mix-blend-mode: overlay;
-      pointer-events:none;
-      z-index:0;
-    }
-
-    .dho-neo-card > *{ position: relative; z-index:1; }
-
-    /* Insight (estética inspirada, sem virar "banner") */
-    .dho-insight-mini{
-      background: rgba(255,255,255,0.92);
-      color: rgba(12,12,18,0.94);
-      padding: 14px 14px 12px;
-    }
-
-    .dho-mini-head{
-      display:flex;
-      align-items:flex-start;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 8px;
-    }
-
-    .dho-mini-head h4{
       margin: 0;
-      font-size: 16px;
-      font-weight: 800;
-      letter-spacing: 0.01em;
-      color: rgba(14,14,20,0.92);
-      text-transform: lowercase;
-      line-height: 1.15;
+    }
+    .dho-objetivos #dhoObjetivosPizza{
+      position: absolute;
+      inset: 0;
+      width: 100% !important;
+      height: 100% !important;
+      display: block;
     }
 
-    .dho-mini-note{
-      margin: 0 0 10px 0;
-      font-size: 12.8px;
-      line-height: 1.45;
-      color: rgba(18,18,26,0.72);
-      text-align: left;
+    .dho-objetivos #dhoObjetivosLegenda{
+      display: grid;
+      grid-template-columns: 1fr;
+      row-gap: 12px;
+      align-content: center;
+      max-width: var(--legendMax);
     }
-
-    .dho-mini-pill{
-      margin-top: 12px;
-      display:inline-flex;
-      align-items:center;
-      gap: 8px;
-      padding: 8px 10px;
-      border-radius: 14px;
-      background: rgba(124,58,237,0.08);
-      border: 1px solid rgba(124,58,237,0.16);
-      color: rgba(14,14,20,0.82);
-      font-size: 12.8px;
-      font-weight: 700;
-      user-select:none;
-    }
-
-    /* Contexto: preserva tipografia original do card, mas ganha presença */
-    .dho-context-head .dho-card-title{ margin: 0; }
-
-    .dho-context-card .dho-card-note{ margin-top: 8px; }
-    .dho-context-card .dho-footnote{ margin-top: 10px; }
-
-    @media (max-width: 920px){
-      .dho-ic-stage{ grid-template-columns: 1fr; }
-      }
-
-/* Ranking */
-    .dho-rank{ display:grid; gap: 8px; }
-    .dho-rank-item{
-      display:grid;
-      grid-template-columns: 30px 1fr;
+    .dho-objetivos .dho-legend-item{
+      display: grid;
+      grid-template-columns: 10px 1fr auto;
       gap: 10px;
-      align-items:center;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,0.10);
-      background: rgba(0,0,0,0.12);
-      padding: 10px 12px;
+      align-items: start;
+      padding: 0;
     }
-    .dho-rank-item > div:first-child{
-      width: 30px;
-      height: 30px;
-      border-radius: 10px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      border: 1px solid rgba(255,255,255,0.10);
-      background: rgba(255,255,255,0.06);
-      color: rgba(255,255,255,0.85);
-      font-weight: 700;
-      font-variant-numeric: tabular-nums;
+    .dho-objetivos .dho-legend-dot{
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-top: 4px;
+      box-shadow: 0 0 0 2px rgba(255,255,255,0.08);
     }
-    .dho-rank-item--top{
-      background: linear-gradient(135deg, rgba(168,85,247,0.20), rgba(96,165,250,0.12));
-      border-color: rgba(233,213,255,0.28);
-    }
-    .dho-rank-item strong{ color: rgba(255,255,255,0.92); }
-    .dho-rank-item span{ color: rgba(255,255,255,0.70); font-size: 13px; }
-    /* Botão padrão */
-    .dho-btn{
-      position: relative;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap: 10px;
-      padding: 10px 14px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,0.14);
-      background: rgba(0,0,0,0.20);
-      color: rgba(255,255,255,0.88);
-      cursor: pointer;
-      transition: transform .18s ease, background .18s ease, border-color .18s ease;
-      user-select: none;
-    }
-    .dho-btn::before{
-      content:"";
-      position:absolute;
-      inset:-2px;
-      border-radius: 16px;
-      background: linear-gradient(90deg, transparent, rgba(233,213,255,0.18), transparent);
-      transform: translateX(-40%);
-      opacity: .7;
-      filter: blur(0.2px);
-      animation: dhoShimmer 2.6s linear infinite;
-      pointer-events:none;
-    }
-    @keyframes dhoShimmer{
-      0%{ transform: translateX(-40%); opacity:.2; }
-      45%{ opacity:.85; }
-      100%{ transform: translateX(40%); opacity:.2; }
-    }
-    .dho-btn:hover{
-      transform: translateY(-1px);
-      background: rgba(0,0,0,0.26);
-      border-color: rgba(233,213,255,0.22);
-    }
-    .is-hidden{ display:none !important; }
-    /* Charts */
-    .dho-chart-shell{
-      margin-top: 12px;
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,0.10);
-      background: rgba(0,0,0,0.10);
-      padding: 12px;
-    }
-    .dho-chart-canvas{
-      width: 100%;
-      height: 320px;
-      display:block;
-    }
-    /* Prontidão (estilo print) */
-    .dho-ready{
-      margin-top: 10px;
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,0.10);
-      background: rgba(0,0,0,0.10);
-      overflow:hidden;
-    }
-    .dho-ready-row{
-      display:grid;
-      grid-template-columns: 1fr 220px 42px 110px;
-      gap: 10px;
-      align-items:center;
-      padding: 10px 12px;
-      border-top: 1px solid rgba(255,255,255,0.08);
-    }
-    .dho-ready-row:first-child{ border-top: 0; }
-    .dho-ready-label{
-      color: rgba(255,255,255,0.88);
+    .dho-objetivos .dho-legend-label{
       font-size: 13.5px;
       line-height: 1.35;
-      text-align: left;
+      color: rgba(255,255,255,0.85);
+      margin: 0;
     }
-    .dho-ready-dots{
-      display:flex;
-      justify-content:flex-end;
-      gap: 10px;
-    }
-    .dho-dot{
-      width: 10px; height: 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.16);
-      background: rgba(255,255,255,0.05);
-      box-shadow: inset 0 0 0 1px rgba(0,0,0,0.08);
-    }
-    .dho-dot.is-on{
-      background: rgba(168,85,247,0.85);
-      border-color: rgba(233,213,255,0.32);
-      box-shadow: 0 0 0 4px rgba(168,85,247,0.10);
-    }
-    .dho-ready-score{
-      font-variant-numeric: tabular-nums;
-      font-weight: 800;
-      color: rgba(255,255,255,0.90);
-      text-align: right;
-    }
-    .dho-ready-status{
+    .dho-objetivos .dho-legend-sub{
+      font-size: 12px;
+      line-height: 1.35;
       color: rgba(255,255,255,0.70);
-      font-size: 12.8px;
-      text-align: right;
-      white-space: nowrap;
-    }
-    /* Reflexão */
-    .dho-flow-title{
-      font-size: 26px;
-      font-weight: 800;
-      letter-spacing: 0.02em;
-      color: rgba(232, 202, 255, 0.95);
-      text-align: center;
-      margin: 6px 0 0 0;
-    }
-    .dho-flow-top,
-    .dho-flow-bottom{
-      grid-column: 1 / -1;
-      max-width: 860px;
-      justify-self: center;
-      font-size: 15px;
-      line-height: 1.6;
-      color: rgba(255,255,255,0.90);
+      margin: 2px 0 0 0;
       text-align: justify;
+      hyphens: auto;
+    }
+    .dho-objetivos .dho-legend-pct{
+      font-variant-numeric: tabular-nums;
+      font-weight: 700;
+      color: #F5F5F7;
+      font-size: 13.5px;
+      opacity: 0.95;
+    }
+
+    .dho-objetivos .dho-footnote{
+      margin: 8px 0 0 0;
+      font-size: 12.8px;
+      line-height: 1.55;
+      color: rgba(255,255,255,0.80);
+      text-align: justify;
+      hyphens: auto;
+    }
+
+    /* ===== Ranking: “sem card” ===== */
+    .dho-objetivos .dho-rank-card{
+      grid-column: 1 / -1;
+      justify-self: center;
+      width: min(750px, 100%);
       background: transparent;
       border: 0;
       box-shadow: none;
       padding: 0;
+      border-radius: 0;
     }
-    .dho-cta{
-      grid-column: 1 / -1;
-      width: min(258px, 70%);
-      justify-self: center;
+    .dho-objetivos .dho-rank-card .dho-card-head{ text-align:center; }
+    .dho-objetivos .dho-rank-wrap{ margin-top: 10px; }
 
-      /* “nota tecnológica” (compacta, quadrada) */
-      position: relative;
-      overflow: hidden;
+    .dho-objetivos .dho-rank{
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 8px;
+    }
+    .dho-objetivos .dho-rank-item{
+      display: grid;
+      grid-template-columns: 30px 1fr;
+      gap: 10px;
+      padding: 10px;
       border-radius: 14px;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: linear-gradient(135deg, rgba(124,58,237,0.12), rgba(59,130,246,0.08), rgba(0,0,0,0.06));
-      box-shadow: 0 12px 34px rgba(0,0,0,0.32);
-      backdrop-filter: blur(10px);
-
-      aspect-ratio: 5 / 3;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(0,0,0,0.12);
+    }
+    .dho-objetivos .dho-rank-item--top{
+      border-color: rgba(255,255,255,0.14);
+      background: linear-gradient(180deg, rgba(180,130,255,0.10), rgba(0,0,0,0.12));
+    }
+    .dho-objetivos .dho-rank-n{
+      width: 28px;
+      height: 28px;
+      border-radius: 10px;
       display: grid;
       place-items: center;
-      align-content: center;
-      justify-items: center;
-
-      padding: 9px 9px;
-      color: rgba(255,255,255,0.90);
-      font-size: 15px;
-      line-height: 1.5;
-      text-align: center;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.92);
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
     }
-    .dho-cta::before{
+    .dho-objetivos .dho-rank-title{
+      margin: 0;
+      font-size: 13.5px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.92);
+    }
+    .dho-objetivos .dho-rank-desc{
+      margin: 3px 0 0 0;
+      font-size: 12.8px;
+      line-height: 1.45;
+      color: rgba(255,255,255,0.70);
+      text-align: justify;
+      hyphens: auto;
+    }
+
+    .dho-objetivos .is-hidden{ display: none !important; }
+
+    /* Botão padrão */
+    .dho-objetivos .dho-btn{
+      width: 100%;
+      border: 1px solid rgba(206, 182, 255, 0.26);
+      border-radius: 14px;
+      padding: 11px 12px;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+      cursor: pointer;
+      color: rgba(255,255,255,0.94);
+      background: rgba(165, 125, 255, 0.16);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.22);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: transform 0.12s ease, background 0.12s ease, border-color 0.12s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .dho-objetivos .dho-btn:hover{
+      transform: translateY(-1px);
+      background: rgba(175, 140, 255, 0.20);
+      border-color: rgba(220, 200, 255, 0.34);
+    }
+    .dho-objetivos .dho-btn:active{ transform: translateY(0px); }
+    .dho-objetivos .dho-btn:disabled{
+      cursor: default;
+      opacity: 0.70;
+      transform: none;
+    }
+
+    /* shimmer (apenas nos botões que pedem glow) */
+    .dho-objetivos .dho-btn--glow::after{
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: linear-gradient(
+        110deg,
+        transparent 0%,
+        rgba(245, 235, 255, 0.06) 35%,
+        rgba(245, 235, 255, 0.22) 50%,
+        rgba(245, 235, 255, 0.06) 65%,
+        transparent 100%
+      );
+      transform: translateX(-55%) rotate(8deg);
+      animation: dhoShimmer 3.6s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes dhoShimmer{
+      0%   { transform: translateX(-60%) rotate(8deg); opacity: 0.0; }
+      18%  { opacity: 0.55; }
+      50%  { transform: translateX(60%) rotate(8deg); opacity: 0.35; }
+      100% { transform: translateX(60%) rotate(8deg); opacity: 0.0; }
+    }
+    @media (prefers-reduced-motion: reduce){
+      .dho-objetivos .dho-btn--glow::after{ animation: none; }
+    }
+
+    .dho-objetivos .dho-rank-cta{ margin-top: 10px; display: grid; gap: 6px; }
+    .dho-objetivos .dho-rank-hint{
+      margin: 0;
+      font-size: 12.5px;
+      line-height: 1.45;
+      color: rgba(255,255,255,0.70);
+      text-align: justify;
+      hyphens: auto;
+    }
+
+    /* CTA editorial quadrado (Pergunta ao leitor) */
+    .dho-objetivos .dho-rank-final{
+      display: none;
+      justify-self: center;
+      width: min(258px, 70%);
+      aspect-ratio: 1 / 0.6;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background:
+        linear-gradient(135deg, rgba(124,58,237,0.12), rgba(59,130,246,0.08), rgba(0,0,0,0.06));
+      box-shadow: 0 12px 34px rgba(0,0,0,0.32);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+      padding: 9px;
+      pointer-events: none;
+    }
+    .dho-objetivos .dho-rank-final.is-visible{ display: grid; }
+    .dho-objetivos .dho-rank-final::before{
       content:"";
       position:absolute;
       inset:-1px;
       background:
-        radial-gradient(340px 220px at 18% 35%, rgba(168,85,247,0.18), transparent 62%),
-        radial-gradient(340px 220px at 85% 70%, rgba(96,165,250,0.14), transparent 64%);
-      opacity: .65;
+        radial-gradient(220px 180px at 18% 18%, rgba(180,130,255,0.65), transparent 62%),
+        radial-gradient(240px 200px at 82% 82%, rgba(130,160,255,0.65), transparent 64%);
+      opacity: 0.65;
       pointer-events:none;
     }
-    .dho-cta::after{
+    .dho-objetivos .dho-rank-final::after{
       content:"";
       position:absolute;
-      left:0; top:0; bottom:0;
+      left:0;
+      top:0;
+      bottom:0;
       width: 3px;
-      background: linear-gradient(180deg, rgba(168,85,247,0.92), rgba(96,165,250,0.72));
-      opacity: .85;
+      background: linear-gradient(180deg, rgba(180,130,255,0.85), rgba(130,160,255,0.85));
+      opacity: 0.85;
       pointer-events:none;
     }
-    .dho-cta > *{ position: relative; z-index: 1; }
-
-    .dho-cta strong{
-      display: inline-block;
-      align-items:center;
+    .dho-objetivos .dho-note-reflexive__inner{
+      position: relative;
+      z-index: 1;
+      display: grid;
+      place-items: center;
+      align-content: center;
       gap: 8px;
-      margin: 0 0 7px 0;
-      padding: 0;
-      border-radius: 0;
-      border: 0;
-      background: transparent;
-      color: rgba(255,255,255,0.92);
-      font-weight: 700;
-      letter-spacing: 0.02em;
-      white-space: normal;
+      width: 100%;
+      height: 100%;
       text-align: center;
     }
-/* Full width within wrap */
-    .dho-full{ grid-column: 1 / -1; }
-    /* Responsive */
+    .dho-objetivos .dho-note-reflexive__kicker{
+      font-weight: 700;
+      color: rgba(255,255,255,0.92);
+      letter-spacing: 0.02em;
+    }
+    .dho-objetivos .dho-note-reflexive__q{
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.5;
+      color: rgba(255,255,255,0.90);
+      text-align: center;
+    }
+
+    /* ===== Reflexão (sem card) ===== */
+    .dho-objetivos .dho-insight-box--flow{
+      background: transparent !important;
+      border-color: transparent !important;
+      box-shadow: none !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      grid-column: 1 / -1;
+    }
+    .dho-objetivos .dho-flow-title{
+      text-align: center;
+      margin: 0 0 10px 0;
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      color: rgba(232, 202, 255, 0.95);
+    }
+    .dho-objetivos .dho-flow-top,
+    .dho-objetivos .dho-flow-bottom{
+      margin: 0 auto;
+      max-width: 860px;
+      font-size: 15px;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.90);
+      text-align: justify;
+      hyphens: auto;
+    }
+    .dho-objetivos .dho-flow-img{
+      display:block;
+      width: 99%;
+      height:auto;
+      margin: 16px auto;
+    }
+
+    /* ===== Responsivo ===== */
     @media (max-width: 920px){
-      .dho-chart-canvas{ height: 300px; }
-      .dho-ready-row{ grid-template-columns: 1fr; gap: 8px; }
-      .dho-ready-dots{ justify-content:flex-start; }
-      .dho-ready-score, .dho-ready-status{ text-align:left; }
+      .dho-objetivos{ --pizzaSize: 240px; --legendMax: 100%; --chartGap: 12px; }
+      .dho-objetivos .dho-objetivos-grid{ grid-template-columns: 1fr; }
+      .dho-objetivos .dho-objetivos-header{ max-width: 100%; }
+      .dho-objetivos .dho-chart-row{
+        display: grid;
+        grid-template-columns: 1fr;
+        align-items: start;
+        justify-items: center;
+        gap: 12px;
+      }
+      .dho-objetivos #dhoObjetivosLegenda{
+        width: 100%;
+        max-width: 560px;
+        justify-self: center;
+      }
     }
     @media (max-width: 520px){
-      .dho-objetivos-wrap{ padding: 14px 14px; border-radius: 18px; }
-      .dho-card{ border-radius: 16px; }
-      .dho-chart-canvas{ height: 260px; }
+      .dho-objetivos{ --pizzaSize: 220px; }
+      .dho-objetivos .dho-objetivos-wrap{ padding: 16px 14px; border-radius: 20px; }
+      .dho-objetivos .dho-title{ text-align: left; } /* evita “rios” em telas muito estreitas */
     }
   </style>
-  <div class="dho-objetivos-wrap">
-    <div class="dho-objetivos-grid">
-      <!-- Header editorial -->
-      <div class="dho-full">
-        <div class="dho-kicker">DIMENSÃO 2 | OBJETIVOS DO NEGÓCIO</div>
-        <h2 class="dho-title">Com objetivos e planos alinhados, a próxima etapa é amadurecer a estrutura.</h2>
+</head>
+
+<body>
+  <section class="dho-objetivos" aria-labelledby="dho-objetivos-title">
+    <div class="dho-objetivos-wrap">
+      <header class="dho-objetivos-header">
+        <p class="dho-kicker">DIMENSÃO 1 | OBJETIVOS E PRIORIDADES DE DESENVOLVIMENTO</p>
+
+        <h2 id="dho-objetivos-title" class="dho-title">
+          Quando se sabe qual é o objetivo, o próximo passo é priorizar por onde começar.
+        </h2>
+
         <p class="dho-subtitle">
-          Os negócios também tem objetivos claros e com eles planos estruturados, o próximo passo é entender como sustentar toda a execução. O ponto central dessa dimensão não é sobre definição de objetivos, e sim sobre a maturidade que sustenta o caminho até lá. 
-
+          É unânime: 100% dos respondentes descreveram seus objetivos a serem alcançados, ou seja, todos têm um ponto de chegada claro.
+          Os relatos traçam um caminho para a conquista de estabilidade (profissional, emocional e financeira) até alta realização (liderança, legado e impacto).
+          Primeiro segurança, depois expansão.
+          Então o que se perguntou foi: onde a energia está concentrada, e qual é o top aspecto da vida para desenvolver-se e chegar lá!
         </p>
-      </div>
-            <!-- Cards (Checklist + Contexto) | inseridos conforme dho360_cards_checklist_contexto -->
-      <div class="dho-ic-stage dho-ic-stage--mini">
-        <div class="dho-mini-cards">
+      </header>
 
-                <!-- Card 1: Checklist do negócio -->
-                <article class="dho-mini-card" aria-label="Checklist do negócio">
-                  <h3 class="dho-mini-title">Checklist do negócio</h3>
+      <div class="dho-objetivos-grid">
+        <!-- Card A: Pizza -->
+        <article class="dho-card dho-card--chart" aria-label="Distribuição dos objetivos por área da vida">
+          <div class="dho-card-head">
+            <h3 class="dho-card-title">Em que área da vida os objetivos dos respondentes se enquadram?</h3>
+          </div>
 
-                  <p class="dho-mini-note">
-                    Lista dos pontos de atenção mais citadas como essenciais para sustentar a execução do negócio.
-                  </p>
-
-                  <ul class="dho-mini-list" role="list">
-                    <li class="dho-mini-item">
-                      <span class="pill pill--green" aria-hidden="true"></span>
-                      <span class="label">Objetivo</span>
-                    </li>
-                    <li class="dho-mini-item">
-                      <span class="pill pill--green" aria-hidden="true"></span>
-                      <span class="label">Plano</span>
-                    </li>
-                    <li class="dho-mini-item">
-                      <span class="pill pill--yellow" aria-hidden="true"></span>
-                      <span class="label">Governança</span>
-                    </li>
-                    <li class="dho-mini-item">
-                      <span class="pill pill--yellow" aria-hidden="true"></span>
-                      <span class="label">Foco</span>
-                    </li>
-                    <li class="dho-mini-item">
-                      <span class="pill pill--yellow" aria-hidden="true"></span>
-                      <span class="label">Pessoas</span>
-                    </li>
-                  </ul>
-
-                  <footer class="dho-mini-footer">
-                    <span class="cta" role="button" aria-label="Diagnóstico">
-                      <!-- Ícone "ouroboros" + download (circular arrow + seta para baixo) -->
-                      <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                        <!-- arco circular -->
-                        <path d="M20 12a8 8 0 1 1-2.35-5.65" stroke="rgba(255,255,255,.92)" stroke-width="2" stroke-linecap="round"/>
-                        <!-- ponta (seta) do arco -->
-                        <path d="M20 4v4h-4" stroke="rgba(255,255,255,.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <!-- download -->
-                        <path d="M12 8v7" stroke="rgba(255,255,255,.92)" stroke-width="2" stroke-linecap="round"/>
-                        <path d="M9.5 12.5 12 15l2.5-2.5" stroke="rgba(255,255,255,.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                      </svg>
-                      Diagnóstico
-                    </span>
-                  </footer>
-                </article>
-
-                <!-- Card 2: Contexto do negócio -->
-                <article class="dho-mini-card" aria-label="Contexto do negócio">
-                  <h3 class="dho-mini-title">Contexto do negócio</h3>
-
-                  <p class="dho-mini-note">
-                    As empresas respondentes possuem estrutura de pequeno a médio porte, na qual o excesso de informalidade pode virar risco.
-                  </p>
-
-                  <div class="section-tag">
-                    <span class="pill pill--yellow" aria-hidden="true"></span>
-                    Necessidades básicas
-                  </div>
-
-                  <ul class="sublist" role="list">
-                    <li class="subitem">
-                      <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.86)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <path d="M5 12h12"/>
-                        <path d="M13 6l6 6-6 6"/>
-                      </svg>
-                      <span>Coordenação mínima</span>
-                    </li>
-                    <li class="subitem">
-                      <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.86)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <path d="M5 12h12"/>
-                        <path d="M13 6l6 6-6 6"/>
-                      </svg>
-                      <span>Processos claros</span>
-                    </li>
-                    <li class="subitem">
-                      <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.86)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <path d="M5 12h12"/>
-                        <path d="M13 6l6 6-6 6"/>
-                      </svg>
-                      <span>Decisões compartilhadas</span>
-                    </li>
-                  </ul>
-
-                  <footer class="dho-mini-footer">
-                    <span class="cta" role="button" aria-label="Estruturação">
-                      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.90)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <path d="M13 2 3 14h8l-1 8 10-12h-8z"/>
-                      </svg>
-                      Estruturação
-                    </span>
-                  </footer>
-                </article>
-
+          <div class="dho-chart-row">
+            <div class="dho-plain-surface" aria-label="Área do gráfico">
+              <div class="dho-chart-box">
+                <canvas id="dhoObjetivosPizza" aria-label="Gráfico de pizza"></canvas>
               </div>
-      </div>
+            </div>
 
-<!-- Seção 2 | Maturidade de governança -->
-      <div class="dho-full dho-card dho-card--chart">
-        <h3 class="dho-card-title">Maturidade de governança</h3>
-        <p class="dho-card-note">
-          A maior parte das empresas operam em níveis iniciais de governança, com pouca formalidade e alguns processos essenciais definidos.
-        </p>
-<div class="dho-rank-card" style="margin-top:14px">
-          <div class="dho-rank">
-            <div class="dho-rank-item dho-rank-item--top">
-              <div>1</div>
-              <div><strong>Inicial</strong><br><span>66,7% das empresas</span></div>
-            </div>
-            <div class="dho-rank-item">
-              <div>2</div>
-              <div><strong>Básica</strong><br><span>33,3% das empresas</span></div>
-            </div>
-            <div class="dho-rank-item" style="opacity:.38">
-              <div>3</div><div>Estruturada</div>
-            </div>
-            <div class="dho-rank-item" style="opacity:.28">
-              <div>4</div><div>Avançada</div>
-            </div>
-            <div class="dho-rank-item" style="opacity:.22">
-              <div>5</div><div>Madura</div>
+            <div class="dho-plain-surface" id="dhoObjetivosLegenda" aria-label="Legenda do gráfico"></div>
+          </div>
+
+          <p class="dho-footnote">
+            A maior parte dos objetivos estão no campo profissional, mas há uma concentração relevante ligada a saúde, mente e equilíbrio:
+            um fio condutor que começa a revelar o tema da coerência entre desempenho e qualidade de vida.
+          </p>
+        </article>
+
+        <!-- Card B: Ranking -->
+        <article class="dho-rank-card" aria-label="Fatores mais importantes para desenvolver">
+          <div class="dho-card-head">
+            <h3 class="dho-card-title">Ranking de iniciativas de desenvolvimento</h3>
+            <p class="dho-card-note">
+              Os respondentes ranquearam os aspectos da vida por onde iniciariam seu desenvolvimento.
+            </p>
+          </div>
+
+          <div class="dho-rank-wrap" id="dhoRankWrap">
+            <ol class="dho-rank" id="dhoObjetivosRank">
+              <li class="dho-rank-item dho-rank-item--top" data-rank="1">
+                <span class="dho-rank-n">1</span>
+                <div>
+                  <p class="dho-rank-title">Corpo e ambiente</p>
+                  <p class="dho-rank-desc">Condições e recursos adequados (saúde, tempo, ferramentas, rede de apoio) para agir.</p>
+                </div>
+              </li>
+
+              <li class="dho-rank-item dho-rank-item--top is-hidden" data-rank="2">
+                <span class="dho-rank-n">2</span>
+                <div>
+                  <p class="dho-rank-title">Habilidades</p>
+                  <p class="dho-rank-desc">Mais conhecimento sobre si e sobre o mundo, e aplicação prática no dia a dia.</p>
+                </div>
+              </li>
+
+              <li class="dho-rank-item dho-rank-item--top is-hidden" data-rank="3">
+                <span class="dho-rank-n">3</span>
+                <div>
+                  <p class="dho-rank-title">Comportamento</p>
+                  <p class="dho-rank-desc">Entender padrões que ajudam (ou travam) produtividade, consistência e novas ações.</p>
+                </div>
+              </li>
+
+              <li class="dho-rank-item is-hidden" data-rank="4">
+                <span class="dho-rank-n">4</span>
+                <div>
+                  <p class="dho-rank-title">Crenças e valores</p>
+                  <p class="dho-rank-desc">Clarear o que se acredita e valoriza para agir com coerência.</p>
+                </div>
+              </li>
+
+              <li class="dho-rank-item is-hidden" data-rank="5">
+                <span class="dho-rank-n">5</span>
+                <div>
+                  <p class="dho-rank-title">Visão e missão</p>
+                  <p class="dho-rank-desc">Definir propósito, futuro desejado e escolher como viver isso.</p>
+                </div>
+              </li>
+
+              <li class="dho-rank-item is-hidden" data-rank="6">
+                <span class="dho-rank-n">6</span>
+                <div>
+                  <p class="dho-rank-title">Legado</p>
+                  <p class="dho-rank-desc">Gerar impacto positivo e duradouro em pessoas, times e sociedade.</p>
+                </div>
+              </li>
+
+              <li class="dho-rank-item is-hidden" data-rank="7">
+                <span class="dho-rank-n">7</span>
+                <div>
+                  <p class="dho-rank-title">Identidade</p>
+                  <p class="dho-rank-desc">Compreender papéis e expressão autêntica de quem se é.</p>
+                </div>
+              </li>
+            </ol>
+
+            <div class="dho-rank-cta">
+              <button class="dho-btn dho-btn--glow" id="dhoRankNextBtn" type="button">
+                Descobrir o Top 2
+              </button>
+
+              <p class="dho-rank-hint" id="dhoRankHint">
+                Dica: clique para abrir o próximo nível do ranking.
+              </p>
+
+              <div class="dho-rank-final" id="dhoRankFinal" aria-live="polite">
+                <div class="dho-note-reflexive__inner" role="note" aria-label="Pergunta ao leitor">
+                  <strong class="dho-note-reflexive__kicker">Pergunta ao leitor</strong>
+                  <p class="dho-note-reflexive__q">
+                    E para você, hoje, qual é o Top 1 para iniciar o seu desenvolvimento?
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-        <div style="text-align:center;margin-top:16px">
-          <button class="dho-btn" id="btn-toggle-maturidade" type="button">
-            Ver descrição de todos os níveis de maturidade
-          </button>
-        </div>
-        <div id="descricao-maturidade" class="is-hidden" style="margin-top:14px">
-          <div class="dho-card dho-plain-surface">
-            <p class="dho-card-note"><strong>1º Nível | Inicial:</strong> decisões concentradas nos sócios, sem reuniões formais, contabilidade focada no fiscal, inexistência de orçamento anual, políticas e alçadas não documentadas.</p>
-            <p class="dho-card-note"><strong>2º Nível | Básica:</strong> reuniões gerenciais mensais, DRE e caixa fechados até D+20, orçamento simples, responsabilidades definidas, contratos e alçadas parcialmente documentados.</p>
-            <p class="dho-card-note"><strong>3º Nível | Estruturada:</strong> plano anual aprovado, orçamento e forecast revisados trimestralmente, relatórios até D+10, políticas escritas mínimas (alçadas, compras, LGPD básico), separação parcial entre propriedade e gestão.</p>
-            <p class="dho-card-note"><strong>4º Nível | Avançada:</strong> conselho consultivo ativo com atas, indicadores por área, matriz de riscos e compliance operando, revisão independente ou auditoria anual, remuneração variável atrelada a metas, separação clara entre sócios e executivos.</p>
-            <p class="dho-card-note"><strong>5º Nível | Madura:</strong> conselho de administração ou consultivo maduro, auditoria independente recorrente, planejamento estratégico com metas e OKRs, políticas robustas de partes relacionadas e sucessão, governança de dados e comitês ativos, transparência e prestação de contas.</p>
-          </div>
-        </div>
-        <p class="dho-footnote">O negócio está em <strong>crescimento</strong> antes da maturidade da governança.</p>
-      </div>
-      <!-- Micro-card | Objetivos profundos (paráfrase) -->
-      <div class="dho-full dho-card">
-        <h3 class="dho-card-title">Objetivos que movem os decisores</h3>
-        <p class="dho-card-note">
-          Nas respostas abertas sobre os objetivos de realização com o negócio, a ambição aparece conectada com as escolhas estratégicas. Foi possível agrupar esses objetivos em 3 grupos que refletem principalmente os PMEs.:
-        </p>
-        <div class="dho-rank" style="margin-top:12px">
-          <div class="dho-rank-item dho-rank-item--top">
-            <div>1</div>
-            <div>
-              <strong>Independência financeira e prosperidade</strong><br>
-              <span>Construir segurança no longo prazo, ampliar patrimônio e ganhar liberdade de escolha.</span>
-            </div>
-          </div>
-          <div class="dho-rank-item">
-            <div>2</div>
-            <div>
-              <strong>Maturidade de liderança</strong><br>
-              <span>Aprender a lidar com a complexidade de liderar, decidir e sustentar resultados sem perder direção.</span>
-            </div>
-          </div>
-          <div class="dho-rank-item">
-            <div>3</div>
-            <div>
-              <strong>Impacto humano e ambiente de desenvolvimento</strong><br>
-              <span>Crescer gerando valor para pessoas, com um contexto de trabalho que desenvolva e multiplique capacidades.</span>
-            </div>
-          </div>
-        </div>
-        <p class="dho-footnote">
-          Essas temáticas ajudam a entender por que o alinhamento entre execução e governança se torna o ponto crítico a partir de certo estágio de crescimento. Enquanto todo o esforço e know-how do negócio se concentram em quem toma as decisões, ampliar escopo, impacto e valor se torna mais custoso.
-        </p>
-      </div>
-      <!-- Seção 3 | Prioridades estratégicas em 12 meses -->
-      <div class="dho-full dho-card dho-card--chart">
-        <h3 class="dho-card-title">Prioridades estratégicas em 12 meses</h3>
-        <p class="dho-card-note">
-          As prioridades para os próximos 12 meses se conectam com as ambições citadas, o que ajuda dar maior foco em como executá-las.
-          Aquisição de clientes e crescimento de receita lideram, seguidos por caixa e eficiência operacional. Escolhas que confirmam os níveis de maturidade iniciais de governança.
-        </p>
-        <div class="dho-chart-shell" aria-label="Gráfico Top 5 objetivos">
-          <canvas id="chartTop5" class="dho-chart-canvas"></canvas>
-        </div>
-        <p class="dho-footnote">
-          <strong>Nota complementar (1 menção cada):</strong>
-          Lançamento de novos produtos ou serviços; Retenção de clientes e customer success; Talentos, liderança e sucessão;
-          Digitalização e automação de processos; Expansão geográfica ou novos mercados.
-        </p>
-      </div>
-      <!-- Seção 4 | Prontidão para executar -->
-      <div class="dho-full dho-card dho-card--chart">
-        <h3 class="dho-card-title">Quão preparado o negócio está para entregar as prioridades?</h3>
-        <p class="dho-card-note">
-          Segundo os respondentes, os planos existem e os recursos necessários estão, em grande parte, encaminhados, contudo, mais uma vez a governança aparece como o ponto mais frágil juntamente com o acompanhamento contínuo da execução.
-        </p>
-        <div class="dho-ready" role="table" aria-label="Tabela de prontidão para execução">
-          <!-- rows injected by JS -->
-        </div>
-        <p class="dho-footnote">
-          <strong>Insight:</strong> quando há objetivos e recursos, o risco passa a ser humano e organizacional.
-        </p>
-      </div>
-      <!-- Seção 5 | Barreiras -->
-      <div class="dho-full dho-card dho-card--chart">
-        <h3 class="dho-card-title">Barreiras que podem comprometer a entrega</h3>
-        <p class="dho-card-note">
-          As mesmas barreiras foram apresentadas para os decidores de negócios e líderes de equipe, na somatória total, comunicação e processos desalinhados aparece como o mais crítico. Por consenso entre liderança e negócio a saída de talentos e a alta rotatividade também é um fator preocupante.
-          O entrave parece estar na forma como as pessoas se organizam, e assim executar o plano com clareza, foco e liderança.
-        </p>
-        <div class="dho-chart-shell" aria-label="Gráfico de barreiras por origem (LID vs NEG)">
-          <canvas id="chartBarreiras" class="dho-chart-canvas"></canvas>
-        </div>
-      </div>
-      <!-- Reflexão + CTA -->
-      <div class="dho-full">
-        <h3 class="dho-flow-title">Reflexão</h3>
-      </div>
-      <div class="dho-flow-top">
-        O negócio tem clareza de objetivos e de quais estratégias pretende seguir. Então parece que o ponto de inflexão está na coerência entre governança,
-        liderança e desenvolvimento humano, ou seja, sem coerência, a barreira não é errar e sim sustentar o percurso completo.
-      </div>
-      <div class="dho-cta">
-        <strong>Pergunta ao leitor</strong> 
-        
-        Na sua empresa, o que hoje mais ameaça a execução dos objetivos: governança, foco ou liderança?
+        </article>
+
+        <!-- Card C: Reflexões -->
+        <aside class="dho-insight-box--flow" aria-label="Reflexão orientada pelos dados">
+          <h3 class="dho-flow-title">Reflexão</h3>
+
+          <p class="dho-flow-top">
+            Aqui as respostas demonstram que os profissionais em geral priorizam desenvolver condições, habilidades e comportamento
+            antes de ampliar sua visão e atuação, ou seja, eles preferem aplicar esforços para construir base e autonômia.
+          </p>
+
+          <img class="dho-flow-img" src="assets/fluxodedesenvolvimento.png" alt="Fluxo de desenvolvimento">
+
+          <p class="dho-flow-bottom">
+            Com essa sequência de desenvolvimento, torna-se possível alcançar mais coerência nas relações de trabalho.
+          </p>
+        </aside>
       </div>
     </div>
-  </div>
-  <!-- Chart.js -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  </section>
+
   <script>
-    /* ===========================
-       Interações
-    =========================== */
     (function(){
-      const btn = document.getElementById('btn-toggle-maturidade');
-      const box = document.getElementById('descricao-maturidade');
-      if(btn && box){
-        btn.addEventListener('click', () => {
-          box.classList.toggle('is-hidden');
-          btn.textContent = box.classList.contains('is-hidden')
-            ? 'Ver descrição de todos os níveis de maturidade'
-            : 'Ocultar descrição dos níveis de maturidade';
-        });
-      }
-    })();
+      function ensureChart(){
+        return new Promise((resolve) => {
+          if (window.Chart) return resolve(true);
 
-
-    /* ===========================
-       Dados (Dimensão 2)
-    =========================== */
-    // Governança (%)
-    const governancaLabels = ['Nível 1', 'Nível 2', 'Nível 3', 'Nível 4', 'Nível 5'];
-    const governancaData = [66.67, 33.33, 0, 0, 0];
-    // Top 5 objetivos (qtd)
-    const top5Labels = [
-      'Aquisição de clientes e novos canais',
-      'Crescimento de receita orgânica',
-      'Caixa e capital de giro',
-      'Lucratividade e eficiência operacional',
-      'Lançamento de novos produtos ou serviços'
-    ];
-    const top5Data = [3, 3, 2, 2, 1];
-    // Prontidão (escala 1-5)
-    const prontidaoRows = [
-      { label: 'Plano tático (MVP, etapas, datas e responsáveis)', score: 5, status: 'Plano completo' },
-      { label: 'Recursos financeiros', score: 4, status: 'Quase pronto' },
-      { label: 'Força de trabalho e competências críticas', score: 4, status: 'Quase pronto' },
-      { label: 'Infraestrutura, ferramentas e tecnologia', score: 4, status: 'Quase pronto' },
-      { label: 'Parcerias e fornecedores críticos', score: 4, status: 'Quase pronto' },
-      { label: 'Mapa de riscos e planos de contingência', score: 4, status: 'Quase pronto' },
-      { label: 'Governança e agendas de acompanhamento (metas e indicadores)', score: 3, status: 'Plano parcial' }
-    ];
-    // Barreiras (LID vs NEG)
-    const barreiras = [
-      { label: 'Comunicação e processos desalinhados', lid: 2, neg: 1 },
-      { label: 'Saída de talentos e rotatividade alta', lid: 1, neg: 1 },
-      { label: 'Liderança não preparada', lid: 0, neg: 2 },
-      { label: 'Excesso de iniciativas, pouca priorização', lid: 0, neg: 2 },
-      { label: 'Falta de capacitação técnica', lid: 0, neg: 2 },
-      { label: 'Absenteísmo e licenças não planejadas', lid: 1, neg: 0 },
-      { label: 'Sobrecarga e risco de burnout', lid: 1, neg: 0 },
-      { label: 'Baixo espírito de equipe', lid: 1, neg: 0 }
-    ];
-    /* ===========================
-       Render: Prontidão
-    =========================== */
-    (function(){
-      const table = document.querySelector('.dho-ready');
-      if(!table) return;
-      const mkDots = (score) => {
-        const wrap = document.createElement('div');
-        wrap.className = 'dho-ready-dots';
-        for(let i=1;i<=5;i++){
-          const dot = document.createElement('span');
-          dot.className = 'dho-dot' + (i===score ? ' is-on' : '');
-          wrap.appendChild(dot);
-        }
-        return wrap;
-      };
-      prontidaoRows.forEach((r, idx) => {
-        const row = document.createElement('div');
-        row.className = 'dho-ready-row';
-        if(idx === prontidaoRows.length-1){
-          row.style.boxShadow = 'inset 0 0 0 1px rgba(168,85,247,0.16)';
-          row.style.background = 'linear-gradient(135deg, rgba(168,85,247,0.10), rgba(96,165,250,0.06))';
-        }
-        const c1 = document.createElement('div');
-        c1.className = 'dho-ready-label';
-        c1.textContent = r.label;
-        const c2 = mkDots(r.score);
-        const c3 = document.createElement('div');
-        c3.className = 'dho-ready-score';
-        c3.textContent = String(r.score);
-        const c4 = document.createElement('div');
-        c4.className = 'dho-ready-status';
-        c4.textContent = r.status;
-        row.appendChild(c1);
-        row.appendChild(c2);
-        row.appendChild(c3);
-        row.appendChild(c4);
-        table.appendChild(row);
-      });
-    })();
-    /* ===========================
-       Render: Charts
-    =========================== */
-    (function(){
-      if(typeof Chart === 'undefined') return;
-      const tickColor = 'rgba(255,255,255,0.72)';
-      const gridColor = 'rgba(255,255,255,0.10)';
-      // Governança
-      const ctxGov = document.getElementById('chartGovernanca');
-      if(ctxGov){
-        new Chart(ctxGov, {
-          type: 'bar',
-          data: {
-            labels: governancaLabels,
-            datasets: [{
-              label: '% de empresas',
-              data: governancaData,
-              borderWidth: 1,
-              borderColor: 'rgba(233,213,255,0.28)',
-              backgroundColor: [
-                'rgba(168,85,247,0.55)',
-                'rgba(96,165,250,0.35)',
-                'rgba(255,255,255,0.10)',
-                'rgba(255,255,255,0.08)',
-                'rgba(255,255,255,0.06)'
-              ]
-            }]
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-              legend: { display: false },
-              tooltip: {
-                callbacks: {
-                  label: (ctx) => `${ctx.raw.toFixed(2)}%`
-                }
-              }
-            },
-            scales: {
-              x: {
-                ticks: { color: tickColor },
-                grid: { color: 'rgba(255,255,255,0.06)' }
-              },
-              y: {
-                beginAtZero: true,
-                max: 100,
-                ticks: { color: tickColor, callback: (v) => v + '%' },
-                grid: { color: gridColor }
-              }
-            }
+          if (window.__dhoChartLoading){
+            const t = setInterval(() => {
+              if (window.Chart){ clearInterval(t); resolve(true); }
+            }, 60);
+            setTimeout(() => { clearInterval(t); resolve(!!window.Chart); }, 2500);
+            return;
           }
+
+          window.__dhoChartLoading = true;
+          const s = document.createElement("script");
+          s.src = "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js";
+          s.async = true;
+          s.onload = () => resolve(true);
+          s.onerror = () => resolve(false);
+          document.head.appendChild(s);
         });
       }
-      // Top 5 objetivos
-      const ctxTop5 = document.getElementById('chartTop5');
-      if(ctxTop5){
-        new Chart(ctxTop5, {
-          type: 'bar',
+
+      function init(root){
+        if (!root || root.dataset.dhoInited === "1") return;
+        root.dataset.dhoInited = "1";
+
+        // ===== Pizza + legenda =====
+        const dataPizza = [
+          { label: "Trabalho e carreira", sub: "carreira, propósito, renda", value: 45, color: "rgba(180,130,255,0.95)" },
+          { label: "Autodesenvolvimento e saúde", sub: "saúde, intelecto, equilíbrio emocional", value: 28, color: "rgba(150,170,255,0.92)" },
+          { label: "Bem-estar e sentido", sub: "hobbies, felicidade, espiritualidade", value: 17, color: "rgba(210,170,255,0.85)" },
+          { label: "Relações", sub: "família, social, conjugal", value: 10, color: "rgba(255,255,255,0.72)" }
+        ];
+
+        const legendaEl = root.querySelector("#dhoObjetivosLegenda");
+        if (legendaEl){
+          legendaEl.innerHTML = dataPizza.map(item => `
+            <div class="dho-legend-item">
+              <span class="dho-legend-dot" style="background:${item.color}"></span>
+              <div>
+                <p class="dho-legend-label">${item.label}</p>
+                <p class="dho-legend-sub">${item.sub}</p>
+              </div>
+              <div class="dho-legend-pct">${item.value}%</div>
+            </div>
+          `).join("");
+        }
+
+        const canvas = root.querySelector("#dhoObjetivosPizza");
+
+        function renderPizza(){
+          if (!canvas || !window.Chart) return;
+
+          if (canvas._chartInstance) canvas._chartInstance.destroy();
+          const ctx = canvas.getContext("2d");
+
+          const chart = new Chart(ctx, {
+            type: "doughnut",
             data: {
-            labels: top5Labels,
-            datasets: [{
-              label: 'Menções',
-              data: top5Data,
-              backgroundColor: 'rgba(168,85,247,0.36)',
-              borderColor: 'rgba(233,213,255,0.20)',
-              borderWidth: 1,
-              borderRadius: 14,
-              borderSkipped: false,
-              barThickness: 22,
-              maxBarThickness: 26
-            ,
-              categoryPercentage: 0.88,
-              barPercentage: 0.92}]},
-          options: {
-            indexAxis: 'y',
-              layout: { padding: { left: 8, right: 12, top: 6, bottom: 6 } },
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-              legend: { display: false },
-              tooltip: {
-                callbacks: {
-                  title: function(items){
-                    if(!items || !items.length) return '';
-                    const i = items[0].dataIndex;
-                    return top5Labels[i] ?? items[0].label;
-                  },
-                  label: function(item){
-                    const v = item.parsed?.x ?? item.parsed;
-                    return `${v} menção(ões)`;
-                  }
+              labels: dataPizza.map(d => d.label),
+              datasets: [{
+                data: dataPizza.map(d => d.value),
+                backgroundColor: dataPizza.map(d => d.color),
+                borderColor: "rgba(255,255,255,0.10)",
+                borderWidth: 1.2,
+                hoverOffset: 6
+              }]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              cutout: "62%",
+              animation: { duration: 650 },
+              plugins: {
+                legend: { display: false },
+                tooltip: {
+                  backgroundColor: "rgba(10,10,14,0.92)",
+                  borderColor: "rgba(255,255,255,0.10)",
+                  borderWidth: 1,
+                  titleColor: "rgba(255,255,255,0.92)",
+                  bodyColor: "rgba(255,255,255,0.85)",
+                  padding: 10,
+                  callbacks: { label: (context) => ` ${context.raw}%` }
                 }
               }
-            },
-            scales: {
-              x: {
-                beginAtZero: true,
-                grid: { color: gridColor, drawBorder: false },
-                ticks: { color: tickColor, precision: 0, padding: 6 }
-              },
-              y: {
-                grid: { display: false, drawBorder: false },
-                ticks: { color: tickColor, autoSkip: false, padding: 8 }
-              }
             }
-          }
+          });
+
+          canvas._chartInstance = chart;
+
+          const force = () => { try { chart.resize(); } catch(e){} };
+          requestAnimationFrame(force);
+          setTimeout(force, 80);
+          setTimeout(force, 260);
+        }
+
+        ensureChart().then((ok) => {
+          if (!ok) return;
+          requestAnimationFrame(renderPizza);
         });
-      }
-      // Barreiras (horizontal empilhado: LID vs NEG)
-      const ctxBar = document.getElementById('chartBarreiras');
-      if(ctxBar){
-        const labels = barreiras.map(b => b.label);
-        const lid = barreiras.map(b => b.lid);
-        const neg = barreiras.map(b => b.neg);
-        new Chart(ctxBar, {
-          type: 'bar',
-          data: {
-            labels,
-            datasets: [
-              {
-                label: 'LID',
-                data: lid,
-                borderWidth: 1,
-                borderColor: 'rgba(96,165,250,0.30)',
-                backgroundColor: 'rgba(96,165,250,0.32)',
-                stack: 'stack1'
-              },
-              {
-                label: 'NEG',
-                data: neg,
-                borderWidth: 1,
-                borderColor: 'rgba(168,85,247,0.28)',
-                backgroundColor: 'rgba(168,85,247,0.32)',
-                stack: 'stack1'
-              }
-            ]
-          },
-          options: {
-            indexAxis: 'y',
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-              legend: {
-                labels: { color: tickColor }
-              }
-            },
-            scales: {
-              x: {
-                beginAtZero: true,
-                ticks: { color: tickColor, precision: 0 },
-                grid: { color: gridColor }
-              },
-              y: {
-                ticks: { color: tickColor },
-                grid: { display: false }
-              }
+
+        // ===== Ranking (revelação progressiva) =====
+        const wrap = root.querySelector("#dhoRankWrap");
+        const btn  = root.querySelector("#dhoRankNextBtn");
+        const hint = root.querySelector("#dhoRankHint");
+        const list = root.querySelector("#dhoObjetivosRank");
+        const finalBox = root.querySelector("#dhoRankFinal");
+
+        if (wrap && btn && list){
+          const items = Array.from(list.querySelectorAll(".dho-rank-item"));
+
+          items.forEach(li => {
+            const r = li.getAttribute("data-rank");
+            if (r !== "1") li.classList.add("is-hidden");
+            else li.classList.remove("is-hidden");
+          });
+
+          if (finalBox) finalBox.classList.remove("is-visible");
+          btn.disabled = false;
+          btn.classList.add("dho-btn--glow");
+
+          const getNextHidden = () => list.querySelector(".dho-rank-item.is-hidden");
+
+          function sync(){
+            const nextHidden = getNextHidden();
+            if (nextHidden){
+              const nextRank = nextHidden.getAttribute("data-rank");
+              btn.textContent = `Descobrir o Top ${nextRank}`;
+              if (hint) hint.textContent = "Dica: clique para abrir o próximo nível do ranking.";
+              return;
             }
+            btn.textContent = "Ranking completo";
+            btn.disabled = true;
+            btn.classList.remove("dho-btn--glow");
+            if (hint) hint.textContent = "Pronto: agora o ranking está totalmente aberto.";
+            if (finalBox) finalBox.classList.add("is-visible");
           }
-        });
+
+          if (wrap.dataset.bound !== "1"){
+            wrap.dataset.bound = "1";
+            btn.addEventListener("click", () => {
+              const hidden = getNextHidden();
+              if (!hidden) return;
+              hidden.classList.remove("is-hidden");
+              sync();
+            });
+          }
+
+          sync();
+        }
+
+        // reflow seguro ao redimensionar
+        window.addEventListener("resize", () => {
+          try{
+            const inst = canvas && canvas._chartInstance;
+            if (inst){ inst.resize(); inst.update("none"); }
+          }catch(e){}
+        }, { passive: true });
       }
-      // Ajuste fino de altura no horizontal
-      const barCanvas = document.getElementById('chartBarreiras');
-      if(barCanvas){
-        const h = Math.max(320, barreiras.length * 34);
-        barCanvas.style.height = h + 'px';
-        barCanvas.parentElement.style.height = h + 'px';
+
+      function run(){
+        init(document.querySelector(".dho-objetivos"));
+      }
+
+      if (document.readyState === "loading"){
+        document.addEventListener("DOMContentLoaded", run, { once: true });
+      } else {
+        run();
       }
     })();
   </script>
-</section>
 </body>
 </html>
