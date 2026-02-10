@@ -1,0 +1,2489 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>DHO 360º | Dimensão 5 | Desafios da Liderança</title>
+<style>
+    :root{
+      /* Base do projeto (assumindo fundo escuro do DHO 360) */
+      --fg: #F5F5F7;
+      --muted: rgba(255,255,255,.70);
+      --text: rgba(255,255,255,.85);
+      --soft: rgba(255,255,255,.90);
+      --line: rgba(255,255,255,.10);
+      --glassA: rgba(255,255,255,.06);
+      --glassB: rgba(255,255,255,.07);
+      --shadow: 0 18px 44px rgba(0,0,0,.40);
+      --shadowCard: 0 10px 30px rgba(0,0,0,.25);
+      --violet1: rgba(124,58,237,.55);
+      --violet2: rgba(168,85,247,.40);
+      --ice: rgba(56,189,248,.25);
+      --greenStrong: rgba(34,197,94,.92);
+      --greenSoft: rgba(34,197,94,.42);
+      --off: rgba(255,255,255,.16);
+      --focus: rgba(232, 202, 255, 0.95);
+    }
+    /* ========= Base ========= */
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color: var(--fg);
+      background: #07070b;
+    }
+    /* ========= Padrão do bloco ========= */
+    .dho-objetivos{ padding: 19px 11px; }
+    .dho-objetivos-wrap{
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 12px 12px;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.06);
+      box-shadow: 0 18px 44px rgba(0,0,0,0.40);
+      backdrop-filter: blur(12px);
+      position: relative;
+      overflow: hidden;
+    }
+    .dho-objetivos-wrap::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(600px 260px at 10% 0%, rgba(168,85,247,.22), transparent 55%),
+        radial-gradient(520px 240px at 90% 10%, rgba(56,189,248,.16), transparent 58%),
+        radial-gradient(560px 260px at 55% 110%, rgba(124,58,237,.18), transparent 58%);
+      pointer-events:none;
+      z-index:0;
+    }
+    .dho-objetivos-grid{
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 14px;
+      align-items: start;
+    }
+    /* ========= Tipografia (padrão) ========= */
+    .dho-kicker{
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.70);
+      margin: 0 0 8px;
+    }
+    .dho-title{
+      font-size: clamp(22px, 2.3vw, 34px);
+      line-height: 1.15;
+      font-weight: 700;
+      color: #F5F5F7;
+      margin: 0 0 10px;
+    }
+    .dho-subtitle{
+      font-size: 15.5px;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.85);
+      text-align: justify;
+      margin: 0;
+    }
+    .dho-flow-title{
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      color: rgba(232, 202, 255, 0.95);
+      text-align: center;
+      line-height: 1.2;
+      margin: 0 0 10px;
+    }
+    .dho-card-title{
+      font-size: 16px;
+      font-weight: 700;
+      color: #F5F5F7;
+      margin: 0 0 6px;
+    }
+    .dho-table-lead{
+      font-size: 15px;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.88);
+      font-weight: 400;
+      text-align: left;
+      margin: 0 0 12px;
+    }
+.dho-card-note{
+      font-size: 13.5px;
+      line-height: 1.55;
+      color: rgba(255,255,255,0.70);
+      text-align: justify;
+      margin: 0;
+    }
+    .dho-footnote{
+      font-size: 12.8px;
+      line-height: 1.55;
+      color: rgba(255,255,255,0.80);
+      text-align: justify;
+      margin: 0;
+    }
+    /* ========= Cards ========= */
+    .dho-card{
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.07);
+      border-radius: 18px;
+      padding: 9px 9px 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+    }
+    .dho-card::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(420px 220px at 0% 0%, rgba(168,85,247,.18), transparent 62%),
+        radial-gradient(420px 220px at 100% 0%, rgba(56,189,248,.10), transparent 62%),
+        radial-gradient(520px 240px at 50% 120%, rgba(124,58,237,.14), transparent 60%);
+      pointer-events:none;
+      z-index:0;
+    }
+    .dho-card > *{ position: relative; z-index:1; }
+    /* ========= NPS (escala 0–10) ========= */
+    .dho-nps{
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .dho-nps-row{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1cm; /* distância solicitada entre gráfico e texto */
+  align-items: center;
+  padding: 0 55px 0 22px; /* margem direita ampliada (+150%) */
+}
+.dho-nps-row .dho-nps-gauge{
+  margin-top: 0;
+  justify-self: end; /* mantém o gráfico “mais à direita” na 1ª coluna */
+}
+.dho-nps-sidecopy{
+  justify-self: start;
+  max-width: 420px;
+}
+.dho-nps-copy{
+  margin: 0;
+}
+@media (max-width: 760px){
+  .dho-nps-row{
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding: 0;
+  }
+  .dho-nps-row .dho-nps-gauge{ justify-self: center; }
+  .dho-nps-sidecopy{ justify-self: stretch; max-width: none; }
+}.dho-nps-sidecopy{ max-width: none; }
+      .dho-nps-row .dho-nps-gauge{ transform:none; }
+    .dho-nps-grid{
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(11, 1fr);
+      gap: 6px;
+      align-items: stretch;
+    }
+    .dho-nps-cell{
+      text-align: center;
+      font-variant-numeric: tabular-nums;
+      font-size: 12.5px;
+      padding: 8px 0;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(0,0,0,0.12);
+      color: rgba(255,255,255,0.78);
+    }
+    .dho-nps-cell.is-score{
+      border-color: rgba(56,189,248,.52);
+      background: rgba(56,189,248,.12);
+      color: rgba(255,255,255,0.92);
+      box-shadow: 0 0 0 1px rgba(56,189,248,.16) inset;
+    }
+    .dho-nps-pointer{
+      position: absolute;
+      top: -9px;
+      left: var(--npsPos, 50%);
+      transform: translateX(-50%);
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(56,189,248,.95);
+      box-shadow: 0 0 0 4px rgba(56,189,248,.18), 0 10px 22px rgba(0,0,0,.35);
+      pointer-events: none;
+    }
+    .dho-nps-ends{
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 8px;
+      font-size: 12.8px;
+      line-height: 1.35;
+      color: rgba(255,255,255,0.70);
+    }
+    @media (max-width: 520px){
+      .dho-nps-grid{ gap: 4px; }
+      .dho-nps-cell{ font-size: 12px; padding: 7px 0; border-radius: 11px; }
+    }
+    /* ========= NPS (gauge semicircular 0–10) ========= */
+    .dho-nps-gauge{
+      width: min(294px, 100%);
+      position: relative;
+      margin-top: 10px;
+    }
+    .dho-nps-svg{
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .dho-nps-arc-bg,
+    .dho-nps-arc-seg{
+      fill: none;
+      stroke-linecap: round;
+      stroke-width: 22;
+    }
+    .dho-nps-arc-bg{ stroke: rgba(255,255,255,0.10); }
+    .dho-nps-arc-seg.seg-a{ stroke: rgba(168,85,247,0.26); }
+    .dho-nps-arc-seg.seg-b{ stroke: rgba(124,58,237,0.32); }
+    .dho-nps-arc-seg.seg-c{ stroke: rgba(56,189,248,0.28); }
+    .dho-nps-needle{
+      stroke: rgba(255,255,255,0.86);
+      stroke-width: 3;
+      stroke-linecap: round;
+      filter: drop-shadow(0 12px 22px rgba(0,0,0,0.40));
+    }
+    .dho-nps-knob{
+      fill: rgba(255,255,255,0.88);
+      filter: drop-shadow(0 12px 22px rgba(0,0,0,0.35));
+    }
+    .dho-nps-knob-ring{
+      fill: rgba(232,202,255,0.10);
+    }
+    .dho-nps-value{
+      position: absolute;
+      left: 50%;
+      bottom: 16px;
+      transform: translateX(-50%);
+      display: inline-flex;
+      align-items: baseline;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.12);
+      border: 1px solid rgba(255,255,255,0.10);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      pointer-events: none;
+    }
+    .dho-nps-value strong{
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+      color: rgba(255,255,255,0.92);
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+    .dho-nps-value span{
+      font-size: 12.5px;
+      color: rgba(255,255,255,0.70);
+      line-height: 1;
+    }
+    .dho-nps-scale{
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 10px;
+      padding: 0 6px;
+      font-size: 12.4px;
+      line-height: 1.35;
+      color: rgba(255,255,255,0.68);
+      font-variant-numeric: tabular-nums;
+    }
+    @media (max-width: 520px){
+      .dho-nps-gauge{ width: min(252px, 100%); }
+      .dho-nps-value strong{ font-size: 24px; }
+    }
+    .dho-plain-surface{
+      border: 0 !important;
+      background: transparent !important;
+      box-shadow: none !important;
+      padding: 0 !important;
+      border-radius: 0 !important;
+      backdrop-filter: none !important;
+    }
+    /* ========= Botões ========= */
+  /* Ícone do topo: invisível até "Concluir" (fica no fluxo, à esquerda do texto) */
+  .dho-dim-toggle.dho-btn--start .dho-dim-toggle__icon{
+    opacity: 0;
+    color: rgba(255,255,255,0);
+  }
+  .dho-dim-toggle.dho-btn--start.is-concluded .dho-dim-toggle__icon{
+    opacity: 1;
+  }
+  .dho-btn{
+    width: 100%;
+    border: 1px solid rgba(206, 182, 255, 0.26);
+    border-radius: 14px;
+    padding: 11px 12px;
+    font-weight: 800;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    color: rgba(255,255,255,0.94);
+    background: rgba(165, 125, 255, 0.16);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.22);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: transform 0.12s ease, background 0.12s ease, border-color 0.12s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .dho-btn:hover{
+    transform: translateY(-1px);
+    background: rgba(175, 140, 255, 0.20);
+    border-color: rgba(220, 200, 255, 0.34);
+  }
+  .dho-btn:active{ transform: translateY(0px); }
+  .dho-btn:disabled{
+    cursor: default;
+    opacity: 0.70;
+    transform: none;
+  }
+  .dho-btn--glow::after{
+    content: "";
+    position: absolute;
+    inset: -40%;
+    background: linear-gradient(
+      110deg,
+      transparent 0%,
+      rgba(245, 235, 255, 0.06) 35%,
+      rgba(245, 235, 255, 0.22) 50%,
+      rgba(245, 235, 255, 0.06) 65%,
+      transparent 100%
+    );
+    transform: translateX(-55%) rotate(8deg);
+    animation: dhoShimmer 3.6s ease-in-out infinite;
+    pointer-events: none;
+  }
+  @keyframes dhoShimmer{
+    0%   { transform: translateX(-60%) rotate(8deg); opacity: 0.0; }
+    18%  { opacity: 0.55; }
+    50%  { transform: translateX(60%) rotate(8deg); opacity: 0.35; }
+    100% { transform: translateX(60%) rotate(8deg); opacity: 0.0; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .dho-btn--glow::after{ animation: none; }
+  }
+  .dho-dim-toggle{
+    height: 42px;
+    min-height: 42px;
+    padding: 0 12px;
+    position: relative;
+    overflow: visible;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: min(860px, 100%);
+    margin: 0 auto 12px;
+    text-align: left;
+}
+  .dho-dim-toggle__main{
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: 0.01em;
+  }
+  .dho-dim-toggle__sub{
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.78);
+    font-weight: 800;
+    opacity: 0.92;
+    white-space: nowrap;
+  }
+  /* Topo: lilás/rosa, sensação de "iniciar leitura" */
+  .dho-dim-toggle.dho-btn--start{
+    border-color: rgba(255, 180, 230, 0.34);
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.18), rgba(236, 72, 153, 0.14));
+  }
+  .dho-dim-toggle.dho-btn--start:hover{
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.22), rgba(236, 72, 153, 0.18));
+    border-color: rgba(255, 200, 245, 0.42);
+  }
+  /* Base: "apagado", sensação de conclusão */
+  .dho-dim-toggle.dho-btn--end{
+    margin: 14px auto 0;
+    border-color: rgba(255,255,255,0.14);
+    background: rgba(255,255,255,0.04);
+    color: rgba(255,255,255,0.88);
+  }
+  .dho-dim-toggle.dho-btn--end:hover{
+    background: rgba(255,255,255,0.06);
+    border-color: rgba(255,255,255,0.20);
+  }
+  /* Esconde o botão final quando a dimensão está recolhida (exceto quando marcado como concluído) */
+  .dho-dim-toggle.dho-btn--end.is-soft-hidden{
+    display: none !important;
+  }
+  /* Farol verde ao recolher via "Leitura concluída" */
+  .dho-dim-toggle.dho-btn--end.is-done{
+    border-color: rgba(34, 197, 94, 0.55);
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.18), rgba(16, 185, 129, 0.12));
+    box-shadow:
+      0 0 0 1px rgba(34, 197, 94, 0.18),
+      0 18px 44px rgba(0,0,0,0.40),
+      0 10px 34px rgba(34, 197, 94, 0.14);
+  }
+  .dho-dim-toggle.dho-btn--end.is-done .dho-dim-toggle__sub{
+    color: rgba(220, 255, 235, 0.88);
+  }
+  /* Conteúdo colapsável */
+  .dho-dim-content{
+    overflow: hidden;
+    max-height: none;
+    opacity: 1;
+    transition: max-height 260ms ease, opacity 220ms ease;
+  }
+  .dho-dim-content.is-collapsed{
+    max-height: 0px !important;
+    opacity: 0;
+    pointer-events: none;
+  }
+    .dho-end-cta{
+      grid-column: 1 / -1;
+      justify-self: center;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      padding: 18px 0 8px;
+    }
+    .dho-end-cta.is-soft-hidden{ display:none; }
+    .dho-end-check{
+      width: 55px;
+      height: 55px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.05);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.35);
+      backdrop-filter: blur(10px);
+      display: grid;
+      place-items: center;
+      position: relative;
+      cursor: pointer;
+      outline: none;
+      transition: transform .16s ease, border-color .16s ease, background .16s ease, box-shadow .16s ease;
+    }
+    .dho-end-check:hover{ transform: translateY(-1px); border-color: rgba(255,255,255,0.22); background: rgba(255,255,255,0.07); }
+    .dho-end-check:active{ transform: translateY(0px) scale(0.99); }
+    /* “caixa de checklist” no centro */
+    .dho-end-check__icon{
+      width: 18px;
+      height: 18px;
+      border-radius: 6px;
+      border: 2px solid rgba(255,255,255,0.40);
+      background: rgba(0,0,0,0.10);
+      position: relative;
+      transition: border-color .18s ease, background .18s ease, box-shadow .18s ease, transform .18s ease;
+    }
+    /* brilho/pulso enquanto a dimensão estiver aberta (incentivo a concluir) */
+    .dho-end-cta.is-pulsing .dho-end-check{
+      animation: dhoPulseSoft 1.25s ease-in-out infinite;
+    }
+    .dho-end-cta.is-pulsing .dho-end-check__icon{
+      border-color: rgba(232, 202, 255, 0.78);
+      box-shadow: 0 0 0 7px rgba(168, 85, 247, 0.06);
+    }
+    @keyframes dhoPulseSoft{
+      0%, 100% { box-shadow: 0 12px 30px rgba(0,0,0,0.38), 0 0 0 0 rgba(168,85,247,0.00); }
+      50%      { box-shadow: 0 12px 30px rgba(0,0,0,0.38), 0 0 0 13px rgba(168,85,247,0.10); }
+    }
+    /* estado “concluída” (farol verde + check) */
+    .dho-end-check.is-done{
+      border-color: rgba(34, 197, 94, 0.95);
+      background: rgba(34, 197, 94, 0.10);
+      box-shadow:
+        0 14px 40px rgba(0,0,0,0.45),
+        0 0 0 1px rgba(34,197,94,0.22),
+        0 0 24px rgba(34,197,94,0.55);
+    }
+    .dho-end-check.is-done .dho-end-check__icon{
+      border-color: rgba(34,197,94,1);
+      background: rgba(34,197,94,0.20);
+      box-shadow: 0 0 18px rgba(34,197,94,0.38);
+      transform: scale(1.02);
+    }
+    .dho-end-check.is-done .dho-end-check__icon::after{
+      content:"";
+      position:absolute;
+      left: 5px;
+      top: 4px;
+      width: 6px;
+      height: 10px;
+      border-right: 2px solid rgba(245,245,247,0.95);
+      border-bottom: 2px solid rgba(245,245,247,0.95);
+      transform: rotate(40deg);
+    }
+    .dho-end-caption{
+      font-size: 12.5px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.72);
+      text-align: center;
+      max-width: 520px;
+    }
+    .dho-end-check.is-done + .dho-end-caption{
+      color: rgba(34,197,94,0.92);
+      text-shadow: 0 0 16px rgba(34,197,94,0.35);
+    }
+    /* acessibilidade */
+    .sr-only{
+      position:absolute !important;
+      width:1px !important;
+      height:1px !important;
+      padding:0 !important;
+      margin:-1px !important;
+      overflow:hidden !important;
+      clip:rect(0,0,0,0) !important;
+      white-space:nowrap !important;
+      border:0 !important;
+    }
+  /* ===== Ajustes finais: dock do botão “Concluir” no topo ===== */
+  .dho-dim-toggle__left{
+    display:flex;
+    align-items:center;
+    gap: 12px;
+    min-width: 0;
+  }
+  .dho-dim-toggle__main{
+    white-space: nowrap;
+  }
+  .dho-dim-toggle__badge-slot{
+    width: 44px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex: 0 0 auto;
+  }
+  .dho-dim-toggle__badge-slot:empty{
+    width: 0;
+  }
+  /* Quando o botão verde estiver anexado ao topo */
+  .dho-end-check.is-docked .dho-end-check__icon{
+    width: 13px;
+    height: 13px;
+    border-radius: 5px;
+  }
+  /* Oculta o “rodapé de concluir” quando o botão estiver dockado no topo */
+  .dho-end-cta.is-docked-away{
+    display:none !important;
+  }
+  /* Correção: check dentro da caixinha quando o botão está dockado no topo */
+  .dho-end-check.is-docked .dho-end-check__icon{
+    width: 13px !important;
+    height: 13px !important;
+    border-radius: 5px !important;
+  }
+  .dho-end-check.is-docked .dho-end-check__icon::after{
+    left: 3.2px !important;
+    top: 1.6px !important;
+    width: 4.2px !important;
+    height: 7.2px !important;
+    border-right: 2px solid rgba(245,245,247,0.95) !important;
+    border-bottom: 2px solid rgba(245,245,247,0.95) !important;
+    transform: rotate(40deg) !important;
+  }
+  .dho-end-check.is-docked .dho-end-check__icon{
+    width: 12px !important;
+    height: 12px !important;
+    border-radius: 5px !important;
+  }
+  .dho-end-check.is-docked .dho-end-check__icon::after{
+    left: 3.0px !important;
+    top: 1.5px !important;
+    width: 4.0px !important;
+    height: 6.8px !important;
+  }
+  /* ===== FIX: tamanho do botão dockado (força 30x30) ===== */
+  .dho-end-check{
+    box-sizing: border-box;
+    padding: 0;
+    line-height: 0;
+  }
+  .dho-end-check.is-docked{
+    width: 30px !important;
+    height: 30px !important;
+    min-width: 30px !important;
+    min-height: 30px !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+    display: grid !important;
+    place-items: center !important;
+    border-radius: 999px !important;
+    margin: 0 !important;
+    transform: none !important;
+  }
+  /* Estado concluído: barra do topo fica verde claro (sensação de “finalizado”) */
+  .dho-dim-toggle.dho-btn--start.is-completed{
+    border-color: rgba(34,197,94,0.34) !important;
+    background:
+      radial-gradient(120% 160% at 10% 10%, rgba(74,222,128,0.22), rgba(34,197,94,0.10) 42%, rgba(255,255,255,0.04) 100%),
+      linear-gradient(90deg, rgba(34,197,94,0.16), rgba(74,222,128,0.08)) !important;
+    box-shadow:
+      0 0 0 1px rgba(34,197,94,0.10),
+      0 14px 34px rgba(0,0,0,0.38),
+      0 0 34px rgba(34,197,94,0.18) !important;
+  }
+  .dho-dim-toggle.dho-btn--start.is-completed .dho-dim-toggle__main{
+    color: rgba(245,245,247,0.96);
+  }
+  .dho-dim-toggle.dho-btn--start.is-completed .dho-dim-toggle__sub{
+    color: rgba(245,245,247,0.82);
+  }
+  /* Ajuste solicitado: remover pisca/brilho do botao do topo (sem shimmer/pulsacao) */
+  .dho-dim-toggle.dho-btn--start.dho-btn--glow::after{
+    display: none !important; /* remove o shimmer animado */
+  }
+  /* Mantem a sensacao de concluido, porem sem halo/brilho extra */
+  .dho-dim-toggle.dho-btn--start.is-completed{
+    box-shadow: 0 14px 34px rgba(0,0,0,0.38) !important;
+  }
+  /* Após “Concluir”: remove totalmente o overlay decorativo do wrap (::before) */
+  .dho-objetivos-wrap.is-concluded::before{
+    opacity: 0 !important;
+    background: transparent !important;
+  }
+  /* Após “Concluir”: o que ainda aparece é o “glass” do próprio wrap (não o ::before).
+     Então, ao concluir, deixamos o wrap inteiro invisível (sem fundo, borda, sombra e blur). */
+  .dho-objetivos-wrap.is-concluded{
+    background: transparent !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  /* Atenção: botão “Iniciar leitura” pisca apenas antes de abrir o conteúdo */
+  @keyframes dhoStartPulse{
+    0%, 100%{
+      border-color: rgba(232, 202, 255, 0.22);
+      box-shadow:
+        0 14px 34px rgba(0,0,0,0.38),
+        0 0 0 1px rgba(168,85,247,0.10),
+        0 0 18px rgba(168,85,247,0.18);
+      filter: saturate(1);
+    }
+    50%{
+      border-color: rgba(232, 202, 255, 0.36);
+      box-shadow:
+        0 14px 34px rgba(0,0,0,0.38),
+        0 0 0 1px rgba(168,85,247,0.18),
+        0 0 26px rgba(168,85,247,0.30);
+      filter: saturate(1.08);
+    }
+  }
+  .dho-dim-toggle.dho-btn--start.is-attn{
+    animation: dhoStartPulse 1.55s ease-in-out infinite;
+  }
+  /* Respeita preferências de movimento */
+  @media (prefers-reduced-motion: reduce){
+    .dho-dim-toggle.dho-btn--start.is-attn{ animation: none; }
+  }
+    .dho-btn:focus-visible{
+      outline: 2px solid rgba(232, 202, 255, .40);
+      outline-offset: 2px;
+    }
+    .dho-btn .dho-btn-ico{
+      width: 18px;
+      height: 18px;
+      display:inline-grid;
+      place-items:center;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.10);
+    }
+    /* ========= Headline da dimensão ========= */
+    .dho-dim-header{
+      grid-column: 1 / -1;
+      width: min(860px, 100%);
+      justify-self: center;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 12px 11px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(0,0,0,0.12);
+      position: relative;
+      overflow: hidden;
+    }
+    .dho-dim-header::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(540px 240px at 20% 0%, rgba(168,85,247,.18), transparent 62%),
+        radial-gradient(520px 240px at 90% 30%, rgba(56,189,248,.12), transparent 62%);
+      pointer-events:none;
+      z-index:0;
+    }
+    .dho-dim-header > *{ position: relative; z-index:1; }
+    .dho-dim-lead{
+      margin: 0;
+      font-size: 14.2px;
+      line-height: 1.55;
+      color: rgba(255,255,255,0.82);
+      text-align: justify;
+      max-width: 860px;
+    }
+    /* ========= Callout/Insight ========= */
+    .dho-callout{
+      margin-top: 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: linear-gradient(135deg, rgba(168,85,247,.12), rgba(0,0,0,0.12));
+      padding: 8px 8px;
+    }
+.dho-callout--narrow{
+      width: min(60%, 520px);
+      margin-left: auto;
+      margin-right: auto;
+    }
+    @media (max-width: 720px){
+      .dho-callout--narrow{ width: 100%; }
+    }
+    /* Ajustes locais | Maturidade e autonomia das equipes */
+    /* Tabela de maturidade (substitui a lista) */
+    .sr-only{
+      position:absolute !important;
+      width:1px !important;
+      height:1px !important;
+      padding:0 !important;
+      margin:-1px !important;
+      overflow:hidden !important;
+      clip:rect(0,0,0,0) !important;
+      white-space:nowrap !important;
+      border:0 !important;
+    }
+    .dho-autonomia .dho-maturity-table{
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0 8px;
+      font-size: 13.8px;
+      line-height: 1.45;
+      color: rgba(255,255,255,0.90);
+    }
+    .dho-autonomia .dho-maturity-table td{
+      padding: 8px 8px;
+      vertical-align: middle;
+      background: rgba(0,0,0,0.10);
+      border-top: 1px solid rgba(255,255,255,0.10);
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+    }
+    .dho-autonomia .dho-maturity-table td:first-child{
+      width: 44px;
+      text-align: center;
+      font-variant-numeric: tabular-nums;
+      color: rgba(255,255,255,0.78);
+      border-left: 1px solid rgba(255,255,255,0.10);
+      border-top-left-radius: 14px;
+      border-bottom-left-radius: 14px;
+    }
+    .dho-autonomia .dho-maturity-table td:nth-child(2){
+      border-left: 0;
+      border-right: 0;
+    }
+    .dho-autonomia .dho-maturity-table td:last-child{
+      width: 150px;
+      border-right: 1px solid rgba(255,255,255,0.10);
+      border-top-right-radius: 14px;
+      border-bottom-right-radius: 14px;
+    }
+    .dho-autonomia .dho-mini-bar{
+      position: relative;
+      height: 22px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: rgba(80, 160, 255, 0.16);
+      border: 1px solid rgba(120, 190, 255, 0.32);
+    }
+    .dho-autonomia .dho-mini-bar::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      width: var(--w, 0%);
+      background: linear-gradient(90deg, rgba(90,170,255,0.38), rgba(90,170,255,0.70));
+    }
+    .dho-autonomia .dho-mini-bar span{
+      position: relative;
+      z-index: 1;
+      display: block;
+      line-height: 22px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 12.8px;
+      color: rgba(255,255,255,0.92);
+    }
+    .dho-autonomia .dho-dash{
+      display:block;
+      text-align:center;
+      color: rgba(255,255,255,0.55);
+      font-variant-numeric: tabular-nums;
+    }
+    .dho-autonomia .dho-callout{
+      padding: 6px 6px; /* ~40% menor vs 12px */
+      border-radius: 12px;
+      /* Largura 40% menor (de full-width para 60%) */
+      width: 60%;
+      max-width: 520px;
+      min-width: 240px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .dho-autonomia .dho-callout p{
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+.dho-callout strong{
+      color: rgba(255,255,255,0.92);
+    }
+    .dho-callout p{
+      margin: 0;
+      font-size: 13.8px;
+      line-height: 1.55;
+      color: rgba(255,255,255,0.85);
+      text-align: justify;
+    }
+    /* ========= Listas ========= */
+    .dho-bullets{
+      margin: 10px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 8px;
+    }
+    .dho-bullets li{
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(0,0,0,0.12);
+      border-radius: 14px;
+      padding: 7px 8px;
+      color: rgba(255,255,255,0.88);
+      line-height: 1.5;
+      text-align: justify;
+    }
+    /* ========= Expand/Collapse ========= */
+    .is-hidden{ display:none !important; }
+    .dho-expand{
+      margin-top: 12px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .dho-expand-hint{
+      font-size: 12.8px;
+      color: rgba(255,255,255,0.70);
+    }
+    .dho-expand-panel{
+      margin-top: 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(0,0,0,0.10);
+      padding: 8px 8px;
+    }
+    .dho-def-list{
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 10px;
+    }
+    .dho-def-item{
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.05);
+      border-radius: 14px;
+      padding: 7px 8px;
+    }
+    .dho-def-item .t{
+      margin: 0 0 4px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.90);
+      font-size: 13.8px;
+    }
+    .dho-def-item .d{
+      margin: 0;
+      color: rgba(255,255,255,0.76);
+      font-size: 13.2px;
+      line-height: 1.55;
+      text-align: justify;
+    }
+    /* ========= Lista de síntese (sem caixas) + farol apagado ========= */
+    .dho-def-list--plain{
+      display:grid;
+      gap: 0;
+      margin-top: 16px;
+    }
+    .dho-def-list--plain .dho-def-item{
+      border: 0 !important;
+      background: transparent !important;
+      box-shadow: none !important;
+      padding: 0 !important;
+    }
+    .dho-def-row{
+      display:flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .dho-lamp{
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      flex: 0 0 auto;
+      margin-top: 6px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.12);
+      box-shadow: 0 0 0 rgba(0,0,0,0);
+      opacity: .9;
+    }
+    /* Gap entre enunciado e lista (somente no bloco de práticas) */
+    article[aria-label="Práticas mais desafiadoras"] .dho-card-note{ margin-bottom: 6px; }
+    /* ========= Separador sutil (azul/roxo) entre itens da lista ========= */
+    .dho-def-list--plain .dho-def-item + .dho-def-item{
+      border-top: 0 !important;
+      padding-top: 12px !important;
+      margin-top: 0;
+      position: relative;
+    }
+    .dho-def-list--plain .dho-def-item + .dho-def-item::before{
+      content:"";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg,
+        rgba(168,85,247,0.00),
+        rgba(168,85,247,0.28),
+        rgba(56,189,248,0.26),
+        rgba(168,85,247,0.18),
+        rgba(168,85,247,0.00)
+      );
+      opacity: 0.95;
+      pointer-events: none;
+    }
+    /* ========= Tabelas com faróis ========= */
+    .dho-table-wrap{
+      width: min(860px, 100%);
+      justify-self: center;
+      grid-column: 1 / -1;
+    }
+    .dho-table-wrap--rh{
+      width: min(722px, 100%); /* apenas tabela RH (+5% vs atual) */
+    }
+    .dho-legend{
+      margin-top: 8px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-end; /* alinha a legenda ao canto direito do card */
+      color: rgba(255,255,255,0.72);
+      font-size: 11.6px;
+    }
+    .dho-legend .chip{
+      display:inline-flex;
+      align-items:center;
+      gap: 7px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(0,0,0,0.10);
+      border-radius: 999px;
+      padding: 5px 8px; /* menor “forma” */
+    }
+    .dot{
+      width: 8px; height:8px; /* menor indicador */
+      border-radius: 99px;
+      display:inline-block;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.18);
+    }
+    .dot.strong{ background: var(--greenStrong); border-color: rgba(34,197,94,.65); }
+    .dot.soft{ background: var(--greenSoft); border-color: rgba(34,197,94,.35); }
+    .dot.off{ background: var(--off); border-color: rgba(255,255,255,.12); }
+    table.dho-table{
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      overflow: hidden;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(0,0,0,0.10);
+    }
+    .dho-table thead th{
+      text-align: left;
+      font-size: 12.6px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.72);
+      padding: 8px 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.04);
+    }
+    .dho-table tbody td{
+      padding: 8px 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      vertical-align: top;
+      color: rgba(255,255,255,0.86);
+      font-size: 13.6px;
+      line-height: 1.5;
+      text-align: justify;
+    }
+    .dho-item-desc{
+      display:block;
+      margin-top: 4px;
+      font-size: 12.8px;
+      line-height: 1.45;
+      color: rgba(255,255,255,.72);
+    }
+    .dho-table tbody tr:last-child td{ border-bottom: 0; }
+    .dho-table .col-desafio{ width: 62%; }
+    .dho-table .col-vis{ width: 19%; text-align: left; }
+    .dho-table .col-vis2{ width: 19%; text-align: left; }
+    .dho-signal{
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 7px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(0,0,0,0.10);
+      min-width: 120px;
+    }
+    .dho-signal .label{
+      font-size: 12.8px;
+      color: rgba(255,255,255,0.80);
+      white-space: nowrap;
+    }
+    .dho-signal .meta{
+      font-variant-numeric: tabular-nums;
+      font-size: 12.6px;
+      color: rgba(255,255,255,0.70);
+    }
+    /* ========= Card com largura controlada (860px) ========= */
+    .dho-card--narrow{
+      width: min(860px, 100%);
+      justify-self: center;
+      grid-column: 1 / -1;
+    }
+    .dho-inner-sep{
+      height: 1px;
+      background: rgba(255,255,255,0.10);
+      border-radius: 999px;
+      margin: 12px 2px 14px;
+      opacity: .9;
+    }
+        /* ========= Fechamento e CTA ========= */
+    .dho-close{
+      grid-column: 1 / -1;
+      width: min(860px, 100%);
+      justify-self: center;
+    }
+    .dho-cta{
+      grid-column: 1 / -1;
+      width: min(860px, 100%);
+      justify-self: center;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    /* ========= Layout editorial (colunas completas) ========= */
+    .full{ grid-column: 1 / -1; }
+    /* ========= Responsivo ========= */
+    @media (max-width: 920px){
+      .dho-objetivos-grid{ grid-template-columns: 1fr; }
+      .dho-dim-header{ padding: 11px 9px; }
+      .dho-objetivos-wrap{ padding: 11px 9px; }
+    }
+    @media (max-width: 520px){
+      .dho-objetivos{ padding: 15px 8px; }
+      .dho-objetivos-wrap{ border-radius: 18px; }
+      .dho-card{ border-radius: 16px; }
+      .dho-table thead th, .dho-table tbody td{ padding: 7px 7px; }
+      .dho-signal{ min-width: 104px; }
+    }
+    /* ========= Superfície totalmente transparente (mantém padding/layout) ========= */
+    .dho-surface-transparent{
+      border: 0 !important;
+      background: transparent !important;
+      box-shadow: none !important;
+      backdrop-filter: none !important;
+    }
+    .dho-surface-transparent::before{ display:none !important; }
+    /* ===== BLOCO 7 | Layout interativo (Pergunta + Respostas) ===== */
+    .dho-qdeck{ display:grid; grid-template-columns: 1fr; gap: 12px; }
+    .dho-question{
+      border: 1px solid rgba(255,255,255,.10);
+      background: transparent;
+      border-radius: 18px;
+      padding: 9px 11px;
+      box-shadow: 0 10px 26px rgba(0,0,0,.20);
+    }
+    .dho-question .label{
+      font-size: 12px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.70);
+      margin-bottom: 8px;
+    }
+    .dho-question .q{
+      margin:0;
+      font-size: 17.5px;
+      line-height: 1.35;
+      font-weight: 800;
+      color: rgba(255,255,255,.92);
+    }
+    .dho-deck{
+      position: relative;
+      border-radius: 18px;
+      border: 0;
+      background: transparent;
+      padding: 16px;
+      overflow:hidden;
+      /* Layout: coluna esquerda (formas) + coluna direita (resposta em foco) */
+      display: grid;
+      grid-template-columns: minmax(280px, 364px) minmax(0, 1fr);
+      column-gap: 16px;
+      row-gap: 12px;
+      align-items: stretch;
+    }
+    .dho-deck::before{
+      content:"";
+      display:none;
+    }
+    .dho-deck > *{ position:relative; z-index:1; }
+    .dho-path{
+      position:absolute; inset: 22px 18px 22px 18px;
+      pointer-events:none;
+      opacity:.35;
+      z-index:0;
+      display:none; /* evita desalinhamento com o layout em coluna */
+    }
+    .dho-path svg{ width:100%; height:100%; }
+    .dho-path path{
+      fill:none;
+      stroke: rgba(255,255,255,.14);
+      stroke-width:1.2;
+    }
+    .dho-cards{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      align-items: stretch;
+      justify-items: stretch;
+      justify-self: start;
+      width: min(364px, 100%);
+    }
+.dho-cardx{
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.06);
+      box-shadow: 0 10px 26px rgba(0,0,0,.18);
+      backdrop-filter: blur(10px);
+      padding: 6px 8px;
+      min-height: 42px;
+      cursor: pointer;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease, box-shadow .18s ease;
+      position: relative;
+      overflow:hidden;
+      text-align: left;
+          display:flex;
+      align-items:center;
+      gap:12px;
+}
+    .dho-cardx::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(260px 180px at 12% 25%, rgba(168,85,247,.14), transparent 60%),
+        radial-gradient(240px 180px at 86% 70%, rgba(56,189,248,.10), transparent 62%);
+      opacity:.85;
+      pointer-events:none;
+    }
+    .dho-cardx > *{ position:relative; z-index:1; }
+    .dho-cardx:hover{
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,.18);
+      background: rgba(255,255,255,.075);
+      box-shadow: 0 14px 34px rgba(0,0,0,.24);
+    }
+    .dho-cardx[aria-pressed="true"]{
+      border-color: rgba(232, 202, 255, 0.42);
+      background: rgba(232, 202, 255, 0.08);
+    }
+    .dho-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-size: 11.5px;
+      letter-spacing: .10em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.70);
+      margin-bottom: 0;
+      flex: 0 0 auto;
+      }
+    .dho-dot{
+      width:9px; height:9px; border-radius:999px;
+      background: rgba(255,255,255,.34);
+      box-shadow: 0 0 0 2px rgba(255,255,255,.10);
+    }
+    /* Variações mantidas por compatibilidade — porém ficam “apagadas” por padrão */
+    .dho-dot.violet,
+    .dho-dot.blue,
+    .dho-dot.green,
+    .dho-dot.gray{
+      background: rgba(255,255,255,.34);
+      box-shadow: 0 0 0 2px rgba(255,255,255,.10);
+    }
+    /* Estado ativo: farol aceso (azul) */
+    .dho-cardx[aria-pressed="true"] .dho-dot{
+      background: rgba(56,189,248,.85);
+      box-shadow: 0 0 0 2px rgba(56,189,248,.18);
+    }
+.dho-cardx .text{
+      font-size: 13px;
+      line-height: 1.5;
+      color: rgba(255,255,255,.90);
+      font-weight: 650;
+    }
+    .dho-focus{
+      margin-top: 0;
+      border-radius: 16px;
+      border: 0;
+      background: transparent;
+      padding: 14px 14px 12px;
+      height: 100%;
+      align-self: stretch;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      overflow: hidden;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    .dho-focus .head{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      min-width:0;
+      justify-content: center;
+    }
+    .dho-focus .k{
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    .dho-focus .k .left{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width: 0;
+    }
+    .dho-focus .k .pill{
+      font-size: 11.5px;
+      letter-spacing: .10em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.70);
+      padding: 6px 7px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.06);
+      white-space: nowrap;
+    }
+    .dho-focus .k .title{
+      font-weight: 800;
+      color: rgba(255,255,255,.92);
+      font-size: 14.8px;
+      overflow:hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .dho-focus .close{
+      border: 0;
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.86);
+      border-radius: 12px;
+      padding: 6px 7px;
+      font-size: 12.8px;
+      cursor: pointer;
+      transition: transform .15s ease, border-color .15s ease, background .15s ease;
+    }
+    .dho-focus .close:hover{
+      transform: translateY(-1px);
+      border-color: rgba(255,255,255,.18);
+      background: rgba(255,255,255,.08);
+    }
+    .dho-focus .desc{
+      margin:0;
+      font-size: 13.8px;
+      line-height: 1.55;
+      color: rgba(255,255,255,.82);
+      text-align: center;
+          flex: 1 1 auto;
+      min-width: 100%;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+    /* Colocação no grid do deck */
+    .dho-cards{ grid-column: 1; }
+    .dho-focus{ grid-column: 2; }
+    .dho-hint{ grid-column: 1 / -1; }
+.dho-hint{
+      margin-top: 10px;
+      font-size: 12.6px;
+      color: rgba(255,255,255,.70);
+      text-align: left;
+    }
+    @media (max-width: 820px){
+      .dho-deck{ grid-template-columns: 1fr; }
+      .dho-cards{ width: 100%; }
+      .dho-focus{ grid-column: 1; margin-top: 10px; }
+      .dho-question .q{ font-size: 17px; }
+    }
+  /* Ajuste solicitado: reduzir altura das formas em 20% (sem afetar a largura/alinhamento) */
+.dho-cardx{
+  padding: 5px 8px;
+  min-height: 34px;
+}
+    /* Ajuste específico: largura do Insight (bloco "O que ajudariam...") */
+    .dho-callout--insight-ajuda{
+      width: min(504px, 100%);
+      max-width: 504px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+/* === Ajustes solicitados (Reflexão: superfície totalmente transparente + título centralizado) === */
+article[aria-label="Reflexão"]{
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+article[aria-label="Reflexão"]::before{
+  content: none !important;
+}
+article[aria-label="Reflexão"] .dho-flow-title{
+  text-align: center !important;
+}
+/* === Ajuste extra: Reflexão totalmente transparente (sem forma/blur) === */
+article[aria-label="Reflexão"].dho-card{
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+}
+article[aria-label="Reflexão"].dho-card::before{
+  content: none !important;
+  display: none !important;
+}
+article[aria-label="Reflexão"] .dho-flow-title{
+  text-align: center !important;
+  width: 100% !important;
+}
+/* === CTA Editorial Quadrado (Pergunta ao leitor) — spec final === */
+article[aria-label="CTA final"].dho-cta-compact{
+  /* Posição no grid */
+  grid-column: 1 / -1;
+  justify-self: center;
+
+  /* Geometria e proporção */
+  width: min(224px, 70%);
+  aspect-ratio: 1 / 1;
+
+  /* Container visual */
+  position: relative;
+  overflow: hidden;
+
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: linear-gradient(
+    135deg,
+    rgba(124,58,237,0.12),
+    rgba(59,130,246,0.08),
+    rgba(0,0,0,0.06)
+  );
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 12px 34px rgba(0,0,0,0.32);
+
+  /* Layout interno */
+  display: grid;
+  place-items: center;
+  align-content: center;
+  padding: 9px;
+  gap: 8px;
+  margin: 12px auto 0;
+  text-align: center;
+
+  /* Sem interação */
+  cursor: default;
+}
+
+article[aria-label="CTA final"].dho-cta-compact::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(190px 170px at 14% 18%, rgba(168,85,247,0.95), transparent 62%),
+    radial-gradient(210px 190px at 86% 86%, rgba(59,130,246,0.90), transparent 62%);
+  opacity: .65;
+  pointer-events:none;
+  z-index:0;
+}
+
+article[aria-label="CTA final"].dho-cta-compact::after{
+  content:"";
+  position:absolute;
+  left:0;
+  top:10px;
+  bottom:10px;
+  width:3px;
+  border-radius:3px;
+  background: linear-gradient(180deg, rgba(168,85,247,0.85), rgba(59,130,246,0.85));
+  opacity: .85;
+  pointer-events:none;
+  z-index:1;
+}
+
+article[aria-label="CTA final"].dho-cta-compact > *{
+  position:relative;
+  z-index:2;
+}
+
+article[aria-label="CTA final"].dho-cta-compact strong{
+  font-weight:700;
+  color: rgba(255,255,255,0.92);
+  letter-spacing: 0.02em;
+  text-transform:none;
+  font-size: 12px;
+  line-height: 1.1;
+}
+
+article[aria-label="CTA final"].dho-cta-compact .dho-cta-question{
+  margin:0;
+  font-size: 15px;
+  line-height: 1.5;
+  color: rgba(255,255,255,0.90);
+  text-align:center;
+}
+
+/* Sem hover */
+article[aria-label="CTA final"].dho-cta-compact:hover{ transform:none; filter:none; }
+
+/* Esconde nota do CTA */
+article[aria-label="CTA final"].dho-cta-compact #cta-nota{ display:none !important; }
+/* Atmosfera cromática (overlay) */
+article[aria-label="CTA final"].dho-cta-compact::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(180px 160px at 18% 20%, rgba(168,85,247,1), transparent 62%),
+    radial-gradient(200px 180px at 82% 82%, rgba(59,130,246,1), transparent 62%);
+  opacity: .65;
+  pointer-events:none;
+  z-index:0;
+}
+/* Marcador editorial (barra lateral esquerda) */
+article[aria-label="CTA final"].dho-cta-compact::after{
+  content:"";
+  position:absolute;
+  left:0;
+  top:10px;
+  bottom:10px;
+  width:3px;
+  border-radius: 3px;
+  background: linear-gradient(180deg, rgba(168,85,247,0.85), rgba(59,130,246,0.85));
+  opacity: .85;
+  pointer-events:none;
+  z-index:0;
+}
+/* Conteúdo acima dos overlays */
+article[aria-label="CTA final"].dho-cta-compact > *{
+  position: relative;
+  z-index: 1;
+}
+/* Tipografia interna */
+article[aria-label="CTA final"].dho-cta-compact .dho-card-title{
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: rgba(255,255,255,0.92);
+  text-transform: none;
+  font-size: 13px;
+  line-height: 1.2;
+}
+article[aria-label="CTA final"].dho-cta-compact .dho-subtitle{
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.5;
+  color: rgba(255,255,255,0.90);
+  text-align: center !important;
+}
+/* Deliberadamente estática: sem hover/animações */
+article[aria-label="CTA final"].dho-cta-compact:hover{
+  transform: none !important;
+  filter: none !important;
+}
+/* Sem notas/expansão dentro do CTA */
+article[aria-label="CTA final"].dho-cta-compact .dho-expand-panel,
+article[aria-label="CTA final"].dho-cta-compact .dho-expand-hint{
+  display:none !important;
+}
+article[aria-label="CTA final"].dho-cta-compact::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width:6px;
+  background: linear-gradient(180deg, rgba(168,85,247,.95), rgba(124,58,237,.55));
+  border-radius: 14px 0 0 14px;
+  opacity: .95;
+  z-index: 0;
+}
+/* desligar o overlay padrão do card e criar um "glow" suave sem pesar */
+article[aria-label="CTA final"].dho-cta-compact.dho-card::before{
+  content: none !important;
+  display: none !important;
+}
+article[aria-label="CTA final"].dho-cta-compact::after{
+  content:"";
+  position:absolute;
+  inset:-28%;
+  background:
+    radial-gradient(closest-side at 18% 22%, rgba(168,85,247,.26), transparent 72%),
+    radial-gradient(closest-side at 82% 86%, rgba(124,58,237,.18), transparent 72%);
+  filter: blur(8px);
+  opacity: .85;
+  z-index: 0;
+}
+article[aria-label="CTA final"].dho-cta-compact > *{
+  position: relative;
+  z-index: 1;
+}
+article[aria-label="CTA final"].dho-cta-compact .dho-card-title{
+  text-align: center !important;
+  font-size: 13px !important;
+  font-weight: 800 !important;
+  margin: 0 0 10px 0 !important;
+  color: rgba(245,245,247,.95) !important;
+}
+article[aria-label="CTA final"].dho-cta-compact .dho-subtitle{
+  text-align: center !important;
+  font-size: 13.5px !important;
+  line-height: 1.55 !important;
+  color: rgba(255,255,255,.86) !important;
+  margin: 0 !important;
+}
+/* === Correção: garantir que elementos com [hidden] fiquem realmente ocultos === */
+[hidden]{ display: none !important; }
+/* ===== CTA Editorial Quadrado (Pergunta ao leitor) — override final ===== */
+#dho-bloco-objetivos article[aria-label="CTA final"].dho-cta-compact{
+  grid-column: 1 / -1 !important;
+  justify-self: center !important;
+  /* Geometria */
+  width: min(258px, 90%) !important;
+  height: 172px !important;
+  /* Container */
+  position: relative !important;
+  overflow: hidden !important;
+  /* Layout interno */
+  display: grid !important;
+  place-items: center !important;
+  align-content: center !important;
+  padding: 9px !important;
+  margin: 12px auto 0 !important;
+  text-align: center !important;
+  cursor: default !important;
+  /* Superfície glass */
+  border-radius: 14px !important;
+  border: 1px solid rgba(255,255,255,0.12) !important;
+  background: linear-gradient(
+    135deg,
+    rgba(124,58,237,0.12),
+    rgba(59,130,246,0.08),
+    rgba(0,0,0,0.06)
+  ) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  box-shadow: 0 12px 34px rgba(0,0,0,0.32) !important;
+  /* Deliberadamente estática */
+  transition: none !important;
+}
+#dho-bloco-objetivos article[aria-label="CTA final"].dho-cta-compact::before{
+  content:"" !important;
+  position:absolute !important;
+  inset:0 !important;
+  background:
+    radial-gradient(180px 160px at 18% 20%, rgba(168,85,247,1), transparent 62%),
+    radial-gradient(200px 180px at 82% 82%, rgba(59,130,246,1), transparent 62%) !important;
+  opacity: .65 !important;
+  pointer-events:none !important;
+  z-index:0 !important;
+}
+#dho-bloco-objetivos article[aria-label="CTA final"].dho-cta-compact::after{
+  content:"" !important;
+  position:absolute !important;
+  left:0 !important;
+  top:10px !important;
+  bottom:10px !important;
+  width:3px !important;
+  border-radius: 3px !important;
+  background: linear-gradient(180deg, rgba(168,85,247,0.85), rgba(59,130,246,0.85)) !important;
+  opacity: .85 !important;
+  pointer-events:none !important;
+  z-index:0 !important;
+}
+#dho-bloco-objetivos article[aria-label="CTA final"].dho-cta-compact > *{
+  position: relative !important;
+  z-index: 1 !important;
+}
+#dho-bloco-objetivos article[aria-label="CTA final"].dho-cta-compact strong{
+  display:block !important;
+  font-weight: 700 !important;
+  color: rgba(255,255,255,0.92) !important;
+  letter-spacing: 0.02em !important;
+  text-transform: none !important;
+  margin: 0 !important;
+  font-size: 13px !important;
+  line-height: 1.2 !important;
+}
+#dho-bloco-objetivos article[aria-label="CTA final"].dho-cta-compact p{
+  margin: 0 !important;
+  font-size: 15px !important;
+  line-height: 1.5 !important;
+  color: rgba(255,255,255,0.90) !important;
+  text-align: center !important;
+  overflow-wrap: anywhere !important;
+}
+#dho-bloco-objetivos article[aria-label="CTA final"].dho-cta-compact:hover{
+  transform: none !important;
+  filter: none !important;
+}
+#dho-bloco-objetivos article[aria-label="CTA final"].dho-cta-compact .dho-expand-panel,
+#dho-bloco-objetivos article[aria-label="CTA final"].dho-cta-compact .dho-expand-hint{
+  display: none !important;
+}
+
+/* =========================================================
+   CTA Editorial (Pergunta ao leitor) — spec final (ajustada)
+   ========================================================= */
+#dho-bloco-objetivos article[aria-label="CTA final"].dho-cta-compact{
+  /* Posição no grid */
+  grid-column: 1 / -1 !important;
+  justify-self: center !important;
+
+  /* Geometria e proporção */
+  width: min(172px, 70%) !important;
+  aspect-ratio: 1 / 1 !important;
+  height: auto !important;
+
+  /* Container */
+  position: relative !important;
+  overflow: hidden !important;
+
+  /* Layout interno */
+  display: grid !important;
+  place-items: center !important;
+  align-content: center !important;
+  padding: 9px !important;
+  row-gap: 8px !important;
+  margin: 12px auto 0 !important;
+  text-align: center !important;
+
+  /* Superfície glass */
+  border-radius: 14px !important;
+  border: 1px solid rgba(255,255,255,0.12) !important;
+  background: linear-gradient(
+    135deg,
+    rgba(124,58,237,0.12),
+    rgba(59,130,246,0.08),
+    rgba(0,0,0,0.06)
+  ) !important;
+
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  box-shadow: 0 12px 34px rgba(0,0,0,0.32) !important;
+
+  /* Deliberadamente estático */
+  cursor: default !important;
+  transition: none !important;
+}
+
+#dho-bloco-objetivos article[aria-label="CTA final"].dho-cta-compact::before{
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background:
+    radial-gradient(190px 170px at 14% 18%, rgba(168,85,247,0.95), transparent 62%),
+    radial-gradient(210px 190px at 86% 86%, rgba(59,130,246,0.90), transparent 62%) !important;
+  opacity: 0.65 !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+}
+
+#dho-bloco-objetivos article[aria-label="CTA final"].dho-cta-compact::after{
+  content: "" !important;
+  position: absolute !important;
+  left: 0 !important;
+  top: 10px !important;
+  bottom: 10px !important;
+  width: 3px !important;
+  border-radius: 3px !important;
+  background: linear-gradient(180deg, rgba(168,85,247,0.85), rgba(59,130,246,0.85)) !important;
+  opacity: 0.85 !important;
+  pointer-events: none !important;
+  z-index: 1 !important;
+}
+
+#dho-bloco-objetivos article[aria-label="CTA final"].dho-cta-compact > *{
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+/* Tipografia interna */
+#dho-bloco-objetivos article[aria-label="CTA final"].dho-cta-compact strong{
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  padding: 6px 10px !important;
+  border-radius: 999px !important;
+
+  font-weight: 700 !important;
+  color: rgba(255,255,255,0.92) !important;
+  letter-spacing: 0.02em !important;
+  text-transform: none !important;
+
+  font-size: 12px !important;
+  line-height: 1.0 !important;
+  margin: 0 !important;
+
+  background: rgba(255,255,255,0.08) !important;
+  border: 1px solid rgba(255,255,255,0.12) !important;
+}
+
+#dho-bloco-objetivos article[aria-label="CTA final"].dho-cta-compact p{
+  margin: 0 !important;
+  font-size: 14px !important;
+  line-height: 1.45 !important;
+  color: rgba(255,255,255,0.90) !important;
+  text-align: center !important;
+  overflow-wrap: anywhere !important;
+  word-break: break-word !important;
+}
+
+/* Sem hover, sem animação */
+#dho-bloco-objetivos article[aria-label="CTA final"].dho-cta-compact:hover{
+  transform: none !important;
+  filter: none !important;
+}
+
+/* Garante que não exista conteúdo secundário dentro do CTA */
+#dho-bloco-objetivos article[aria-label="CTA final"].dho-cta-compact #cta-nota{
+  display: none !important;
+}
+
+
+
+
+/* === HOTFIX: CTA quadrado -> aumentar apenas largura (+30%), manter altura === */
+article.dho-cta-compact{
+  width: 224px !important;   /* 172 * 1.30 */
+  height: 172px !important;  /* manter */
+  aspect-ratio: auto !important; /* impede que a altura siga a largura */
+}
+
+
+/* === FIX: aumentar apenas largura (+30%) mantendo altura (vence seletores anteriores) === */
+article[aria-label="CTA final"].dho-cta-compact{
+  width: 224px !important;   /* 172 * 1.30 */
+  height: 172px !important;  /* manter */
+  aspect-ratio: auto !important;
+}
+
+
+/* =========================================================
+   FINAL OVERRIDE — largura +30% (somente), altura preservada
+   ========================================================= */
+article[aria-label="CTA final"].dho-cta-compact{
+  width: 224px !important;     /* 172px * 1.30 */
+  height: 172px !important;    /* mantém a altura original */
+  aspect-ratio: unset !important;
+  min-width: 224px !important;
+  max-width: 224px !important;
+}
+
+
+/* =========================================================
+   FINAL OVERRIDE 2 — manter largura (224px) e reduzir ALTURA em 30%
+   ========================================================= */
+article[aria-label="CTA final"].dho-cta-compact{
+  width: 224px !important;
+  min-width: 224px !important;
+  max-width: 224px !important;
+
+  height: 157px !important;     /* 224px * 0.70 */
+  min-height: 157px !important;
+  max-height: 157px !important;
+
+  aspect-ratio: unset !important;
+}
+
+
+/* =========================================================
+   Ajuste: "Pergunta ao leitor" (strong) totalmente transparente
+   ========================================================= */
+article[aria-label="CTA final"].dho-cta-compact strong{
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+
+/* =========================================================
+   Ajuste final: remover totalmente a "forma" do kicker (strong)
+   Sem preenchimento, sem borda, sem espaço extra
+   ========================================================= */
+article[aria-label="CTA final"].dho-cta-compact strong{
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+
+  padding: 0 !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+
+  /* evita qualquer caixa/pílula residual */
+  display: block !important;
+  width: auto !important;
+  max-width: none !important;
+}
+
+article[aria-label="CTA final"].dho-cta-compact strong::before,
+article[aria-label="CTA final"].dho-cta-compact strong::after{
+  content: none !important;
+  display: none !important;
+}
+
+
+/* =========================================================
+   HOTFIX ABSOLUTO: "Pergunta ao leitor" sem qualquer pílula/shape
+   (vence qualquer regra anterior)
+   ========================================================= */
+article[aria-label="CTA final"].dho-cta-compact > strong,
+article[aria-label="CTA final"].dho-cta-compact strong{
+  /* mata qualquer fill */
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+
+  /* mata qualquer borda/outline */
+  border: 0 !important;
+  border-color: transparent !important;
+  outline: none !important;
+
+  /* mata sombras/efeitos */
+  box-shadow: none !important;
+  filter: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+
+  /* mata qualquer "capsule" */
+  padding: 0 !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+
+  display: block !important;
+}
+
+article[aria-label="CTA final"].dho-cta-compact > strong::before,
+article[aria-label="CTA final"].dho-cta-compact > strong::after,
+article[aria-label="CTA final"].dho-cta-compact strong::before,
+article[aria-label="CTA final"].dho-cta-compact strong::after{
+  content: none !important;
+  display: none !important;
+}
+
+
+/* =========================================================
+   FIX estrutural: remove o <strong> (que herda pílula do tema)
+   Mantém apenas texto do kicker, sem forma
+   ========================================================= */
+article[aria-label="CTA final"].dho-cta-compact .dho-cta-kicker{
+  background: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+
+  padding: 0 !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+
+  font-weight: 700 !important;
+  color: rgba(255,255,255,0.92) !important;
+  letter-spacing: 0.02em !important;
+  text-transform: none !important;
+  font-size: 12px !important;
+  line-height: 1.1 !important;
+
+  display: block !important;
+  text-align: center !important;
+}
+
+
+/* =========================================================
+   Ajuste: títulos da coluna "Desafio" em negrito (somente tabela)
+   ========================================================= */
+.dho-table .col-desafio .dho-cta-kicker{
+  font-weight: 700 !important;
+}
+
+
+/* =========================================================
+   Ajuste solicitado: bloco do print (tabela de maturidade) em 13.5px
+   ========================================================= */
+.dho-maturity-table,
+.dho-maturity-table *{
+  font-size: 13.5px !important;
+}
+
+</style>
+</head>
+<body>
+<section id="dho-bloco-objetivos" aria-labelledby="dho-d5-title" class="dho-objetivos">
+<div class="dho-objetivos-wrap">
+<div id="dho-objetivos-content" class="dho-dim-content">
+<div class="dho-objetivos-grid">
+<!-- BLOCO 1 | HEADER DA DIMENSÃO -->
+<header class="dho-dim-header full dho-surface-transparent">
+<p class="dho-kicker">DIMENSÃO 5 | DESAFIOS DA LIDERANÇA</p>
+<h2 class="dho-title" id="dho-d5-title">Liderar demanda técnica, mas exige principalmente sustentação.</h2>
+<p class="dho-dim-lead">Esta dimensão mostra onde a liderança sente mais dificuldade no cotidiano e o que falta para que o seu papel seja exercido com clareza, segurança e consistência.</p>
+</header>
+<!-- BLOCO 2 | ABERTURA EDITORIAL -->
+<!-- BLOCO 3 | PRÁTICAS MAIS DESAFIADORAS -->
+<article aria-label="Práticas mais desafiadoras" class="dho-card full dho-card--narrow">
+<h3 class="dho-card-title">O desafio de sustentar boas práticas.</h3>
+<p class="dho-card-note">Com base nas respostas qualitativas, os líderes descrevem suas maiores dificuldade nas práticas de gestão de pessoas.</p><div aria-label="Síntese das práticas e motivos" class="dho-def-list dho-def-list--plain"><div class="dho-def-item"><div class="dho-def-row"><span aria-hidden="true" class="dho-lamp"></span><div><p class="t">Gestão de desempenho contínuo</p><p class="d">Demanda presença constante, leitura individual e acompanhamento que concorre com a agenda operacional.</p></div></div></div><div class="dho-def-item"><div class="dho-def-row"><span aria-hidden="true" class="dho-lamp"></span><div><p class="t">Desenvolvimento de pessoas</p><p class="d">Depende de corresponsabilidade, maturidade do time e resultados que nem sempre evoluem no ritmo esperado.</p></div></div></div><div class="dho-def-item"><div class="dho-def-row"><span aria-hidden="true" class="dho-lamp"></span><div><p class="t">OKRs em contextos pouco estruturados</p><p class="d">Enfrentam limitações de clareza estratégica, governança e priorização no dia a dia.</p></div></div></div><div class="dho-def-item"><div class="dho-def-row"><span aria-hidden="true" class="dho-lamp"></span><div><p class="t">People Analytics sem base de dados organizada</p><p class="d">Perde efetividade quando faltam dados confiáveis, acessíveis e conectados à decisão.</p></div></div></div></div>
+<div class="dho-expand">
+<button aria-controls="praticas-todas" aria-expanded="false" class="dho-btn" data-toggle="praticas-todas" type="button">
+<span aria-hidden="true" class="dho-btn-ico">+</span>
+<span>Ver todas as práticas de gestão avaliadas</span>
+</button>
+<span class="dho-expand-hint">Clique para expandir e recolher a lista completa.</span>
+</div>
+<div aria-label="Lista completa de práticas" class="dho-expand-panel is-hidden" id="praticas-todas" role="region">
+<div class="dho-def-list dho-def-list--plain">
+<div class="dho-def-item"><div class="dho-def-row"><span aria-hidden="true" class="dho-lamp"></span><div><p class="t">1:1 e Feedback Estruturado</p><p class="d">Programação de conversas individuais recorrentes com propósito e objetivo pré-definido, com foco prático</p></div></div></div><div class="dho-def-item"><div class="dho-def-row"><span aria-hidden="true" class="dho-lamp"></span><div><p class="t">Agenda de Equipe e Comunicação Interna</p><p class="d">Ações em equipe, como reuniões de alinhamento, check-ins, celebração e compartilhamento de aprendizados</p></div></div></div><div class="dho-def-item"><div class="dho-def-row"><span aria-hidden="true" class="dho-lamp"></span><div><p class="t">Gestão Baseada em Dados (People Analytics)</p><p class="d">Uso de indicadores para decisões sobre pessoas e performance</p></div></div></div><div class="dho-def-item"><div class="dho-def-row"><span aria-hidden="true" class="dho-lamp"></span><div><p class="t">Gestão de Clima e Engajamento</p><p class="d">Monitoramento da percepção das pessoas, exploração das necessidades do time e planos de ação relacionados ao ambiente de trabalho</p></div></div></div><div class="dho-def-item"><div class="dho-def-row"><span aria-hidden="true" class="dho-lamp"></span><div><p class="t">Gestão de Desempenho Contínuo</p><p class="d">Acompanhamento e ajustes de rotina, com planos individuais e de equipe em tempo real, ao menos mensalmente</p></div></div></div><div class="dho-def-item"><div class="dho-def-row"><span aria-hidden="true" class="dho-lamp"></span><div><p class="t">Gestão por Competências</p><p class="d">Identificação e desenvolvimento de competências técnicas e comportamentais essenciais ao cargo</p></div></div></div><div class="dho-def-item"><div class="dho-def-row"><span aria-hidden="true" class="dho-lamp"></span><div><p class="t">Gestão por OKRs (Objectives and Key Results)</p><p class="d">Definição de metas e resultados mensuráveis de curto e médio prazo alinhados à estratégia do negócio e da área</p></div></div></div><div class="dho-def-item"><div class="dho-def-row"><span aria-hidden="true" class="dho-lamp"></span><div><p class="t">Liderança Situacional</p><p class="d">Adaptação do estilo de liderança conforme o nível de maturidade das pessoas da equipe</p></div></div></div><div class="dho-def-item"><div class="dho-def-row"><span aria-hidden="true" class="dho-lamp"></span><div><p class="t">Mapeamento de Skills Críticas</p><p class="d">Identificação das habilidades-chave necessárias para a estratégia do negócio e da área</p></div></div></div><div class="dho-def-item"><div class="dho-def-row"><span aria-hidden="true" class="dho-lamp"></span><div><p class="t">Mentoria e Desenvolvimento de Talentos</p><p class="d">Apoio ao crescimento profissional e sucessão dentro da equipe</p></div></div></div><div class="dho-def-item"><div class="dho-def-row"><span aria-hidden="true" class="dho-lamp"></span><div><p class="t">Plano de Desenvolvimento Individual (PDI)</p><p class="d">Criação e acompanhamento estruturado do desenvolvimento dos colaboradores</p></div></div></div></div></div></article>
+<!-- BLOCO 4 | TURNOVER COMO RISCO -->
+<!-- BLOCO 5 | MATURIDADE E AUTONOMIA DAS EQUIPES -->
+<article aria-label="Maturidade e autonomia das equipes" class="dho-card full dho-card--narrow dho-autonomia">
+<h3 class="dho-card-title">Maturidade e autonomia das equipes</h3>
+<p class="dho-card-note">
+            A maioria dos líderes descreve equipes com autonomia operacional razoável, mas ainda dependentes do líder para decisões críticas e alinhamentos estratégicos.
+          </p>
+<table aria-label="Níveis de maturidade e autonomia" class="dho-maturity-table">
+<caption class="sr-only">Níveis de maturidade, descrição e incidência observada</caption>
+<thead class="sr-only">
+<tr>
+<th scope="col">Nível</th>
+<th scope="col">Descrição</th>
+<th scope="col">Incidência</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="dho-maturity-lvl">5</td>
+<td class="dho-maturity-item"><div class="dho-cta-kicker"><strong>Equipe multiplicadora</strong>:</div> além de autônoma, propõe melhorias, desenvolve outras pessoas da equipe e influencia positivamente outras áreas.</td>
+<td class="dho-maturity-val"><span class="dho-dash">-</span></td>
+</tr>
+<tr>
+<td class="dho-maturity-lvl">4</td>
+<td class="dho-maturity-item"><div class="dho-cta-kicker"><strong>Equipe autônoma</strong>:</div> todos têm clareza de objetivos, se auto-organiza e mantém desempenho mesmo sem meu acompanhamento direto.</td>
+<td class="dho-maturity-val">
+<div class="dho-mini-bar" style="--w:20%;">
+<span>1</span>
+</div>
+</td>
+</tr>
+<tr>
+<td class="dho-maturity-lvl">3</td>
+<td class="dho-maturity-item"><div class="dho-cta-kicker"><strong>Equipe equilibrada</strong>:</div> equipe com boa autonomia operacional, me procura apenas para alinhamentos e decisões críticas.</td>
+<td class="dho-maturity-val">
+<div class="dho-mini-bar" style="--w:80%;">
+<span>4</span>
+</div>
+</td>
+</tr>
+<tr>
+<td class="dho-maturity-lvl">2</td>
+<td class="dho-maturity-item"><div class="dho-cta-kicker"><strong>Equipe em transição</strong>:</div> alguns membros já agem com autonomia, mas outros ainda dependem do meu direcionamento.</td>
+<td class="dho-maturity-val"><span class="dho-dash">-</span></td>
+</tr>
+<tr>
+<td class="dho-maturity-lvl">1</td>
+<td class="dho-maturity-item"><div class="dho-cta-kicker"><strong>Equipe dependente</strong>:</div> precisam constantemente da minha orientação e validação, e eu devo aprovar previamente as decisões.</td>
+<td class="dho-maturity-val"><span class="dho-dash">-</span></td>
+</tr>
+</tbody>
+</table>
+<div aria-label="Insight" class="dho-callout dho-callout--narrow" role="note">
+<p><div class="dho-cta-kicker"></div> Quanto menor a autonomia, maior a sobrecarga da liderança.</p>
+</div>
+</article>
+<!-- BLOCO 6 | DESAFIO DO LÍDER × DESAFIO DO RH -->
+<article aria-label="Tabela comparativa: liderança vs RH" class="dho-card dho-table-wrap">
+<h3 class="dho-card-title">Os desafios da liderança</h3>
+<p class="dho-card-note">
+            As respostas a seguir se referem ao mesmo tema: os desafios enfrentados na gestão de equipes pelos líderes.
+As respostas são apresentadas à partir de dois pontos de vistas: enquanto os líderes descrevem os desafios a partir da própria experiência no exercício do papel, o RH responde a partir da observação e da escuta sobre o que considera ser o principal desafio enfrentado pelos líderes no dia a dia.
+          </p>
+<div aria-label="Legenda dos faróis" class="dho-legend">
+<span class="chip"><span aria-hidden="true" class="dot strong"></span> Verde intenso: mais citado</span>
+<span class="chip"><span aria-hidden="true" class="dot soft"></span> Verde claro: menos citado</span>
+<span class="chip"><span aria-hidden="true" class="dot off"></span> Cinza: não citado</span>
+</div>
+<div style="height:12px"></div>
+<table aria-label="Desafios: visão da liderança e visão do RH" class="dho-table" role="table">
+<thead>
+<tr>
+<th class="col-desafio">Desafio</th>
+<th class="col-vis">Visão da Liderança</th>
+<th class="col-vis2">Visão do RH</th>
+</tr>
+</thead>
+<tbody><tr>
+<td class="col-desafio">
+<div class="dho-cta-kicker">Conciliar demandas operacionais e estratégicas</div>: Equilibrar execução diária com planejamento e visão de futuro.
+                </td>
+<td class="col-vis">
+<span aria-label="Liderança: 2 citações" class="dho-signal">
+<span aria-hidden="true" class="dot strong"></span>
+<span class="label">Mais citado</span>
+<span class="meta">(2)</span>
+</span>
+</td>
+<td class="col-vis2">
+<span aria-label="RH: não citado" class="dho-signal">
+<span aria-hidden="true" class="dot off"></span>
+<span class="label">Não citado</span>
+<span class="meta">(0)</span>
+</span>
+</td>
+</tr>
+<tr>
+<td class="col-desafio">
+<div class="dho-cta-kicker">Conduzir conversas difíceis</div>: Tratar temas sensíveis com empatia, clareza e foco em soluções.
+                </td>
+<td class="col-vis">
+<span aria-label="Liderança: 2 citações" class="dho-signal">
+<span aria-hidden="true" class="dot strong"></span>
+<span class="label">Mais citado</span>
+<span class="meta">(2)</span>
+</span>
+</td>
+<td class="col-vis2">
+<span aria-label="RH: não citado" class="dho-signal">
+<span aria-hidden="true" class="dot off"></span>
+<span class="label">Não citado</span>
+<span class="meta">(0)</span>
+</span>
+</td>
+</tr>
+<tr>
+<td class="col-desafio">
+<div class="dho-cta-kicker">Desenvolver pessoas em ritmo sustentável</div>: Apoiar o crescimento do time sem sobrecarga e respeitando o tempo de aprendizado.
+                </td>
+<td class="col-vis">
+<span aria-label="Liderança: 1 citação" class="dho-signal">
+<span aria-hidden="true" class="dot soft"></span>
+<span class="label">Menos citado</span>
+<span class="meta">(1)</span>
+</span>
+</td>
+<td class="col-vis2">
+<span aria-label="RH: não citado" class="dho-signal">
+<span aria-hidden="true" class="dot off"></span>
+<span class="label">Não citado</span>
+<span class="meta">(0)</span>
+</span>
+</td>
+</tr>
+<tr>
+<td class="col-desafio">
+<div class="dho-cta-kicker">Reter talentos</div>: Criar condições para que profissionais-chave queiram permanecer e crescer na equipe.
+                </td>
+<td class="col-vis">
+<span aria-label="Liderança: não citado" class="dho-signal">
+<span aria-hidden="true" class="dot off"></span>
+<span class="label">Não citado</span>
+<span class="meta">(0)</span>
+</span>
+</td>
+<td class="col-vis2">
+<span aria-label="RH: 1 citação" class="dho-signal">
+<span aria-hidden="true" class="dot soft"></span>
+<span class="label">Menos citado</span>
+<span class="meta">(1)</span>
+</span>
+</td>
+</tr>
+<tr>
+<td class="col-desafio">
+<div class="dho-cta-kicker">Engajar a equipe</div>: Manter motivação e alinhamento do time durante períodos de alta pressão e/ou transformação organizacional.
+                </td>
+<td class="col-vis">
+<span aria-label="Liderança: não citado" class="dho-signal">
+<span aria-hidden="true" class="dot off"></span>
+<span class="label">Não citado</span>
+<span class="meta">(0)</span>
+</span>
+</td>
+<td class="col-vis2">
+<span aria-label="RH: 1 citação" class="dho-signal">
+<span aria-hidden="true" class="dot soft"></span>
+<span class="label">Menos citado</span>
+<span class="meta">(1)</span>
+</span>
+</td>
+</tr>
+</tbody>
+</table>
+<div style="height:12px"></div>
+<p class="dho-footnote">
+            Síntese: os desafios são percebido de formas diferentes.
+          </p>
+</article>
+<!-- BLOCO 7 | O QUE AJUDARIA A LIDERAR MELHOR -->
+<article aria-label="O que ajudaria a liderar melhor" class="dho-card full dho-card--narrow">
+<h3 class="dho-card-title">O que ajudariam os líderes a exercer o seu papel?</h3>
+<p class="dho-card-note">
+    Ao serem questionados sobre o que facilitaria exercer o seu papel de liderança, os respondentes descreveram necessidades desde gestão de tempo até objetivos de negócio claros.
+  </p>
+<div aria-label="Pergunta e respostas" class="dho-qdeck">
+<div aria-label="Respostas" class="dho-deck" role="group">
+<div aria-hidden="true" class="dho-path">
+<svg preserveaspectratio="none" viewbox="0 0 1000 420">
+<path d="M120,90 C280,40 420,60 500,130"></path>
+<path d="M880,90 C720,40 580,60 500,130"></path>
+<path d="M300,340 C380,280 440,240 500,200"></path>
+<path d="M700,340 C620,280 560,240 500,200"></path>
+</svg>
+</div>
+<div class="dho-cards" id="dhoCardsAjuda">
+<button aria-pressed="false" class="dho-cardx" data-key="estrategia" type="button">
+<div class="dho-badge"><span class="dho-dot gray"></span></div>
+<div class="text">Clareza da estratégia e dos objetivos do negócio</div>
+</button>
+<button aria-pressed="false" class="dho-cardx" data-key="tempo" type="button">
+<div class="dho-badge"><span class="dho-dot gray"></span></div>
+<div class="text">Mais tempo para conversar, orientar e desenvolver</div>
+</button>
+<button aria-pressed="false" class="dho-cardx" data-key="desdobramento" type="button">
+<div class="dho-badge"><span class="dho-dot gray"></span></div>
+<div class="text">Tradução dos objetivos do negócio</div>
+</button>
+<button aria-pressed="false" class="dho-cardx" data-key="sobrecarga" type="button">
+<div class="dho-badge"><span class="dho-dot gray"></span></div>
+<div class="text">Modelo de gestão adequado ao tamanho da equipe</div>
+</button>
+</div>
+<div class="dho-focus" hidden="" id="dhoFocusAjuda">
+<div class="k">
+<div class="left">
+<span class="title" id="dhoFocusAjudaTitle"></span>
+</div>
+</div>
+<p class="desc" id="dhoFocusAjudaDesc"></p>
+</div>
+<div class="dho-hint">Dica: clique em uma resposta para ver o detalhe dela.</div>
+</div>
+</div>
+<div aria-label="Insight" class="dho-callout dho-callout--insight-ajuda" role="note">
+<p><div class="dho-cta-kicker"></div> A lideranças poderiam exercer melhor o seu papel ao contar com tempo, estrutura adequada e espaço para personalizar a gestão das pessoas.</p>
+</div>
+</article>
+<!-- BLOCO 8 | RH COMO ALIADO ESTRATÉGICO -->
+<article aria-label="RH como aliado estratégico" class="dho-card full dho-card--narrow">
+<h3 class="dho-card-title">RH como um parceiro da liderança</h3>
+<div aria-label="Percepção do RH como aliado estratégico (escala 0 a 10)" class="dho-nps" role="group">
+<div class="dho-nps-row">
+<div aria-label="Indicador em semicírculo. Escala de 0 a 10. Resultado: 5." class="dho-nps-gauge" data-max="10" data-min="0" data-value="5" role="img">
+<svg aria-hidden="true" class="dho-nps-svg" focusable="false" viewbox="0 0 360 220">
+<!-- arco base -->
+<path class="dho-nps-arc-bg" d="M 40 180 A 140 140 0 0 1 320 180"></path>
+<!-- segmentos (0–4 / 4–7 / 7–10) -->
+<path class="dho-nps-arc-seg seg-a" d="M 40 180 A 140 140 0 0 1 136.74 46.85"></path>
+<path class="dho-nps-arc-seg seg-b" d="M 136.74 46.85 A 140 140 0 0 1 262.29 66.74"></path>
+<path class="dho-nps-arc-seg seg-c" d="M 262.29 66.74 A 140 140 0 0 1 320 180"></path>
+<!-- agulha -->
+<g data-needle="" transform="rotate(90 180 180)">
+<line class="dho-nps-needle" x1="180" x2="296" y1="180" y2="180"></line>
+</g>
+<circle class="dho-nps-knob-ring" cx="180" cy="180" r="18"></circle>
+<circle class="dho-nps-knob" cx="180" cy="180" r="7.5"></circle>
+</svg>
+<div aria-hidden="true" class="dho-nps-value"><div class="dho-cta-kicker">5</div><span>de 10</span></div>
+<div aria-hidden="true" class="dho-nps-scale"><span>0</span><span>10</span></div>
+<div aria-hidden="true" class="dho-nps-ends">
+<span>Não considero</span>
+<span>Considero totalmente</span>
+</div>
+</div>
+<div class="dho-nps-sidecopy">
+<p class="dho-footnote dho-nps-copy">Em uma escala de 0 a 10, os líderes indicaram o grau em que percebem o RH como aliado estratégico para o alcance dos objetivos do negócio.</p>
+</div>
+</div>
+</div>
+<div aria-hidden="true" class="dho-inner-sep"></div>
+<!-- BLOCO 9 | ALAVANCAS DE IMPACTO DO RH -->
+<div aria-label="Alavancas de impacto do RH no curto prazo" class="dho-table-wrap dho-table-wrap--rh">
+<p class="dho-table-lead">Ao perguntar ao negócio e ao próprio RH o que poderia ser desenvolvido no curto prazo para tornar o RH um aliado estratégico mais relevante, houve convergência principalmente em projetos, dados e gestão, enquanto conhecimento do negócio e relacionamentos estratégicos ficaram em segundo plano.</p>
+<div aria-label="Legenda dos faróis" class="dho-legend">
+<span class="chip"><span aria-hidden="true" class="dot strong"></span> Verde intenso: mais selecionados</span>
+<span class="chip"><span aria-hidden="true" class="dot soft"></span> Verde claro: menos selecionados</span>
+<span class="chip"><span aria-hidden="true" class="dot off"></span> Cinza: não selecionados</span>
+</div>
+<div style="height:12px"></div>
+<table aria-label="Alavancas de impacto: faróis" class="dho-table" role="table">
+<thead>
+<tr>
+<th class="col-desafio">ITENS</th>
+<th class="col-vis">Farol</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="col-desafio">
+<div class="dho-cta-kicker">PMO de iniciativas críticas para Força de Trabalho</div>
+<span class="dho-item-desc">Planejar, organizar e entregar projetos com definição de donos, prazos, orçamento e ROI.</span>
+</td>
+<td class="col-vis">
+<span aria-label="Mais selecionado (2)" class="dho-signal">
+<span aria-hidden="true" class="dot strong"></span>
+<span class="label">Mais citado</span>
+<span class="meta">(2)</span>
+</span>
+</td>
+</tr>
+<tr>
+<td class="col-desafio">
+<div class="dho-cta-kicker">People Analytics para decisão</div>
+<span class="dho-item-desc">Construir indicadores e insights que conectem ações de RH à receita, custo e produtividade.</span>
+</td>
+<td class="col-vis">
+<span aria-label="Menos selecionado (1)" class="dho-signal">
+<span aria-hidden="true" class="dot soft"></span>
+<span class="label">Menos citado</span>
+<span class="meta">(1)</span>
+</span>
+</td>
+</tr>
+<tr>
+<td class="col-desafio">
+<div class="dho-cta-kicker">Rotinas de gestão com execução e performance</div>
+<span class="dho-item-desc">Implantar metas simples, fazer 1:1, acompanhamento semanal e correções rápidas.</span>
+</td>
+<td class="col-vis">
+<span aria-label="Menos selecionado (1)" class="dho-signal">
+<span aria-hidden="true" class="dot soft"></span>
+<span class="label">Menos citado</span>
+<span class="meta">(1)</span>
+</span>
+</td>
+</tr>
+<tr>
+<td class="col-desafio">
+<div class="dho-cta-kicker">Conhecimento do negócio</div>
+<span class="dho-item-desc">Entender P&amp;L, drivers de margem, funil de vendas, metas e riscos.</span>
+</td>
+<td class="col-vis">
+<span aria-label="Não selecionado (0)" class="dho-signal">
+<span aria-hidden="true" class="dot off"></span>
+<span class="label">Não citado</span>
+<span class="meta">(0)</span>
+</span>
+</td>
+</tr>
+<tr>
+<td class="col-desafio">
+<div class="dho-cta-kicker">Habilidades executivas e influência</div>
+<span class="dho-item-desc">Priorizar, negociar, decidir, se relacionar com a diretoria e conselhos.</span>
+</td>
+<td class="col-vis">
+<span aria-label="Não selecionado (0)" class="dho-signal">
+<span aria-hidden="true" class="dot off"></span>
+<span class="label">Não citado</span>
+<span class="meta">(0)</span>
+</span>
+</td>
+</tr>
+</tbody>
+</table>
+<div style="height:12px"></div>
+<p class="dho-footnote">
+            Observação: houve também a opção “Não sei” (1), tratada aqui como resposta fora do conjunto de itens a serem desenvolvidos.
+          </p>
+<div aria-label="Insight" class="dho-callout" role="note">
+<p>O RH fortalece a liderança ao se envolver ativamente na organização, na priorização e na consistência das decisões de gestão.</p>
+</div>
+</div>
+</article>
+<!-- BLOCO 10 | SÍNTESE E FECHAMENTO -->
+<article aria-label="Reflexão" class="dho-card dho-close">
+<h3 class="dho-flow-title">Reflexão</h3>
+<p class="dho-cta-question">Os desafios da liderança não decorrem de falta de percepção ou método, mas da tensão entre a demanda por práticas sustentáveis, estruturas ainda em consolidação e pouco tempo dedicado à gestão, em detrimento da operação.</p>
+</article>
+<!-- BLOCO 11 | CTA FINAL -->
+<article aria-label="CTA final" class="dho-cta-compact">
+<div class="dho-cta-kicker">Pergunta ao leitor</div>
+<p class="dho-cta-question">O que hoje mais dificulta a sustentação do papel da liderança na sua organização: tempo, clareza ou estrutura?</p>
+<div aria-label="Nota de leitura do CTA" class="dho-expand-panel is-hidden" id="cta-nota" role="region">
+<p class="dho-footnote">
+              Sugestão de uso: esta pergunta funciona como fechamento e ponte para conversa interna.
+              Ela ajuda a organizar prioridades antes de buscar novas ferramentas.
+            </p>
+</div>
+</article>
+</div>
+</div>
+</div>
+</div>
+</section>
+<script>
+(function(){
+      const toggles = document.querySelectorAll('[data-toggle]');
+      toggles.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = btn.getAttribute('data-toggle');
+          const panel = document.getElementById(id);
+          if(!panel) return;
+          const isHidden = panel.classList.contains('is-hidden');
+          panel.classList.toggle('is-hidden', !isHidden);
+          btn.setAttribute('aria-expanded', String(isHidden));
+          const ico = btn.querySelector('.dho-btn-ico');
+          if(ico) ico.textContent = isHidden ? '−' : '+';
+        });
+      });
+    })();
+    (function(){
+      const root = document;
+      const cards = [...root.querySelectorAll('#dhoCardsAjuda .dho-cardx')];
+      const focus = root.getElementById('dhoFocusAjuda');
+      const focusTitle = root.getElementById('dhoFocusAjudaTitle');
+      const focusDesc = root.getElementById('dhoFocusAjudaDesc');
+      if(!cards.length || !focus || !focusTitle || !focusDesc) return;
+      const data = {
+        estrategia: {
+          title: 'Clareza da estratégia e dos objetivos do negócio',
+          desc: 'Quando os objetivos são claros, a liderança ganha referência de como priorizar, decidir e alinhar expectativas, e assim reduzir retrabalho e conflitos no dia a dia.'
+        },
+        desdobramento: {
+          title: 'Tradução dos objetivos do negócio',
+          desc: 'Metas bem traduzidas para a operação tornam o papel do líder mais objetivo: conectar tarefas, indicadores e entregas sem depender de interpretação ou achismos constantes.'
+        },
+        tempo: {
+          title: 'Mais tempo para conversar, orientar e desenvolver',
+          desc: 'Nem sempre uma nova ferramenta ajudará a performance, e sim gestão de tempo para garantir acompanhamento dos liderados, conversa de qualidade e desenvolvimento contínuo.'
+        },
+        sobrecarga: {
+          title: 'Modelo de gestão adequado ao tamanho da equipe',
+          desc: 'À medida que o tamanho da equipe cresce, aumenta a necessidade de modelos gerenciais estruturados para garantir consistência e alcance das práticas. Em equipes menores, a proximidade permite modelos híbridos entre gestão e execução'
+        }
+      };
+      function clearPressed(){
+        cards.forEach(b => b.setAttribute('aria-pressed','false'));
+      }
+      cards.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const key = btn.getAttribute('data-key');
+          const d = data[key];
+          if(!d) return;
+          // Toggle: se já estiver em foco, fecha
+          const already = (btn.getAttribute('aria-pressed') === 'true') && (focus.hidden === false);
+          if(already){
+            focus.hidden = true;
+            clearPressed();
+            return;
+          }
+          clearPressed();
+          btn.setAttribute('aria-pressed','true');
+          focusTitle.textContent = d.title;
+          focusDesc.textContent = d.desc;
+          focus.hidden = false;
+          const rect = focus.getBoundingClientRect();
+          if(rect.bottom > window.innerHeight - 24){
+            focus.scrollIntoView({ behavior:'smooth', block:'nearest' });
+          }
+        });
+      });
+    // Fechar: clicar novamente no item selecionado ou pressionar ESC
+      window.addEventListener('keydown', (e) => {
+        if(e.key === 'Escape'){
+          focus.hidden = true;
+          clearPressed();
+        }
+      });
+    })();
+    // NPS gauge (semicírculo): posiciona e anima a agulha conforme o valor (0–10)
+    (function(){
+      const g = document.querySelector('.dho-nps-gauge[data-value]');
+      if(!g) return;
+      const min = Number(g.dataset.min ?? 0);
+      const max = Number(g.dataset.max ?? 10);
+      const raw = Number(g.dataset.value ?? 0);
+      const v = Math.min(max, Math.max(min, raw));
+      // Mapeia 0..10 => 180..0 (esquerda -> direita)
+      const target = 180 - ((v - min) / (max - min)) * 180;
+      const needle = g.querySelector('[data-needle]');
+      const strong = g.querySelector('.dho-nps-value strong');
+      if(strong) strong.textContent = (Number.isInteger(v) ? String(v) : String(v).replace('.', ','));
+      if(!needle){
+        return;
+      }
+      const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if(prefersReduced){
+        needle.setAttribute('transform', `rotate(${target} 180 180)`);
+        return;
+      }
+      // Entrada suave, leve (requestAnimationFrame): do "apagado" à esquerda até o valor final
+      const start = 180;               // ponto inicial (à esquerda)
+      const duration = 900;            // ms
+      const t0 = performance.now();
+      needle.setAttribute('transform', `rotate(${start} 180 180)`);
+      const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+      function step(now){
+        const p = Math.min(1, (now - t0) / duration);
+        const e = easeOutCubic(p);
+        const a = start + (target - start) * e;
+        needle.setAttribute('transform', `rotate(${a} 180 180)`);
+        if(p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    })();
+</script>
+</body>
+</html>
