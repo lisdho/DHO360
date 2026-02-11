@@ -959,6 +959,20 @@
       // as-is (relative)
       push(rawUrl);
 
+      // variants (case/underscore) for the filename part
+      try{
+        const parts = String(rawUrl).split("/");
+        const fname = parts.pop() || "";
+        const dir = parts.length ? (parts.join("/") + "/") : "";
+        fileVariants(fname).forEach(v=>{
+          push(dir + v);
+          push("./" + dir + v);
+          if((dir + v)[0] !== "/") push("/" + dir + v);
+          try{ push(new URL(dir + v, location.href).href); }catch(e){}
+        });
+      }catch(e){}
+
+
       // explicit relative
       push("./" + rawUrl);
 
@@ -1217,6 +1231,31 @@ async function carregarBloco({ url, targetId, initFnName }) {
       { file: "Participar_da_Onda2.html", targetId: "onda2", initFnName: "initBloco_Participar_da_Onda2" },
     ];
 
+    function fileVariants(file){
+      if(!file) return [];
+      const vars = [];
+      const push = (v)=>{ if(v && !vars.includes(v)) vars.push(v); };
+
+      push(file);
+      push(file.toLowerCase());
+
+      // common case-sensitivity issues with "R" marker
+      push(file.replace("-R-", "-r-"));
+      push(file.replace("-r-", "-R-"));
+
+      // underscore / dash swaps (common in manual renames)
+      push(file.replace(/_/g, "-"));
+      push(file.replace(/-/g, "_"));
+      push(file.toLowerCase().replace(/_/g, "-"));
+      push(file.toLowerCase().replace(/-/g, "_"));
+
+      // remove accidental double separators
+      vars.forEach(v=> push(v.replace(/__+/g,"_").replace(/--+/g,"-")));
+
+      return vars;
+    }
+
+
     async function detectBlocksBase(){
       const bases = [
         "blocks/",
@@ -1228,21 +1267,23 @@ async function carregarBloco({ url, targetId, initFnName }) {
         "", "./",
       ];
 
-      // Probe with first file (intro)
       const probe = BLOCO_SPECS[0]?.file || "01-intro.html";
+      const probeVariants = fileVariants(probe);
 
       for(const base of bases){
-        const url = base + probe;
-        try{
-          const r = await fetch(url, { cache: "no-store" });
-          if(r && r.ok) return base;
-        }catch(e){}
+        for(const f of probeVariants){
+          const url = base + f;
+          try{
+            const r = await fetch(url, { cache: "no-store" });
+            if(r && r.ok) return { base, resolvedProbe: url };
+          }catch(e){}
+        }
       }
-      return "blocks/"; // default
+      return { base: "blocks/", resolvedProbe: "blocks/" + probe };
     }
-
-    (async function(){
-      const base = await detectBlocksBase();
+(async function(){
+      const info = await detectBlocksBase();
+      const base = info.base;
 
       BLOCO_SPECS.forEach(spec=>{
         carregarBloco({
