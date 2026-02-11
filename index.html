@@ -576,23 +576,19 @@
     
     /* ================================
        Mobile clamps (anti "desktop zoom-out")
-       If any bloco injects min-width / fixed widths, mobile browsers may shrink the whole page.
-       These rules harden the layout to stay within the viewport.
+       Prevent any bloco min-width/fixed widths from forcing "desktop layout" on phones.
     ================================ */
     html, body{ width:100%; max-width:100%; }
     body{ min-width: 0 !important; }
     header.siteHeader, .navWrap, main, footer{ max-width: 100%; }
 
-    /* Neutralize accidental min-widths coming from bloco styles */
     [class$="-wrap"], [class*="-wrap "], [class*=" wrap"], .dho-card, .dho-card--chart, .dho-rank-card{
       min-width: 0 !important;
       max-width: 100%;
     }
 
-    /* Force any embedded fixed-width containers to fit */
     iframe, embed, object{ width:100%; max-width:100%; }
 
-    /* Keep long inline elements from forcing overflow */
     .linksBottom, .brandText{ min-width: 0; }
 
     @media (max-width: 760px){
@@ -601,7 +597,6 @@
       .linksBottom{ gap: 6px; }
       .linksBottom a{ padding: 6px 9px; }
     }
-
 
 /* =========================
        Modal — Dimensões (Editorial)
@@ -882,13 +877,47 @@
           // leave as-is; we only harden obvious overflow cases
         }
 
-
     function hardClampOverflow(root){
+
+      function resolveUrlCandidates(rawUrl){
+        const basePath = location.pathname.replace(/\/[^\/]*$/, "/");
+        const baseHref = location.origin + basePath;
+
+        const candidates = [];
+        const push = (u)=>{ if(u && !candidates.includes(u)) candidates.push(u); };
+
+        // as-is (relative)
+        push(rawUrl);
+
+        // explicit relative
+        push("./" + rawUrl);
+
+        // absolute from current dir
+        try{ push(new URL(rawUrl, location.href).href); }catch(e){}
+
+        // absolute from site root
+        if(rawUrl && rawUrl[0] !== "/") push("/" + rawUrl);
+
+        // fallback: same filename in current dir (remove "blocks/")
+        const noBlocks = (rawUrl || "").replace(/^blocks\//i, "");
+        if(noBlocks !== rawUrl){
+          push(noBlocks);
+          push("./" + noBlocks);
+          try{ push(new URL(noBlocks, location.href).href); }catch(e){}
+          if(noBlocks && noBlocks[0] !== "/") push("/" + noBlocks);
+        }
+
+        // fallback: try under current directory base explicitly
+        try{ push(new URL(rawUrl, baseHref).href); }catch(e){}
+
+        return candidates;
+      }
+
+
       try{
         const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
         if(!vw || !root) return;
 
-        // Clamp typical offenders
         root.querySelectorAll("img, video, svg, canvas, iframe, embed, object").forEach((el)=>{
           el.style.maxWidth = "100%";
           if(el.tagName === "IFRAME" || el.tagName === "EMBED" || el.tagName === "OBJECT"){
@@ -896,11 +925,9 @@
           }
         });
 
-        // Any element wider than viewport: allow horizontal scroll instead of shrinking whole page
         root.querySelectorAll("*").forEach((el)=>{
           const r = el.getBoundingClientRect();
           if(r && r.width > vw + 2){
-            // Prefer scroll container for tables/pre; otherwise clamp
             const tag = el.tagName;
             if(tag === "TABLE" || tag === "PRE"){
               el.style.maxWidth = "100%";
@@ -915,6 +942,7 @@
         console.warn("[mobile] clamp overflow falhou:", e);
       }
     }
+
       });
     }
 
@@ -1025,11 +1053,21 @@
 
       try{
 
-        const res = await fetch(url, { cache: "no-store" });
+        const candidates = resolveUrlCandidates(url);
+        let res = null;
+        let lastErr = null;
 
-        if(!res.ok) throw new Error("Falha ao carregar " + url + ": " + res.status);
+        for (const u of candidates){
+          try{
+            const r = await fetch(u, { cache: "no-store" });
+            if(r && r.ok){ res = r; break; }
+            lastErr = new Error("HTTP " + (r ? r.status : "??") + " em " + u);
+          }catch(e){
+            lastErr = e;
+          }
+        }
 
-
+        if(!res) throw lastErr || new Error("Falha ao carregar " + url);
 
         const html = await res.text();
 
@@ -1168,6 +1206,7 @@
       window.addEventListener('resize', syncHeaderHeight);
 
       syncHeaderHeight();
+      try{ hardClampOverflow(document.body); }catch(e){}
 
     })();
 
