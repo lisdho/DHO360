@@ -6,9 +6,44 @@
 
   <meta charset="utf-8" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, shrink-to-fit=no" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+
   <meta name="HandheldFriendly" content="true" />
   <meta name="MobileOptimized" content="width" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <script>
+    (function(){
+      try{
+        var ua = navigator.userAgent || "";
+        var isMobileUA = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua) || /Mobi/i.test(ua);
+        // Some browsers in "Desktop site" mode won't trigger max-width media queries.
+        // Force a mobile class when we're clearly on a handheld device.
+        if(isMobileUA){
+          document.documentElement.classList.add('force-mobile');
+        }
+        // Ensure viewport is present and correct (in case of caches or duplicated metas)
+        var m = document.querySelector('meta[name="viewport"]');
+        if(m){
+          var c = m.getAttribute('content') || '';
+          // Strengthen without breaking desktop
+          if(c.indexOf('width=device-width') === -1 || c.indexOf('initial-scale') === -1){
+            m.setAttribute('content','width=device-width, initial-scale=1, viewport-fit=cover');
+          }else if(c.indexOf('viewport-fit') === -1){
+            m.setAttribute('content', c + ', viewport-fit=cover');
+          }
+        }else{
+          var nm = document.createElement('meta');
+          nm.name = 'viewport';
+          nm.content = 'width=device-width, initial-scale=1, viewport-fit=cover';
+          document.head.appendChild(nm);
+        }
+      }catch(e){}
+    })();
+  </script>
+
 
   <title>DHO 360º</title>
 
@@ -710,64 +745,56 @@
     }
 
   
-
     /* =========================
-       MOBILE HARDENING (forces mobile layout even if the browser renders with a desktop viewport)
-       Target: touch devices (coarse pointer / no hover) + small device width fallback
-    ========================= */
-    @media (hover: none) and (pointer: coarse), (max-device-width: 720px){
-      html, body{ width:100%; max-width:100%; }
-      body{ -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+       Mobile hardening (force-mobile)
+       - Applies when browsers render in "desktop site" mode on handhelds.
+       - Does NOT affect real desktop.
+       ========================= */
+    html.force-mobile{
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
+    html.force-mobile body{
+      overflow-x: hidden;
+    }
+    html.force-mobile .navWrap{ padding: 0 14px; }
+    html.force-mobile .navTop{ flex-wrap: wrap; align-items: center; }
+    html.force-mobile .left{ min-width: 0; }
+    html.force-mobile .ctaTop{ margin-left: auto; width: auto; }
+    html.force-mobile .linksBottom{ justify-content: center; }
 
-      /* Header becomes lighter and more breathable */
-      .navTop{ flex-wrap: wrap; gap:10px; }
-      .brandText{ max-width: 70vw; }
-      .brandName{ font-size: 14px; }
-      .pilot{ display:none; }
-
-      /* CTA stays visible but not oversized */
-      .ctaTop{ padding: 10px 12px; border-radius: 999px; font-size: 12.5px; }
-
-      /* Bottom links: horizontal scroll instead of squeezing */
-      .navBottom{ justify-content:flex-start; }
-      .linksBottom{
-        width:100%;
-        justify-content:flex-start;
-        gap: 14px;
-        overflow-x:auto;
-        -webkit-overflow-scrolling: touch;
-        padding: 0 2px 2px;
-        scrollbar-width: none;
-      }
-      .linksBottom::-webkit-scrollbar{ display:none; }
-      .linksBottom a{ white-space: nowrap; font-size: 12.5px; padding: 6px 8px; border-radius: 10px; }
-
-      /* Main spacing */
-      main{
-        padding: calc(var(--headerH) + 16px) 14px 46px;
-      }
-
-      /* Any block host should never be constrained by desktop paddings */
-      #intro, #metodologia, #r_objetivos, #r_objetivosNeg, #r_motivacoes, #r_praticas, #onda2, #r_lideranca, #r_posicionamento, #conclusao{
-        padding-left: 0 !important;
-        padding-right: 0 !important;
-      }
-
-      /* Generic: prevent overflow for images/canvases inside dynamically loaded blocks */
-      img, svg, canvas, video{
-        max-width: 100%;
-        height: auto;
-      }
-      .dho-card--chart, .dho-rank-card, .dho-flow-top, .dho-flow-bottom{
-        width: 100% !important;
-        max-width: 100% !important;
-      }
-
-      /* Wide tables already wrapped, but ensure wrapper is not clipped */
-      .dho-table-scroll{ max-width:100%; }
+    html.force-mobile #intro,
+    html.force-mobile #metodologia,
+    html.force-mobile #r_objetivos,
+    html.force-mobile #r_objetivosNeg,
+    html.force-mobile #r_motivacoes,
+    html.force-mobile #r_praticas,
+    html.force-mobile #onda2,
+    html.force-mobile #r_lideranca,
+    html.force-mobile #r_posicionamento,
+    html.force-mobile #conclusao{
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 14px;
+      box-sizing: border-box;
     }
 
-</style>
+    html.force-mobile{ --headerH: 58px; }
+    html.force-mobile main{
+      padding: calc(var(--headerH) + 16px) 12px 48px;
+    }
+    html.force-mobile .siteHeader .navWrap{ padding: 0 14px; }
+
+    /* Media-safe: images/canvas never overflow */
+    html.force-mobile img,
+    html.force-mobile svg,
+    html.force-mobile canvas{
+      max-width: 100%;
+      height: auto;
+    }
+
+  </style>
 
 
 
