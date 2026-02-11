@@ -6,7 +6,9 @@
 
   <meta charset="utf-8" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, shrink-to-fit=no" />
+  <meta name="HandheldFriendly" content="true" />
+  <meta name="MobileOptimized" content="width" />
 
   <title>DHO 360º</title>
 
@@ -53,10 +55,6 @@
       --veil2: rgba(0,0,0,.10);
 
     }
-
-    /* Mobile: stabilize viewport scaling and text sizing */
-    html{ -webkit-text-size-adjust:100%; text-size-adjust:100%; }
-    body{ -webkit-text-size-adjust:100%; text-size-adjust:100%; }
 
 
 
@@ -711,57 +709,65 @@
       .dho-modalItem a{ padding: 11px 11px; }
     }
 
-    /* ================================
-       Fallback mobile breakpoints
-       (for cases where layout viewport behaves like desktop)
-       ================================ */
-@media (max-device-width: 680px){
+  
 
-      .navWrap{ padding: 0 14px; }
+    /* =========================
+       MOBILE HARDENING (forces mobile layout even if the browser renders with a desktop viewport)
+       Target: touch devices (coarse pointer / no hover) + small device width fallback
+    ========================= */
+    @media (hover: none) and (pointer: coarse), (max-device-width: 720px){
+      html, body{ width:100%; max-width:100%; }
+      body{ -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 
-      .navTop{ flex-wrap: wrap; align-items: center; }
+      /* Header becomes lighter and more breathable */
+      .navTop{ flex-wrap: wrap; gap:10px; }
+      .brandText{ max-width: 70vw; }
+      .brandName{ font-size: 14px; }
+      .pilot{ display:none; }
 
-      .left{ min-width: 0; }
+      /* CTA stays visible but not oversized */
+      .ctaTop{ padding: 10px 12px; border-radius: 999px; font-size: 12.5px; }
 
-      .ctaTop{ margin-left: auto; width: auto; }
+      /* Bottom links: horizontal scroll instead of squeezing */
+      .navBottom{ justify-content:flex-start; }
+      .linksBottom{
+        width:100%;
+        justify-content:flex-start;
+        gap: 14px;
+        overflow-x:auto;
+        -webkit-overflow-scrolling: touch;
+        padding: 0 2px 2px;
+        scrollbar-width: none;
+      }
+      .linksBottom::-webkit-scrollbar{ display:none; }
+      .linksBottom a{ white-space: nowrap; font-size: 12.5px; padding: 6px 8px; border-radius: 10px; }
 
-      .linksBottom{ justify-content: center; }
-
-
-
-      #intro, #metodologia, #r_objetivos, #r_objetivosNeg, #r_motivacoes, #r_praticas, #onda2, #r_lideranca, #r_posicionamento, #conclusao{
-
-        width: 100%;
-
-        max-width: 1100px;
-
-        margin: 0 auto;
-
-        padding: 0 14px;
-
-        box-sizing: border-box;
-
+      /* Main spacing */
+      main{
+        padding: calc(var(--headerH) + 16px) 14px 46px;
       }
 
-@media (max-device-width: 900px){
+      /* Any block host should never be constrained by desktop paddings */
+      #intro, #metodologia, #r_objetivos, #r_objetivosNeg, #r_motivacoes, #r_praticas, #onda2, #r_lideranca, #r_posicionamento, #conclusao{
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+      }
 
-      .pilot{display:none}
+      /* Generic: prevent overflow for images/canvases inside dynamically loaded blocks */
+      img, svg, canvas, video{
+        max-width: 100%;
+        height: auto;
+      }
+      .dho-card--chart, .dho-rank-card, .dho-flow-top, .dho-flow-bottom{
+        width: 100% !important;
+        max-width: 100% !important;
+      }
 
+      /* Wide tables already wrapped, but ensure wrapper is not clipped */
+      .dho-table-scroll{ max-width:100%; }
     }
 
-@media (max-device-width: 760px){
-      :root{ --headerH: 62px; }
-      main{ padding: calc(var(--headerH) + 18px) 14px 54px; }
-      .siteHeader .navWrap{ padding: 0 14px; }
-    }
-
-@media (max-device-width: 520px){
-      :root{ --headerH: 58px; }
-      main{ padding: calc(var(--headerH) + 16px) 12px 48px; }
-    }
-
-
-  </style>
+</style>
 
 
 
