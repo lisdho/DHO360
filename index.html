@@ -16,7 +16,7 @@
 
     :root{
 
-      --headerH: 92px;
+      --headerH: 74px;
 
       --fg:#f4f4f8;
 
@@ -188,7 +188,7 @@
 
     .navTop{
 
-      padding:12px 0;
+      padding:8px 0;
 
       display:flex;
 
@@ -204,16 +204,36 @@
 
     .navBottom{
 
-      padding:10px 0 12px;
+      /* redução ~10% apenas da faixa inferior */
+      padding:5.4px 0 7.2px;
 
-      border-top:1px solid rgba(255,255,255,.06);
+      position: relative;
 
-      background: rgba(168,85,247,.06);
+      background: transparent;
 
       display:flex;
 
       justify-content:center;
 
+    }
+
+    /* Divisor editorial (mais elegante) */
+    .navBottom::before{
+      content:"";
+      position:absolute;
+      top:0;
+      left:0;
+      right:0;
+      height:1px;
+      background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(255,255,255,.08) 18%,
+        rgba(233,213,255,.18) 50%,
+        rgba(255,255,255,.08) 82%,
+        transparent 100%);
+      box-shadow: 0 0 18px rgba(168,85,247,.12);
+      opacity: .95;
+      pointer-events:none;
     }
 
 
@@ -500,11 +520,11 @@
 
       mix-blend-mode: screen;
 
-      opacity: 0.10;
+      opacity: 0.14;
 
       transform: rotate(-18deg);
 
-      background-image: url("data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%22640%22%20height=%22240%22%20viewBox=%220%200%20640%20240%22%3E%0A%20%20%3Crect%20width=%22100%25%22%20height=%22100%25%22%20fill=%22transparent%22/%3E%0A%20%20%3Ctext%20x=%220%22%20y=%22130%22%20font-family=%22system-ui,-apple-system,Segoe%20UI,Roboto,Arial,sans-serif%22%20font-size=%2218%22%20fill=%22rgba(255,255,255,0.18)%22%20letter-spacing=%221.2%22%3E%C2%A9%202026%20DHO%20360%20-%20O%20futuro%20do%20trabalho%20em%20Foco.%3C/text%3E%0A%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%22640%22%20height=%22240%22%20viewBox=%220%200%20640%20240%22%3E%0A%20%20%3Crect%20width=%22100%25%22%20height=%22100%25%22%20fill=%22transparent%22/%3E%0A%20%20%3Ctext%20x=%220%22%20y=%22130%22%20font-family=%22system-ui,-apple-system,Segoe%20UI,Roboto,Arial,sans-serif%22%20font-size=%2218%22%20fill=%22rgba(255,255,255,0.26)%22%20letter-spacing=%221.2%22%3E%C2%A9%202026%20DHO%20360%20-%20O%20futuro%20do%20trabalho%20em%20Foco.%3C/text%3E%0A%3C/svg%3E");
 
       background-repeat: repeat;
 
@@ -512,6 +532,179 @@
 
       filter: blur(0.2px);
 
+    }
+
+  
+    /* ================================
+       Mobile guards (global)
+       - Avoid horizontal overflow
+       - Make media elements responsive
+       - Wrap long text/tables safely
+    ================================ */
+    *, *::before, *::after{ box-sizing: border-box; }
+    img, svg, video{ max-width:100%; height:auto; }
+    canvas{ max-width:100% !important; height:auto !important; display:block; }
+    pre, code{ white-space: pre-wrap; overflow-wrap:anywhere; word-break: break-word; }
+    .dho-embed, .embed, iframe{ max-width:100%; }
+
+    /* Ensure anchor navigation does not hide content behind fixed header */
+    main > div{ scroll-margin-top: calc(var(--headerH) + 14px); }
+
+    /* Defensive text wrapping */
+    h1,h2,h3,h4,p,li,span,a,div{ overflow-wrap:anywhere; word-break: break-word; }
+
+    /* Tables: default safe scroll on narrow screens */
+    .dho-table-scroll{
+      overflow-x:auto;
+      -webkit-overflow-scrolling: touch;
+      width:100%;
+      max-width:100%;
+    }
+    .dho-table-scroll > table{ min-width: 520px; }
+    @media (max-width: 760px){
+      :root{ --headerH: 62px; }
+      main{ padding: calc(var(--headerH) + 18px) 14px 54px; }
+      .siteHeader .navWrap{ padding: 0 14px; }
+    }
+    @media (max-width: 520px){
+      :root{ --headerH: 58px; }
+      main{ padding: calc(var(--headerH) + 16px) 12px 48px; }
+    }
+
+
+  
+    /* =========================
+       Modal — Dimensões (Editorial)
+       ========================= */
+    .dho-modalOverlay{
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(6px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px 14px;
+      z-index: 9999;
+    }
+    .dho-modalOverlay.is-open{ display: flex; }
+
+    .dho-modal{
+      width: min(720px, 100%);
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.07);
+      box-shadow: 0 22px 60px rgba(0,0,0,0.55);
+      backdrop-filter: blur(12px);
+      position: relative;
+      overflow: hidden;
+    }
+    .dho-modal::before{
+      content:"";
+      position:absolute; inset:-20%;
+      background:
+        radial-gradient(520px 320px at 18% 18%, rgba(168,85,247,.26), transparent 62%),
+        radial-gradient(520px 320px at 82% 82%, rgba(124,58,237,.20), transparent 62%);
+      pointer-events:none;
+      opacity:.9;
+    }
+    .dho-modalInner{ position: relative; z-index:1; padding: 16px 16px 14px; }
+
+    .dho-modalTop{
+      display:flex;
+      align-items:flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+    }
+    .dho-modalTitle{
+      margin:0;
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      color: #F5F5F7;
+    }
+    .dho-modalSub{
+      margin: 6px 0 0;
+      font-size: 13.5px;
+      line-height: 1.55;
+      color: rgba(255,255,255,0.72);
+      text-align: justify;
+      max-width: 60ch;
+    }
+    .dho-modalClose{
+      appearance:none;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(0,0,0,0.16);
+      color: rgba(255,255,255,0.88);
+      border-radius: 12px;
+      padding: 8px 10px;
+      cursor:pointer;
+      line-height: 1;
+      font-weight: 700;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+      flex: 0 0 auto;
+    }
+    .dho-modalClose:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.22);
+    }
+
+    .dho-modalList{
+      list-style: none;
+      padding: 12px 0 0;
+      margin: 0;
+      display: grid;
+      gap: 10px;
+    }
+    .dho-modalItem a{
+      display:flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      text-decoration:none;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(0,0,0,0.14);
+      padding: 12px 12px;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+    }
+    .dho-modalItem a:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.07);
+      border-color: rgba(255,255,255,0.18);
+    }
+    .dho-modalLabel{
+      display:flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 0;
+    }
+    .dho-modalName{
+      font-weight: 800;
+      color: rgba(245,245,247,0.95);
+      font-size: 14px;
+      line-height: 1.25;
+    }
+    .dho-modalHint{
+      font-size: 12.8px;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.4;
+      text-align: justify;
+    }
+    .dho-modalArrow{
+      color: rgba(232, 202, 255, 0.80);
+      font-weight: 900;
+      flex: 0 0 auto;
+      opacity: .9;
+    }
+
+    @media (max-width: 520px){
+      .dho-modalInner{ padding: 14px 12px 12px; }
+      .dho-modalSub{ max-width: 52ch; }
+      .dho-modalItem a{ padding: 11px 11px; }
     }
 
   </style>
@@ -596,6 +789,10 @@
 
           <a href="#metodologia">Metodologia</a>
 
+          <a href="#dimensoes" id="btnDimensoes" aria-haspopup="dialog" aria-controls="dhoDimModal">Dimensões</a>
+
+          <a href="#conclusao">Conclusão</a>
+
         </nav>
 
       </div>
@@ -632,6 +829,31 @@
 
 
   <script>
+
+
+    function applyMobileGuards(root){
+      if(!root) return;
+
+      // Wrap wide tables so mobile can scroll horizontally
+      root.querySelectorAll("table").forEach((tbl) => {
+        const parent = tbl.parentElement;
+        if (parent && parent.classList && parent.classList.contains("dho-table-scroll")) return;
+
+        const wrap = document.createElement("div");
+        wrap.className = "dho-table-scroll";
+        tbl.replaceWith(wrap);
+        wrap.appendChild(tbl);
+      });
+
+      // Ensure any element that accidentally sets fixed widths can shrink
+      root.querySelectorAll("*").forEach((el) => {
+        const cs = window.getComputedStyle(el);
+        if (cs && cs.maxWidth === "none") {
+          // leave as-is; we only harden obvious overflow cases
+        }
+      });
+    }
+
 
     async function carregarBloco({ url, targetId, initFnName }) {
 
@@ -752,6 +974,8 @@
 
 
         host.innerHTML = (doc.body && doc.body.innerHTML) ? doc.body.innerHTML : "";
+
+        applyMobileGuards(host);
 
 
 
@@ -895,6 +1119,161 @@
     </div>
 
   </footer>
+
+
+  <!-- Modal: Dimensões -->
+  <div class="dho-modalOverlay" id="dhoDimModalOverlay" role="dialog" aria-modal="true" aria-labelledby="dhoDimModalTitle">
+    <div class="dho-modal" id="dhoDimModal">
+      <div class="dho-modalInner">
+        <div class="dho-modalTop">
+          <div>
+            <h3 class="dho-modalTitle" id="dhoDimModalTitle">Dimensões</h3>
+            <p class="dho-modalSub">Atalhos de navegação para leitura por dimensão. Ao clicar, você é direcionado diretamente para o bloco correspondente.</p>
+          </div>
+          <button class="dho-modalClose" type="button" id="dhoDimModalClose" aria-label="Fechar">✕</button>
+        </div>
+
+        <ul class="dho-modalList">
+          <li class="dho-modalItem">
+            <a href="#r_objetivos" data-target="r_objetivos">
+              <span class="dho-modalLabel">
+                <span class="dho-modalName">Objetivos dos Trabalhadores</span>
+              </span>
+              <span class="dho-modalArrow">↳</span>
+            </a>
+          </li>
+
+          <li class="dho-modalItem">
+            <a href="#r_objetivosNeg" data-target="r_objetivosNeg">
+              <span class="dho-modalLabel">
+                <span class="dho-modalName">Objetivos do Negócio</span>
+              </span>
+              <span class="dho-modalArrow">↳</span>
+            </a>
+          </li>
+
+          <li class="dho-modalItem">
+            <a href="#r_motivacoes" data-target="r_motivacoes">
+              <span class="dho-modalLabel">
+                <span class="dho-modalName">Motivações Profissionais</span>
+              </span>
+              <span class="dho-modalArrow">↳</span>
+            </a>
+          </li>
+
+          <li class="dho-modalItem">
+            <a href="#r_praticas" data-target="r_praticas">
+              <span class="dho-modalLabel">
+                <span class="dho-modalName">Práticas de Gestão de Pessoas</span>
+              </span>
+              <span class="dho-modalArrow">↳</span>
+            </a>
+          </li>
+
+          <li class="dho-modalItem">
+            <a href="#r_lideranca" data-target="r_lideranca">
+              <span class="dho-modalLabel">
+                <span class="dho-modalName">Desafios da Liderança</span>
+              </span>
+              <span class="dho-modalArrow">↳</span>
+            </a>
+          </li>
+
+          <li class="dho-modalItem">
+            <a href="#r_posicionamento" data-target="r_posicionamento">
+              <span class="dho-modalLabel">
+                <span class="dho-modalName">Posicionamento dos Trabalhadores</span>
+              </span>
+              <span class="dho-modalArrow">↳</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    (function(){
+      const btn = document.getElementById('btnDimensoes');
+      const overlay = document.getElementById('dhoDimModalOverlay');
+      const closeBtn = document.getElementById('dhoDimModalClose');
+      const modal = document.getElementById('dhoDimModal');
+
+      if(!btn || !overlay || !closeBtn || !modal) return;
+
+      const header = document.querySelector('header');
+
+      function lockBody(lock){
+        if(lock){
+          document.documentElement.classList.add('is-modal-open');
+          document.body.style.overflow = 'hidden';
+        }else{
+          document.documentElement.classList.remove('is-modal-open');
+          document.body.style.overflow = '';
+        }
+      }
+
+      function openModal(){
+        overlay.classList.add('is-open');
+        lockBody(true);
+        closeBtn.focus({preventScroll:true});
+      }
+
+      function closeModal(){
+        overlay.classList.remove('is-open');
+        lockBody(false);
+        btn.focus({preventScroll:true});
+      }
+
+      function scrollWithOffset(targetId){
+        const el = document.getElementById(targetId);
+        if(!el) return;
+
+        const headerH = header ? header.offsetHeight : 0;
+        const y = el.getBoundingClientRect().top + window.pageYOffset - headerH - 10;
+
+        window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+        // Atualiza a hash sem "pulo"
+        try{
+          history.pushState(null, '', '#' + targetId);
+        }catch(e){
+          // fallback
+          location.hash = targetId;
+        }
+      }
+
+      btn.addEventListener('click', function(e){
+        e.preventDefault();
+        openModal();
+      });
+
+      closeBtn.addEventListener('click', function(){
+        closeModal();
+      });
+
+      overlay.addEventListener('click', function(e){
+        // fecha ao clicar fora do card
+        if(e.target === overlay) closeModal();
+      });
+
+      document.addEventListener('keydown', function(e){
+        if(!overlay.classList.contains('is-open')) return;
+        if(e.key === 'Escape') closeModal();
+      });
+
+      overlay.querySelectorAll('a[data-target]').forEach(a=>{
+        a.addEventListener('click', function(e){
+          e.preventDefault();
+          const target = this.getAttribute('data-target');
+          closeModal();
+          // pequena espera para evitar conflito com overflow lock
+          setTimeout(()=> scrollWithOffset(target), 10);
+        });
+      });
+    })();
+  </script>
+
 
 </body>
 
