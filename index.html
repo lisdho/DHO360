@@ -573,32 +573,7 @@
 
 
   
-    
-    /* ================================
-       Mobile clamps (anti "desktop zoom-out")
-       Prevent any bloco min-width/fixed widths from forcing "desktop layout" on phones.
-    ================================ */
-    html, body{ width:100%; max-width:100%; }
-    body{ min-width: 0 !important; }
-    header.siteHeader, .navWrap, main, footer{ max-width: 100%; }
-
-    [class$="-wrap"], [class*="-wrap "], [class*=" wrap"], .dho-card, .dho-card--chart, .dho-rank-card{
-      min-width: 0 !important;
-      max-width: 100%;
-    }
-
-    iframe, embed, object{ width:100%; max-width:100%; }
-
-    .linksBottom, .brandText{ min-width: 0; }
-
-    @media (max-width: 760px){
-      .navWrap{ padding: 0 12px; }
-      .navTop{ gap: 10px; }
-      .linksBottom{ gap: 6px; }
-      .linksBottom a{ padding: 6px 9px; }
-    }
-
-/* =========================
+    /* =========================
        Modal — Dimensões (Editorial)
        ========================= */
     .dho-modalOverlay{
@@ -876,129 +851,11 @@
         if (cs && cs.maxWidth === "none") {
           // leave as-is; we only harden obvious overflow cases
         }
-
-    function hardClampOverflow(root){
-
-      function _resolveUrlCandidatesNested(rawUrl){
-        const basePath = location.pathname.replace(/\/[^\/]*$/, "/");
-        const baseHref = location.origin + basePath;
-
-        const candidates = [];
-        const push = (u)=>{ if(u && !candidates.includes(u)) candidates.push(u); };
-
-        // as-is (relative)
-        push(rawUrl);
-
-        // explicit relative
-        push("./" + rawUrl);
-
-        // absolute from current dir
-        try{ push(new URL(rawUrl, location.href).href); }catch(e){}
-
-        // absolute from site root
-        if(rawUrl && rawUrl[0] !== "/") push("/" + rawUrl);
-
-        // fallback: same filename in current dir (remove "blocks/")
-        const noBlocks = (rawUrl || "").replace(/^blocks\//i, "");
-        if(noBlocks !== rawUrl){
-          push(noBlocks);
-          push("./" + noBlocks);
-          try{ push(new URL(noBlocks, location.href).href); }catch(e){}
-          if(noBlocks && noBlocks[0] !== "/") push("/" + noBlocks);
-        }
-
-        // fallback: try under current directory base explicitly
-        try{ push(new URL(rawUrl, baseHref).href); }catch(e){}
-
-        return candidates;
-      }
-
-
-      try{
-        const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
-        if(!vw || !root) return;
-
-        root.querySelectorAll("img, video, svg, canvas, iframe, embed, object").forEach((el)=>{
-          el.style.maxWidth = "100%";
-          if(el.tagName === "IFRAME" || el.tagName === "EMBED" || el.tagName === "OBJECT"){
-            if(!el.style.width) el.style.width = "100%";
-          }
-        });
-
-        root.querySelectorAll("*").forEach((el)=>{
-          const r = el.getBoundingClientRect();
-          if(r && r.width > vw + 2){
-            const tag = el.tagName;
-            if(tag === "TABLE" || tag === "PRE"){
-              el.style.maxWidth = "100%";
-              el.style.overflowX = "auto";
-            }else{
-              el.style.maxWidth = "100%";
-              el.style.minWidth = "0";
-            }
-          }
-        });
-      }catch(e){
-        console.warn("[mobile] clamp overflow falhou:", e);
-      }
-    }
-
       });
     }
 
 
-    
-    // Resolve bloco URL candidates safely (kept global on purpose)
-    function resolveUrlCandidates(rawUrl){
-      const basePath = location.pathname.replace(/\/[^\/]*$/, "/");
-      const baseHref = location.origin + basePath;
-
-      const candidates = [];
-      const push = (u)=>{ if(u && !candidates.includes(u)) candidates.push(u); };
-
-      // as-is (relative)
-      push(rawUrl);
-
-      // variants (case/underscore) for the filename part
-      try{
-        const parts = String(rawUrl).split("/");
-        const fname = parts.pop() || "";
-        const dir = parts.length ? (parts.join("/") + "/") : "";
-        fileVariants(fname).forEach(v=>{
-          push(dir + v);
-          push("./" + dir + v);
-          if((dir + v)[0] !== "/") push("/" + dir + v);
-          try{ push(new URL(dir + v, location.href).href); }catch(e){}
-        });
-      }catch(e){}
-
-
-      // explicit relative
-      push("./" + rawUrl);
-
-      // absolute from current dir
-      try{ push(new URL(rawUrl, location.href).href); }catch(e){}
-
-      // absolute from site root
-      if(rawUrl && rawUrl[0] !== "/") push("/" + rawUrl);
-
-      // fallback: same filename in current dir (remove "blocks/")
-      const noBlocks = (rawUrl || "").replace(/^blocks\//i, "");
-      if(noBlocks !== rawUrl){
-        push(noBlocks);
-        push("./" + noBlocks);
-        try{ push(new URL(noBlocks, location.href).href); }catch(e){}
-        if(noBlocks && noBlocks[0] !== "/") push("/" + noBlocks);
-      }
-
-      // current directory base explicitly
-      try{ push(new URL(rawUrl, baseHref).href); }catch(e){}
-
-      return candidates;
-    }
-
-
-async function carregarBloco({ url, targetId, initFnName }) {
+    async function carregarBloco({ url, targetId, initFnName }) {
 
       const host = document.getElementById(targetId);
 
@@ -1104,21 +961,11 @@ async function carregarBloco({ url, targetId, initFnName }) {
 
       try{
 
-        const candidates = resolveUrlCandidates(url);
-        let res = null;
-        let lastErr = null;
+        const res = await fetch(url, { cache: "no-store" });
 
-        for (const u of candidates){
-          try{
-            const r = await fetch(u, { cache: "no-store" });
-            if(r && r.ok){ res = r; break; }
-            lastErr = new Error("HTTP " + (r ? r.status : "??") + " em " + u);
-          }catch(e){
-            lastErr = e;
-          }
-        }
+        if(!res.ok) throw new Error("Falha ao carregar " + url + ": " + res.status);
 
-        if(!res) throw lastErr || new Error("Falha ao carregar " + url);
+
 
         const html = await res.text();
 
@@ -1129,7 +976,6 @@ async function carregarBloco({ url, targetId, initFnName }) {
         host.innerHTML = (doc.body && doc.body.innerHTML) ? doc.body.innerHTML : "";
 
         applyMobileGuards(host);
-        hardClampOverflow(host);
 
 
 
@@ -1217,83 +1063,24 @@ async function carregarBloco({ url, targetId, initFnName }) {
 
 
 
-    
-    const BLOCO_SPECS = [
-      { file: "01-intro.html", targetId: "intro", initFnName: "" },
-      { file: "02-metodologia.html", targetId: "metodologia", initFnName: "initBloco_metodologia" },
-      { file: "03-R-objetivos.html", targetId: "r_objetivos", initFnName: "initBloco_objetivos" },
-      { file: "04-R-objetivosNeg.html", targetId: "r_objetivosNeg", initFnName: "initBloco_objetivosNeg" },
-      { file: "05-R-motivacoes.html", targetId: "r_motivacoes", initFnName: "initBloco_motivacoes" },
-      { file: "06-R-praticas.html", targetId: "r_praticas", initFnName: "initBloco_praticas" },
-      { file: "07-R-lideranca.html", targetId: "r_lideranca", initFnName: "initBloco_lideranca" },
-      { file: "08-R-posicionamento.html", targetId: "r_posicionamento", initFnName: "initBloco_posicionamento" },
-      { file: "09-conclusao.html", targetId: "conclusao", initFnName: "initBloco_conclusao" },
-      { file: "Participar_da_Onda2.html", targetId: "onda2", initFnName: "initBloco_Participar_da_Onda2" },
-    ];
+    carregarBloco({ url: "blocks/01-intro.html", targetId: "intro", initFnName: "" });
 
-    function fileVariants(file){
-      if(!file) return [];
-      const vars = [];
-      const push = (v)=>{ if(v && !vars.includes(v)) vars.push(v); };
+    carregarBloco({ url: "blocks/02-metodologia.html", targetId: "metodologia", initFnName: "initBloco_metodologia" });
 
-      push(file);
-      push(file.toLowerCase());
+    carregarBloco({ url: "blocks/03-R-objetivos.html", targetId: "r_objetivos", initFnName: "initBloco_objetivos" });
 
-      // common case-sensitivity issues with "R" marker
-      push(file.replace("-R-", "-r-"));
-      push(file.replace("-r-", "-R-"));
+    carregarBloco({ url: "blocks/04-R-objetivosNeg.html", targetId: "r_objetivosNeg", initFnName: "initBloco_objetivosNeg" });
 
-      // underscore / dash swaps (common in manual renames)
-      push(file.replace(/_/g, "-"));
-      push(file.replace(/-/g, "_"));
-      push(file.toLowerCase().replace(/_/g, "-"));
-      push(file.toLowerCase().replace(/-/g, "_"));
+    carregarBloco({ url: "blocks/05-R-motivacoes.html", targetId: "r_motivacoes", initFnName: "initBloco_motivacoes" });
 
-      // remove accidental double separators
-      vars.forEach(v=> push(v.replace(/__+/g,"_").replace(/--+/g,"-")));
+    carregarBloco({ url: "blocks/06-R-praticas.html", targetId: "r_praticas", initFnName: "initBloco_praticas" });
 
-      return vars;
-    }
+    carregarBloco({ url: "blocks/07-R-lideranca.html", targetId: "r_lideranca", initFnName: "initBloco_lideranca" });
+    carregarBloco({ url: "blocks/08-R-posicionamento.html", targetId: "r_posicionamento", initFnName: "initBloco_posicionamento" });
 
+    carregarBloco({ url: "blocks/09-conclusao.html", targetId: "conclusao", initFnName: "initBloco_conclusao" });
 
-    async function detectBlocksBase(){
-      const bases = [
-        "blocks/",
-        "./blocks/",
-        "Blocks/",
-        "./Blocks/",
-        "blocos/",
-        "./blocos/",
-        "", "./",
-      ];
-
-      const probe = BLOCO_SPECS[0]?.file || "01-intro.html";
-      const probeVariants = fileVariants(probe);
-
-      for(const base of bases){
-        for(const f of probeVariants){
-          const url = base + f;
-          try{
-            const r = await fetch(url, { cache: "no-store" });
-            if(r && r.ok) return { base, resolvedProbe: url };
-          }catch(e){}
-        }
-      }
-      return { base: "blocks/", resolvedProbe: "blocks/" + probe };
-    }
-(async function(){
-      const info = await detectBlocksBase();
-      const base = info.base;
-
-      BLOCO_SPECS.forEach(spec=>{
-        carregarBloco({
-          url: base + spec.file,
-          targetId: spec.targetId,
-          initFnName: spec.initFnName
-        });
-      });
-    })();
-
+    carregarBloco({ url: "blocks/Participar_da_Onda2.html", targetId: "onda2", initFnName: "initBloco_Participar_da_Onda2" });
 
 
 
@@ -1316,7 +1103,6 @@ async function carregarBloco({ url, targetId, initFnName }) {
       window.addEventListener('resize', syncHeaderHeight);
 
       syncHeaderHeight();
-      try{ hardClampOverflow(document.body); }catch(e){}
 
     })();
 
